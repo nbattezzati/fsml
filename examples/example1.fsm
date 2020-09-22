@@ -1,0 +1,116 @@
+PowerManager power_manager;
+SharedEvent requestRebootEvent;
+SharedEvent shutdownEvent;
+bool ign_old = false;
+json::Object ignition_status;
+json::Object power_state_json;
+
+
+fsm power_manager {
+
+	bool init_done = false;
+	Alarm ign_timer, shutdown_timer, delay_timer;
+	unsigned int delay_count = 0;
+
+	input bool ign = false;
+	input bool reboot = false;
+	input bool shutdown = false;
+
+	output power_manager_state_t power_state = startup;
+
+
+	state [start] startup {
+		init_done = true;
+	} on (init_done) go running;
+
+
+	state running {
+		if (!ign && ign_old) {
+			ign_timer.Start();	
+		}
+	}
+	on (reboot || shutdown || (!ign && ign_timer.IsElapsed())) {
+		shutdown_timer.Start();
+		delay_timer.Start();
+		delay_count = 0;
+	} go shutdown_requested;
+
+
+	state shutdown_requested
+	on (!reboot && !shutdown && ign) go running
+	on (delay_count > 0 && delay_timer.IsElapsed()) go shutdown_delayed
+	on (shutdown_timer.IsElapsed() || delay_timer.IsElapsed()) go shutting_down;
+
+
+	state shutdown_delayed
+	on (delay_timer.IsElapsed()) go shutting_down
+	on (delay_count == 0 && !delay_timer.IsElapsed()) go shutdown_requested;
+
+
+	state [end] shutting_down;
+
+
+	out power_state { return this.state; } 
+} power_fsm;
+
+
+power_fsm.reset();
+power_manager_state_t old_state = power_fsm.power_state;
+while (power_fsm.power_state != shutting_down) {
+	// get update mode request
+	enterUpdateModeEvent = GET_SHARED_DATA(power_manager, enterUpdateModeEvent);
+	if (enterUpdateModeEvent.called == true) {
+		power_manager.ResetSharedEvent(&(GET_SHARED_DATA(power_manager, enterUpdateModeEvent)));
+		update_requested = true;
+	}
+
+	ign = GET_SHARED_DATA(power_manager, ignition);
+
+	requestRebootEvent = GET_SHARED_DATA(power_manager, requestRebootEvent);
+	if (requestRebootEvent.called == true) {
+		power_manager.ResetSharedEvent(&(GET_SHARED_DATA(power_manager, requestRebootEvent)));
+		reboot_requested = true;
+	}
+
+	shutdownEvent = GET_SHARED_DATA(power_manager, shutdownEvent);
+	if (shutdownEvent.called == true) {
+		power_manager.ResetSharedEvent(&(GET_SHARED_DATA(power_manager, shutdownEvent)));
+		deepsleep_requested = (*shutdownEvent.data)["deep"].ToBool();
+		shutdown_requested = true;
+	}
+
+
+	// set FSM input
+	power_fsm.set_ign(ign);
+	power_fsm.set_ign_old();
+	power_fsm.set_reboot(reboot_requested);
+	power_fsm.set_shutdown(shutdown_requested);
+
+	// exec FSM
+	power_fsm.execute();
+
+
+	// notify ignition_status
+	if (ign != ign_old) {
+		ignition_json[IGNITION_STATUS] = ign;
+		power_manager.LCPSetPropertyValue(IGNITION_STATUS, ignition_json, true);
+		ign_old = ign;
+	}
+
+	// notify change of state
+	if (old_state != power_fsm.power_state) {
+		power_state_json[POWER_STATE] = power_fsm.power_state;
+		power_manager.LCPSetPropertyValue(POWER_STATE, power_state_json, true);
+		old_state = power_fsm.power_state;		// TODO: check!!!
+	}
+
+	// wait for event
+	if (power_fsm.power_state != shutting_down) {
+		power_manager.WaitForSharedData(lock);	
+	}
+}
+
+sleep(...);
+
+...
+

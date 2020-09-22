@@ -1,0 +1,89 @@
+fsml ::= <declaration> <fsm> | <fsm>
+
+<declaration> ::= decl <c-code>
+
+<fsm> ::= fsm <identifier> { <fsm-objects-list> }
+
+<fsm-objects-list> ::= <fsm-object>
+					 | <fsm-objects-list> <fsm-object>
+
+<fsm-object> ::= <variable-declaration> 
+			   | <state>
+			   | <until-retry>
+
+<variable-declaration> ::= <variable-specifier> {<type-specifier>}+ <init-declarator> ;
+
+<variable-specifier> ::= var
+					   | input
+					   | output
+
+<type-specifier> ::= void
+				   | char
+				   | short
+				   | int
+				   | long
+				   | float
+				   | double
+				   | signed
+				   | unsigned
+				   | <struct-or-union-specifier>
+				   | <enum-specifier>
+				   | <typedef-name>
+
+<struct-or-union-specifier> ::= <struct-or-union> <identifier>
+
+<struct-or-union> ::= struct
+                    | union
+
+<enum-specifier> ::= enum <identifier>
+
+<typedef-name> ::= <identifier>
+
+<init-declarator> ::= <declarator> = <constant>
+
+<declarator> ::= {<pointer>}? <direct-declarator>
+
+<direct-declarator> ::= <identifier>
+
+<pointer> ::= * {<pointer>}?
+
+<constant> ::= <integer-constant>
+			 | <character-constant>
+			 | <floating-constant>
+			 | <enumeration-constant>
+
+
+
+
+
+
+
+decl {
+	<c-code>
+}
+
+fsm <name> {
+
+	<type> <var_name> = <initializer>;
+	...
+
+	input <type> <name> = <initializer>;
+	...
+
+	output <type> <name> = <initializer>;
+
+
+	state \[<id> [,<id>...]\] <name> [{ <code> }]
+	on ( <condition> ) [{ <code> }] [go <name> | err | retry]
+	[...]
+	[out <name> { <code> }]
+	;
+
+	...
+
+	until (<limit>) {
+		
+		state ... 
+	} 
+
+}

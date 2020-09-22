@@ -1,0 +1,10 @@
+- input shall be initialized
+- input can never be modified a part for initialization
+- ouptut shall be initialized
+- output can never be used in transitions condition
+- [WARN] transitions shall not be order-dependent
+- there shall not be undefined behaviors among transitions (all combinations of conditions shall be convered by one and only one transition)
+- there shall not be two or more transitions with the same condition
+- transition condition can contain only input and local variables
+- [WARN] there shall not be loops without a 'retry'/'timeout' guard
+- 'retry' condition shall contain only constants

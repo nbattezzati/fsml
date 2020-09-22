@@ -1,0 +1,84 @@
+decl {
+
+#include <memories.h>
+
+#define MAX_RETRIES		(3)
+
+
+/* decl comincia con { 
+
+// e se aggiungessi anche un commento di questo genere!?!?!
+
+e poi finirebbe con } ma in realta`
+abbiamo trovato un'altra {{{{
+{{*{/ 
+
+*/
+
+typedef enum {
+	PicState_IDLE,	// e se ce lo mettessi pure qui {?
+	PicState_BUSY,	// questo e` lo stato BUSY se non si fosse capito!
+	PicState_SHOT,
+	PicState_COMPLETE,
+	PicState_ERR
+} pic_state_t;
+
+}
+
+
+
+fsm pic_manager {
+
+	var pic_desc_t * pd = NULL;	
+
+	input memory_t dest = MEMORY_CPU_RAM;
+
+	output pic_state_t pic_state = PicState_IDLE;
+	
+
+	state [start] SHOOT_PIC {
+		pd = picture_manager_shoot(CAMERA_1, 1, 17984, 0, 0);		
+	}
+	on (pd) go WAIT_METADATA
+	on (!pd) err PicErr_SHOOT_FAILED
+	out pic_state { return PicState_BUSY; };
+
+
+	retry (MAX_RETRIES) {
+
+		state WAIT_METADATA 
+		on (!pd) err PicErr_MEMORY_VIOLATION
+		on (pd && pd->ready && pd->metadata == METADATA_READY) {
+			pd = move_picture_from_payload();
+		} go WAIT_TRANSF_1
+		on (pd && pd->metadata == METADATA_CORRUPT) retry;
+
+
+		retry (MAX_RETRIES) {
+			state WAIT_TRANSF_1
+			on (!pd) err PicErr_MEMORY_VIOLATION
+			on (pd && pd->ready && pd->memory == MEMORY_FPGA_RAM && dest != MEMORY_FPGA_RAM) {
+				if (dest == MEMORY_CPU_RAM) {
+					pd = move_picture_to_cpu();
+				} else if (dest == MEMORY_FPGA_NAND) {
+					pd = move_picture_to_nand();
+				}
+			} go WAIT_TRANSF_2
+			on (pd && pd->ready && pd->memory == MEMORY_FPGA_RAM && dest == MEMORY_FPGA_RAM) go FINISHED
+			on (pd && pd->ready && pd->memory != MEMORY_FPGA_RAM) retry
+			out pic_state { return PicState_SHOT; };
+
+
+			state WAIT_TRANSF_2
+			on (!pd) err PicErr_MEMORY_VIOLATION
+			on (pd && pd->ready && pd->memory == MEMORY_CPU_RAM) go FINISHED
+			on (pd && pd->ready && pd->memory != MEMORY_CPU_RAM) retry;
+		} err PicErr_TRANSFER_FAILED;
+
+	} err PicErr_TRANSFER_FAILED;
+
+
+	state [end, err] FINISHED
+	out pic_desc { return pd; }
+	out pic_state { return err ? PicState_ERR : PicState_COMPLETE; };
+};
