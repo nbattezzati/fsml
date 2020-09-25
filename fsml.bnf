@@ -1,8 +1,8 @@
 fsml ::= <declaration> <fsm> | <fsm>
 
-<declaration> ::= decl <c-code>
+<declaration> ::= <DECL> <c-code>
 
-<fsm> ::= fsm <identifier> { <fsm-objects-list> }
+<fsm> ::= <FSM> <IDENTIFIER> { <fsm-objects-list> }
 
 <fsm-objects-list> ::= <fsm-object>
 					 | <fsm-objects-list> <fsm-object>
@@ -13,44 +13,44 @@ fsml ::= <declaration> <fsm> | <fsm>
 
 <variable-declaration> ::= <variable-specifier> {<type-specifier>}+ <init-declarator> ;
 
-<variable-specifier> ::= var
-					   | input
-					   | output
+<variable-specifier> ::= <VAR>
+					   | <INPUT>
+					   | <OUTPUT>
 
-<type-specifier> ::= void
-				   | char
-				   | short
-				   | int
-				   | long
-				   | float
-				   | double
-				   | signed
-				   | unsigned
+<type-specifier> ::= <VOID>
+				   | <CHAR>
+				   | <SHORT>
+				   | <INT>
+				   | <LONG>
+				   | <FLOAT>
+				   | <DOUBLE>
+				   | <SIGNED>
+				   | <UNSIGNED>
 				   | <struct-or-union-specifier>
 				   | <enum-specifier>
 				   | <typedef-name>
 
-<struct-or-union-specifier> ::= <struct-or-union> <identifier>
+<struct-or-union-specifier> ::= <struct-or-union> <IDENTIFIER>
 
-<struct-or-union> ::= struct
-                    | union
+<struct-or-union> ::= <STRUCT>
+                    | <UNION>
 
-<enum-specifier> ::= enum <identifier>
+<enum-specifier> ::= <ENUM> <IDENTIFIER>
 
-<typedef-name> ::= <identifier>
+<typedef-name> ::= <IDENTIFIER>
 
 <init-declarator> ::= <declarator> = <constant>
 
 <declarator> ::= {<pointer>}? <direct-declarator>
 
-<direct-declarator> ::= <identifier>
+<direct-declarator> ::= <IDENTIFIER>
 
 <pointer> ::= * {<pointer>}?
 
-<constant> ::= <integer-constant>
-			 | <character-constant>
-			 | <floating-constant>
-			 | <enumeration-constant>
+<constant> ::= <INTEGER-CONSTANT>
+			 | <CHARACTER-CONSTANT>
+			 | <FLOATING-CONSTANT>
+			 | <ENUMERATION-CONSTANT>
 
 
 
@@ -64,7 +64,7 @@ decl {
 
 fsm <name> {
 
-	<type> <var_name> = <initializer>;
+	var <type> <var_name> = <initializer>;
 	...
 
 	input <type> <name> = <initializer>;
