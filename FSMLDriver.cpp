@@ -71,6 +71,7 @@ int FSMLDriver::parse(const std::string& fileName)
 	file = fileName;
 	scanBegin();
 	FSML::FSMLParser parser (*this);
+	parser.set_debug_level(10);
 	res = parser.parse();
 	scanEnd();
 
@@ -98,6 +99,6 @@ void FSMLDriver::error(FSML::location const & l, const std::string& errorMsg)
 	fprintf(stderr, "%s %s at line %d\n", \
 			THIS_PARSER, \
 			errorMsg.c_str(), \
-			l.begin.line
+			l.begin.line-1
 	);
 }

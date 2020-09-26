@@ -4,12 +4,21 @@
 
 %locations
 
+
 %{
+#include <iostream>
 #include <stdio.h>
 #include <string>
 #include "fsml.h"
 
-//#define DEBUG
+// #define DEBUG
+
+
+#ifdef DEBUG
+#define log(...) printf(__VA_ARGS__)
+#else
+#define log(...)
+#endif
 
 class FSMLDriver;
 %}
@@ -19,183 +28,164 @@ class FSMLDriver;
 %lex-param {FSMLDriver& driver}
 
 %union {
-	int num;
+	int i;
+	float f;
 	std::string *s;
-	bool b;
 }
 
 
 %{
 #include "FSMLDriver.h"
-#include "fsml.h"
+#include "fsml_inner.h"
 %}
 
-%start actelPdc
+%start fsml
 
 %token END_OF_FILE 0
-%token YES NO SET_LOCATION SET_PRESERVE FIXED
 
 
 
-
-%token <num> INTEGER
-%token <s> IO_BANK_COMMAND
-%token <s> LOCAL_CLOCK_COMMAND
-%token <s> REGION_COMMAND
-%token <s> IO_COMMAND
-%token <s> HIERARCHICAL_IDENTIFIER
-
-%type <num> x_loc
-%type <num> y_loc
-%type <b> fixed_val
-%type <s> hier_name
+%token DECL_KEY FSM_KEY LCB RCB VAR_KEY INPUT_KEY OUTPUT_KEY STATE_KEY ON GO ERR RETRY VOID CHAR SHORT INT LONG FLOAT DOUBLE SIGNED UNSIGNED UNION STRUCT ENUM STAR COMMA START END LSB RSB OUT UNTIL_KEY SC EQUAL LB RB
+%token <s> C_CODE_BLOCK C_CONDITION_BLOCK IDENTIFIER CHARACTER_CONSTANT ENUMERATION_CONSTANT
+%token <i> INTEGER_CONSTANT
+%token <f> FLOATING_CONSTANT
 
 
 %%
-						
-actelPdc		:	io_bank_settings local_clock_constraints region_constraints io_constraints core_cell_constraints
-					{
-						#ifdef DEBUG
-						printf("actelPdc file successfully recognized\n");
-						#endif
-					}
+
+
+fsml	: declaration fsm ;
+
+declaration : DECL_KEY C_CODE_BLOCK 
+			| /* empty */ 
+			;
+
+fsm : FSM_KEY IDENTIFIER LCB fsm_objects_list RCB ;
+
+fsm_objects_list : fsm_object
+				 | fsm_objects_list fsm_object
+				 ;
+
+fsm_object : variable_declaration 
+		   | state
+		   | until_retry
+		   ;
+
+variable_declaration : variable_specifier type_specifier_list init_declarator SC { std::cout << "\n\n VARIABLE RECOGNISED \n\n"; } ;
+
+type_specifier_list : type_specifier
+					| type_specifier_list type_specifier
+					;
+
+variable_specifier : VAR_KEY
+				   | INPUT_KEY
+				   | OUTPUT_KEY
+				   ;
+
+type_specifier : VOID
+			   | CHAR
+			   | SHORT
+			   | INT
+			   | LONG
+			   | FLOAT
+			   | DOUBLE
+			   | SIGNED
+			   | UNSIGNED
+			   | struct_or_union_specifier
+			   | enum_specifier
+			   | typedef_name
+			   ;
+
+struct_or_union_specifier : struct_or_union IDENTIFIER ;
+
+struct_or_union : STRUCT
+				| UNION
 				;
 
-io_bank_settings	:	io_bank_settings_list 
-						{
-							#ifdef DEBUG
-							printf("I/O Banks Settings successfully recognized\n");
-							#endif
-						}
-					|	/* empty */
-					;
+enum_specifier : ENUM IDENTIFIER ;
 
-io_bank_settings_list	:	io_bank_settings_list io_bank_setting
-						|	io_bank_setting
-						;
+typedef_name : IDENTIFIER ;
 
-io_bank_setting	:	IO_BANK_COMMAND
-					;
+init_declarator : declarator EQUAL constant ;
 
-local_clock_constraints	:	local_clock_constraints_list 
-							{
-								#ifdef DEBUG
-								printf("Local Clock Constraints successfully recognized\n");
-								#endif
-							}
-						|	/* empty */
-						;
+declarator : pointer direct_declarator
+		   | direct_declarator
+		   ;
 
-local_clock_constraints_list	:	local_clock_constraints_list local_clock_constraint
-								|	local_clock_constraint
-								;
+direct_declarator : IDENTIFIER ;
 
-local_clock_constraint	:	LOCAL_CLOCK_COMMAND
-						;
+pointer : STAR
+		| STAR pointer
+		;
 
-region_constraints	:	region_constraints_list 
-						{
-							#ifdef DEBUG
-							printf("Region Constraints successfully recognized\n");
-							#endif
-						}
-					|	/* empty */
-					;
+constant : INTEGER_CONSTANT
+		 | CHARACTER_CONSTANT
+		 | FLOATING_CONSTANT
+		 | enumeration_constant
+		 ;
 
-region_constraints_list	:	region_constraints_list region_constraint
-						|	region_constraint
-						;
+enumeration_constant : IDENTIFIER ;
 
-region_constraint	:	REGION_COMMAND
-					;
+state : STATE_KEY state_specifier transition_list output_list SC ;
 
-io_constraints	:	io_constraints_list 
-					{
-						#ifdef DEBUG
-						printf("I/O Constraints successfully recognized\n");
-						#endif
-					}
-				|	/* empty */
+state_specifier : state_type_specifier IDENTIFIER state_c_code ;
+
+state_type_specifier : LCB state_type_list RCB
+					 | /* empty */
+					 ;
+
+state_c_code : C_CODE_BLOCK
+			 | /* empty */
+			 ;
+
+state_type_list : state_type
+				| state_type_list COMMA state_type
 				;
 
-io_constraints_list	:	io_constraints_list io_constraint
-					|	io_constraint
-					;
+state_type : START
+		   | END
+		   | ERR
+		   ;
 
-io_constraint	:	IO_COMMAND
+transition_list : transition_specifier
+				| transition_list transition_specifier
+				| /* empty */
 				;
 
-core_cell_constraints	:	core_cell_constraints_list 
-							{
-								#ifdef DEBUG
-								printf("Core Cell Constraints successfully recognized\n");
-								#endif
-							}
-						|	/* empty */
-						;
 
-core_cell_constraints_list	:	core_cell_constraints_list core_cell_constraint
-							|	core_cell_constraint
-							;
+transition_specifier : ON transition_condition transition_c_code transition_actuator ;
 
-core_cell_constraint	:	set_preserve_comm
-						|	set_location_comm
-						;
+transition_c_code : C_CODE_BLOCK
+				  | /* empty */
+				  ;
 
-set_preserve_comm		:	SET_PRESERVE hier_name
-							{
-								//printf("<set_preserve %s> command found\n", ($<s>2)->c_str());
-								//printf("purged string: <%s>\n", StringRemoveEscapes(*($<s>2)).c_str());
-								//printf("looking for instance ...\n");
-								//fflush(stdout);
-								/*
-								EdifInstance * i;
-								if((i = driver.getInstanceByPath(StringRemoveEscapes(*($<s>2)))) == NULL){
-									return 1;
-								}
-								i->getActelConstr()->setPreserve(true);
-								*/
-								//printf("%s\n", i->getInfo().c_str());
-							}
-						;
+transition_condition : C_CONDITION_BLOCK ;
 
-set_location_comm		:	SET_LOCATION hier_name FIXED fixed_val x_loc y_loc
-							{
-								//printf("<set_location %s %d %d> command found\n", ($<s>2)->c_str(), $<num>5, $<num>6);
-								//printf("purged string: <%s>\n", StringRemoveEscapes(*($<s>2)).c_str());
-								//printf("looking for instance ...\n");
-								//fflush(stdout);
-								//if(driver.getInstanceByPath(StringRemoveEscapes(*($<s>2))) != NULL){
-								//	printf("done\n");
-								//}
-								//else{
-								//	printf("erroreeee!!!\n"); fflush(stdout);
-								//}
-								/*
-								EdifInstance * i;
-								if((i = driver.getInstanceByPath(StringRemoveEscapes(*($<s>2)))) == NULL){
-									return 1;
-								}
-								i->getActelConstr()->setFixed($<b>4);
-								i->getActelConstr()->setLocX($<num>5);
-								i->getActelConstr()->setLocY($<num>6);
-								*/
-								//printf("%s\n", i->getInfo().c_str());
-							}
-						;
+transition_actuator : GO IDENTIFIER
+					| ERR IDENTIFIER
+					| RETRY
+					;
 
-hier_name				:	HIERARCHICAL_IDENTIFIER
-						;
+output_list : output_specifier
+			| output_list output_specifier
+			| /* empty */
+			;
 
-fixed_val				:	YES	{$<b>$ = true;}
-						|	NO {$<b>$ = false;}
-						;
+output_specifier : OUT IDENTIFIER C_CODE_BLOCK ;
 
-x_loc					:	INTEGER
-						;
+until_retry : UNTIL_KEY until_condition LCB until_object_list RCB transition_actuator ;
 
-y_loc					:	INTEGER
-						;
+until_condition : LB INTEGER_CONSTANT RB
+				| LB enumeration_constant RB
+				;
+
+until_object_list : until_object
+				  | until_object_list until_object
+				  ;
+
+until_object : state 
+			 | until_retry
+			 ;
 
 
 

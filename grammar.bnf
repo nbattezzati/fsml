@@ -81,6 +81,9 @@ fsml ::= <declaration> <fsm> | <fsm>
 
 <until-retry> ::= <UNTIL> <until-condition> { <until-object-list> } <transition-actuator> ;
 
+<until-condition> ::= <LB> <INTEGER-CONSTANT> <RB>
+					| <LB> <ENUMERATION-CONSTANT> <RB>
+
 <until-object-list> ::= <until-object>
 					  | <until-object-list> <until-object>
 
