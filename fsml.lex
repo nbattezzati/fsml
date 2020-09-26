@@ -63,21 +63,25 @@ typedef FSML::FSMLParser::token token;
 #endif
 
 
-int line = 1;
-int cb_cnt = 0;
+int line = 1;		/* line counter */
+int cb_cnt = 0;		/* counter for curly braces */
+int b_cnt = 0;		/* counter for round brackets */
 
 
 %}
 
 %option noyywrap nounput batch stack
 
-%x DECL FSM C_CODE C_COMMENT
+%x DECL FSM VAR STATE STATE_TYPE UNTIL C_CODE C_CONDITION C_COMMENT
 
 
 
 GEN_IDENTIFIER	[a-zA-Z]([a-zA-Z0-9_]*)
 STRING			\"[^\"]+\"
 INTEGER			[0-9]+
+CHARACTER		\'.\'
+FLOAT			[0-9]+(\.[0-9]+)*
+TYPE_SPECIFIER	("void"|"char"|"short"|"int"|"long"|"float"|"double"|"signed"|"unsgined"|"struct"|"union"|"enum")
 
 
 
@@ -91,31 +95,27 @@ INTEGER			[0-9]+
 			}
 
 <DECL>"{"	{
-				print("found: LCB_DECL\n");
+				print("Beginning C-CODE\n");
+				printf("%s", yytext);
 				yy_push_state(C_CODE);
-				// return token::LCB_DECL;
 			}
 
 <C_CODE>"{"	{
-				print("found: LCB_CODE\n");
-				print("%s", yytext);
+				printf("%s", yytext);
 				cb_cnt++;
-				// return token::LCB_CODE;
 			}
 
 <C_CODE>"}"	{
+				printf("%s", yytext);
 				cb_cnt--;
 				if (cb_cnt < 0) {
-					print("found: RCB_DECL\n");
+					print("found: C_CODE\n");
 					cb_cnt = 0;
+					if (yy_top_state() == DECL) {
+						yy_pop_state();
+					}
 					yy_pop_state();
-					yy_pop_state();
-					// return token::RCB_DECL;
-				}
-				else {
-					print("found: RCB_CODE\n");
-					print("%s", yytext);
-					// return token::RCB_CODE;
+					// TODO: return C_CODE with full content 
 				}
 			}
 
@@ -124,126 +124,233 @@ INTEGER			[0-9]+
 				yy_push_state(FSM);
 				// return token::FSM;
 			}
-
+			
 <FSM>"{"	{
-				print("found: LCB_FSM\n");
-				// return token::LCB_FSM;
+				print("found: LCB\n");
+				// return token::LCB;
 			}
 
-<FSM>"var"		{
+
+<FSM>"}"	{
+				print("found: RCB\n");
+				yy_pop_state();
+				// return token::RCB;
+			}
+
+<FSM>"var"	{
 				print("found: VAR\n");
+				yy_push_state(VAR);
 				// return token::VAR;
 			}
 
-<FSM>"input"		{
+<FSM>"input"	{
 				print("found: INPUT\n");
+				yy_push_state(VAR);
 				// return token::INPUT;
 			}
 
 <FSM>"output"	{
 				print("found: OUTPUT\n");
+				yy_push_state(VAR);
 				// return token::OUTPUT;
 			}
 
-<FSM>{GEN_IDENTIFIER} {
-				print("found: identifier %s\n", yytext);
+<VAR>";"	{
+				print("found: SC\n");
+				yy_pop_state();
+				// return token::SC;
 			}
 
-<FSM>"="	{
+<VAR>{TYPE_SPECIFIER} {
+				print("found: TYPE %s\n", yytext);
+				// TODO: return type with content
+			}
+
+<VAR>{GEN_IDENTIFIER} {
+				print("found: IDENTIFIER %s\n", yytext);
+				// TODO: return identifier with content
+			}
+
+<VAR>"="	{
 				print("found: EQUAL\n");
 				// return token::EQUAL;
 			}
 
-<FSM>"}"	{
-				print("found: RCB_FSM\n");
-				// return token::RCB_FSM;
+<VAR>"*"	{
+				print("found: STAR\n");
+				// return token::STAR;
 			}
 
-
-<FSM>"state"		{
-				print("found: STATE\n");
-				exit(0);
-				// return token::STATE;
+<VAR>{INTEGER} {
+				print("found: INTEGER %s\n", yytext);
+				// TODO: return integer with content
 			}
 
-<FSM>"["			{
-				#ifdef DEBUG
-				printf("found: LB\n");
-				#endif
-				// return token::LB;
+<VAR>{CHARACTER} {
+				print("found: CHARACTER %s\n", yytext);
+				// TODO: return character with content
 			}
 
-<FSM>"]"			{
-				#ifdef DEBUG
-				printf("found: RB\n");
-				#endif
-				// return token::RB;
+<VAR>{FLOAT} {
+				print("found: FLOAT %s\n", yytext);
+				// TODO: return float with content
 			}
 
-<FSM>"on"		{
-				#ifdef DEBUG
-				printf("found: ON\n");
-				#endif
-				// return token::ON;
-			}
-
-<FSM>"go"		{
-				#ifdef DEBUG
-				printf("found: GO\n");
-				#endif
-				// return token::GO;
-			}
-
-<FSM>"err"		{
-				#ifdef DEBUG
-				printf("found: ERR\n");
-				#endif
-				// return token::ERR;
-			}
-
-<FSM>"retry"		{
-				#ifdef DEBUG
-				printf("found: RETRY\n");
-				#endif
-				// return token::RETRY;
-			}
-
-<FSM>"out"		{
-				#ifdef DEBUG
-				printf("found: OUT\n");
-				#endif
-				// return token::OUT;
-			}
-
-<FSM>"until"		{
-				#ifdef DEBUG
-				printf("found: UNTIL\n");
-				#endif
+<FSM,UNTIL>"until"	{
+				print("found: UNTIL\n");
+				yy_push_state(UNTIL);
 				// return token::UNTIL;
 			}
 
-<FSM>";"			{
-				#ifdef DEBUG
-				printf("found: SC\n");
-				#endif
+<UNTIL>"("	{
+				print("found LB\n");
+				// return token::LB;
+			}
+
+<UNTIL>{INTEGER} {
+				print("found: INTEGER %s\n", yytext);
+				// TODO: return integer with content
+			}
+
+<UNTIL>")"	{
+				print("found RB\n");
+				// return token::RB;
+			}
+
+<UNTIL>"{"	{
+				print("found LCB\n");
+				// return token::LCB;
+			}
+
+<UNTIL>"}"	{
+				print("found RCB\n");
+				// return token::LCB;
+			}
+
+<FSM,UNTIL>"state"		{
+				print("found: STATE\n");
+				yy_push_state(STATE);
+				// return token::STATE;
+			}
+
+<STATE>"["	{
+				print("found: LSB\n");
+				yy_push_state(STATE_TYPE);
+				// return token::LSB;
+			}
+
+<STATE_TYPE>"start" {
+				print("found: START\n");
+				// return token::START;
+			}
+
+<STATE_TYPE>"end" {
+				print("found: END\n");
+				// return token::END;
+			}
+
+<STATE_TYPE>"err" {
+				print("found: ERR\n");
+				// return token::ERR;
+			}
+
+<STATE_TYPE>","	{
+				print("found: COMMA\n");
+				// return token::COMMA;
+			}
+
+<STATE_TYPE>"]"	{
+				print("found: RSB\n");
+				yy_pop_state();
+				// return token::RSB;
+			}
+
+<STATE>"{"	{
+				print("Beginning C_CODE\n");
+				printf("%s", yytext);
+				yy_push_state(C_CODE);
+			}
+
+<STATE>"on"	{
+				print("found: ON\n");
+				// return token::ON;
+			}
+
+<STATE>"("	{
+				print("Beginning C_CONDITION\n");
+				printf("%s", yytext);
+				yy_push_state(C_CONDITION);
+			}
+
+<C_CONDITION>"("	{
+				printf("%s", yytext);
+				b_cnt++;
+			}
+
+<C_CONDITION>")"	{
+				printf("%s", yytext);
+				b_cnt--;
+				if (b_cnt < 0) {
+					print("found: C_CONDITION\n");
+					b_cnt = 0;
+					yy_pop_state();
+					// TODO: return C_CONDITION with full content 
+				}
+			}
+
+<UNTIL,STATE>"go"	{
+				print("found: GO\n");
+				// return token::GO;
+			}
+
+<UNTIL,STATE>"err" {
+				print("found: ERR\n");
+				// return token::ERR;
+			}
+
+<UNTIL,STATE>"retry"	{
+				print("found: RETRY\n");
+				// return token::RETRY;
+			}
+
+<STATE>"out"	{
+				print("found: OUT\n");
+				// return token::OUT;
+			}
+
+<UNTIL,STATE>";"	{
+				print("found: SC\n");
+				yy_pop_state();
 				// return token::SC;
 			}
 
 
 
-
-<C_CODE>"/*"    		{ print("%s", yytext); yy_push_state(C_COMMENT); }
-<C_COMMENT>[^*\n]*		{ print("%s", yytext); }
-<C_COMMENT>"*"+[^*/\n]*	{ print("%s", yytext); }
-<C_COMMENT>\n   		{ ++line; print("%s", yytext); }
-<C_COMMENT>"*"+"/"		{ print("%s", yytext); yy_pop_state(); }
-
-<C_CODE>"//".*			{ print("%s", yytext); }
+<FSM,STATE,UNTIL>{GEN_IDENTIFIER} {
+				print("found: IDENTIFIER %s\n", yytext);
+				// TODO: return identifier with content
+			}
 
 
 
-<C_CODE>.				{ print("%s", yytext); }
-<C_CODE>\n				{ ++line; print("%s", yytext); }
+
+<C_CODE>"/*"    		{ printf("%s", yytext); yy_push_state(C_COMMENT); }
+<C_CONDITION>"/*"    	{ printf("%s", yytext); yy_push_state(C_COMMENT); }
+
+<C_COMMENT>[^*\n]*		{ printf("%s", yytext); }
+<C_COMMENT>"*"+[^*/\n]*	{ printf("%s", yytext); }
+<C_COMMENT>\n   		{ ++line; printf("%s", yytext); }
+<C_COMMENT>"*"+"/"		{ printf("%s", yytext); yy_pop_state(); }
+
+<C_CODE>"//".*			{ printf("%s", yytext); }
+<C_CONDITION>"//".*		{ printf("%s", yytext); }
+
+
+
+<C_CODE>.				{ printf("%s", yytext); }
+<C_CODE>\n				{ ++line; printf("%s", yytext); }
+<C_CONDITION>.			{ printf("%s", yytext); }
+<C_CONDITION>\n			{ ++line; printf("%s", yytext); }
 
 
 <<EOF>>					{yyterminate();}

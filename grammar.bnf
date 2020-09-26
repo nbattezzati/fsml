@@ -1,6 +1,6 @@
 fsml ::= <declaration> <fsm> | <fsm>
 
-<declaration> ::= <DECL> <c-code>
+<declaration> ::= <DECL> <C_CODE>
 
 <fsm> ::= <FSM> <IDENTIFIER> { <fsm-objects-list> }
 
@@ -52,9 +52,40 @@ fsml ::= <declaration> <fsm> | <fsm>
 			 | <FLOATING-CONSTANT>
 			 | <ENUMERATION-CONSTANT>
 
+<state> ::= <STATE> <state-specifier> {<transition-list>}? {<output-list>}? ;
 
+<state-specifier> ::= [ <state-type-list> ] <IDENTIFIER> {<C_CODE>}?
 
+<state-type-list> ::= <state-type>
+					| <state-type-list> , <state-type>
 
+<state-type> ::= <START>
+			   | <END>
+			   | <ERR>
+
+<transition-list> ::= <transition-specifier>
+				 	| <transition-list> <transition-specifier>
+
+<transition-specifier> ::= <ON> <transition-condition> {<C_CODE>}? <transition-actuator>
+
+<transition-condition> ::= ( <C_BOOLEAN_EXPR> )
+
+<transition-actuator> ::= <GO> <IDENTIFIER>
+						| <ERR> <IDENTIFIER>
+						| <RETRY>
+
+<output-list> ::= <output-specifier>
+				| <output-list> <output-specifier>
+
+<output-specifier> ::= <OUT> <IDENTIFIER> <C_CODE>
+
+<until-retry> ::= <UNTIL> <until-condition> { <until-object-list> } <transition-actuator> ;
+
+<until-object-list> ::= <until-object>
+					  | <until-object-list> <until-object>
+
+<until-object> ::= <state> 
+				 | <until-retry>
 
 
 
@@ -84,6 +115,6 @@ fsm <name> {
 	until (<limit>) {
 		
 		state ... 
-	} 
+	} go <name> | err | retry;
 
 }
