@@ -46,18 +46,6 @@
 typedef FSML::FSMLParser::token token;
 
 
-
-// #define DEBUG
-
-
-#ifdef DEBUG
-#define log(...) printf(__VA_ARGS__)
-#else
-#define log(...)
-#endif
-
-
-
 int line = 1;			/* line counter */
 int cb_cnt = 0;			/* counter for curly braces */
 int b_cnt = 0;			/* counter for round brackets */
@@ -68,7 +56,7 @@ std::string tmp_str;	/* used to collect characters scanned by different rules in
 
 %option noyywrap nounput batch stack
 
-%x DECL FSM VAR STATE STATE_TYPE UNTIL C_CODE C_CONDITION C_COMMENT
+%s DECL FSM VAR STATE STATE_TYPE UNTIL C_CODE C_CONDITION C_COMMENT FSML_COMMENT
 
 
 
@@ -275,7 +263,7 @@ TYPE_SPECIFIER	("void"|"char"|"short"|"int"|"long"|"float"|"double"|"signed"|"un
 
 <UNTIL>"}"	{
 				log("found RCB\n");
-				return token::LCB;
+				return token::RCB;
 			}
 
 <FSM,UNTIL>"state"		{
@@ -389,23 +377,34 @@ TYPE_SPECIFIER	("void"|"char"|"short"|"int"|"long"|"float"|"double"|"signed"|"un
 <C_CODE,C_CONDITION>"/*"    { tmp_str += std::string(yytext); yy_push_state(C_COMMENT); }
 
 <C_COMMENT>[^*\n]*			{ tmp_str += std::string(yytext);}
-<C_COMMENT>"*"+[^*/\n]*		{  tmp_str += std::string(yytext); }
+<C_COMMENT>"*"+[^*/\n]*		{ tmp_str += std::string(yytext); }
 <C_COMMENT>\n   			{ ++line; yylloc->begin.line++; tmp_str += std::string(yytext); }
 <C_COMMENT>"*"+"/"			{ tmp_str += std::string(yytext); yy_pop_state(); }
 
 <C_CODE,C_CONDITION>"//".*	{ tmp_str += std::string(yytext); }
 
 
-
 <C_CODE,C_CONDITION>.		{ tmp_str += std::string(yytext); }
 <C_CODE,C_CONDITION>\n		{ ++line; yylloc->begin.line++; tmp_str += std::string(yytext); }
 
 
-<<EOF>>					{yyterminate();}
 
-\n						{ ++line; yylloc->begin.line++; }
+<INITIAL,DECL,FSM,VAR,STATE,STATE_TYPE,UNTIL>"/*"   { 
+							yy_push_state(FSML_COMMENT); 
+							log("removing comment\n"); 
+							}
+<FSML_COMMENT>[^*\n]*		
+<FSML_COMMENT>"*"+[^*/\n]*	
+<FSML_COMMENT>\n   			{ ++line; yylloc->begin.line++; }
+<FSML_COMMENT>"*"+"/"		{ yy_pop_state(); }
+<INITIAL,DECL,FSM,VAR,STATE,STATE_TYPE,UNTIL>"//".*   { 
+							log("removing comment\n"); 
+							}
 
 
+<<EOF>>						{yyterminate();}
+
+\n							{ ++line; yylloc->begin.line++; }
 
 
 %%

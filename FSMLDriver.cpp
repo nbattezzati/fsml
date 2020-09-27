@@ -33,19 +33,13 @@
 #include "fsml.h"
 
 
-
-
-
 /**
  * @brief   The FSMLDriver constructor
  * @param   edM		The EdifManager whose netlist is constrained by the Actel PDC information
  */
 FSMLDriver::FSMLDriver()
 {
-
 }
-
-
 
 
 /**
@@ -53,10 +47,7 @@ FSMLDriver::FSMLDriver()
  */
 FSMLDriver::~FSMLDriver()
 {
-
 }
-
-
 
 
 /**
@@ -71,21 +62,14 @@ int FSMLDriver::parse(const std::string& fileName)
 	file = fileName;
 	scanBegin();
 	FSML::FSMLParser parser (*this);
+#ifdef DEBUG
 	parser.set_debug_level(10);
+#endif
 	res = parser.parse();
 	scanEnd();
 
 	return res;
 }
-
-
-
-
-
-
-
-
-
 
 
 //error handling functions
@@ -94,11 +78,12 @@ void FSMLDriver::error(const std::string& errorMsg)
 	std::cerr << THIS_PARSER << errorMsg << std::endl;
 }
 
+
 void FSMLDriver::error(FSML::location const & l, const std::string& errorMsg)
 {
 	fprintf(stderr, "%s %s at line %d\n", \
 			THIS_PARSER, \
 			errorMsg.c_str(), \
-			l.begin.line-1
+			l.begin.line
 	);
 }

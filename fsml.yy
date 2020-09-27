@@ -11,8 +11,9 @@
 #include <string>
 #include "fsml.h"
 
-// #define DEBUG
 
+
+// #define DEBUG
 
 #ifdef DEBUG
 #define log(...) printf(__VA_ARGS__)
@@ -54,7 +55,7 @@ class FSMLDriver;
 %%
 
 
-fsml	: declaration fsm ;
+fsml	: declaration fsm { std::cout << "\n\n PARSING COMPLETE! \n\n"; };
 
 declaration : DECL_KEY C_CODE_BLOCK 
 			| /* empty */ 
@@ -71,7 +72,7 @@ fsm_object : variable_declaration
 		   | until_retry
 		   ;
 
-variable_declaration : variable_specifier type_specifier_list init_declarator SC { std::cout << "\n\n VARIABLE RECOGNISED \n\n"; } ;
+variable_declaration : variable_specifier type_specifier_list init_declarator SC ;
 
 type_specifier_list : type_specifier
 					| type_specifier_list type_specifier
@@ -126,11 +127,11 @@ constant : INTEGER_CONSTANT
 
 enumeration_constant : IDENTIFIER ;
 
-state : STATE_KEY state_specifier transition_list output_list SC ;
+state : state_specifier state_decorator_list SC ;
 
-state_specifier : state_type_specifier IDENTIFIER state_c_code ;
+state_specifier : STATE_KEY state_type_specifier IDENTIFIER state_c_code ;
 
-state_type_specifier : LCB state_type_list RCB
+state_type_specifier : LSB state_type_list RSB
 					 | /* empty */
 					 ;
 
@@ -147,9 +148,14 @@ state_type : START
 		   | ERR
 		   ;
 
-transition_list : transition_specifier
-				| transition_list transition_specifier
-				| /* empty */
+state_decorator_list : state_decorator
+					 | state_decorator_list state_decorator
+					 | /* empty */
+					 ;
+
+
+state_decorator : transition_specifier
+				| output_specifier
 				;
 
 
@@ -166,14 +172,9 @@ transition_actuator : GO IDENTIFIER
 					| RETRY
 					;
 
-output_list : output_specifier
-			| output_list output_specifier
-			| /* empty */
-			;
-
 output_specifier : OUT IDENTIFIER C_CODE_BLOCK ;
 
-until_retry : UNTIL_KEY until_condition LCB until_object_list RCB transition_actuator ;
+until_retry : UNTIL_KEY until_condition LCB until_object_list RCB transition_actuator  SC;
 
 until_condition : LB INTEGER_CONSTANT RB
 				| LB enumeration_constant RB

@@ -28,12 +28,14 @@ DEBUG =
 
 TARGET = fsmlc
 
+CXXFLAGS = # -DDEBUG
+
 ######### scanning/parsing commands #######
 
 PREFIX = FSML
 
 SCAN = flex   #-i	-d		# -d --> debug		# -i --> case-insesitiveness
-PARSE = bison -d -v -t  # -t --> debug 		# -v is for verbose (explains conflicts) 
+PARSE = bison -d -v  # -t --> debug 		# -v is for verbose (explains conflicts) 
 
 ######### files ############
 
@@ -52,7 +54,7 @@ SRCS_CPP = FSMLDriver.cpp
 
 ######### rules ###########
 all: scanner_cpp parser_cpp  
-	g++ -o $(TARGET) $(PARSER_OUTPUT_CPP) $(SCANNER_OUTPUT) $(SRCS_CPP) main.cpp
+	g++ -o $(TARGET) $(CXXFLAGS) $(PARSER_OUTPUT_CPP) $(SCANNER_OUTPUT) $(SRCS_CPP) main.cpp
 
 
 scanner_cpp:

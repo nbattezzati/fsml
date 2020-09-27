@@ -12,7 +12,7 @@ int main(int argc, char * argv[])
 
 	FSMLDriver driver;
 	if (driver.parse(argv[1]) != 0) {
-		std::cerr << "Parsing failed" << std::endl;
+		; // std::cerr << "Parsing failed" << std::endl;
 	}
 
 	return 0;
