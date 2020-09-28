@@ -1,3 +1,9 @@
-a.out
-a.exe
+fsml.cc
+fsml.hh
+fsml.output
+fsml.yy.cc
+fsmlc.exe
 lex.yy.c
+location.hh
+position.hh
+stack.hh
