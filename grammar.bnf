@@ -108,7 +108,7 @@ fsm <name> {
 
 
 	state \[<id> [,<id>...]\] <name> [{ <code> }]
-	on ( <condition> ) [{ <code> }] [go <name> | err | retry]
+	on ( <condition> ) [{ <code> }] [go <name> | err <err_id> | retry]
 	[...]
 	[out <name> { <code> }]
 	;

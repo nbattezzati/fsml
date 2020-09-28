@@ -59,18 +59,21 @@ fsm /* poi ci metti il nome della FSM*/ pic_manager {
 	}
 	on (pd) {
 		// go to next state and wait for the shoot to be finished
-	} go WAIT_METADATA on (!pd) err PicErr_SHOOT_FAILED
-	out pic_state { return PicState_BUSY; };
+	} go WAIT_METADATA,
+	on (!pd) err PicErr_SHOOT_FAILED,		// fsm_pic_manager_t myFsm; myFsm.err(); enum pic_manager_err_t {...}
+							// possiamo evitare di definire un enum con tutti gli errori?
+							// cosa succede se ho piu` stati di tipo [err]?
+	out pic_state { return PicState_BUSY; } ;	// non e` molto chiaro che il return assegni quel valore all'output
 
 
 	until (MAX_RETRIES) {
 
-		state WAIT_METADATA 
+		state WAIT_METADATA
 		on (!pd) err PicErr_MEMORY_VIOLATION
 		on (pd && pd->ready && pd->metadata == METADATA_READY) {
 			pd = move_picture_from_payload();
 		} go WAIT_TRANSF_1
-		on (pd && pd->metadata == METADATA_CORRUPT) retry;
+		on (pd && pd->metadata == METADATA_CORRUPT) retry;	// ha senso lascaire il retry verso il primo stato o e` meglio mettere un etichetta tipo [rst]?
 
 
 		until (MAX_RETRIES) {
