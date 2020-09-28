@@ -37,6 +37,11 @@
 #include "fsml.hh" 
 #include "fsml_inner.h"
 
+#ifdef DEBUG
+#define log(...) printf(__VA_ARGS__)
+#else
+#define log(...)
+#endif
 
 #define yyterminate()	return token::END_OF_FILE
 

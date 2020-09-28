@@ -1,6 +1,6 @@
 %skeleton "lalr1.cc"
 %defines
-%define "parser_class_name" "FSMLParser"
+%define parser_class_name "FSMLParser"
 
 %locations
 
@@ -11,9 +11,6 @@
 #include <string>
 #include "fsml.h"
 
-
-
-// #define DEBUG
 
 #ifdef DEBUG
 #define log(...) printf(__VA_ARGS__)
