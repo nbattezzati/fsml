@@ -1,6 +1,6 @@
 %skeleton "lalr1.cc"
 %defines
-%define parser_class_name "FSMLParser"
+%define api.parser.class {FSMLParser}
 
 %locations
 
