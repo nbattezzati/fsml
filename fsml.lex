@@ -364,6 +364,11 @@ TYPE_SPECIFIER	("void"|"char"|"short"|"int"|"long"|"float"|"double"|"signed"|"un
 				return token::OUT;
 			}
 
+<STATE>"="	{
+				log("found: EQUAL\n");
+				return token::EQUAL;
+			}
+
 <UNTIL,STATE>";"	{
 				log("found: SC\n");
 				yy_pop_state();
@@ -409,7 +414,11 @@ TYPE_SPECIFIER	("void"|"char"|"short"|"int"|"long"|"float"|"double"|"signed"|"un
 
 <<EOF>>						{yyterminate();}
 
-\n							{ ++line; yylloc->begin.line++; }
+<INITIAL,DECL,FSM,VAR,STATE,STATE_TYPE,UNTIL>\n		{ 
+							++line; yylloc->begin.line++; 
+							}
+
+<INITIAL,DECL,FSM,VAR,STATE,STATE_TYPE,UNTIL>.    
 
 
 %%
