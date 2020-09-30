@@ -11,9 +11,9 @@ decl {
 fsm power_manager {
 
 	var bool init_done = false;
-	var Alarm ign_timer = 0;				// it should be possible not to initialize complex objects
-	var Alarm shutdown_timer = 0;
-	var Alarm delay_timer;
+	var Alarm ign_timer = {0};				// it should be possible not to initialize complex objects
+	var Alarm shutdown_timer = {0};
+	var Alarm delay_timer = {0};
 	var unsigned int delay_count = 0;
 
 	input bool ign = false;
@@ -26,7 +26,7 @@ fsm power_manager {
 	state [start] startup {
 		init_done = true;
 	} on (init_done) go running
-	out power_state { return this.state; } ;
+	out power_state = { return this.state(); } ;
 
 
 	state running {
@@ -39,24 +39,24 @@ fsm power_manager {
 		delay_timer.Start();
 		delay_count = 0;
 	} go shutdown_requested
-	out power_state { return this.state; } ;
+	out power_state = { return this.state(); } ;
 
 
 	state shutdown_requested
 	on (!reboot && !shutdown && ign) go running
 	on (delay_count > 0 && delay_timer.IsElapsed()) go shutdown_delayed
 	on (shutdown_timer.IsElapsed() || delay_timer.IsElapsed()) go shutting_down
-	out power_state { return this.state; } ;
+	out power_state = { return this.state(); } ;
 
 
 	state shutdown_delayed
 	on (delay_timer.IsElapsed()) go shutting_down
 	on (delay_count == 0 && !delay_timer.IsElapsed()) go shutdown_requested
-	out power_state { return this.state; } ;
+	out power_state = { return this.state(); } ;
 
 
 	state [end] shutting_down
-	out power_state { return this.state; } ;
+	out power_state = { return this.state(); } ;
 
 
 }

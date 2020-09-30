@@ -77,7 +77,7 @@ fsml ::= <declaration> <fsm> | <fsm>
 <output-list> ::= <output-specifier>
 				| <output-list> <output-specifier>
 
-<output-specifier> ::= <OUT> <IDENTIFIER> <C_CODE>
+<output-specifier> ::= <OUT> <IDENTIFIER> <EQUAL> <C_CODE>
 
 <until-retry> ::= <UNTIL> <until-condition> { <until-object-list> } <transition-actuator> ;
 

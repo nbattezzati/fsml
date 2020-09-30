@@ -169,7 +169,7 @@ transition_actuator : GO IDENTIFIER
 					| RETRY
 					;
 
-output_specifier : OUT IDENTIFIER C_CODE_BLOCK ;
+output_specifier : OUT IDENTIFIER EQUAL C_CODE_BLOCK ;
 
 until_retry : UNTIL_KEY until_condition LCB until_object_list RCB transition_actuator  SC;
 
