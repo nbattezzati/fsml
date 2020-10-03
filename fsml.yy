@@ -54,7 +54,7 @@ class FSMLDriver;
 
 fsml	: declaration time fsm { std::cout << "\n\n PARSING COMPLETE! \n\n"; };
 
-declaration : DECL_KEY C_CODE_BLOCK 
+declaration : DECL_KEY C_CODE_BLOCK { driver.Decl(*($<s>2)); }
 			| /* empty */ 
 			;
 

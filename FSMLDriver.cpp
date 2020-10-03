@@ -27,6 +27,8 @@
  * =====================================================================================
  */
 
+#include <string>
+#include <stdio.h>
 
 #include "FSMLDriver.h"
 #include "fsml_inner.h"
@@ -47,6 +49,44 @@ FSMLDriver::FSMLDriver()
  */
 FSMLDriver::~FSMLDriver()
 {
+}
+
+
+/**
+ * @brief   This method stores the C code contained in the declaration section
+ * @param   c_code_block	string containing the C code block (whose curly braces will be stripped out)
+ */
+void FSMLDriver::Decl(const std::string & c_code_block)
+{
+	decl_ = c_code_block;
+	// strip starting and ending curly braces
+	decl_ = decl_.substr(1, decl_.size()-1);
+}
+
+
+/**
+ * @brief   This method translates the FSML grammar and creates a C code that implements the FSM
+ * @param   file_name	output file name for translation (if empty translates to the default fsm.c)
+ * \return	true if successfull, false if any error occurred
+ */
+bool FSMLDriver::translate(const std::string & file_name)
+{
+	bool ret_val = false;
+	std::string out_file = file_name.size() > 0 ? file_name : kDefaultOutputCFile_;
+
+	// open the output C file
+	FILE * fp = fopen(out_file.c_str(), "w+");
+	if (fp != nullptr) {
+		fprintf(fp, "%s\n", decl_.c_str());
+		ret_val = true;
+	}
+
+	// close the file
+	if (fp != nullptr) {
+		fclose(fp);
+	}
+
+	return ret_val;
 }
 
 

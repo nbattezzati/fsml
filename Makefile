@@ -28,7 +28,7 @@ DEBUG =
 
 TARGET = fsmlc
 
-CXXFLAGS = # -DDEBUG
+CXXFLAGS = -std=c++11 -Wno-deprecated-register # -DDEBUG
 
 ######### scanning/parsing commands #######
 

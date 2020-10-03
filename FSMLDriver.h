@@ -63,13 +63,25 @@ public:
 	//public destructor
 	virtual ~FSMLDriver();
 
+
+	void Decl(const std::string & c_code_block);
+
+	//-----------------------------------------------------/
+
+
+
+	//------------------ compiler  methods ----------------/
+
+	// compile and generate C code
+	bool translate(const std::string & file_name);
+
 	//-----------------------------------------------------/
 
 
 
 	//------------------ parsing methods ----------------/
 
-	//scanner's functions	(implemented in actelPdc.lexpp)
+	//scanner's functions	(implemented in fsml.lex)
 	void scanBegin();
 	void scanEnd();
 
@@ -84,7 +96,11 @@ public:
 	//---------------------------------------------------/
 	
 
+private:
+	// code contained in the starting declaration (if any)
+	std::string decl_;
 
+	const std::string kDefaultOutputCFile_ = "fsm.c";
 };
 
 	
