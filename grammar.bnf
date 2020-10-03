@@ -1,4 +1,4 @@
-fsml ::= <declaration> <fsm> | <fsm>
+fsml ::= <declaration> <time_specifier> <fsm> | <time_specifier> <fsm> | <fsm>
 
 <declaration> ::= <DECL> <C_CODE>
 
@@ -12,6 +12,7 @@ fsml ::= <declaration> <fsm> | <fsm>
 			   | <until-retry>
 
 <variable-declaration> ::= <variable-specifier> {<type-specifier>}+ <init-declarator> ;
+						 | <timer-specifier> ;
 
 <variable-specifier> ::= <VAR>
 					   | <INPUT>
@@ -52,6 +53,11 @@ fsml ::= <declaration> <fsm> | <fsm>
 			 | <FLOATING-CONSTANT>
 			 | <ENUMERATION-CONSTANT>
 
+<timer-specifier> ::= <TIMER> <IDENTIFIER> ( <timer-initializer> )
+
+<timer-initializer> ::= <INTEGER-CONSTANT>
+					  | <IDENTIFIER>
+
 <state> ::= <STATE> <state-specifier> {<transition-list>}? {<output-list>}? ;
 
 <state-specifier> ::= [ <state-type-list> ] <IDENTIFIER> {<C_CODE>}?
@@ -66,13 +72,16 @@ fsml ::= <declaration> <fsm> | <fsm>
 <transition-list> ::= <transition-specifier>
 				 	| <transition-list> <transition-specifier>
 
-<transition-specifier> ::= <ON> <transition-condition> {<C_CODE>}? <transition-actuator>
+<transition-specifier> ::= <ON> <transition-condition> {<C_CODE>}? <transition-actuator> {<timer-actuator>}?
 
 <transition-condition> ::= ( <C_BOOLEAN_EXPR> )
+						 | <TIMEOUT> ( <IDENTIFIER> )
 
 <transition-actuator> ::= <GO> <IDENTIFIER>
 						| <ERR> <IDENTIFIER>
 						| <RETRY>
+
+<timer-actuator> ::= <START> <IDENTIFIER>
 
 <output-list> ::= <output-specifier>
 				| <output-list> <output-specifier>
@@ -96,6 +105,14 @@ decl {
 	<c-code>
 }
 
+time_us {
+	<c-code>
+}
+	
+period_us {
+	<c-code>
+}
+
 fsm <name> {
 
 	var <type> <var_name> = <initializer>;
@@ -105,12 +122,16 @@ fsm <name> {
 	...
 
 	output <type> <name> = <initializer>;
+	...
+
+	timer <name>(<initializer>);
+	...
 
 
 	state \[<id> [,<id>...]\] <name> [{ <code> }]
-	on ( <condition> ) [{ <code> }] [go <name> | err <err_id> | retry]
+	on ( <condition> ) [{ <code> }] [go <name> [start <name>] | err <err_id> | retry] [start <name>]
 	[...]
-	[out <name> { <code> }]
+	[out <name> = { <code> }]
 	;
 
 	...
@@ -118,6 +139,6 @@ fsm <name> {
 	until (<limit>) {
 		
 		state ... 
-	} go <name> | err | retry;
+	} go <name> | err | retry [start <name>];
 
 }

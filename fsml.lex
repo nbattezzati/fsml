@@ -61,7 +61,7 @@ std::string tmp_str;	/* used to collect characters scanned by different rules in
 
 %option noyywrap nounput batch stack
 
-%s DECL FSM VAR STATE STATE_TYPE UNTIL C_CODE C_CONDITION C_COMMENT FSML_COMMENT
+%s DECL TIME PERIOD FSM VAR TIMER STATE STATE_TYPE TIMEOUT UNTIL C_CODE C_CONDITION C_COMMENT FSML_COMMENT
 
 
 
@@ -82,7 +82,19 @@ TYPE_SPECIFIER	("void"|"char"|"short"|"int"|"long"|"float"|"double"|"signed"|"un
 				return token::DECL_KEY;
 			}
 
-<DECL>"{"	{
+"time_us"	{
+				log("found: TIME\n");
+				yy_push_state(TIME);
+				return token::TIME_KEY;
+			}
+
+"period_us"	{
+				log("found: PERIOD\n");
+				yy_push_state(PERIOD);
+				return token::PERIOD_KEY;
+			}
+
+<DECL,TIME,PERIOD>"{"	{
 				log("Beginning C-CODE\n");
 				tmp_str += std::string(yytext);
 				yy_push_state(C_CODE);
@@ -99,8 +111,14 @@ TYPE_SPECIFIER	("void"|"char"|"short"|"int"|"long"|"float"|"double"|"signed"|"un
 				if (cb_cnt < 0) {
 					log("found: C_CODE\n");
 					cb_cnt = 0;
-					if (yy_top_state() == DECL) {
-						yy_pop_state();
+					switch (yy_top_state()) {
+						case DECL:
+						case TIME:
+						case PERIOD:
+							yy_pop_state();
+						break;
+
+						default: break;
 					}
 					yy_pop_state();
 					FSMLlval->s = new std::string(tmp_str); 
@@ -145,7 +163,13 @@ TYPE_SPECIFIER	("void"|"char"|"short"|"int"|"long"|"float"|"double"|"signed"|"un
 				return token::OUTPUT_KEY;
 			}
 
-<VAR>";"	{
+<FSM>"timer"	{
+				log("found: TIMER\n");
+				yy_push_state(TIMER);
+				return token::TIMER_KEY;
+			}
+
+<VAR,TIMER>";"	{
 				log("found: SC\n");
 				yy_pop_state();
 				return token::SC;
@@ -211,12 +235,6 @@ TYPE_SPECIFIER	("void"|"char"|"short"|"int"|"long"|"float"|"double"|"signed"|"un
 				return token::ENUM;
 			}
 
-<VAR>{GEN_IDENTIFIER} {
-				log("found: IDENTIFIER %s\n", yytext);
-				FSMLlval->s = new std::string(yytext);
-				return token::IDENTIFIER;
-			}
-
 <VAR>"="	{
 				log("found: EQUAL\n");
 				return token::EQUAL;
@@ -227,7 +245,7 @@ TYPE_SPECIFIER	("void"|"char"|"short"|"int"|"long"|"float"|"double"|"signed"|"un
 				return token::STAR;
 			}
 
-<VAR,UNTIL>{INTEGER} {
+<VAR,TIMER,UNTIL>{INTEGER} {
 				log("found: INTEGER %s\n", yytext);
 				FSMLlval->i = atoi(yytext);
 				return token::INTEGER_CONSTANT;
@@ -251,12 +269,12 @@ TYPE_SPECIFIER	("void"|"char"|"short"|"int"|"long"|"float"|"double"|"signed"|"un
 				return token::UNTIL_KEY;
 			}
 
-<UNTIL>"("	{
+<TIMER,TIMEOUT,UNTIL>"("	{
 				log("found LB\n");
 				return token::LB;
 			}
 
-<UNTIL>")"	{
+<TIMER,UNTIL>")"	{
 				log("found RB\n");
 				return token::RB;
 			}
@@ -344,6 +362,18 @@ TYPE_SPECIFIER	("void"|"char"|"short"|"int"|"long"|"float"|"double"|"signed"|"un
 				}
 			}
 
+<STATE>"timeout"	{
+				log("found: TIMEOUT\n");
+				yy_push_state(TIMEOUT);
+				return token::TIMEOUT_KEY;
+			}
+
+<TIMEOUT>")"	{
+				log("found RB\n");
+				yy_pop_state();
+				return token::RB;
+			}
+
 <UNTIL,STATE>"go"	{
 				log("found: GO\n");
 				return token::GO;
@@ -352,6 +382,11 @@ TYPE_SPECIFIER	("void"|"char"|"short"|"int"|"long"|"float"|"double"|"signed"|"un
 <UNTIL,STATE>"err" {
 				log("found: ERR\n");
 				return token::ERR;
+			}
+
+<UNTIL,STATE>"start" {
+				log("found: START\n");
+				return token::START;
 			}
 
 <UNTIL,STATE>"retry"	{
@@ -375,7 +410,7 @@ TYPE_SPECIFIER	("void"|"char"|"short"|"int"|"long"|"float"|"double"|"signed"|"un
 				return token::SC;
 			}
 
-<FSM,STATE,UNTIL>{GEN_IDENTIFIER} {
+<FSM,STATE,UNTIL,VAR,TIMER,TIMEOUT>{GEN_IDENTIFIER} {
 				log("found: IDENTIFIER %s\n", yytext);
 				FSMLlval->s = new std::string(yytext);
 				return token::IDENTIFIER;
@@ -399,7 +434,7 @@ TYPE_SPECIFIER	("void"|"char"|"short"|"int"|"long"|"float"|"double"|"signed"|"un
 
 
 
-<INITIAL,DECL,FSM,VAR,STATE,STATE_TYPE,UNTIL>"/*"   { 
+<INITIAL,DECL,TIME,PERIOD,FSM,VAR,TIMER,STATE,STATE_TYPE,TIMEOUT,UNTIL>"/*"   { 
 							yy_push_state(FSML_COMMENT); 
 							log("removing comment\n"); 
 							}
@@ -407,18 +442,18 @@ TYPE_SPECIFIER	("void"|"char"|"short"|"int"|"long"|"float"|"double"|"signed"|"un
 <FSML_COMMENT>"*"+[^*/\n]*	
 <FSML_COMMENT>\n   			{ ++line; yylloc->begin.line++; }
 <FSML_COMMENT>"*"+"/"		{ yy_pop_state(); }
-<INITIAL,DECL,FSM,VAR,STATE,STATE_TYPE,UNTIL>"//".*   { 
+<INITIAL,DECL,TIME,PERIOD,FSM,VAR,TIMER,STATE,STATE_TYPE,TIMEOUT,UNTIL>"//".*   { 
 							log("removing comment\n"); 
 							}
 
 
 <<EOF>>						{yyterminate();}
 
-<INITIAL,DECL,FSM,VAR,STATE,STATE_TYPE,UNTIL>\n		{ 
+<INITIAL,DECL,TIME,PERIOD,FSM,VAR,TIMER,STATE,STATE_TYPE,TIMEOUT,UNTIL>\n		{ 
 							++line; yylloc->begin.line++; 
 							}
 
-<INITIAL,DECL,FSM,VAR,STATE,STATE_TYPE,UNTIL>.    
+<INITIAL,DECL,TIME,PERIOD,FSM,VAR,TIMER,STATE,STATE_TYPE,TIMEOUT,UNTIL>.    
 
 
 %%

@@ -43,7 +43,7 @@ class FSMLDriver;
 
 
 
-%token DECL_KEY FSM_KEY LCB RCB VAR_KEY INPUT_KEY OUTPUT_KEY STATE_KEY ON GO ERR RETRY VOID CHAR SHORT INT LONG FLOAT DOUBLE SIGNED UNSIGNED UNION STRUCT ENUM STAR COMMA START END LSB RSB OUT UNTIL_KEY SC EQUAL LB RB
+%token DECL_KEY TIME_KEY PERIOD_KEY FSM_KEY LCB RCB VAR_KEY INPUT_KEY OUTPUT_KEY TIMER_KEY STATE_KEY ON TIMEOUT_KEY GO ERR RETRY START VOID CHAR SHORT INT LONG FLOAT DOUBLE SIGNED UNSIGNED UNION STRUCT ENUM STAR COMMA END LSB RSB OUT UNTIL_KEY SC EQUAL LB RB
 %token <s> C_CODE_BLOCK C_CONDITION_BLOCK IDENTIFIER CHARACTER_CONSTANT ENUMERATION_CONSTANT
 %token <i> INTEGER_CONSTANT
 %token <f> FLOATING_CONSTANT
@@ -52,11 +52,20 @@ class FSMLDriver;
 %%
 
 
-fsml	: declaration fsm { std::cout << "\n\n PARSING COMPLETE! \n\n"; };
+fsml	: declaration time fsm { std::cout << "\n\n PARSING COMPLETE! \n\n"; };
 
 declaration : DECL_KEY C_CODE_BLOCK 
 			| /* empty */ 
 			;
+
+time : time_specifier 
+	 | period_specifier
+	 | /* empty */
+	 ;
+
+time_specifier : TIME_KEY C_CODE_BLOCK ;
+
+period_specifier : PERIOD_KEY C_CODE_BLOCK ;
 
 fsm : FSM_KEY IDENTIFIER LCB fsm_objects_list RCB ;
 
@@ -69,7 +78,8 @@ fsm_object : variable_declaration
 		   | until_retry
 		   ;
 
-variable_declaration : variable_specifier type_specifier_list init_declarator SC ;
+variable_declaration : variable_specifier type_specifier_list init_declarator SC
+					 | timer_specifier SC ;
 
 type_specifier_list : type_specifier
 					| type_specifier_list type_specifier
@@ -124,6 +134,12 @@ constant : INTEGER_CONSTANT
 
 enumeration_constant : IDENTIFIER ;
 
+timer_specifier : TIMER_KEY IDENTIFIER LB timer_initializer RB ;
+
+timer_initializer : INTEGER_CONSTANT 
+				  | IDENTIFIER
+				  ;
+
 state : state_specifier state_decorator_list SC ;
 
 state_specifier : STATE_KEY state_type_specifier IDENTIFIER state_c_code ;
@@ -156,18 +172,24 @@ state_decorator : transition_specifier
 				;
 
 
-transition_specifier : ON transition_condition transition_c_code transition_actuator ;
+transition_specifier : ON transition_condition transition_c_code transition_actuator timer_actuator ;
 
 transition_c_code : C_CODE_BLOCK
 				  | /* empty */
 				  ;
 
-transition_condition : C_CONDITION_BLOCK ;
+transition_condition : C_CONDITION_BLOCK
+					 | TIMEOUT_KEY LB IDENTIFIER RB
+					 ;
 
 transition_actuator : GO IDENTIFIER
 					| ERR IDENTIFIER
 					| RETRY
 					;
+
+timer_actuator : START IDENTIFIER 
+			   | /* empty*/
+			   ;
 
 output_specifier : OUT IDENTIFIER EQUAL C_CODE_BLOCK ;
 
