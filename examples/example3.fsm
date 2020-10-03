@@ -12,8 +12,23 @@ typedef enum {
 	ManeuverState_COMPLETE,
 	ManeuverState_ERR
 } maneuver_state_t;
+
 }
 
+/*
+time(t) {
+	struct timespec t;
+	rtems_clock_get_uptime(&t);
+	return t;
+}
+*/
+
+period {
+	struct timespec t;
+	t->tv_sec = 0;
+	t->tv_nsec = 1000000;		// 1 ms period
+	return t;
+}
 
 fsm maneuver {
 	

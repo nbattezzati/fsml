@@ -44,16 +44,20 @@ typedef enum {
 
 
 /* Possiamo poi definire delle funzioni per il cacolo del tempo:
- * - time_us ==> ad ogni chiamata deve ritornare il tempo attuale in microsecondi
- * - period_us ==> deve ritornare il periodo (in microsecondi) con cui viene chiamata la funzione exec() della FSM
+ * - time ==> deve ritornare una variabile di tipo struct timespec * e deve inserirvi dentro il tempo attuale a ogni chiamata
+ * - period ==> deve ritornare una variabile t di tipo struct timespec * e deve inserirvi il periodo con cui viene chiamata la exec()
 */
-time_us {
-	return get_tick() * MS_X_TICK * 1000;
+time {
+	struct timespec t;
+	rtems_clock_get_uptime(&t);
+	return t;
 }
 
-/* only one can be declared
-period_us {
-	return TASK_PERIOD_MS * 1000;
+/* only one of the two time functions can be declared
+period {
+	struct timespec t = {0}
+	t->tv_nsec = 10000000;		// 10 ms period		
+	return t;
 }
 */
 
