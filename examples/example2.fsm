@@ -11,10 +11,15 @@ decl
 // il blocco di codice C va tra {}
 {
 
+#include <time.h>
+
 #include <memories.h>
 
 #define MAX_RETRIES		(3)
 
+#define MS_X_TICK		(10)
+
+#define TASK_PERIOD_MS	(10)		
 
 /* questi commenti rimangono nel codice C
 decl comincia con { 
@@ -37,6 +42,20 @@ typedef enum {
 
 }	/* qui finisce la sezione delle dichiarazioni */
 
+
+/* Possiamo poi definire delle funzioni per il cacolo del tempo:
+ * - time_us ==> ad ogni chiamata deve ritornare il tempo attuale in microsecondi
+ * - period_us ==> deve ritornare il periodo (in microsecondi) con cui viene chiamata la funzione exec() della FSM
+*/
+time_us {
+	return get_tick() * MS_X_TICK * 1000;
+}
+
+/* only one can be declared
+period_us {
+	return TASK_PERIOD_MS * 1000;
+}
+*/
 
 // E ora vediamo la vera e propria FSM (che significa Finite State Machine se non lo sapessi)
 // La parolina magica 'fsm', guarda a caso definisce che stiamo facendo una FSM

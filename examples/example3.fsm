@@ -1,0 +1,62 @@
+decl {
+
+#include <bool.h>
+#include "space_math.h"
+
+#define MAX_ERROR 			(0.1)
+#define MAX_MAN_RETRIES		(3)
+
+typedef enum {
+	ManeuverState_IDLE,
+	ManeuverState_BUSY,
+	ManeuverState_COMPLETE,
+	ManeuverState_ERR
+} maneuver_state_t;
+}
+
+
+fsm maneuver {
+	
+	var bool res = false;
+	var quaternion_t err = {0};
+
+	input unsigned int maneuver_duration = 0;
+	input quaternion_t * q = NULL;
+	output maneuver_state_t man_state = ManeuverState_IDLE;
+
+	timer stable_timer(ADCS_PERIOD);
+	timer maneuver_timer(maneuver_duration);
+
+
+	until (MAX_MAN_RETRIES) {
+	
+		/* start the maneuver tellind the ADCS the target attitude quaternion */
+		state [start] START_MAN {
+			if (q)
+				res = xact_goto_eci_attitude(q);
+		}
+		on (q == NULL) err MemViolation
+		on (res == TRUE) go WAIT_MAN start maneuver_timer
+		on (res == FALSE) retry
+		out man_state = { return ManeuverState_BUSY; };	
+
+		/* wait for the ADCS controller to reach the target with the expected accuracy */
+		state WAIT_MAN {
+			xact_get_error(&err);
+		}
+		on (is_error_less_than(&err, MAX_ERROR)) go WAIT_STABLE start stable_timer
+		on timeout(maneuver_timer) retry;
+
+		/* wait the error between the setpoint and the output attitude is stabilized */
+		state WAIT_STABLE {
+			xact_get_error(&err);
+		}
+		on (!is_error_less_than(&err, MAX_ERROR)) go WAIT_MAN
+		on timeout(stable_timer) go FINISHED
+		on timeout(maneuver_timer) retry;
+
+	} err ManFailed;
+
+	state [end, err] FINISHED
+	out man_state = { return err ? ManeuverState_ERR : ManeuverState_COMPLETE; };
+}
