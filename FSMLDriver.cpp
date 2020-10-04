@@ -63,6 +63,48 @@ void FSMLDriver::Decl(const std::string & c_code_block)
 	decl_ = decl_.substr(1, decl_.size()-2);
 }
 
+/**
+ * @brief   This method stores the C code contained in the time section
+ * @param   c_code_block	string containing the C code block (whose curly braces will be stripped out)
+ */
+bool FSMLDriver::TimeSpec(const std::string & c_code_block)
+{
+	bool ret_val = false;
+
+	if (periodSpec_.size() == 0) {
+		timeSpec_ = c_code_block;
+		// strip starting and ending curly braces
+		timeSpec_ = timeSpec_.substr(1, timeSpec_.size()-2);
+		ret_val = true;
+	}
+	else {
+		lastError_ = "'period' section already defined, 'time' section cannot be defined any more";
+	}
+
+	return ret_val;
+}
+
+/**
+ * @brief   This method stores the C code contained in the period section
+ * @param   c_code_block	string containing the C code block (whose curly braces will be stripped out)
+ */
+bool FSMLDriver::PeriodSpec(const std::string & c_code_block)
+{
+	bool ret_val = false;
+
+	if (timeSpec_.size() == 0) {
+		periodSpec_ = c_code_block;
+		// strip starting and ending curly braces
+		periodSpec_ = periodSpec_.substr(1, periodSpec_.size()-2);
+		ret_val = true;
+	}
+	else {
+		lastError_ = "'time' section already defined, 'period' section cannot be defined any more";
+	}
+
+	return ret_val;
+}
+
 
 /**
  * @brief   This method translates the FSML grammar and creates a C code that implements the FSM

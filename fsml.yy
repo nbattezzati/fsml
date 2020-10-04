@@ -43,8 +43,8 @@ class FSMLDriver;
 
 
 
-%token DECL_KEY TIME_KEY PERIOD_KEY FSM_KEY LCB RCB VAR_KEY INPUT_KEY OUTPUT_KEY TIMER_KEY STATE_KEY ON TIMEOUT_KEY GO ERR RETRY START VOID CHAR SHORT INT LONG FLOAT DOUBLE SIGNED UNSIGNED UNION STRUCT ENUM STAR COMMA END LSB RSB OUT UNTIL_KEY SC EQUAL LB RB
-%token <s> C_CODE_BLOCK C_CONDITION_BLOCK IDENTIFIER CHARACTER_CONSTANT ENUMERATION_CONSTANT
+%token DECL_KEY TIME_KEY PERIOD_KEY FSM_KEY LCB RCB VAR_KEY INPUT_KEY OUTPUT_KEY TIMER_KEY STATE_KEY ON TIMEOUT_KEY GO ERR RETRY START VOID CHAR SHORT INT LONG FLOAT DOUBLE SIGNED UNSIGNED UNION STRUCT ENUM STAR COMMA END LSB RSB OUT UNTIL_KEY SC EQUAL LB RB ERROR
+%token <s> C_CODE_BLOCK C_CONDITION_BLOCK IDENTIFIER CHARACTER_CONSTANT
 %token <i> INTEGER_CONSTANT
 %token <f> FLOATING_CONSTANT
 
@@ -52,20 +52,36 @@ class FSMLDriver;
 %%
 
 
-fsml	: declaration time fsm { std::cout << "\n\n PARSING COMPLETE! \n\n"; };
+fsml	: init_section_list fsm
 
-declaration : DECL_KEY C_CODE_BLOCK { driver.Decl(*($<s>2)); }
-			| /* empty */ 
-			;
+init_section_list : init_section
+				  | init_section_list init_section
+				  | /* empty */
+				  ;
+
+init_section : declaration
+			 | time
+			 ;
+
+declaration : DECL_KEY C_CODE_BLOCK { driver.Decl(*($<s>2)); } ;
 
 time : time_specifier 
 	 | period_specifier
-	 | /* empty */
 	 ;
 
-time_specifier : TIME_KEY C_CODE_BLOCK ;
+time_specifier : TIME_KEY C_CODE_BLOCK { 
+		if (driver.TimeSpec(*($<s>2)) == false) { 
+			driver.error(@$, driver.GetLastError()); 
+			YYERROR; 
+		}; 
+	} ;
 
-period_specifier : PERIOD_KEY C_CODE_BLOCK ;
+period_specifier : PERIOD_KEY C_CODE_BLOCK {
+		if (driver.PeriodSpec(*($<s>2)) == false) { 
+			driver.error(@$, driver.GetLastError()); 
+			YYERROR; 
+		}; 
+	} ;
 
 fsm : FSM_KEY IDENTIFIER LCB fsm_objects_list RCB ;
 
@@ -114,7 +130,16 @@ enum_specifier : ENUM IDENTIFIER ;
 
 typedef_name : IDENTIFIER ;
 
-init_declarator : declarator EQUAL constant ;
+init_declarator : declarator EQUAL initializer ;
+
+initializer : constant
+			| LCB initializer_list RCB
+			| LCB initializer_list COMMA RCB
+			;
+
+initializer_list : initializer
+                 | initializer_list COMMA initializer
+				 ;
 
 declarator : pointer direct_declarator
 		   | direct_declarator

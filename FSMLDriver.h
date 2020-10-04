@@ -65,6 +65,8 @@ public:
 
 
 	void Decl(const std::string & c_code_block);
+	bool TimeSpec(const std::string & c_code_block);
+	bool PeriodSpec(const std::string & c_code_block);
 
 	//-----------------------------------------------------/
 
@@ -92,13 +94,22 @@ public:
 	//error handling
 	void error(FSML::location const & l, const std::string& m);
 	void error(const std::string& errorMsg);
+	inline std::string GetLastError() { return lastError_; }
 
 	//---------------------------------------------------/
 	
 
 private:
-	// code contained in the starting declaration (if any)
+	// code contained in the declaration section (if any)
 	std::string decl_;
+
+	// code contained in the time secction (if any)
+	std::string timeSpec_;
+
+	// code contained in the period section (if any)
+	std::string periodSpec_;
+
+	std::string lastError_;
 
 	const std::string kDefaultOutputCFile_ = "fsm.c";
 };

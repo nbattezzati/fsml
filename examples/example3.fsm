@@ -1,3 +1,10 @@
+period {
+	struct timespec t;
+	t->tv_sec = 0;
+	t->tv_nsec = 1000000;		// 1 ms period
+	return t;
+}
+
 decl {
 
 #include <bool.h>
@@ -16,24 +23,17 @@ typedef enum {
 }
 
 /*
-time(t) {
+time {
 	struct timespec t;
 	rtems_clock_get_uptime(&t);
 	return t;
-}
-*/
+}*/
 
-period {
-	struct timespec t;
-	t->tv_sec = 0;
-	t->tv_nsec = 1000000;		// 1 ms period
-	return t;
-}
 
 fsm maneuver {
 	
 	var bool res = false;
-	var quaternion_t err = {0};
+	var quaternion_t q_err = {0};
 
 	input unsigned int maneuver_duration = 0;
 	input quaternion_t * q = NULL;
@@ -57,16 +57,16 @@ fsm maneuver {
 
 		/* wait for the ADCS controller to reach the target with the expected accuracy */
 		state WAIT_MAN {
-			xact_get_error(&err);
+			xact_get_error(&q_err);
 		}
-		on (is_error_less_than(&err, MAX_ERROR)) go WAIT_STABLE start stable_timer
+		on (is_error_less_than(&q_err, MAX_ERROR)) go WAIT_STABLE start stable_timer
 		on timeout(maneuver_timer) retry;
 
 		/* wait the error between the setpoint and the output attitude is stabilized */
 		state WAIT_STABLE {
 			xact_get_error(&err);
 		}
-		on (!is_error_less_than(&err, MAX_ERROR)) go WAIT_MAN
+		on (!is_error_less_than(&q_err, MAX_ERROR)) go WAIT_MAN
 		on timeout(stable_timer) go FINISHED
 		on timeout(maneuver_timer) retry;
 
