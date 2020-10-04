@@ -60,7 +60,7 @@ void FSMLDriver::Decl(const std::string & c_code_block)
 {
 	decl_ = c_code_block;
 	// strip starting and ending curly braces
-	decl_ = decl_.substr(1, decl_.size()-1);
+	decl_ = decl_.substr(1, decl_.size()-2);
 }
 
 

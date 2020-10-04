@@ -8,3 +8,4 @@ lex.yy.c
 location.hh
 position.hh
 stack.hh
+fsm.c
