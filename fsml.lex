@@ -61,7 +61,8 @@ std::string tmp_str;	/* used to collect characters scanned by different rules in
 
 %option noyywrap nounput batch stack
 
-%s DECL TIME PERIOD FSM VAR TIMER STATE STATE_TYPE TIMEOUT UNTIL C_CODE C_CONDITION C_COMMENT FSML_COMMENT
+%s DECL TIME PERIOD FSM VAR TIMER STATE STATE_TYPE TIMEOUT UNTIL 
+%x C_CODE C_CONDITION C_COMMENT FSML_COMMENT
 
 
 
@@ -69,9 +70,6 @@ GEN_IDENTIFIER	[a-zA-Z]([a-zA-Z0-9_]*)
 INTEGER			[0-9]+
 CHARACTER		\'.\'
 FLOAT			[0-9]+(\.[0-9]+)*
-TYPE_SPECIFIER	("void"|"char"|"short"|"int"|"long"|"float"|"double"|"signed"|"unsgined"|"struct"|"union"|"enum")
-
-
 
 %%
 
@@ -82,13 +80,13 @@ TYPE_SPECIFIER	("void"|"char"|"short"|"int"|"long"|"float"|"double"|"signed"|"un
 				return token::DECL_KEY;
 			}
 
-"time_us"	{
+"time"	{
 				log("found: TIME\n");
 				yy_push_state(TIME);
 				return token::TIME_KEY;
 			}
 
-"period_us"	{
+"period"	{
 				log("found: PERIOD\n");
 				yy_push_state(PERIOD);
 				return token::PERIOD_KEY;
@@ -145,25 +143,25 @@ TYPE_SPECIFIER	("void"|"char"|"short"|"int"|"long"|"float"|"double"|"signed"|"un
 				return token::RCB;
 			}
 
-<FSM>"var"	{
+"var"	{
 				log("found: VAR\n");
 				yy_push_state(VAR);
 				return token::VAR_KEY;
 			}
 
-<FSM>"input"	{
+"input"	{
 				log("found: INPUT\n");
 				yy_push_state(VAR);
 				return token::INPUT_KEY;
 			}
 
-<FSM>"output"	{
+"output"	{
 				log("found: OUTPUT\n");
 				yy_push_state(VAR);
 				return token::OUTPUT_KEY;
 			}
 
-<FSM>"timer"	{
+"timer"	{
 				log("found: TIMER\n");
 				yy_push_state(TIMER);
 				return token::TIMER_KEY;
@@ -175,74 +173,64 @@ TYPE_SPECIFIER	("void"|"char"|"short"|"int"|"long"|"float"|"double"|"signed"|"un
 				return token::SC;
 			}
 
-<VAR>"void" {
+"void" {
 				log("found: VOID\n");
 				return token::VOID;
 			}
 
-<VAR>"char" {
+"char" {
 				log("found: CHAR\n");
 				return token::CHAR;
 			}
 
-<VAR>"short" {
+"short" {
 				log("found: SHORT\n");
 				return token::SHORT;
 			}
 
-<VAR>"int" {
+"int" {
 				log("found: INT\n");
 				return token::INT;
 			}
 
-<VAR>"long" {
+"long" {
 				log("found: LONG\n");
 				return token::LONG;
 			}
 
-<VAR>"float" {
+"float" {
 				log("found: FLOAT\n");
 				return token::FLOAT;
 			}
 
-<VAR>"double" {
+"double" {
 				log("found: DOUBLE\n");
 				return token::DOUBLE;
 			}
 
-<VAR>"signed" {
+"signed" {
 				log("found: SIGNED\n");
 				return token::SIGNED;
 			}
 
-<VAR>"unsigned" {
+"unsigned" {
 				log("found: UNSIGNED\n");
 				return token::UNSIGNED;
 			}
 
-<VAR>"union" {
+"union" {
 				log("found: UNION\n");
 				return token::UNION;
 			}
 
-<VAR>"struct" {
+"struct" {
 				log("found: STRUCT\n");
 				return token::STRUCT;
 			}
 
-<VAR>"enum" {
+"enum" {
 				log("found: ENUM\n");
 				return token::ENUM;
-			}
-
-<VAR>"="	{
-				log("found: EQUAL\n");
-				return token::EQUAL;
-			}
-
-<VAR>"*"	{
-				log("found: STAR\n");
-				return token::STAR;
 			}
 
 <VAR,TIMER,UNTIL>{INTEGER} {
@@ -263,33 +251,15 @@ TYPE_SPECIFIER	("void"|"char"|"short"|"int"|"long"|"float"|"double"|"signed"|"un
 				return token::FLOATING_CONSTANT;
 			}
 
-<FSM,UNTIL>"until"	{
+"until"	{
 				log("found: UNTIL\n");
 				yy_push_state(UNTIL);
 				return token::UNTIL_KEY;
 			}
 
-<TIMER,TIMEOUT,UNTIL>"("	{
-				log("found LB\n");
-				return token::LB;
-			}
 
-<TIMER,UNTIL>")"	{
-				log("found RB\n");
-				return token::RB;
-			}
 
-<UNTIL>"{"	{
-				log("found LCB\n");
-				return token::LCB;
-			}
-
-<UNTIL>"}"	{
-				log("found RCB\n");
-				return token::RCB;
-			}
-
-<FSM,UNTIL>"state"		{
+"state"		{
 				log("found: STATE\n");
 				yy_push_state(STATE);
 				return token::STATE_KEY;
@@ -301,24 +271,19 @@ TYPE_SPECIFIER	("void"|"char"|"short"|"int"|"long"|"float"|"double"|"signed"|"un
 				return token::LSB;
 			}
 
-<STATE_TYPE>"start" {
+"start" {
 				log("found: START\n");
 				return token::START;
 			}
 
-<STATE_TYPE>"end" {
+"end" {
 				log("found: END\n");
 				return token::END;
 			}
 
-<STATE_TYPE>"err" {
+"err" {
 				log("found: ERR\n");
 				return token::ERR;
-			}
-
-<STATE_TYPE>","	{
-				log("found: COMMA\n");
-				return token::COMMA;
 			}
 
 <STATE_TYPE>"]"	{
@@ -333,7 +298,7 @@ TYPE_SPECIFIER	("void"|"char"|"short"|"int"|"long"|"float"|"double"|"signed"|"un
 				yy_push_state(C_CODE);
 			}
 
-<STATE>"on"	{
+"on"	{
 				log("found: ON\n");
 				return token::ON;
 			}
@@ -362,7 +327,7 @@ TYPE_SPECIFIER	("void"|"char"|"short"|"int"|"long"|"float"|"double"|"signed"|"un
 				}
 			}
 
-<STATE>"timeout"	{
+"timeout"	{
 				log("found: TIMEOUT\n");
 				yy_push_state(TIMEOUT);
 				return token::TIMEOUT_KEY;
@@ -374,34 +339,19 @@ TYPE_SPECIFIER	("void"|"char"|"short"|"int"|"long"|"float"|"double"|"signed"|"un
 				return token::RB;
 			}
 
-<UNTIL,STATE>"go"	{
+"go"	{
 				log("found: GO\n");
 				return token::GO;
 			}
 
-<UNTIL,STATE>"err" {
-				log("found: ERR\n");
-				return token::ERR;
-			}
-
-<UNTIL,STATE>"start" {
-				log("found: START\n");
-				return token::START;
-			}
-
-<UNTIL,STATE>"retry"	{
+"retry"	{
 				log("found: RETRY\n");
 				return token::RETRY;
 			}
 
-<STATE>"out"	{
+"out"	{
 				log("found: OUT\n");
 				return token::OUT;
-			}
-
-<STATE>"="	{
-				log("found: EQUAL\n");
-				return token::EQUAL;
 			}
 
 <UNTIL,STATE>";"	{
@@ -410,13 +360,46 @@ TYPE_SPECIFIER	("void"|"char"|"short"|"int"|"long"|"float"|"double"|"signed"|"un
 				return token::SC;
 			}
 
-<FSM,STATE,UNTIL,VAR,TIMER,TIMEOUT>{GEN_IDENTIFIER} {
+{GEN_IDENTIFIER} { 
 				log("found: IDENTIFIER %s\n", yytext);
 				FSMLlval->s = new std::string(yytext);
 				return token::IDENTIFIER;
 			}
 
+"{"			{
+				log("found LCB\n");
+				return token::LCB;
+			}
 
+"}"			{
+				log("found RCB\n");
+				return token::RCB;
+			}
+
+"("			{
+				log("found LB\n");
+				return token::LB;
+			}
+
+")"			{
+				log("found RB\n");
+				return token::RB;
+			}
+
+","			{
+				log("found: COMMA\n");
+				return token::COMMA;
+			}
+
+"="			{
+				log("found: EQUAL\n");
+				return token::EQUAL;
+			}
+
+"*"			{
+				log("found: STAR\n");
+				return token::STAR;
+			}
 
 
 <C_CODE,C_CONDITION>"/*"    { tmp_str += std::string(yytext); yy_push_state(C_COMMENT); }
@@ -434,27 +417,23 @@ TYPE_SPECIFIER	("void"|"char"|"short"|"int"|"long"|"float"|"double"|"signed"|"un
 
 
 
-<INITIAL,DECL,TIME,PERIOD,FSM,VAR,TIMER,STATE,STATE_TYPE,TIMEOUT,UNTIL>"/*"   { 
-							yy_push_state(FSML_COMMENT); 
-							log("removing comment\n"); 
+"/*"   						{ 
+								yy_push_state(FSML_COMMENT); 
+								log("removing comment\n"); 
 							}
 <FSML_COMMENT>[^*\n]*		
 <FSML_COMMENT>"*"+[^*/\n]*	
 <FSML_COMMENT>\n   			{ ++line; yylloc->begin.line++; }
 <FSML_COMMENT>"*"+"/"		{ yy_pop_state(); }
-<INITIAL,DECL,TIME,PERIOD,FSM,VAR,TIMER,STATE,STATE_TYPE,TIMEOUT,UNTIL>"//".*   { 
-							log("removing comment\n"); 
-							}
+"//".*   					{ log("removing comment\n"); }
 
 
 <<EOF>>						{yyterminate();}
 
-<INITIAL,DECL,TIME,PERIOD,FSM,VAR,TIMER,STATE,STATE_TYPE,TIMEOUT,UNTIL>\n		{ 
-							++line; yylloc->begin.line++; 
-							}
+\n							{ ++line; yylloc->begin.line++; }
 
-<INITIAL,DECL,TIME,PERIOD,FSM,VAR,TIMER,STATE,STATE_TYPE,TIMEOUT,UNTIL>.    
-
+[[:blank:]]+				{ /* skip silently */ }
+.							{ log("Found unexpected character at line %d: <%s>\n", line, yytext); }
 
 %%
 
