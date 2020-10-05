@@ -34,7 +34,7 @@
 
 #include <string>
 #include <vector>
-
+#include <map>
 
 namespace FSML{
 	class location;
@@ -43,8 +43,46 @@ namespace FSML{
 
 
 
+typedef enum {
+	VariableFamily_VAR,
+	VariableFamily_INPUT,
+	VariableFamily_OUTPUT,
+} var_family_t;
+
+class FSMVariable
+{
+public:	
+	FSMVariable(const var_family_t family, const std::string & type, const std::string & name, const std::string & init_val)
+		: family_(family), type_(type), name_(name), init_val_(init_val) {}
+	virtual ~FSMVariable() {}
+
+	inline var_family_t Family() { return family_; }
+	inline std::string Type() { return type_; }
+	inline std::string Name() { return name_; }
+	inline std::string InitVal() { return init_val_; }
+
+private:
+	var_family_t family_;
+	std::string type_;
+	std::string name_;
+	std::string init_val_;
+};
 
 
+class FSMTimer 
+{
+public:
+	FSMTimer(const std::string & name, const std::string & init_val)
+		: name_(name), init_val_(init_val) {}
+	~FSMTimer() {}
+
+	inline std::string Name() { return name_; }
+	inline std::string InitVal() { return init_val_; }
+
+private:
+	std::string name_;
+	std::string init_val_;
+};
 
 
 /**
@@ -67,6 +105,8 @@ public:
 	void Decl(const std::string & c_code_block);
 	bool TimeSpec(const std::string & c_code_block);
 	bool PeriodSpec(const std::string & c_code_block);
+	bool AddVariable(const var_family_t f, const std::string & type, const std::string & name, const std::string & init_val);
+	bool AddTimer(const std::string & name, const std::string & init_val);
 
 	//-----------------------------------------------------/
 
@@ -75,7 +115,12 @@ public:
 	//------------------ compiler  methods ----------------/
 
 	// compile and generate C code
-	bool translate(const std::string & file_name);
+	bool Translate(const std::string & file_name);
+
+	std::string TranslateDecl();
+	std::string TranslateTimeOrPeriod();
+	std::string TranslateVariables();
+	std::string TranslateTimers();
 
 	//-----------------------------------------------------/
 
@@ -88,7 +133,7 @@ public:
 	void scanEnd();
 
 	//parser's functions	
-	int parse(const std::string& fileName);
+	int Parse(const std::string& fileName);
 	std::string file;
 
 	//error handling
@@ -110,6 +155,10 @@ private:
 	std::string periodSpec_;
 
 	std::string lastError_;
+
+	std::map<std::string, FSMVariable *> var_map_;
+	std::map<std::string, FSMTimer *> timer_map_;
+	std::string tmp_initializer_;
 
 	const std::string kDefaultOutputCFile_ = "fsm.c";
 };

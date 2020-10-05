@@ -13,6 +13,8 @@ decl {
 #define MAX_ERROR 			(0.1)
 #define MAX_MAN_RETRIES		(3)
 
+#define ADCS_PERIOD			(200)
+
 typedef enum {
 	ManeuverState_IDLE,
 	ManeuverState_BUSY,
@@ -34,9 +36,10 @@ fsm maneuver {
 	
 	var bool res = false;
 	var quaternion_t q_err = {0};
+	var unsigned long int * this_is_a_test = 0;
 
-	input unsigned int maneuver_duration = 0;
-	input quaternion_t * q = NULL;
+	input float maneuver_duration = 0.1;
+	input quaternion_t ** q = NULL;
 	output maneuver_state_t man_state = ManeuverState_IDLE;
 
 	timer stable_timer(ADCS_PERIOD);

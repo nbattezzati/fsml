@@ -19,23 +19,27 @@
 #endif
 
 class FSMLDriver;
-%}
 
+std::string tmp_initializer;
+std::string tmp_ptr_type;
+std::string tmp_declarator;
+%}
 
 %parse-param {FSMLDriver& driver}
 %lex-param {FSMLDriver& driver}
-
-%union {
-	int i;
-	float f;
-	std::string *s;
-}
-
 
 %{
 #include "FSMLDriver.h"
 #include "fsml_inner.h"
 %}
+
+%union {
+	int i;
+	float f;
+	std::string *s;
+	var_family_t vf;
+}
+
 
 %start fsml
 
@@ -47,6 +51,7 @@ class FSMLDriver;
 %token <s> C_CODE_BLOCK C_CONDITION_BLOCK IDENTIFIER CHARACTER_CONSTANT
 %token <i> INTEGER_CONSTANT
 %token <f> FLOATING_CONSTANT
+
 
 
 %%
@@ -95,74 +100,94 @@ fsm_object : variable_declaration
 		   ;
 
 variable_declaration : variable_specifier type_specifier_list init_declarator SC
-					 | timer_specifier SC ;
+						{
+							bool result = driver.AddVariable(
+													$<vf>1, 
+													*($<s>2) + std::string(" ") + tmp_ptr_type, 
+													tmp_declarator, 
+													tmp_initializer);
+							tmp_initializer.clear();
+							tmp_ptr_type.clear();
+							if (result == false) {
+								driver.error(@$, driver.GetLastError()); 
+								YYERROR; 
+							}
+						}
+					 | timer_specifier SC 
+					 ;
 
-type_specifier_list : type_specifier
-					| type_specifier_list type_specifier
+type_specifier_list : type_specifier						{ $<s>$ = $<s>1; }
+					| type_specifier_list type_specifier 	{ $<s>$->append(" " + *($<s>2)); }
 					;
 
-variable_specifier : VAR_KEY
-				   | INPUT_KEY
-				   | OUTPUT_KEY
+variable_specifier : VAR_KEY		{ $<vf>$ = VariableFamily_VAR; }
+				   | INPUT_KEY		{ $<vf>$ = VariableFamily_INPUT; }
+				   | OUTPUT_KEY		{ $<vf>$ = VariableFamily_OUTPUT; }
 				   ;
 
-type_specifier : VOID
-			   | CHAR
-			   | SHORT
-			   | INT
-			   | LONG
-			   | FLOAT
-			   | DOUBLE
-			   | SIGNED
-			   | UNSIGNED
-			   | struct_or_union_specifier
-			   | enum_specifier
-			   | typedef_name
+type_specifier : VOID				{ $<s>$ = new std::string("void"); }
+			   | CHAR				{ $<s>$ = new std::string("char"); }
+			   | SHORT				{ $<s>$ = new std::string("short"); }
+			   | INT				{ $<s>$ = new std::string("int"); }
+			   | LONG				{ $<s>$ = new std::string("long"); }
+			   | FLOAT				{ $<s>$ = new std::string("float"); }
+			   | DOUBLE				{ $<s>$ = new std::string("double"); }
+			   | SIGNED				{ $<s>$ = new std::string("signed"); }
+			   | UNSIGNED			{ $<s>$ = new std::string("unsigned"); }
+			   | struct_or_union_specifier	{ $<s>$ = $<s>1; }
+			   | enum_specifier		{ $<s>$ = $<s>1; }
+			   | typedef_name		{ $<s>$ = $<s>1; }
 			   ;
 
 struct_or_union_specifier : struct_or_union IDENTIFIER ;
 
-struct_or_union : STRUCT
-				| UNION
+struct_or_union : STRUCT			{ $<s>$ = new std::string("struct"); }
+				| UNION				{ $<s>$ = new std::string("union"); }
 				;
 
-enum_specifier : ENUM IDENTIFIER ;
+enum_specifier : ENUM IDENTIFIER	{ $<s>$ = new std::string("enum" + *($<s>1)); } 
+			   ;
 
-typedef_name : IDENTIFIER ;
+typedef_name : IDENTIFIER			{ $<s>$ = $<s>1; } 
+			 ;
 
 init_declarator : declarator EQUAL initializer ;
 
-initializer : constant
-			| LCB initializer_list RCB
-			| LCB initializer_list COMMA RCB
+initializer : constant			{ tmp_initializer = *($<s>1); }
+			| LCB constant RCB	{ tmp_initializer = std::string("{" + *($<s>2) + "}"); }
 			;
 
-initializer_list : initializer
-                 | initializer_list COMMA initializer
-				 ;
-
-declarator : pointer direct_declarator
-		   | direct_declarator
+declarator : pointer direct_declarator	{ /*tmp_declarator = *$<s>2;*/ }
+		   | direct_declarator			{ /*tmp_declarator = *$<s>1;*/ }
 		   ;
 
-direct_declarator : IDENTIFIER ;
+direct_declarator : IDENTIFIER 			{ tmp_declarator = *$<s>1; }
+				  ;
 
-pointer : STAR
-		| STAR pointer
+pointer : STAR							{ tmp_ptr_type.append("*"); }
+		| STAR pointer					{ tmp_ptr_type.append("*"); }
 		;
 
-constant : INTEGER_CONSTANT
-		 | CHARACTER_CONSTANT
-		 | FLOATING_CONSTANT
-		 | enumeration_constant
+constant : INTEGER_CONSTANT				{ $<s>$ = new std::string(std::to_string($<i>1)); }
+		 | CHARACTER_CONSTANT			{ $<s>$ = $<s>1; }
+		 | FLOATING_CONSTANT			{ $<s>$ = new std::string(std::to_string($<f>1)); }
+		 | enumeration_constant			{ $<s>$ = $<s>1; }
 		 ;
 
-enumeration_constant : IDENTIFIER ;
+enumeration_constant : IDENTIFIER 		{ $<s>$ = $<s>1; }
+					 ;
 
-timer_specifier : TIMER_KEY IDENTIFIER LB timer_initializer RB ;
+timer_specifier : TIMER_KEY IDENTIFIER LB timer_initializer RB 
+					{
+						if (driver.AddTimer(*($<s>2), *($<s>4)) == false) {
+							driver.error(@$, driver.GetLastError()); 
+							YYERROR; 
+						};
+					}
+				;
 
-timer_initializer : INTEGER_CONSTANT 
-				  | IDENTIFIER
+timer_initializer : INTEGER_CONSTANT 	{ $<s>$ = new std::string(std::to_string($<i>1)); }
+				  | IDENTIFIER			{ $<s>$ = $<s>1; }
 				  ;
 
 state : state_specifier state_decorator_list SC ;

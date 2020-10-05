@@ -106,12 +106,68 @@ bool FSMLDriver::PeriodSpec(const std::string & c_code_block)
 }
 
 
+bool FSMLDriver::AddVariable(const var_family_t f, const std::string & type, const std::string & name, const std::string & init_val)
+{
+	bool ret_val = false;
+
+	// check if this variable is initialized
+	if (init_val.size() > 0) {
+		// check if this variable does not exist yet
+		if (	(var_map_.find(name) == var_map_.end())
+			&&	(timer_map_.find(name) == timer_map_.end()) ) 
+		{
+			// insert the new variable in its map
+			var_map_[name] = new FSMVariable(f, type, name, init_val);
+			ret_val = true;
+		}
+		else {
+			lastError_ = "Redeclaration of variable " + name;
+		}
+	}
+	else {
+		lastError_ = "Uninitialized variable " + name;
+	}
+
+	return ret_val;
+}
+
+
+bool FSMLDriver::AddTimer(const std::string & name, const std::string & init_val)
+{
+	bool ret_val = false;
+
+	// check if time or period sections have been defined
+	if (timeSpec_.size() > 0 || periodSpec_.size() > 0) {
+
+		// check if this timer does not exist yet
+		if (	(var_map_.find(name) == var_map_.end())
+			&&	(timer_map_.find(name) == timer_map_.end()) ) 
+		{
+			// insert the new timer in its map
+			timer_map_[name] = new FSMTimer(name, init_val);
+			ret_val = true;
+		}
+		else {
+			lastError_ = "Redeclaration of variable " + name;
+		}
+
+	}
+	else {
+		lastError_ = "Timer declared without a time/period section";
+	}
+
+	return ret_val;
+}
+
+
+
+
 /**
  * @brief   This method translates the FSML grammar and creates a C code that implements the FSM
  * @param   file_name	output file name for translation (if empty translates to the default fsm.c)
  * \return	true if successfull, false if any error occurred
  */
-bool FSMLDriver::translate(const std::string & file_name)
+bool FSMLDriver::Translate(const std::string & file_name)
 {
 	bool ret_val = false;
 	std::string out_file = file_name.size() > 0 ? file_name : kDefaultOutputCFile_;
@@ -119,7 +175,12 @@ bool FSMLDriver::translate(const std::string & file_name)
 	// open the output C file
 	FILE * fp = fopen(out_file.c_str(), "w+");
 	if (fp != nullptr) {
-		fprintf(fp, "%s\n", decl_.c_str());
+
+		fprintf(fp, "%s", TranslateDecl().c_str());
+		fprintf(fp, "%s", TranslateTimeOrPeriod().c_str());
+		fprintf(fp, "%s", TranslateVariables().c_str());
+		fprintf(fp, "%s", TranslateTimers().c_str());
+		
 		ret_val = true;
 	}
 
@@ -131,13 +192,55 @@ bool FSMLDriver::translate(const std::string & file_name)
 	return ret_val;
 }
 
+std::string FSMLDriver::TranslateDecl()
+{
+	return std::string(decl_ + "\n\n");	
+}
+
+std::string FSMLDriver::TranslateTimeOrPeriod()
+{
+	if (!timer_map_.empty()) {
+		if (timeSpec_.size() > 0) {
+			return std::string("struct timespec get_cur_time(void) {\n" + timeSpec_ + "\n}\n");
+		}
+		else {
+			return std::string("struct timespec get_time_period(void) {\n" + periodSpec_ + "\n}\n");
+		}
+	}
+
+	return std::string();
+}
+
+std::string FSMLDriver::TranslateVariables()
+{
+	std::string ret_str;
+
+	for (const auto & elem : var_map_) {
+		FSMVariable * v = elem.second;
+		ret_str += v->Type() + " " + v->Name() + " = " + v->InitVal() + ";\n";
+	}
+
+	return ret_str;
+}
+
+std::string FSMLDriver::TranslateTimers()
+{
+	std::string ret_str;
+
+	for (const auto & elem : timer_map_) {
+		FSMTimer * v = elem.second;
+		ret_str += "fsm_timer_t " + v->Name() + ";\n";
+	}
+
+	return ret_str;
+}
 
 /**
  * @brief   This method parses the specified Actel PDC file
  * @param   fileName	The name of the PDC file to be parsed
  * @return  0 if the parsing operation has been successful, 1 otherwise
  */
-int FSMLDriver::parse(const std::string& fileName)
+int FSMLDriver::Parse(const std::string& fileName)
 {
 	int res;
 
