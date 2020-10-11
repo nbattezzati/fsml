@@ -95,7 +95,8 @@ period_specifier : PERIOD_KEY C_CODE_BLOCK {
 		}; 
 	} ;
 
-fsm : FSM_KEY IDENTIFIER LCB fsm_objects_list RCB ;
+fsm : FSM_KEY IDENTIFIER LCB fsm_objects_list RCB { driver.FsmName($2); }
+	;
 
 fsm_objects_list : fsm_object
 				 | fsm_objects_list fsm_object

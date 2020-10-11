@@ -113,6 +113,8 @@ public:
 	inline void ErrorCode(const std::string & errorCode) { errorCode_ = errorCode; }
 	inline std::string ErrorCode() const { return errorCode_; }
 
+	inline virtual std::string ConditionStr() const { return condition_; }
+
 	virtual bool CheckCondition();
 	bool CheckDestination();
 
@@ -132,6 +134,8 @@ public:
 	FSMTimeoutTransition(FSMLDriver & driver, const std::string & timeout) : FSMTransition(driver, timeout) {}
 	virtual ~FSMTimeoutTransition() {}
 
+	inline std::string ConditionStr() const override { return condition_ + ".expired()"; }
+
 	bool CheckCondition() override;
 };
 
@@ -140,6 +144,8 @@ class FSMUntilTransition : public FSMTransition
 public:
 	FSMUntilTransition(FSMLDriver & driver, const std::string & until) : FSMTransition(driver, until) {}
 	virtual ~FSMUntilTransition() {}
+
+	inline std::string ConditionStr() const override { return "retries < " + condition_; }
 
 	bool CheckCondition() override;
 };
@@ -232,6 +238,8 @@ public:
 	virtual ~FSMLDriver();
 
 
+	inline void FsmName(const std::string & name) { fsmName_ = name; }
+	inline std::string & FsmName() { return fsmName_; }
 	void Decl(const std::string & c_code_block);
 	bool TimeSpec(const std::string & c_code_block);
 	bool PeriodSpec(const std::string & c_code_block);
@@ -247,7 +255,7 @@ public:
 	void PopUntil();
 	inline FSMUntil * CurUntil() { return until_stack_.top(); }
 
-	bool CheckGraph();
+	bool BuildGraph();
 
 	//-----------------------------------------------------/
 
@@ -286,6 +294,8 @@ public:
 	//---------------------------------------------------/
 	
 private:
+	std::string fsmName_;
+
 	// code contained in the declaration section (if any)
 	std::string decl_;
 

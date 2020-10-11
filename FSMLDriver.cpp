@@ -101,9 +101,14 @@ bool FSMTransition::CheckDestination()
 		break;
 
 		case TransActuator_ERR: 
-			if (driver_.ErrorState() == nullptr) {
+		{	
+			FSMState * err = driver_.ErrorState();
+			if (err == nullptr) {
 				return false;
 			}
+			// set the end state name on the transition
+			endState_ = err->Name();
+		}
 		break;
 		
 		// TODO: should never happen since it should be translated into a GO or ERR actuator
@@ -288,10 +293,10 @@ void FSMLDriver::PopUntil()
 
 
 /**
- * @brief   This method checks the FSML Graph to verify it is consistent and correct
+ * @brief   This method builds the FSML Graph that contains states and transitions
  * \return	true if successfull, false if any error occurred (call GetLastError() to have a description of the error)
  */
-bool FSMLDriver::CheckGraph()
+bool FSMLDriver::BuildGraph()
 {
 	// check transitions are correct 
 	for (auto & s : state_map_) {
@@ -336,6 +341,27 @@ bool FSMLDriver::Translate(const std::string & file_name)
 		
 		ret_val = true;
 	}
+
+/*********************** THIS PART SHALL BE MOVED ELSEWHERE *******************/
+	fprintf(fp, "/*\n");
+	fprintf(fp, "digraph %s {\n", fsmName_.c_str());
+	fprintf(fp, "node [shape = doublecircle]; ");
+	for(auto & s : state_map_) {
+		if(s.second->HasType(kStateTypeEnd) || s.second->HasType(kStateTypeErr)) {
+			fprintf(fp, "%s ", s.second->Name().c_str());
+		}
+	}
+	fprintf(fp, ";\n");
+	fprintf(fp, "node [shape = circle];\n");
+	for(auto & s : state_map_) {
+		FSMState * curS = s.second;
+		for(FSMTransition * t : curS->Transitions()) {
+			fprintf(fp, "%s -> %s [ label = \"%s\"];\n", curS->Name().c_str(), t->EndState().c_str(), t->ConditionStr().c_str());
+		}
+	}
+	fprintf(fp, "}\n");
+	fprintf(fp, "*/\n");
+/******************************************************************************/
 
 	// close the file
 	if (fp != nullptr) {

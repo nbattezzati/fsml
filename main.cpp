@@ -13,7 +13,7 @@ int main(int argc, char * argv[])
 	FSMLDriver driver;
 	if (driver.Parse(argv[1]) == 0) {	// parsing successful
 		// build FSM graph
-		if (driver.CheckGraph() == false) {
+		if (driver.BuildGraph() == false) {
 			std::cerr << "Check FSM Graph failed: " << driver.GetLastError() << std::endl;
 		}
 		// translate to target language
