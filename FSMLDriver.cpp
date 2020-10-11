@@ -35,6 +35,27 @@
 #include "fsml.h"
 
 
+bool FSMState::AddOutput(const std::string & output, const std::string & out_code)
+{
+	if (driver_.FindVar(output) == true) {
+		if (output_map_.find(output) == output_map_.end()) {
+			output_map_[output] = out_code;
+			return true;
+		}
+		else {
+			driver_.SetlastError("Output <" + output + "> redeclared in state <" + name_ + ">");
+		}
+	}
+	else {
+		driver_.SetlastError("State <" + name_ + "> tries to set inexistent output <" + output + ">");
+	}
+
+	return false;
+}
+
+
+
+
 /**
  * @brief   The FSMLDriver constructor
  * @param   edM		The EdifManager whose netlist is constrained by the Actel PDC information
@@ -49,6 +70,8 @@ FSMLDriver::FSMLDriver()
  */
 FSMLDriver::~FSMLDriver()
 {
+	// TODO: empty tha maps
+	// TODO: delete states
 }
 
 
@@ -158,6 +181,7 @@ bool FSMLDriver::AddTimer(const std::string & name, const std::string & init_val
 
 	return ret_val;
 }
+
 
 
 

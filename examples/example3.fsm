@@ -48,7 +48,7 @@ fsm maneuver {
 
 	until (MAX_MAN_RETRIES) {
 	
-		/* start the maneuver tellind the ADCS the target attitude quaternion */
+		/* start the maneuver telling the ADCS the target attitude quaternion */
 		state [start] START_MAN {
 			if (q)
 				res = xact_goto_eci_attitude(q);
@@ -56,7 +56,7 @@ fsm maneuver {
 		on (q == NULL) err MemViolation
 		on (res == TRUE) go WAIT_MAN start maneuver_timer
 		on (res == FALSE) retry
-		out man_state = { return ManeuverState_BUSY; };	
+		out man_state = { return ManeuverState_BUSY; };
 
 		/* wait for the ADCS controller to reach the target with the expected accuracy */
 		state WAIT_MAN {

@@ -119,7 +119,7 @@ FLOAT			[0-9]+(\.[0-9]+)*
 						default: break;
 					}
 					yy_pop_state();
-					FSMLlval->s = new std::string(tmp_str); 
+					FSMLlval->emplace<std::string>(tmp_str); 
 					tmp_str.clear();
 					return token::C_CODE_BLOCK;
 				}
@@ -235,19 +235,19 @@ FLOAT			[0-9]+(\.[0-9]+)*
 
 <VAR,TIMER,UNTIL>{INTEGER} {
 				log("found: INTEGER %s\n", yytext);
-				FSMLlval->i = atoi(yytext);
+				FSMLlval->emplace<int>(atoi(yytext));
 				return token::INTEGER_CONSTANT;
 			}
 
 <VAR>{CHARACTER} {
 				log("found: CHARACTER %s\n", yytext);
-				FSMLlval->s = new std::string(yytext);
+				FSMLlval->emplace<std::string>(yytext);
 				return token::CHARACTER_CONSTANT;
 			}
 
 <VAR>{FLOAT} {
 				log("found: FLOAT %s\n", yytext);
-				FSMLlval->f = atof(yytext);
+				FSMLlval->emplace<float>(atof(yytext));
 				return token::FLOATING_CONSTANT;
 			}
 
@@ -321,7 +321,7 @@ FLOAT			[0-9]+(\.[0-9]+)*
 					log("found: C_CONDITION\n");
 					b_cnt = 0;
 					yy_pop_state();
-					FSMLlval->s = new std::string(tmp_str); 
+					FSMLlval->emplace<std::string>(tmp_str); 
 					tmp_str.clear();
 					return token::C_CONDITION_BLOCK;
 				}
@@ -362,7 +362,7 @@ FLOAT			[0-9]+(\.[0-9]+)*
 
 {GEN_IDENTIFIER} { 
 				log("found: IDENTIFIER %s\n", yytext);
-				FSMLlval->s = new std::string(yytext);
+				FSMLlval->emplace<std::string>(yytext);
 				return token::IDENTIFIER;
 			}
 
@@ -433,7 +433,7 @@ FLOAT			[0-9]+(\.[0-9]+)*
 \n							{ ++line; yylloc->begin.line++; }
 
 [[:blank:]]+				{ /* skip silently */ }
-.							{ log("Found unexpected character at line %d: <%s>\n", line, yytext); }
+.							{ throw FSML::FSMLParser::syntax_error(*yylloc, "invalid character: " + std::string(yytext)); }
 
 %%
 
