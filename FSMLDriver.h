@@ -135,6 +135,15 @@ public:
 	bool CheckCondition() override;
 };
 
+class FSMUntilTransition : public FSMTransition
+{
+public:
+	FSMUntilTransition(FSMLDriver & driver, const std::string & until) : FSMTransition(driver, until) {}
+	virtual ~FSMUntilTransition() {}
+
+	bool CheckCondition() override;
+};
+
 
 typedef enum {
 	kStateTypeStart,
@@ -158,6 +167,7 @@ public:
 
 	bool HasType(state_type_t type);
 	bool AddOutput(const std::string & output, const std::string & out_code);
+	void SetEndStateForRetryTrans(FSMState * s);
 
 	inline std::string ToString() { return std::string(
 		"S<" + name_ + ">" + 
@@ -191,14 +201,17 @@ private:
 class FSMUntil
 {
 public:
-	FSMUntil(const std::string & condition) : condition_(condition) {}
+	FSMUntil() {}
 	~FSMUntil() {}
 
 	inline void AddState(FSMState * s) { states_.push_back(s); }
+	inline std::vector<FSMState *> & States() { return states_; }
+	inline void ExitTransition(FSMUntilTransition * t) { exitTransition_ = t; }
+	inline FSMUntilTransition * ExitTransition() { return exitTransition_; }
 
 private:
-	std::string condition_;
 	std::vector<FSMState *> states_;
+	FSMUntilTransition * exitTransition_ = nullptr;
 };
 
 
@@ -231,7 +244,7 @@ public:
 	inline bool StateExists(const std::string & s) { return state_map_.find(s) != state_map_.end(); }
 
 	inline void PushUntil(FSMUntil * u) { until_stack_.push(u); }
-	inline void PopUntil() { until_stack_.pop(); /* TODO: create transitions due to this FSMUntil and destroy this FSMUntil after */ }
+	void PopUntil();
 	inline FSMUntil * CurUntil() { return until_stack_.top(); }
 
 	bool CheckGraph();

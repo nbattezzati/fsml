@@ -45,7 +45,6 @@ bool FSMState::HasType(state_type_t type)
 	return res != types_.end();
 }
 
-
 bool FSMState::AddOutput(const std::string & output, const std::string & out_code)
 {
 	if (driver_.varExists(output) == true) {
@@ -64,6 +63,16 @@ bool FSMState::AddOutput(const std::string & output, const std::string & out_cod
 	return false;
 }
 
+void FSMState::SetEndStateForRetryTrans(FSMState * s)
+{
+	for(FSMTransition * t : transitions_) {
+		if (t->Actuator() == TransActuator_RETRY) {
+			t->EndState(s->Name());
+		}
+	}
+}
+
+
 
 bool FSMTransition::CheckCondition()
 {
@@ -74,6 +83,12 @@ bool FSMTransition::CheckCondition()
 bool FSMTimeoutTransition::CheckCondition()
 {
 	return driver_.TimerExists(condition_);
+}
+
+bool FSMUntilTransition::CheckCondition()
+{
+	// TODO: implement checks on condition (if any)
+	return true;
 }
 
 bool FSMTransition::CheckDestination()
@@ -252,20 +267,36 @@ FSMState * FSMLDriver::ErrorState()
 }
 
 
+void FSMLDriver::PopUntil()
+{ 
+	/* TODO: create transitions due to this FSMUntil and destroy this FSMUntil after */ 
+	FSMUntil * u = until_stack_.top();
+
+	// add retry transition to all internal states
+	std::vector<FSMState *> & untilStates = u->States();
+	FSMState * firstS = untilStates[0];
+	for (int i=0; i<untilStates.size(); ++i) {
+		untilStates[i]->SetEndStateForRetryTrans(firstS);
+	}
+
+	// add exit transition for the first state
+	firstS->AddTransition(u->ExitTransition());
+
+	// delete the current Until scope
+	until_stack_.pop();	
+}
+
+
 /**
  * @brief   This method checks the FSML Graph to verify it is consistent and correct
  * \return	true if successfull, false if any error occurred (call GetLastError() to have a description of the error)
  */
 bool FSMLDriver::CheckGraph()
 {
-	std::cout << "Building graph: " << state_map_.size() << " states" << std::endl; 
-
 	// check transitions are correct 
 	for (auto & s : state_map_) {
 		FSMState * curS = s.second;
-		std::cout << "Checking state <" << curS->Name() << ">" << std::endl;
 		for (FSMTransition * t : curS->Transitions()) {
-			std::cout << "Checking transition <" << t->Condition() << ">" << std::endl;
 			// check condition
 			if (t->CheckCondition() == false) {
 				lastError_ = "Condition <" + t->Condition() + "> in state <" + curS->Name() + "> is invalid";

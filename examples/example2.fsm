@@ -99,7 +99,7 @@ fsm /* poi ci metti il nome della FSM*/ pic_manager {
 		on (pd && pd->metadata == METADATA_CORRUPT) retry;
 
 
-		until (MAX_RETRIES) {
+		until (MAX_TRANSF) {
 			state WAIT_TRANSF_1
 			on (!pd) err PicErr_MEMORY_VIOLATION
 			on (pd && pd->ready && pd->memory == MEMORY_FPGA_RAM && dest != MEMORY_FPGA_RAM) {
@@ -118,7 +118,7 @@ fsm /* poi ci metti il nome della FSM*/ pic_manager {
 			on (!pd) err PicErr_MEMORY_VIOLATION
 			on (pd && pd->ready && pd->memory == MEMORY_CPU_RAM) go FINISHED
 			on (pd && pd->ready && pd->memory != MEMORY_CPU_RAM) retry;
-		} go FINSHED;
+		} go FINISHED;
 
 	} err PicErr_TRANSFER_FAILED;
 
