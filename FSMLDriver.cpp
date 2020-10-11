@@ -28,6 +28,7 @@
  */
 
 #include <string>
+#include <algorithm>
 #include <stdio.h>
 
 #include "FSMLDriver.h"
@@ -35,9 +36,19 @@
 #include "fsml.h"
 
 
+bool FSMState::HasType(state_type_t type)
+{
+	auto res = std::find_if(
+		types_.begin(), types_.end(), 
+		[&type](const state_type_t elem){ return elem == type; }
+	); 
+	return res != types_.end();
+}
+
+
 bool FSMState::AddOutput(const std::string & output, const std::string & out_code)
 {
-	if (driver_.FindVar(output) == true) {
+	if (driver_.varExists(output) == true) {
 		if (output_map_.find(output) == output_map_.end()) {
 			output_map_[output] = out_code;
 			return true;
@@ -54,6 +65,38 @@ bool FSMState::AddOutput(const std::string & output, const std::string & out_cod
 }
 
 
+bool FSMTransition::CheckCondition()
+{
+	// TODO: implement checks on condition
+	return true;
+}
+
+bool FSMTimeoutTransition::CheckCondition()
+{
+	return driver_.TimerExists(condition_);
+}
+
+bool FSMTransition::CheckDestination()
+{
+	switch(actuator_) {
+		case TransActuator_GO: 
+			if (driver_.StateExists(endState_) == false) {
+				return false;
+			}
+		break;
+
+		case TransActuator_ERR: 
+			if (driver_.ErrorState() == nullptr) {
+				return false;
+			}
+		break;
+		
+		// TODO: should never happen since it should be translated into a GO or ERR actuator
+		case TransActuator_RETRY: break;
+	}
+
+	return true;
+}
 
 
 /**
@@ -183,11 +226,66 @@ bool FSMLDriver::AddTimer(const std::string & name, const std::string & init_val
 }
 
 
+bool FSMLDriver::AddState(FSMState * s)
+{
+	bool ret_val = false;
+
+	// check if the state name is unique
+	if (s != nullptr && state_map_.find(s->Name()) == state_map_.end()) {
+		state_map_[s->Name()] = s;
+		ret_val = true;
+	}
+
+	lastError_ = "State <" + s->Name() + "> redefined";
+	return ret_val;
+}
+
+
+FSMState * FSMLDriver::ErrorState()
+{
+	for(auto s : state_map_) { 
+		if(s.second->HasType(kStateTypeErr)) {
+			return s.second;
+		} 
+	}
+	return nullptr;
+}
+
+
+/**
+ * @brief   This method checks the FSML Graph to verify it is consistent and correct
+ * \return	true if successfull, false if any error occurred (call GetLastError() to have a description of the error)
+ */
+bool FSMLDriver::CheckGraph()
+{
+	std::cout << "Building graph: " << state_map_.size() << " states" << std::endl; 
+
+	// check transitions are correct 
+	for (auto & s : state_map_) {
+		FSMState * curS = s.second;
+		std::cout << "Checking state <" << curS->Name() << ">" << std::endl;
+		for (FSMTransition * t : curS->Transitions()) {
+			std::cout << "Checking transition <" << t->Condition() << ">" << std::endl;
+			// check condition
+			if (t->CheckCondition() == false) {
+				lastError_ = "Condition <" + t->Condition() + "> in state <" + curS->Name() + "> is invalid";
+				return false;
+			}
+			// check destination
+			if (t->CheckDestination() == false) {
+				lastError_ = "End state on transition <" + t->Condition() + "> in state <" + curS->Name() + "> is not reachable";
+				return false;
+			}
+		}
+	}
+
+	return true;
+}
 
 
 
 /**
- * @brief   This method translates the FSML grammar and creates a C code that implements the FSM
+ * @brief   This method translates the FSML graph and creates a C code that implements the FSM
  * @param   file_name	output file name for translation (if empty translates to the default fsm.c)
  * \return	true if successfull, false if any error occurred
  */

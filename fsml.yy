@@ -196,7 +196,13 @@ timer_initializer : INTEGER_CONSTANT 	{ $$ = std::to_string($1); }
 				  | IDENTIFIER			{ $$ = $1; }
 				  ;
 
-state : state_specifier state_decorator_list SC { };
+state : state_specifier state_decorator_list SC
+		{ 
+			if (driver.AddState(tmpState) == false) {
+				driver.error(@$, driver.GetLastError()); 
+				YYERROR; 
+			} 
+		} ;
 
 state_specifier : STATE_KEY { tmpState = new FSMState(driver); } 
 				  state_type_specifier 
@@ -227,7 +233,7 @@ state_decorator_list : state_decorator
 					 ;
 
 
-state_decorator : transition_specifier
+state_decorator : transition_specifier	{ tmpState->AddTransition(tmpTrans); }
 				| output_specifier
 				;
 
@@ -238,8 +244,8 @@ transition_c_code : C_CODE_BLOCK	{ tmpTrans->Code($1); }
 				  | /* empty */
 				  ;
 
-transition_condition : C_CONDITION_BLOCK				{ tmpTrans = new FSMTransition($1); }
-					 | TIMEOUT_KEY LB IDENTIFIER RB		{ tmpTrans = new FSMTimeoutTransition($3); }
+transition_condition : C_CONDITION_BLOCK				{ tmpTrans = new FSMTransition(driver, $1); }
+					 | TIMEOUT_KEY LB IDENTIFIER RB		{ tmpTrans = new FSMTimeoutTransition(driver, $3); }
 					 ;
 
 transition_actuator : GO IDENTIFIER		{ tmpTrans->Actuator(TransActuator_GO); tmpTrans->EndState($2); }

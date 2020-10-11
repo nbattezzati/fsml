@@ -97,8 +97,8 @@ typedef enum {
 class FSMTransition
 {
 public:
-	FSMTransition(const std::string & condition)
-		: condition_(condition) {}
+	FSMTransition(FSMLDriver & driver, const std::string & condition)
+		: driver_(driver), condition_(condition) {}
 	virtual ~FSMTransition() {}
 
 	inline void Code(const std::string & code) { code_ = code; }
@@ -113,20 +113,26 @@ public:
 	inline void ErrorCode(const std::string & errorCode) { errorCode_ = errorCode; }
 	inline std::string ErrorCode() const { return errorCode_; }
 
-public:
+	virtual bool CheckCondition();
+	bool CheckDestination();
+
+protected:
 	std::string condition_;
 	std::string code_;
 	trans_actuator_t actuator_;
 	std::string timer_;
 	std::string endState_;
 	std::string errorCode_;
+	FSMLDriver & driver_;
 };
 
 class FSMTimeoutTransition : public FSMTransition
 {
 public:
-	FSMTimeoutTransition(const std::string & timeout) : FSMTransition(timeout) {}
+	FSMTimeoutTransition(FSMLDriver & driver, const std::string & timeout) : FSMTransition(driver, timeout) {}
 	virtual ~FSMTimeoutTransition() {}
+
+	bool CheckCondition() override;
 };
 
 
@@ -148,6 +154,9 @@ public:
 	inline void Code(const std::string & code) { code_ = code; }
 	inline std::string Code() const { return code_; } 
 	inline void AddTransition(FSMTransition * t) { transitions_.push_back(t); }
+	inline std::vector<FSMTransition *> & Transitions() { return transitions_; }
+
+	bool HasType(state_type_t type);
 	bool AddOutput(const std::string & output, const std::string & out_code);
 
 	inline std::string ToString() { return std::string(
@@ -214,11 +223,18 @@ public:
 	bool TimeSpec(const std::string & c_code_block);
 	bool PeriodSpec(const std::string & c_code_block);
 	bool AddVariable(const var_family_t f, const std::string & type, const std::string & name, const std::string & init_val);
-	inline bool FindVar(const std::string & v) { return var_map_.find(v) != var_map_.end(); }
+	inline bool varExists(const std::string & v) { return var_map_.find(v) != var_map_.end(); }
+	inline bool TimerExists(const std::string & t) { return timer_map_.find(t) != timer_map_.end(); }
 	bool AddTimer(const std::string & name, const std::string & init_val);
+	bool AddState(FSMState * s);
+	FSMState * ErrorState();
+	inline bool StateExists(const std::string & s) { return state_map_.find(s) != state_map_.end(); }
+
 	inline void PushUntil(FSMUntil * u) { until_stack_.push(u); }
 	inline void PopUntil() { until_stack_.pop(); /* TODO: create transitions due to this FSMUntil and destroy this FSMUntil after */ }
 	inline FSMUntil * CurUntil() { return until_stack_.top(); }
+
+	bool CheckGraph();
 
 	//-----------------------------------------------------/
 

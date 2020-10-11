@@ -11,10 +11,12 @@ int main(int argc, char * argv[])
 	}
 
 	FSMLDriver driver;
-	if (driver.Parse(argv[1]) != 0) {
-		std::cerr << "Parsing failed" << std::endl;
-	}
-	else {
+	if (driver.Parse(argv[1]) == 0) {	// parsing successful
+		// build FSM graph
+		if (driver.CheckGraph() == false) {
+			std::cerr << "Check FSM Graph failed: " << driver.GetLastError() << std::endl;
+		}
+		// translate to target language
 		driver.Translate(std::string());
 	}
 

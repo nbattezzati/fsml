@@ -124,7 +124,7 @@ fsm /* poi ci metti il nome della FSM*/ pic_manager {
 
 
 	state [end, err] FINISHED
-	out pic_desc = { return pd; }
+	out pd = { return pd; }
 	out pic_state = { return this.err() ? PicState_ERR : PicState_COMPLETE; };
 
 }
