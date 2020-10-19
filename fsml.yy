@@ -23,6 +23,7 @@
 class FSMLDriver;
 
 std::string tmp_initializer;
+std::string tmp_type;
 std::string tmp_ptr_type;
 std::string tmp_declarator;
 %}
@@ -111,7 +112,7 @@ variable_declaration : variable_specifier type_specifier_list init_declarator SC
 						{
 							bool result = driver.AddVariable(
 													$1, 
-													$2 + std::string(" ") + tmp_ptr_type, 
+													tmp_type + (tmp_ptr_type.size() ? " " : "") + tmp_ptr_type, 
 													tmp_declarator, 
 													tmp_initializer);
 							tmp_initializer.clear();
@@ -124,8 +125,8 @@ variable_declaration : variable_specifier type_specifier_list init_declarator SC
 					 | timer_specifier SC 
 					 ;
 
-type_specifier_list : type_specifier						{ $$ = $1; }
-					| type_specifier_list type_specifier 	{ $$.append(" " + $2); }
+type_specifier_list : type_specifier						{ tmp_type = $1; }
+					| type_specifier_list type_specifier 	{ tmp_type.append(" " + $2); }
 					;
 
 variable_specifier : VAR_KEY		{ $$ = VariableFamily_VAR; }
@@ -147,13 +148,13 @@ type_specifier : VOID				{ $$ = std::string("void"); }
 			   | typedef_name		{ $$ = $1; }
 			   ;
 
-struct_or_union_specifier : struct_or_union IDENTIFIER { $$ = $1 + $2; };
+struct_or_union_specifier : struct_or_union IDENTIFIER { $$ = $1 + " " + $2; };
 
 struct_or_union : STRUCT			{ $$ = std::string("struct"); }
 				| UNION				{ $$ = std::string("union"); }
 				;
 
-enum_specifier : ENUM IDENTIFIER	{ $$ = std::string("enum" + $2); } 
+enum_specifier : ENUM IDENTIFIER	{ $$ = std::string("enum " + $2); } 
 			   ;
 
 typedef_name : IDENTIFIER			{ $$ = $1; } 
