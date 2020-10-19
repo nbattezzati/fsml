@@ -325,7 +325,7 @@ bool FSMLDriver::BuildGraph()
  * @param   file_name	output file name for translation (if empty translates to the default fsm.c)
  * \return	true if successfull, false if any error occurred
  */
-bool FSMLDriver::Translate(const std::string & file_name)
+bool FSMLDriver::TranslateToC(const std::string & file_name)
 {
 	bool ret_val = false;
 	std::string out_file = file_name.size() > 0 ? file_name : kDefaultOutputCFile_;
@@ -334,34 +334,13 @@ bool FSMLDriver::Translate(const std::string & file_name)
 	FILE * fp = fopen(out_file.c_str(), "w+");
 	if (fp != nullptr) {
 
-		fprintf(fp, "%s", TranslateDecl().c_str());
-		fprintf(fp, "%s", TranslateTimeOrPeriod().c_str());
-		fprintf(fp, "%s", TranslateVariables().c_str());
-		fprintf(fp, "%s", TranslateTimers().c_str());
+		fprintf(fp, "%s", TranslateToC_Decl().c_str());
+		fprintf(fp, "%s", TranslateToC_TimeOrPeriod().c_str());
+		fprintf(fp, "%s", TranslateToC_Variables().c_str());
+		fprintf(fp, "%s", TranslateToC_Timers().c_str());
 		
 		ret_val = true;
 	}
-
-/*********************** THIS PART SHALL BE MOVED ELSEWHERE *******************/
-	fprintf(fp, "/*\n");
-	fprintf(fp, "digraph %s {\n", fsmName_.c_str());
-	fprintf(fp, "node [shape = doublecircle]; ");
-	for(auto & s : state_map_) {
-		if(s.second->HasType(kStateTypeEnd) || s.second->HasType(kStateTypeErr)) {
-			fprintf(fp, "%s ", s.second->Name().c_str());
-		}
-	}
-	fprintf(fp, ";\n");
-	fprintf(fp, "node [shape = circle];\n");
-	for(auto & s : state_map_) {
-		FSMState * curS = s.second;
-		for(FSMTransition * t : curS->Transitions()) {
-			fprintf(fp, "%s -> %s [ label = \"%s\"];\n", curS->Name().c_str(), t->EndState().c_str(), t->ConditionStr().c_str());
-		}
-	}
-	fprintf(fp, "}\n");
-	fprintf(fp, "*/\n");
-/******************************************************************************/
 
 	// close the file
 	if (fp != nullptr) {
@@ -371,12 +350,12 @@ bool FSMLDriver::Translate(const std::string & file_name)
 	return ret_val;
 }
 
-std::string FSMLDriver::TranslateDecl()
+std::string FSMLDriver::TranslateToC_Decl()
 {
 	return std::string(decl_ + "\n\n");	
 }
 
-std::string FSMLDriver::TranslateTimeOrPeriod()
+std::string FSMLDriver::TranslateToC_TimeOrPeriod()
 {
 	if (!timer_map_.empty()) {
 		if (timeSpec_.size() > 0) {
@@ -390,7 +369,7 @@ std::string FSMLDriver::TranslateTimeOrPeriod()
 	return std::string();
 }
 
-std::string FSMLDriver::TranslateVariables()
+std::string FSMLDriver::TranslateToC_Variables()
 {
 	std::string ret_str;
 
@@ -402,7 +381,7 @@ std::string FSMLDriver::TranslateVariables()
 	return ret_str;
 }
 
-std::string FSMLDriver::TranslateTimers()
+std::string FSMLDriver::TranslateToC_Timers()
 {
 	std::string ret_str;
 
@@ -412,6 +391,49 @@ std::string FSMLDriver::TranslateTimers()
 	}
 
 	return ret_str;
+}
+
+/**
+ * @brief   This method translates the FSML graph and creates a graphics representation of the FSM
+ *          according to the DOT format defined here (https://graphviz.org/doc/info/lang.html)
+ * @param   file_name	output file name for translation (if empty translates to the default fsm.dot)
+ * \return	true if successfull, false if any error occurred
+ */
+bool FSMLDriver::TranslateToDOT(const std::string & file_name)
+{
+	bool ret_val = false;
+	std::string out_file = file_name.size() > 0 ? file_name : kDefaultOutputDOTFile_;
+
+	// open the output C file
+	FILE * fp = fopen(out_file.c_str(), "w+");
+	if (fp != nullptr) {
+
+		fprintf(fp, "digraph %s {\n", fsmName_.c_str());
+		fprintf(fp, "node [shape = doublecircle]; ");
+		for(auto & s : state_map_) {
+			if(s.second->HasType(kStateTypeEnd) || s.second->HasType(kStateTypeErr)) {
+				fprintf(fp, "%s ", s.second->Name().c_str());
+			}
+		}
+		fprintf(fp, ";\n");
+		fprintf(fp, "node [shape = circle];\n");
+		for(auto & s : state_map_) {
+			FSMState * curS = s.second;
+			for(FSMTransition * t : curS->Transitions()) {
+				fprintf(fp, "%s -> %s [ label = \"%s\"];\n", curS->Name().c_str(), t->EndState().c_str(), t->ConditionStr().c_str());
+			}
+		}
+		fprintf(fp, "}\n");
+		
+		ret_val = true;
+	}
+
+	// close the file
+	if (fp != nullptr) {
+		fclose(fp);
+	}
+
+	return ret_val;
 }
 
 /**

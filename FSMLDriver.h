@@ -264,12 +264,16 @@ public:
 	//------------------ compiler  methods ----------------/
 
 	// compile and generate C code
-	bool Translate(const std::string & file_name);
+	bool TranslateToC(const std::string & file_name);
 
-	std::string TranslateDecl();
-	std::string TranslateTimeOrPeriod();
-	std::string TranslateVariables();
-	std::string TranslateTimers();
+	std::string TranslateToC_Decl();
+	std::string TranslateToC_TimeOrPeriod();
+	std::string TranslateToC_Variables();
+	std::string TranslateToC_Timers();
+
+
+	// generate DOT (Graphviz) code
+	bool TranslateToDOT(const std::string & file_name);
 
 	//-----------------------------------------------------/
 
@@ -314,6 +318,7 @@ private:
 	std::stack<FSMUntil *> until_stack_;
 
 	const std::string kDefaultOutputCFile_ = "fsm.c";
+	const std::string kDefaultOutputDOTFile_ = "fsm.dot";
 };
 
 	

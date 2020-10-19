@@ -9,3 +9,4 @@ location.hh
 position.hh
 stack.hh
 fsm.c
+fsm.dot

@@ -17,7 +17,8 @@ int main(int argc, char * argv[])
 			std::cerr << "Check FSM Graph failed: " << driver.GetLastError() << std::endl;
 		}
 		// translate to target language
-		driver.Translate(std::string());
+		driver.TranslateToC(std::string());
+		driver.TranslateToDOT(std::string());
 	}
 
 	return 0;
