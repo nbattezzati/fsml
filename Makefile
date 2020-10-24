@@ -48,7 +48,7 @@ PARSER_OUTPUT_CPP = fsml.cc
 
 HEADERS_GEN = location.hh position.hh stack.hh fsml.hh
 
-SRCS_CPP = FSMLDriver.cpp
+SRCS_CPP = FSMLDriver.cpp FSML2CCompiler.cpp
 
 
 

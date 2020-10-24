@@ -240,8 +240,11 @@ public:
 
 	inline void FsmName(const std::string & name) { fsmName_ = name; }
 	inline std::string & FsmName() { return fsmName_; }
+	inline std::string Decl() const { return decl_; }
 	void Decl(const std::string & c_code_block);
+	inline std::string TimeSpec() const { return timeSpec_; }
 	bool TimeSpec(const std::string & c_code_block);
+	inline std::string PeriodSpec() const { return periodSpec_; }
 	bool PeriodSpec(const std::string & c_code_block);
 	bool AddVariable(const var_family_t f, const std::string & type, const std::string & name, const std::string & init_val);
 	inline bool varExists(const std::string & v) { return var_map_.find(v) != var_map_.end(); }
@@ -250,6 +253,10 @@ public:
 	bool AddState(FSMState * s);
 	FSMState * ErrorState();
 	inline bool StateExists(const std::string & s) { return state_map_.find(s) != state_map_.end(); }
+
+	inline std::map<std::string, FSMVariable *> & VarMap() {return var_map_; }
+	inline std::map<std::string, FSMTimer *> & TimerMap() {return timer_map_; }
+	inline std::map<std::string, FSMState *> & StateMap() { return state_map_; }
 
 	inline void PushUntil(FSMUntil * u) { until_stack_.push(u); }
 	void PopUntil();
@@ -262,9 +269,6 @@ public:
 
 
 	//------------------ compiler  methods ----------------/
-
-	// compile and generate C code
-	bool TranslateToC(const std::string & file_name);
 
 	// generate DOT (Graphviz) code
 	bool TranslateToDOT(const std::string & file_name);
@@ -292,15 +296,6 @@ public:
 	//---------------------------------------------------/
 	
 private:
-	std::string FSMLCComment(const std::string & msg);
-	std::string TranslateToC_FSMLDecl();
-	std::string TranslateToC_Decl();
-	std::string TranslateToC_TimeOrPeriod();
-	std::string TranslateToC_Variables();
-	std::string TranslateToC_Timers();
-	const std::string kStaticCKeyword_ = "static";
-	const std::string kFsmTimerCType_ = "fsm_timer_t";
-
 	std::string fsmName_;
 
 	// code contained in the declaration section (if any)
@@ -320,9 +315,8 @@ private:
 
 	std::stack<FSMUntil *> until_stack_;
 
-	const std::string kDefaultOutputCFile_ = "fsm.c";
 	const std::string kDefaultOutputDOTFile_ = "fsm.dot";
 };
 
 	
-#endif //FSML_DRIVER_H_
+#endif	// FSML_DRIVER_H_

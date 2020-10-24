@@ -1,6 +1,7 @@
 #include <iostream>
 
 #include "FSMLDriver.h"
+#include "FSML2CCompiler.h"
 
 int main(int argc, char * argv[])
 {
@@ -17,7 +18,9 @@ int main(int argc, char * argv[])
 			std::cerr << "Check FSM Graph failed: " << driver.GetLastError() << std::endl;
 		}
 		// translate to target language
-		driver.TranslateToC(std::string());
+		FSML2CCompiler c_compiler(driver);
+		c_compiler.Translate(std::string());
+
 		driver.TranslateToDOT(std::string());
 	}
 
