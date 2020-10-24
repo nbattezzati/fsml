@@ -334,6 +334,7 @@ bool FSMLDriver::TranslateToC(const std::string & file_name)
 	FILE * fp = fopen(out_file.c_str(), "w+");
 	if (fp != nullptr) {
 
+		fprintf(fp, "%s", TranslateToC_FSMLDecl().c_str());
 		fprintf(fp, "%s", TranslateToC_Decl().c_str());
 		fprintf(fp, "%s", TranslateToC_TimeOrPeriod().c_str());
 		fprintf(fp, "%s", TranslateToC_Variables().c_str());
@@ -350,33 +351,70 @@ bool FSMLDriver::TranslateToC(const std::string & file_name)
 	return ret_val;
 }
 
+std::string FSMLDriver::FSMLCComment(const std::string & msg)
+{
+	std::string comment;
+	comment += "/";
+	for(int i=0;i<58;++i) { comment += "*"; }
+	comment += "/\n";
+
+	comment += "/*";
+	for (int i=0; i<(57-msg.length())/2; ++i) { comment += " "; }
+	comment += msg;
+	for (int i=0; i<(57-msg.length())/2; ++i) { comment += " "; }
+	comment += "*/\n";
+
+	comment += "/";
+	for(int i=0; i<58; ++i) { comment += "*"; }
+	comment += "/\n";
+
+	return comment;
+}
+
+std::string FSMLDriver::TranslateToC_FSMLDecl()
+{
+	std::string ret_val;
+	ret_val += FSMLCComment("FSML declarations");
+	ret_val += "#include <time.h>\n";
+	ret_val += "\n\n";
+	return ret_val;
+}
+
 std::string FSMLDriver::TranslateToC_Decl()
 {
-	return std::string(decl_ + "\n\n");	
+	std::string ret_val;
+	ret_val += FSMLCComment("User declarations");
+	ret_val += std::string(decl_ + "\n\n");
+	return ret_val;
 }
 
 std::string FSMLDriver::TranslateToC_TimeOrPeriod()
 {
+	std::string ret_val;
+
 	if (!timer_map_.empty()) {
+		ret_val += FSMLCComment("Timeout handling");
 		if (timeSpec_.size() > 0) {
-			return std::string("struct timespec get_cur_time(void) {\n" + timeSpec_ + "\n}\n");
+			ret_val += std::string("struct timespec get_cur_time(void) {\n" + timeSpec_ + "\n}\n\n\n");
 		}
 		else {
-			return std::string("struct timespec get_time_period(void) {\n" + periodSpec_ + "\n}\n");
+			ret_val += std::string("struct timespec get_time_period(void) {\n" + periodSpec_ + "\n}\n\n\n");
 		}
 	}
 
-	return std::string();
+	return ret_val;
 }
 
 std::string FSMLDriver::TranslateToC_Variables()
 {
 	std::string ret_str;
 
+	ret_str += FSMLCComment("FSM variables");
 	for (const auto & elem : var_map_) {
 		FSMVariable * v = elem.second;
-		ret_str += v->Type() + " " + v->Name() + " = " + v->InitVal() + ";\n";
+		ret_str += kStaticCKeyword_ + " " + v->Type() + " " + v->Name() + " = " + v->InitVal() + ";\n";
 	}
+	ret_str += "\n\n";
 
 	return ret_str;
 }
@@ -385,10 +423,12 @@ std::string FSMLDriver::TranslateToC_Timers()
 {
 	std::string ret_str;
 
+	ret_str += FSMLCComment("FSM timers");
 	for (const auto & elem : timer_map_) {
 		FSMTimer * v = elem.second;
-		ret_str += "fsm_timer_t " + v->Name() + ";\n";
+		ret_str += kStaticCKeyword_ + " " + kFsmTimerCType_ + " " + v->Name() + ";\n";
 	}
+	ret_str += "\n\n";
 
 	return ret_str;
 }

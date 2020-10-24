@@ -266,12 +266,6 @@ public:
 	// compile and generate C code
 	bool TranslateToC(const std::string & file_name);
 
-	std::string TranslateToC_Decl();
-	std::string TranslateToC_TimeOrPeriod();
-	std::string TranslateToC_Variables();
-	std::string TranslateToC_Timers();
-
-
 	// generate DOT (Graphviz) code
 	bool TranslateToDOT(const std::string & file_name);
 
@@ -298,6 +292,15 @@ public:
 	//---------------------------------------------------/
 	
 private:
+	std::string FSMLCComment(const std::string & msg);
+	std::string TranslateToC_FSMLDecl();
+	std::string TranslateToC_Decl();
+	std::string TranslateToC_TimeOrPeriod();
+	std::string TranslateToC_Variables();
+	std::string TranslateToC_Timers();
+	const std::string kStaticCKeyword_ = "static";
+	const std::string kFsmTimerCType_ = "fsm_timer_t";
+
 	std::string fsmName_;
 
 	// code contained in the declaration section (if any)
