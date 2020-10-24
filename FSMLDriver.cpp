@@ -298,6 +298,8 @@ void FSMLDriver::PopUntil()
  */
 bool FSMLDriver::BuildGraph()
 {
+	unsigned int error_codes_counter = 1;
+
 	// check transitions are correct 
 	for (auto & s : state_map_) {
 		FSMState * curS = s.second;
@@ -311,6 +313,13 @@ bool FSMLDriver::BuildGraph()
 			if (t->CheckDestination() == false) {
 				lastError_ = "End state on transition <" + t->Condition() + "> in state <" + curS->Name() + "> is not reachable";
 				return false;
+			}
+			// add eventual error code to the errors map
+			else {
+				std::string err_code = t->ErrorCode();
+				if ((err_code.size() > 0) && (error_map_.find(err_code) == error_map_.end())) {
+					error_map_[err_code] =  error_codes_counter++;
+				}
 			}
 		}
 	}

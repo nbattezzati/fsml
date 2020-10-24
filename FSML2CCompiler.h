@@ -44,29 +44,29 @@ class FSML2CCompiler
 {
 
 public:
-	//public constructor
-	FSML2CCompiler(FSMLDriver & fsml) : fsml_(fsml) {}
-
-	//public destructor
+	FSML2CCompiler(FSMLDriver & fsml, const std::string & outputName = "", const std::string & prefix = "");
 	~FSML2CCompiler() {}
 
 	// compile and generate C code
-	bool Translate(const std::string & file_name);
+	bool Translate();
 	
 private:
 	std::string CComment(const std::string & msg);
+	std::string Generate_Header();
 	std::string Translate_FSMLDecl();
 	std::string Translate_Decl();
 	std::string Translate_TimeOrPeriod();
 	std::string Translate_Variables();
 	std::string Translate_Timers();
+
 	const std::string kStaticCKeyword_ = "static";
 	const std::string kFsmTimerCType_ = "fsm_timer_t";
 
-	const std::string kDefaultOutputCFile_ = "fsm.c";
 	const unsigned int kCCommentWidth_ = 59;
 
 	FSMLDriver & fsml_;
+	std::string outputName_;
+	std::string prefix_;
 };
 
 	

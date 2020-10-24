@@ -19,7 +19,7 @@ int main(int argc, char * argv[])
 		}
 		// translate to target language
 		FSML2CCompiler c_compiler(driver);
-		c_compiler.Translate(std::string());
+		c_compiler.Translate();
 
 		driver.TranslateToDOT(std::string());
 	}

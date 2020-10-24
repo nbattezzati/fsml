@@ -238,13 +238,13 @@ public:
 	virtual ~FSMLDriver();
 
 
-	inline void FsmName(const std::string & name) { fsmName_ = name; }
 	inline std::string & FsmName() { return fsmName_; }
-	inline std::string Decl() const { return decl_; }
+	inline void FsmName(const std::string & name) { fsmName_ = name; }
+	inline std::string & Decl() { return decl_; }
 	void Decl(const std::string & c_code_block);
-	inline std::string TimeSpec() const { return timeSpec_; }
+	inline std::string & TimeSpec() { return timeSpec_; }
 	bool TimeSpec(const std::string & c_code_block);
-	inline std::string PeriodSpec() const { return periodSpec_; }
+	inline std::string & PeriodSpec() { return periodSpec_; }
 	bool PeriodSpec(const std::string & c_code_block);
 	bool AddVariable(const var_family_t f, const std::string & type, const std::string & name, const std::string & init_val);
 	inline bool varExists(const std::string & v) { return var_map_.find(v) != var_map_.end(); }
@@ -257,6 +257,7 @@ public:
 	inline std::map<std::string, FSMVariable *> & VarMap() {return var_map_; }
 	inline std::map<std::string, FSMTimer *> & TimerMap() {return timer_map_; }
 	inline std::map<std::string, FSMState *> & StateMap() { return state_map_; }
+	inline std::map<std::string, unsigned int> & ErrorMap() { return error_map_; }
 
 	inline void PushUntil(FSMUntil * u) { until_stack_.push(u); }
 	void PopUntil();
@@ -312,6 +313,7 @@ private:
 	std::map<std::string, FSMVariable *> var_map_;
 	std::map<std::string, FSMTimer *> timer_map_;
 	std::map<std::string, FSMState *> state_map_;
+	std::map<std::string, unsigned int> error_map_;
 
 	std::stack<FSMUntil *> until_stack_;
 
