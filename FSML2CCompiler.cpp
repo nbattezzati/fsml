@@ -41,8 +41,9 @@ bool FSML2CCompiler::Translate()
 			fprintf(fp, "%s", Translate_Variables().c_str());
 			fprintf(fp, "%s", Translate_Timers().c_str());
 			fprintf(fp, "%s", Translate_OutputDeclarations().c_str());
-			fprintf(fp, "%s", Translate_GetterFunctions().c_str());
 			fprintf(fp, "%s", Translate_OutputFunctions().c_str());
+			fprintf(fp, "%s", Translate_TimerFunctions().c_str());
+			fprintf(fp, "%s", Translate_GetterFunctions().c_str());
 			
 			ret_val = true;
 		}
@@ -196,7 +197,7 @@ static @PREFIX@fsm_t this = {
 // timer declarations
 typedef struct {
     struct timespec __started_time;
-    unsigned int __timeout_val;
+    unsigned int __timeout_val_ms;
 } fsm_timer_t;
 void fsm_timer_start(fsm_timer_t * t);
 unsigned char fsm_timer_timeout(fsm_timer_t * t);
@@ -272,6 +273,8 @@ std::string FSML2CCompiler::Translate_OutputDeclarations()
 {
 	std::string ret_str;
 
+	ret_str += CComment("Output functions");
+
 	// loop over all output variables
 	for (const auto & v : fsml_.VarMap()) {
 		if (v.second->Family() == VariableFamily_OUTPUT) {
@@ -313,27 +316,6 @@ std::string FSML2CCompiler::Translate_OutputDeclarations()
 }
 
 
-std::string FSML2CCompiler::Translate_GetterFunctions()
-{
-	std::string ret_str = R"(
-// state getter function
-@PREFIX@state_t __get_state(void)
-{
-    return __cur_state;
-}
-
-// error getter function
-@PREFIX@err_t __get_err(void)
-{
-    return __err;
-}
-
-)";
-
-	return StrReplace(ret_str, "@PREFIX@", prefix_ + (prefix_.size() ? "_" : ""));
-}
-
-
 std::string FSML2CCompiler::Translate_OutputFunctions()
 {
 	std::string ret_str;
@@ -357,4 +339,50 @@ std::string FSML2CCompiler::Translate_OutputFunctions()
  	}
 
 	return ret_str;
+}
+
+
+std::string FSML2CCompiler::Translate_TimerFunctions()
+{
+	std::string ret_str = R"(
+void fsm_timer_start(fsm_timer_t * t)
+{
+   t->__started_time = get_cur_time();
+}
+
+// return 0 if timeout is not elapsed, 1 if elapsed
+unsigned char fsm_timer_timeout(fsm_timer_t * t)
+{
+   struct timespec now_t = get_cur_time();
+   long ms_diff = now_t.tv_nsec/1000000 - t->__started_time.tv_nsec/1000000;
+   long s_diff = now_t.tv_sec - t->__started_time.tv_sec;
+   double t_diff = ms_diff + s_diff*1000;
+
+   return t_diff >= t->__timeout_val_ms;
+   return 0;
+}
+)";
+
+	return ret_str;
+}
+
+
+std::string FSML2CCompiler::Translate_GetterFunctions()
+{
+	std::string ret_str = R"(
+// state getter function
+@PREFIX@state_t __get_state(void)
+{
+    return __cur_state;
+}
+
+// error getter function
+@PREFIX@err_t __get_err(void)
+{
+    return __err;
+}
+
+)";
+
+	return StrReplace(ret_str, "@PREFIX@", prefix_ + (prefix_.size() ? "_" : ""));
 }
