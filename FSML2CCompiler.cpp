@@ -40,6 +40,9 @@ bool FSML2CCompiler::Translate()
 			fprintf(fp, "%s", Translate_TimeOrPeriod().c_str());
 			fprintf(fp, "%s", Translate_Variables().c_str());
 			fprintf(fp, "%s", Translate_Timers().c_str());
+			fprintf(fp, "%s", Translate_OutputDeclarations().c_str());
+			fprintf(fp, "%s", Translate_GetterFunctions().c_str());
+			fprintf(fp, "%s", Translate_OutputFunctions().c_str());
 			
 			ret_val = true;
 		}
@@ -261,6 +264,97 @@ std::string FSML2CCompiler::Translate_Timers()
 		ret_str += kStaticCKeyword_ + " " + kFsmTimerCType_ + " " + v->Name() + ";\n";
 	}
 	ret_str += "\n\n";
+
+	return ret_str;
+}
+
+std::string FSML2CCompiler::Translate_OutputDeclarations()
+{
+	std::string ret_str;
+
+	// loop over all output variables
+	for (const auto & v : fsml_.VarMap()) {
+		if (v.second->Family() == VariableFamily_OUTPUT) {
+			FSMVariable * out = v.second;
+
+			// output setter function
+			ret_str += "// OUT Variable: " + out->Name() + ";\n";
+			ret_str += "typedef " + out->Type() + " (*__out_foo__" + out->Name() + ")(void);\n";
+			
+			// output setter function prototypes
+			for (const auto & s : fsml_.StateMap()) {
+				if (s.second->DrivesOutput(out->Name())) {
+					ret_str += out->Type() + " __out_foo__" + out->Name() + "__" + s.second->Name() + "(void);\n";
+				}
+			}
+
+			// output setter functions table
+			ret_str += "static __out_foo__" + out->Name() + " __out_table__" + out->Name() + "[] = {\n";
+			unsigned int cnt_states = fsml_.StateMap().size() - 1;
+			for (const auto & s : fsml_.StateMap()) {
+				if (s.second->DrivesOutput(out->Name())) {
+					ret_str += "   __out_foo__" + out->Name() + "__" + s.second->Name();
+				}
+				else {
+					ret_str += "   NULL";
+				}
+				// add comma if this is not the last table entry
+				if (cnt_states > 0) {
+					ret_str += ",";
+				}
+				cnt_states--;
+				ret_str += "\n";
+			}
+			ret_str += "};\n\n";
+		}
+ 	}
+
+	return ret_str;
+}
+
+
+std::string FSML2CCompiler::Translate_GetterFunctions()
+{
+	std::string ret_str = R"(
+// state getter function
+@PREFIX@state_t __get_state(void)
+{
+    return __cur_state;
+}
+
+// error getter function
+@PREFIX@err_t __get_err(void)
+{
+    return __err;
+}
+
+)";
+
+	return StrReplace(ret_str, "@PREFIX@", prefix_ + (prefix_.size() ? "_" : ""));
+}
+
+
+std::string FSML2CCompiler::Translate_OutputFunctions()
+{
+	std::string ret_str;
+
+	// loop over all output variables
+	for (const auto & v : fsml_.VarMap()) {
+		if (v.second->Family() == VariableFamily_OUTPUT) {
+			FSMVariable * out = v.second;
+
+			// output setter functions
+			ret_str += "// OUT Variable: " + out->Name() + ";\n";
+			
+			// output setter function prototypes
+			for (const auto & s : fsml_.StateMap()) {
+				if (s.second->DrivesOutput(out->Name())) {
+					ret_str += out->Type() + " __out_foo__" + out->Name() + "__" + s.second->Name() + "(void)\n";
+					ret_str += s.second->OutputCode(out->Name()) + "\n\n";
+				}
+			}
+		}
+ 	}
 
 	return ret_str;
 }

@@ -60,6 +60,9 @@ private:
 	std::string Translate_TimeOrPeriod();
 	std::string Translate_Variables();
 	std::string Translate_Timers();
+	std::string Translate_OutputDeclarations();
+	std::string Translate_GetterFunctions();
+	std::string Translate_OutputFunctions();
 
 	const std::string kStaticCKeyword_ = "static";
 	const std::string kFsmTimerCType_ = "fsm_timer_t";

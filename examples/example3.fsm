@@ -84,5 +84,5 @@ fsm maneuver {
 	} err ManFailed;
 
 	state [end, err] FINISHED
-	out man_state = { return err ? ManeuverState_ERR : ManeuverState_COMPLETE; };
+	out man_state = { return this.err() ? ManeuverState_ERR : ManeuverState_COMPLETE; };
 }

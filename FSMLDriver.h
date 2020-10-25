@@ -170,6 +170,8 @@ public:
 	inline std::string Code() const { return code_; } 
 	inline void AddTransition(FSMTransition * t) { transitions_.push_back(t); }
 	inline std::vector<FSMTransition *> & Transitions() { return transitions_; }
+	inline bool DrivesOutput(const std::string & output) const { return (output_map_.find(output) != output_map_.end()); }
+	inline std::string OutputCode(const std::string & output) { return (DrivesOutput(output) ? output_map_[output] : std::string("")); }
 
 	bool HasType(state_type_t type);
 	bool AddOutput(const std::string & output, const std::string & out_code);
