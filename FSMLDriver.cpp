@@ -260,6 +260,15 @@ bool FSMLDriver::AddState(FSMState * s)
 	return ret_val;
 }
 
+FSMState * FSMLDriver::StartState()
+{
+	for(auto s : state_map_) { 
+		if(s.second->HasType(kStateTypeStart)) {
+			return s.second;
+		} 
+	}
+	return nullptr;
+}
 
 FSMState * FSMLDriver::ErrorState()
 {
@@ -270,7 +279,6 @@ FSMState * FSMLDriver::ErrorState()
 	}
 	return nullptr;
 }
-
 
 void FSMLDriver::PopUntil()
 { 
@@ -287,6 +295,9 @@ void FSMLDriver::PopUntil()
 	// add exit transition for the first state
 	firstS->AddTransition(u->ExitTransition());
 
+	// add first state to the until_first_states
+	until_first_states_.push_back(firstS);
+
 	// delete the current Until scope
 	until_stack_.pop();	
 }
@@ -299,6 +310,12 @@ void FSMLDriver::PopUntil()
 bool FSMLDriver::BuildGraph()
 {
 	unsigned int error_codes_counter = 1;
+
+	// check there is a start state
+	if (StartState() == nullptr) {
+		lastError_ = "Missing start state";
+		return false;
+	}
 
 	// check transitions are correct 
 	for (auto & s : state_map_) {
@@ -314,8 +331,9 @@ bool FSMLDriver::BuildGraph()
 				lastError_ = "End state on transition <" + t->Condition() + "> in state <" + curS->Name() + "> is not reachable";
 				return false;
 			}
-			// add eventual error code to the errors map
+			// if correct ...
 			else {
+				// add eventual error code to the errors map
 				std::string err_code = t->ErrorCode();
 				if ((err_code.size() > 0) && (error_map_.find(err_code) == error_map_.end())) {
 					error_map_[err_code] =  error_codes_counter++;

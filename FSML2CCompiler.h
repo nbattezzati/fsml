@@ -51,6 +51,8 @@ public:
 	bool Translate();
 	
 private:
+	std::string & StrReplace(std::string & str, std::string toReplace, std::string replaceWith);
+
 	std::string CComment(const std::string & msg);
 	std::string Generate_Header();
 	std::string Translate_FSMLDecl();

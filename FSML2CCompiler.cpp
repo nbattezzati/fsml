@@ -53,6 +53,18 @@ bool FSML2CCompiler::Translate()
 	return ret_val;
 }
 
+
+std::string & FSML2CCompiler::StrReplace(std::string & str, std::string toReplace, std::string replaceWith)
+{
+	std::string::size_type n = std::string::npos;
+
+	while((n = str.find(toReplace)) != std::string::npos) {
+		str.replace(n, toReplace.length(), replaceWith);
+	}
+	return str;
+}
+
+
 std::string FSML2CCompiler::CComment(const std::string & msg)
 {
 	std::string comment;
@@ -109,7 +121,7 @@ std::string FSML2CCompiler::Generate_Header()
 	ret_str += "   " + prefix_ + (prefix_.size() ? "_" : "") + "state_t (*state)(void);\n";
 	ret_str += "   " + prefix_ + (prefix_.size() ? "_" : "") + "err_t (*err)(void);\n";
 	ret_str += "   void (*reset)(void);\n";
-	ret_str += "   " + prefix_ + (prefix_.size() ? "_" : "") + "state_t (*run)(void);\n";
+	ret_str += "   " + prefix_ + (prefix_.size() ? "_" : "") + "state_t (*exec)(void);\n";
 	ret_str += "} " + prefix_ + (prefix_.size() ? "_" : "") + "fsm_t;\n\n";
 	ret_str += "extern " + prefix_ + (prefix_.size() ? "_" : "") + "fsm_t * " + prefix_ + (prefix_.size() ? "_" : "") + "fsm;\n\n";
 
@@ -119,13 +131,85 @@ std::string FSML2CCompiler::Generate_Header()
 	return ret_str;
 }
 
+
 std::string FSML2CCompiler::Translate_FSMLDecl()
 {
-	std::string ret_val;
-	ret_val += CComment("FSML declarations");
-	ret_val += "#include <time.h>\n";
-	ret_val += "\n\n";
-	return ret_val;
+	std::string ret_str;
+
+	ret_str += CComment("FSML DECLARATIONS");
+	
+	// includes and special states definition
+	ret_str += R"(
+#include <stddef.h>
+#include <time.h>
+#include "@OUTPUT_NAME@.h"
+
+// special states definition
+#define __START_STATE   @START_STATE@
+)";
+
+	// define error state (if any)
+	if (fsml_.ErrorState() != nullptr) {
+		ret_str += "#define __ERR_STATE   " + fsml_.ErrorState()->Name() + "\n";
+	}
+
+	// private variables
+	ret_str += R"(
+// private variables
+static @PREFIX@state_t __cur_state;
+static @PREFIX@state_t __next_state;
+static @PREFIX@err_t __err;
+)";
+
+	// retry counters (if any)
+	for (const auto & s : fsml_.UntilFirstStates()) {
+		ret_str += "static unsigned int __retries_" + s->Name() + ";\n";
+	}
+
+	// public function declarations
+	ret_str += R"(
+// public function declarations
+@PREFIX@state_t __get_state(void);
+@PREFIX@err_t __get_err(void);
+void __reset(void);
+@PREFIX@state_t __exec(void);
+)";
+
+	// FSM object to access internal variables
+	ret_str += R"(
+// FSM object to access internal variables
+static @PREFIX@fsm_t this = {
+    .state = __get_state,
+    .err = __get_err,
+    .reset = __reset,
+    .exec = __exec
+};
+@PREFIX@fsm_t * @PREFIX@fsm = &this;
+)";
+
+	// timer declarations
+	if (fsml_.TimerMap().size()) {
+		ret_str += R"(
+// timer declarations
+typedef struct {
+    struct timespec __started_time;
+    unsigned int __timeout_val;
+} fsm_timer_t;
+void fsm_timer_start(fsm_timer_t * t);
+unsigned char fsm_timer_timeout(fsm_timer_t * t);
+
+)";
+	}
+	else {
+		ret_str += "\n";
+	}
+
+	// replace placeholders
+	StrReplace(ret_str, "@OUTPUT_NAME@", outputName_);
+	StrReplace(ret_str, "@START_STATE@", fsml_.StartState()->Name());
+	StrReplace(ret_str, "@PREFIX@", prefix_ + (prefix_.size() ? "_" : ""));
+
+	return ret_str;
 }
 
 std::string FSML2CCompiler::Translate_Decl()
