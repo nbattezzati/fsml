@@ -1,5 +1,4 @@
 #include <string>
-#include <algorithm>
 #include "FSML2CCompiler.h"
 
 
@@ -7,7 +6,6 @@ FSML2CCompiler::FSML2CCompiler(FSMLDriver & fsml, const std::string & outputName
 	: fsml_(fsml)
 {
 	std::string fsmName = fsml.FsmName();
-	std::transform(fsmName.begin(), fsmName.end(), fsmName.begin(), std::toupper);
 
 	outputName_ = (outputName.size() ? outputName : fsmName) + "_fsm";
 	prefix_ = prefix.size() ? prefix : fsmName;
@@ -44,6 +42,8 @@ bool FSML2CCompiler::Translate()
 			fprintf(fp, "%s", Translate_OutputFunctions().c_str());
 			fprintf(fp, "%s", Translate_TimerFunctions().c_str());
 			fprintf(fp, "%s", Translate_GetterFunctions().c_str());
+			fprintf(fp, "%s", Translate_ResetFunction().c_str());
+			fprintf(fp, "%s", Translate_ExecFunction().c_str());
 			
 			ret_val = true;
 		}
@@ -149,20 +149,20 @@ std::string FSML2CCompiler::Translate_FSMLDecl()
 #include "@OUTPUT_NAME@.h"
 
 // special states definition
-#define __START_STATE   @START_STATE@
+#define __START_STATE   @PREFIX@State__@START_STATE@
 )";
 
 	// define error state (if any)
 	if (fsml_.ErrorState() != nullptr) {
-		ret_str += "#define __ERR_STATE   " + fsml_.ErrorState()->Name() + "\n";
+		ret_str += "#define __ERR_STATE   @PREFIX@State__" + fsml_.ErrorState()->Name() + "\n";
 	}
 
 	// private variables
 	ret_str += R"(
 // private variables
-static @PREFIX@state_t __cur_state;
-static @PREFIX@state_t __next_state;
-static @PREFIX@err_t __err;
+static @PREFIX_@state_t __cur_state;
+static @PREFIX_@state_t __next_state;
+static @PREFIX_@err_t __err;
 )";
 
 	// retry counters (if any)
@@ -173,22 +173,22 @@ static @PREFIX@err_t __err;
 	// public function declarations
 	ret_str += R"(
 // public function declarations
-@PREFIX@state_t __get_state(void);
-@PREFIX@err_t __get_err(void);
+@PREFIX_@state_t __get_state(void);
+@PREFIX_@err_t __get_err(void);
 void __reset(void);
-@PREFIX@state_t __exec(void);
+@PREFIX_@state_t __exec(void);
 )";
 
 	// FSM object to access internal variables
 	ret_str += R"(
 // FSM object to access internal variables
-static @PREFIX@fsm_t this = {
+static @PREFIX_@fsm_t this = {
     .state = __get_state,
     .err = __get_err,
     .reset = __reset,
     .exec = __exec
 };
-@PREFIX@fsm_t * @PREFIX@fsm = &this;
+@PREFIX_@fsm_t * @PREFIX_@fsm = &this;
 )";
 
 	// timer declarations
@@ -197,10 +197,10 @@ static @PREFIX@fsm_t this = {
 // timer declarations
 typedef struct {
     struct timespec __started_time;
-    unsigned int __timeout_val_ms;
+    unsigned int __timeout_ms;
 } fsm_timer_t;
 void fsm_timer_start(fsm_timer_t * t);
-unsigned char fsm_timer_timeout(fsm_timer_t * t);
+unsigned char fsm_timer_expired(fsm_timer_t * t);
 
 )";
 	}
@@ -211,7 +211,8 @@ unsigned char fsm_timer_timeout(fsm_timer_t * t);
 	// replace placeholders
 	StrReplace(ret_str, "@OUTPUT_NAME@", outputName_);
 	StrReplace(ret_str, "@START_STATE@", fsml_.StartState()->Name());
-	StrReplace(ret_str, "@PREFIX@", prefix_ + (prefix_.size() ? "_" : ""));
+	StrReplace(ret_str, "@PREFIX_@", prefix_ + (prefix_.size() ? "_" : ""));
+	StrReplace(ret_str, "@PREFIX@", prefix_);
 
 	return ret_str;
 }
@@ -337,6 +338,7 @@ std::string FSML2CCompiler::Translate_OutputFunctions()
 			}
 		}
  	}
+	ret_str += "\n";
 
 	return ret_str;
 }
@@ -344,23 +346,25 @@ std::string FSML2CCompiler::Translate_OutputFunctions()
 
 std::string FSML2CCompiler::Translate_TimerFunctions()
 {
-	std::string ret_str = R"(
+	std::string ret_str = CComment("Timer functions");
+	
+	ret_str += R"(
 void fsm_timer_start(fsm_timer_t * t)
 {
    t->__started_time = get_cur_time();
 }
 
 // return 0 if timeout is not elapsed, 1 if elapsed
-unsigned char fsm_timer_timeout(fsm_timer_t * t)
+unsigned char fsm_timer_expired(fsm_timer_t * t)
 {
    struct timespec now_t = get_cur_time();
    long ms_diff = now_t.tv_nsec/1000000 - t->__started_time.tv_nsec/1000000;
    long s_diff = now_t.tv_sec - t->__started_time.tv_sec;
    double t_diff = ms_diff + s_diff*1000;
 
-   return t_diff >= t->__timeout_val_ms;
-   return 0;
+   return t_diff >= t->__timeout_ms;
 }
+
 )";
 
 	return ret_str;
@@ -369,20 +373,214 @@ unsigned char fsm_timer_timeout(fsm_timer_t * t)
 
 std::string FSML2CCompiler::Translate_GetterFunctions()
 {
-	std::string ret_str = R"(
+	std::string ret_str = CComment("Public functions");
+	
+	ret_str += R"(
 // state getter function
-@PREFIX@state_t __get_state(void)
+@PREFIX_@state_t __get_state(void)
 {
     return __cur_state;
 }
 
 // error getter function
-@PREFIX@err_t __get_err(void)
+@PREFIX_@err_t __get_err(void)
 {
     return __err;
 }
 
 )";
 
-	return StrReplace(ret_str, "@PREFIX@", prefix_ + (prefix_.size() ? "_" : ""));
+	return StrReplace(ret_str, "@PREFIX_@", prefix_ + (prefix_.size() ? "_" : ""));
+}
+
+
+std::string FSML2CCompiler::Translate_ResetFunction()
+{
+	std::string ret_str = R"(
+// reset function
+void __reset(void)
+{
+   // init private variables
+   __cur_state = __START_STATE;
+   __next_state = __START_STATE;
+   __err = @PREFIX@Err__NoError;
+
+)";
+
+	// reset timers (if any)
+	if (fsml_.TimerMap().size() > 0) {
+		ret_str += "   // init timers\n";
+		for (const auto & timer : fsml_.TimerMap()) {
+			FSMTimer * t = timer.second;
+			ret_str += "   " + t->Name() + ".__started_time = get_cur_time();\n";
+			ret_str += "   " + t->Name() + ".__timeout_ms = " + t->InitVal() + ";\n";
+		}
+		ret_str += "\n";
+	}
+
+	// retry variables (if any)
+	if (fsml_.UntilFirstStates().size() > 0) {
+		ret_str += "   // init retry variables\n";
+		for (const auto & s : fsml_.UntilFirstStates()) {
+			ret_str += "   __retries_" + s->Name() + " = 0;\n";
+		}
+	}
+
+	// close function
+	ret_str += "}\n\n";
+	
+	return StrReplace(ret_str, "@PREFIX@", prefix_);
+}
+
+
+std::string FSML2CCompiler::Translate_ExecFunction()
+{
+	// start switch-case
+	std::string ret_str = R"(
+// execute function
+@PREFIX_@state_t __exec(void)
+{
+   // execute current state and transition evaluation
+   switch(__cur_state) {
+)";
+
+	// loop over the states
+	for (const auto & elem : fsml_.StateMap()) {
+		FSMState * s = elem.second;
+		// start case
+		ret_str += "      case @PREFIX@State__" + s->Name() + ":\n";
+		ret_str += "      {\n";
+		
+		// user defined code (if any)
+		if (s->Code().size() > 0) {
+			ret_str += "         " + s->Code() + "\n";
+		}
+
+		bool first_trans_done = false;
+		// retry transition (if any)
+		for (const auto & t : s->Transitions()) {
+			if (t->Type() == TransType_ExitUntil) {
+				ret_str += TranslateTransition(*s, *t);
+				first_trans_done = true;
+			}
+		}
+
+		// all other thransitions
+		for (const auto & t : s->Transitions()) {
+			if (t->Type() != TransType_ExitUntil) {
+				if (first_trans_done == true) {
+					ret_str += "         else\n";
+				}
+				ret_str += TranslateTransition(*s, *t);
+				first_trans_done = true;
+			}
+		}
+
+		// else remain in this state (if any transition has been put before)
+		if (first_trans_done) {
+			ret_str += R"(
+         else {
+	        // stay in this state
+		 }
+)";
+		}
+
+		// end case
+		ret_str += R"(
+      }
+      break;
+
+)";   
+	}
+
+	// end switch-case
+	ret_str += R"(
+      default:
+	     // TODO: handle error here
+      break;
+   }
+)";
+
+	// assign output values (if any)
+	ret_str += "   // assign new values to the output (Mealy Machine)\n";
+	for(const auto & elem : fsml_.VarMap()) {
+		FSMVariable * v = elem.second;
+		if (v->Family() == VariableFamily_OUTPUT) {
+			ret_str += "   " + v->Name() + " = (__out_table__" + v->Name() + "[__next_state] != NULL ? "
+			             + "__out_table__" + v->Name() + "[__next_state]() : " + v->Name() + ");\n";
+		}
+	}
+
+	// assign next state to the current one, and return
+	ret_str += R"(
+   // execute transition
+   __cur_state = __next_state;
+
+   return __cur_state;
+}
+)";
+
+	StrReplace(ret_str, "@PREFIX@", prefix_);
+	StrReplace(ret_str, "@PREFIX_@", prefix_ + (prefix_.size() ? "_" : ""));
+	
+	return ret_str;
+}
+
+
+std::string FSML2CCompiler::TranslateTransition(FSMState & starting_state, FSMTransition & t)
+{
+	std::string ret_str;
+
+	// transition condition
+	switch(t.Type()) {
+		case TransType_Normal:
+			ret_str += "         if " + t.Condition() + " {\n";
+		break;
+
+		case TransType_Timeout:
+			ret_str += "         if (fsm_timer_expired(&" + t.Condition() + ")) {\n";
+		break;
+
+		case TransType_ExitUntil:
+			ret_str += "         if (__retries_" + starting_state.Name() + " >= " + t.Condition() + ") {\n";
+		break;
+
+		default:
+		break;
+	}
+
+	// transition code
+	if (t.Code().size()) {
+		ret_str += "            " + t.Code() + "\n";
+	}
+
+	// transition actuator actions
+	switch(t.Actuator()) {
+		case TransActuator_GO:
+			ret_str += "            __next_state = @PREFIX@State__" + t.EndState() + ";\n";
+		break;
+
+		case TransActuator_RETRY:
+			ret_str += "            __next_state = @PREFIX@State__" + t.EndState() + ";\n";
+			ret_str += "            __retries_" + t.EndState() + "++;\n";
+		break;
+
+		case TransActuator_ERR:
+			ret_str += "            __next_state = __ERR_STATE;\n";
+			ret_str += "            __err = @PREFIX@Err__" + t.ErrorCode() + ";\n";
+		break;
+
+		default:
+		break;
+	}
+
+	// start timer (if any)
+	if (t.Timer().size()) {
+		ret_str += "            fsm_timer_start(&" + t.Timer() + ");\n";
+	}
+
+	// close 'if' brace
+	ret_str += "         }\n";
+
+	return ret_str;
 }

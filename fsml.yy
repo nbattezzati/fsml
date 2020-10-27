@@ -247,8 +247,8 @@ transition_c_code : C_CODE_BLOCK	{ tmpTrans->Code($1); }
 				  | /* empty */
 				  ;
 
-transition_condition : C_CONDITION_BLOCK				{ tmpTrans = new FSMTransition(driver, $1); }
-					 | TIMEOUT_KEY LB IDENTIFIER RB		{ tmpTrans = new FSMTimeoutTransition(driver, $3); }
+transition_condition : C_CONDITION_BLOCK				{ tmpTrans = new FSMTransition(driver, TransType_Normal, $1); }
+					 | TIMEOUT_KEY LB IDENTIFIER RB		{ tmpTrans = new FSMTransition(driver, TransType_Timeout, $3); }
 					 ;
 
 transition_actuator : GO IDENTIFIER		{ tmpTrans->Actuator(TransActuator_GO); tmpTrans->EndState($2); }
@@ -274,8 +274,8 @@ until_retry : UNTIL_KEY until_condition
 			  	} 
 			  LCB until_object_list RCB 
 			  	{ 
-					tmpTrans = new FSMUntilTransition(driver, $2); 
-					driver.CurUntil()->ExitTransition(dynamic_cast<FSMUntilTransition *>(tmpTrans));
+					tmpTrans = new FSMTransition(driver, TransType_ExitUntil, $2); 
+					driver.CurUntil()->ExitTransition(tmpTrans);
 				}
 			  transition_actuator SC
 			  	{ 

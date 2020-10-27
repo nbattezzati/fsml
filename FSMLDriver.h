@@ -94,15 +94,22 @@ typedef enum {
 	TransActuator_RETRY,
 } trans_actuator_t;
 
+typedef enum {
+	TransType_Normal,
+	TransType_Timeout,
+	TransType_ExitUntil,
+} trans_type_t;
+
 class FSMTransition
 {
 public:
-	FSMTransition(FSMLDriver & driver, const std::string & condition)
-		: driver_(driver), condition_(condition) {}
+	FSMTransition(FSMLDriver & driver, const trans_type_t type, const std::string & condition)
+		: driver_(driver), type_(type), condition_(condition) {}
 	virtual ~FSMTransition() {}
 
 	inline void Code(const std::string & code) { code_ = code; }
 	inline std::string Code() const { return code_; }
+	inline trans_type_t Type() const { return type_; }
 	inline std::string Condition() const { return condition_; }
 	inline void Actuator(const trans_actuator_t act) { actuator_ = act; }
 	inline trans_actuator_t Actuator() const { return actuator_; }
@@ -119,6 +126,7 @@ public:
 	bool CheckDestination();
 
 protected:
+	trans_type_t type_;
 	std::string condition_;
 	std::string code_;
 	trans_actuator_t actuator_;
@@ -127,29 +135,6 @@ protected:
 	std::string errorCode_;
 	FSMLDriver & driver_;
 };
-
-class FSMTimeoutTransition : public FSMTransition
-{
-public:
-	FSMTimeoutTransition(FSMLDriver & driver, const std::string & timeout) : FSMTransition(driver, timeout) {}
-	virtual ~FSMTimeoutTransition() {}
-
-	inline std::string ConditionStr() const override { return condition_ + ".expired()"; }
-
-	bool CheckCondition() override;
-};
-
-class FSMUntilTransition : public FSMTransition
-{
-public:
-	FSMUntilTransition(FSMLDriver & driver, const std::string & until) : FSMTransition(driver, until) {}
-	virtual ~FSMUntilTransition() {}
-
-	inline std::string ConditionStr() const override { return "retries < " + condition_; }
-
-	bool CheckCondition() override;
-};
-
 
 typedef enum {
 	kStateTypeStart,
@@ -214,12 +199,12 @@ public:
 
 	inline void AddState(FSMState * s) { states_.push_back(s); }
 	inline std::vector<FSMState *> & States() { return states_; }
-	inline void ExitTransition(FSMUntilTransition * t) { exitTransition_ = t; }
-	inline FSMUntilTransition * ExitTransition() { return exitTransition_; }
+	inline void ExitTransition(FSMTransition * t) { exitTransition_ = t; }
+	inline FSMTransition * ExitTransition() { return exitTransition_; }
 
 private:
 	std::vector<FSMState *> states_;
-	FSMUntilTransition * exitTransition_ = nullptr;
+	FSMTransition * exitTransition_ = nullptr;
 };
 
 
@@ -266,6 +251,7 @@ public:
 	void PopUntil();
 	inline FSMUntil * CurUntil() { return until_stack_.top(); }
 	inline std::vector<FSMState *> & UntilFirstStates() { return until_first_states_; }
+	inline bool IsUntilFirstState(const std::string & state) { for(auto & s : until_first_states_) { if(s->Name() == state) return true; } return false; }
 
 	bool BuildGraph();
 

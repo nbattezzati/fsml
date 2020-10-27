@@ -22,7 +22,7 @@ typedef enum {
 	ManeuverState_BUSY,
 	ManeuverState_COMPLETE,
 	ManeuverState_ERR
-} maneuver_state_t;
+} maneuver_out_state_t;
 
 // DUMMY FUNCTIONS
 void rtems_clock_get_uptime(struct timespec * t) {}
@@ -48,7 +48,7 @@ fsm maneuver {
 
 	input float maneuver_duration = 0.1;
 	input struct quaternion * q = NULL;
-	output maneuver_state_t man_state = ManeuverState_IDLE;
+	output maneuver_out_state_t man_state = ManeuverState_IDLE;
 
 	timer stable_timer(ADCS_PERIOD);
 	timer maneuver_timer(maneuver_duration);

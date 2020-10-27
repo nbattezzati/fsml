@@ -64,6 +64,9 @@ private:
 	std::string Translate_OutputFunctions();
 	std::string Translate_TimerFunctions();
 	std::string Translate_GetterFunctions();
+	std::string Translate_ResetFunction();
+	std::string Translate_ExecFunction();
+	std::string TranslateTransition(FSMState & starting_state, FSMTransition & t);
 
 	const std::string kStaticCKeyword_ = "static";
 	const std::string kFsmTimerCType_ = "fsm_timer_t";

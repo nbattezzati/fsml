@@ -76,19 +76,24 @@ void FSMState::SetEndStateForRetryTrans(FSMState * s)
 
 bool FSMTransition::CheckCondition()
 {
-	// TODO: implement checks on condition
-	return true;
-}
+	bool ret_val = false;
 
-bool FSMTimeoutTransition::CheckCondition()
-{
-	return driver_.TimerExists(condition_);
-}
+	switch (type_) {
+		case TransType_Normal:
+		case TransType_ExitUntil:
+			// TODO: implement checks on condition
+			ret_val = true;
+		break;
 
-bool FSMUntilTransition::CheckCondition()
-{
-	// TODO: implement checks on condition (if any)
-	return true;
+		case TransType_Timeout:
+			ret_val = driver_.TimerExists(condition_);
+		break;
+
+		default:
+		break;
+	}
+
+	return ret_val;
 }
 
 bool FSMTransition::CheckDestination()
