@@ -8,7 +8,7 @@ decl {
 }
 
 
-fsm power_manager {
+fsm test1 {
 
 	var bool init_done = false;
 	var Alarm ign_timer = {0};				// it should be possible not to initialize complex objects

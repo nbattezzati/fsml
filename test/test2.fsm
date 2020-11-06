@@ -64,7 +64,7 @@ period {
 // E ora vediamo la vera e propria FSM (che significa Finite State Machine se non lo sapessi)
 // La parolina magica 'fsm', guarda a caso definisce che stiamo facendo una FSM
 
-fsm /* poi ci metti il nome della FSM*/ pic_manager {
+fsm /* poi ci metti il nome della FSM*/ test2 {
 
 	var pic_desc_t * pd = NULL;	
 

@@ -7,15 +7,10 @@
 
 decl {
 
-typedef unsigned char bool;
-#define FALSE 0
-#define TRUE 1
-typedef struct quaternion { float x, y, z; } quaternion_t;
+#include "maneuver_lib.h"
 
 #define MAX_ERROR 			(0.1)
 #define MAX_MAN_RETRIES		(3)
-
-#define ADCS_PERIOD			(200)
 
 typedef enum {
 	ManeuverState_IDLE,
@@ -23,12 +18,6 @@ typedef enum {
 	ManeuverState_COMPLETE,
 	ManeuverState_ERR
 } maneuver_out_state_t;
-
-// DUMMY FUNCTIONS
-void rtems_clock_get_uptime(struct timespec * t) {}
-bool xact_goto_eci_attitude(struct quaternion * q) { return TRUE; }
-void xact_get_error(quaternion_t * q) {}
-bool is_error_less_than(quaternion_t * q, float e) { return TRUE; }
 
 }
 
@@ -40,7 +29,7 @@ time {
 }
 
 
-fsm maneuver {
+fsm test3 {
 	
 	var bool res = FALSE;
 	var quaternion_t q_err = {0};
