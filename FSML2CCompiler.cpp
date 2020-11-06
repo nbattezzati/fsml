@@ -34,7 +34,6 @@ bool FSML2CCompiler::Translate()
 		if (fp != nullptr) {
 			// translate C
 			fprintf(fp, "%s", Translate_FSMLDecl().c_str());
-			fprintf(fp, "%s", Translate_Decl().c_str());
 			fprintf(fp, "%s", Translate_TimeOrPeriod().c_str());
 			fprintf(fp, "%s", Translate_Variables().c_str());
 			fprintf(fp, "%s", Translate_Timers().c_str());
@@ -98,6 +97,9 @@ std::string FSML2CCompiler::Generate_Header()
 	ret_str += "#ifndef " + include_guard + "\n";
 	ret_str += "#define " + include_guard + "\n\n";
 
+	// user declarations
+	ret_str += Translate_Decl();
+
 	// states enum
 	ret_str += CComment("STATES");
 	ret_str += "typedef enum {\n";
@@ -121,16 +123,44 @@ std::string FSML2CCompiler::Generate_Header()
 
 	// FSM structure
 	ret_str += CComment("FSM STRUCTURE");
-	ret_str += "typedef struct {\n";
-	ret_str += "   " + prefix_ + (prefix_.size() ? "_" : "") + "state_t (*state)(void);\n";
-	ret_str += "   " + prefix_ + (prefix_.size() ? "_" : "") + "err_t (*err)(void);\n";
-	ret_str += "   void (*reset)(void);\n";
-	ret_str += "   " + prefix_ + (prefix_.size() ? "_" : "") + "state_t (*exec)(void);\n";
-	ret_str += "} " + prefix_ + (prefix_.size() ? "_" : "") + "fsm_t;\n\n";
-	ret_str += "extern " + prefix_ + (prefix_.size() ? "_" : "") + "fsm_t * " + prefix_ + (prefix_.size() ? "_" : "") + "fsm;\n\n";
+	ret_str += R"(
+typedef struct {
+   /* built-in functions */
+   void (*reset)(void);
+   @PREFIX_@state_t (*exec)(void);
+   @PREFIX_@state_t (*state)(void);
+   @PREFIX_@err_t (*err)(void);
 
+   /* input setter functions */
+@INPUT_FUNCTIONS@
+   /* output getter functions */
+@OUTPUT_FUNCTIONS@
+} @PREFIX_@fsm_t;
+
+extern @PREFIX_@fsm_t * @PREFIX_@fsm;
+
+)";
+	
 	// close include guard
 	ret_str += "#endif   // " + include_guard + "\n";
+
+	// generate input setter and output getter functions
+	std::string in_functions;
+	std::string out_functions;
+	for(const auto & elem : fsml_.VarMap()) {
+		FSMVariable * v = elem.second;
+		if (v->Family() == VariableFamily_INPUT) {
+			in_functions += "   void (* set_" + v->Name() + ")(" + v->Type() + ");\n";
+		}
+		else if (v->Family() == VariableFamily_OUTPUT) {
+			out_functions += "   " + v->Type() + " (* get_" + v->Name() +")(void);\n";
+		}
+	}
+
+	// replace placeholders
+	StrReplace(ret_str, "@PREFIX_@", prefix_ + (prefix_.size() ? "_" : ""));
+	StrReplace(ret_str, "@INPUT_FUNCTIONS@", in_functions);
+	StrReplace(ret_str, "@OUTPUT_FUNCTIONS@", out_functions);
 
 	return ret_str;
 }
@@ -179,6 +209,28 @@ void __reset(void);
 @PREFIX_@state_t __exec(void);
 )";
 
+	// input setter and output getter functions
+	std::string in_functions;
+	std::string out_functions;
+	unsigned int cnt_inout_functions = 0;
+	for(const auto & elem : fsml_.VarMap()) {
+		FSMVariable * v = elem.second;
+		if (v->Family() == VariableFamily_INPUT) {
+			in_functions += "void __set_" + v->Name() + "(" + v->Type() + ");\n";
+			cnt_inout_functions++;
+		}
+		else if (v->Family() == VariableFamily_OUTPUT) {
+			out_functions += v->Type() + " __get_" + v->Name() +"(void);\n";
+			cnt_inout_functions++;
+		}
+		else { /* not an IN/OUT variable */ }
+	}
+
+	ret_str += "// input setter and output getter functions\n";
+	ret_str += in_functions;
+	ret_str += out_functions;
+	ret_str += "\n";
+
 	// FSM object to access internal variables
 	ret_str += R"(
 // FSM object to access internal variables
@@ -186,7 +238,34 @@ static @PREFIX_@fsm_t this = {
     .state = __get_state,
     .err = __get_err,
     .reset = __reset,
-    .exec = __exec
+    .exec = __exec,
+)";
+
+	// add input/output functions
+	unsigned int cnt_functions = 0;
+	for(const auto & elem : fsml_.VarMap()) {
+		FSMVariable * v = elem.second;
+		if (v->Family() == VariableFamily_INPUT) {
+			ret_str += "   .set_" + v->Name() + " = __set_" + v->Name();
+			cnt_functions++;
+		}
+		else if (v->Family() == VariableFamily_OUTPUT) {
+			ret_str += "   .get_" + v->Name() + " = __get_" + v->Name();
+			cnt_functions++;
+		}
+		else { /* not an IN/OUT variable */ }
+		
+		// add comma at the end of the line
+		if (v->Family() == VariableFamily_INPUT || v->Family() == VariableFamily_OUTPUT) {
+			if (cnt_functions < cnt_inout_functions) {
+				ret_str += ",";
+			}
+			ret_str += "\n";
+		}
+	}
+
+	// close FSM object
+	ret_str += R"(
 };
 @PREFIX_@fsm_t * @PREFIX_@fsm = &this;
 )";
@@ -388,7 +467,35 @@ std::string FSML2CCompiler::Translate_GetterFunctions()
     return __err;
 }
 
+// input setter functions
+@INPUT_FUNCTIONS@
+// output getter functions
+@OUTPUT_FUNCTIONS@
 )";
+
+	// input setter / output getter public functions
+	// generate input setter and output getter functions
+	std::string in_functions;
+	std::string out_functions;
+	for(const auto & elem : fsml_.VarMap()) {
+		FSMVariable * v = elem.second;
+		if (v->Family() == VariableFamily_INPUT) {
+			in_functions += "void __set_" + v->Name() + "(" + v->Type() + " input)\n";
+			in_functions += "{\n";
+			in_functions += "   " + v->Name() + " = input;\n";
+			in_functions += "}\n\n";
+		}
+		else if (v->Family() == VariableFamily_OUTPUT) {
+			out_functions += v->Type() + " __get_" + v->Name() +"(void)\n";
+			out_functions += "{\n";
+			out_functions += "   return " + v->Name() + ";\n";
+			out_functions += "}\n\n";
+		}
+	}
+
+	// replace placeholders
+	StrReplace(ret_str, "@INPUT_FUNCTIONS@", in_functions);
+	StrReplace(ret_str, "@OUTPUT_FUNCTIONS@", out_functions);
 
 	return StrReplace(ret_str, "@PREFIX_@", prefix_ + (prefix_.size() ? "_" : ""));
 }
