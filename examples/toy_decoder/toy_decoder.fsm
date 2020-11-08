@@ -1,0 +1,17 @@
+fsm toy_decoder {
+
+    input char input_char = '0';
+
+    state [start] wait_T
+    on (input_char == 'T') go wait_O;
+
+    state wait_O
+    on (input_char == 'O') go wait_Y
+    on (input_char != 'O') go wait_T;
+
+    state wait_Y
+    on (input_char == 'Y') go toy_found
+    on (input_char != 'Y') go wait_T;
+
+    state [end] toy_found;
+}

@@ -1,0 +1,4 @@
+*.exe
+a.out
+toy_decoder
+toy_decoder_fsm.*
