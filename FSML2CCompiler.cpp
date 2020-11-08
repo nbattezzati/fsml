@@ -129,8 +129,13 @@ typedef struct {
    void (*reset)(void);
    @PREFIX_@state_t (*exec)(void);
    @PREFIX_@state_t (*state)(void);
-   @PREFIX_@err_t (*err)(void);
+)";
 
+	if (fsml_.ErrorState() != nullptr) {
+		ret_str += "   @PREFIX_@err_t (*err)(void);\n";
+	}
+
+	ret_str += R"(
    /* input setter functions */
 @INPUT_FUNCTIONS@
    /* output getter functions */
@@ -192,8 +197,12 @@ std::string FSML2CCompiler::Translate_FSMLDecl()
 // private variables
 static @PREFIX_@state_t __cur_state;
 static @PREFIX_@state_t __next_state;
-static @PREFIX_@err_t __err;
 )";
+
+	// error variable (if any)
+	if (fsml_.ErrorState() != nullptr) {
+		ret_str += "static @PREFIX_@err_t __err;\n";
+	}
 
 	// retry counters (if any)
 	for (const auto & s : fsml_.UntilFirstStates()) {
@@ -204,7 +213,13 @@ static @PREFIX_@err_t __err;
 	ret_str += R"(
 // public function declarations
 @PREFIX_@state_t __get_state(void);
-@PREFIX_@err_t __get_err(void);
+)";
+	// error getter (if any)
+	if (fsml_.ErrorState() != nullptr) {
+		ret_str += "@PREFIX_@err_t __get_err(void);\n";
+	}
+
+	ret_str += R"(
 void __reset(void);
 @PREFIX_@state_t __exec(void);
 )";
@@ -236,7 +251,11 @@ void __reset(void);
 // FSM object to access internal variables
 static @PREFIX_@fsm_t this = {
     .state = __get_state,
-    .err = __get_err,
+)";
+	if (fsml_.ErrorState() != nullptr) {
+		ret_str += "    .err = __get_err,\n";
+	}
+	ret_str += R"(
     .reset = __reset,
     .exec = __exec,
 )";
@@ -425,7 +444,13 @@ std::string FSML2CCompiler::Translate_OutputFunctions()
 
 std::string FSML2CCompiler::Translate_TimerFunctions()
 {
-	std::string ret_str = CComment("Timer functions");
+	std::string ret_str;
+	
+	if (fsml_.TimerMap().size() == 0) {
+		return ret_str;
+	}
+
+	ret_str += CComment("Timer functions");
 	
 	ret_str += R"(
 void fsm_timer_start(fsm_timer_t * t)
@@ -460,13 +485,20 @@ std::string FSML2CCompiler::Translate_GetterFunctions()
 {
     return __cur_state;
 }
+)";
 
+	// error getter function (if any)
+	if (fsml_.ErrorState() != nullptr) {
+		ret_str += R"(
 // error getter function
 @PREFIX_@err_t __get_err(void)
 {
     return __err;
 }
+)";
+	}
 
+	ret_str += R"(
 // input setter functions
 @INPUT_FUNCTIONS@
 // output getter functions
@@ -510,9 +542,13 @@ void __reset(void)
    // init private variables
    __cur_state = __START_STATE;
    __next_state = __START_STATE;
-   __err = @PREFIX@Err__NoError;
-
 )";
+
+	// reset error (if any)
+	if (fsml_.ErrorState() != nullptr) {
+		ret_str += "   __err = @PREFIX@Err__NoError;\n\n";
+	}
+
 
 	// reset timers (if any)
 	if (fsml_.TimerMap().size() > 0) {
