@@ -17,13 +17,13 @@ FSML is **portable**, since it is compiled to C and is completely **standalone**
 ### FSM structure
 The first thing to is to define the FSM itself:
 ```
-fsm myFirtFSM {
+fsm myFirstFSM {
   // ... and this is a comment
 }
 ```
 You jus need to use the keyword `fsm` followed by a *name* and the enclose the FSM code in a pare of `{}`.
 
-### States and transitions
+### States
 Then you have to define states within the FSM:
 ```
 state [start] firstState
@@ -49,3 +49,43 @@ Except for the variable family, the definition is exactly the same as in C langu
 var int myVar = 0;
 input short condition = 0;
 ```
+
+### Transitions 
+Let's go back to trantions and have a deeper look into this construct. We've previously mentioned that a transition is specified by the keyweord `on`, followed by a condition and the *actuator* `go`, that specifies the next state.
+In order to be activated, a transition need its condition to be evaluated to true. This condition is expressed in a pair of brackets `()`, that contain a boolean expression using variables and inputs.
+```
+state [start] firstState
+on (myVar > 0) go secondState
+on (myVar == 0) go thirdState;
+```
+In the previous snippet, if the internal variable `myVar` is greater than 0, this will activate a transition toward `secondState`. If the condition `myVar == 0` evaluates to true, instead, the transition will bring the FSM to the state `thirdState`. In case none of the conditions are true, the FSM will stay in the same state, i.e. `firstState`.
+
+### Errors
+If an error state exists (i.e. a state with the `err` type), the transition actuator can be `err` instead of `go`, followed by a label that identifies the type of error, e.g.:
+```
+state [start] firstState
+on (myVar > 0) go secondState
+on (myVar == 0) go thirdState
+on (myVar < 0) err negativeValue;
+
+state [end, err] lastState;
+```
+
+### Retries
+On thing that is usefull expecially in embedded systems and critical applications, is to retry a certain operation that has failed.
+A special construct can be used for this, the `until-retry`.
+```
+until (MAX_RETRIES) {
+   state waitStep1
+   on (input1 == OK) go waitStep2;
+   
+   state waitStep2
+   on ((input1 == OK) && (input2 == OK)) go endState
+   on (input1 == FAIL) retry;
+} err tooManyRetries;
+
+state [end, err] endState;
+```
+In the code above, there are two states surrounded by an `until` block. This block is composed by the keyword `until`, followed by a pair of brackets `()` that contains a *constant* value, that specifies the maximum number of retries. The `until` block ends with a transition actuator (in this case an `err` actuator), that specifies what the FSM shall do next, if the maximum number of retries have been reached.
+
+The `until` block can contain any number of states, that can use the `retry` transition actuator to go to the first state of the block.
