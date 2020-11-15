@@ -271,9 +271,9 @@ FLOAT			[0-9]+(\.[0-9]+)*
 				return token::LSB;
 			}
 
-"start" {
-				log("found: START\n");
-				return token::START;
+"reset" {
+				log("found: RESET\n");
+				return token::RESET;
 			}
 
 "end" {
@@ -352,6 +352,11 @@ FLOAT			[0-9]+(\.[0-9]+)*
 "out"	{
 				log("found: OUT\n");
 				return token::OUT;
+			}
+
+"start" {
+				log("found: START\n");
+				return token::START;
 			}
 
 <UNTIL,STATE>";"	{

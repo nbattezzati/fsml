@@ -2,7 +2,7 @@ fsm toy_decoder {
 
     input char input_char = '0';
 
-    state [start] wait_T
+    state [reset] wait_T
     on (input_char == 'T') go wait_O;
 
     state wait_O

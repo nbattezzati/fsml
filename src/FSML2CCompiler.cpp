@@ -184,7 +184,7 @@ std::string FSML2CCompiler::Translate_FSMLDecl()
 #include "@OUTPUT_NAME@.h"
 
 // special states definition
-#define __START_STATE   @PREFIX@State__@START_STATE@
+#define __RESET_STATE   @PREFIX@State__@RESET_STATE@
 )";
 
 	// define error state (if any)
@@ -308,7 +308,7 @@ unsigned char fsm_timer_expired(fsm_timer_t * t);
 
 	// replace placeholders
 	StrReplace(ret_str, "@OUTPUT_NAME@", outputName_);
-	StrReplace(ret_str, "@START_STATE@", fsml_.StartState()->Name());
+	StrReplace(ret_str, "@RESET_STATE@", fsml_.ResetState()->Name());
 	StrReplace(ret_str, "@PREFIX_@", prefix_ + (prefix_.size() ? "_" : ""));
 	StrReplace(ret_str, "@PREFIX@", prefix_);
 
@@ -540,8 +540,8 @@ std::string FSML2CCompiler::Translate_ResetFunction()
 void __reset(void)
 {
    // init private variables
-   __cur_state = __START_STATE;
-   __next_state = __START_STATE;
+   __cur_state = __RESET_STATE;
+   __next_state = __RESET_STATE;
 )";
 
 	// reset error (if any)

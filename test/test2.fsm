@@ -77,7 +77,7 @@ fsm /* poi ci metti il nome della FSM*/ test2 {
 	output float paperino_float = 0.4;
 	
 
-	state [start] SHOOT_PIC {
+	state [reset] SHOOT_PIC {
 		/* shoot picture */
 		pd = picture_manager_shoot(CAMERA_1, 1, 17984, 0, 0);
 		// ... done

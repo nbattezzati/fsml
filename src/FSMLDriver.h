@@ -137,7 +137,7 @@ protected:
 };
 
 typedef enum {
-	kStateTypeStart,
+	kStateTypeReset,
 	kStateTypeEnd,
 	kStateTypeErr,
 } state_type_t;
@@ -238,7 +238,7 @@ public:
 	inline bool TimerExists(const std::string & t) { return timer_map_.find(t) != timer_map_.end(); }
 	bool AddTimer(const std::string & name, const std::string & init_val);
 	bool AddState(FSMState * s);
-	FSMState * StartState();
+	FSMState * ResetState();
 	FSMState * ErrorState();
 	inline bool StateExists(const std::string & s) { return state_map_.find(s) != state_map_.end(); }
 

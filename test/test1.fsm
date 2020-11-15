@@ -23,7 +23,7 @@ fsm test1 {
 	output power_manager_state_t power_state = startup;
 
 
-	state [start] startup {
+	state [reset] startup {
 		init_done = true;
 	} on (init_done) go running
 	out power_state = { return this.state(); } ;

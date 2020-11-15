@@ -46,7 +46,7 @@ fsm test3 {
 	until (MAX_MAN_RETRIES) {
 	
 		/* start the maneuver telling the ADCS the target attitude quaternion */
-		state [start] START_MAN {
+		state [reset] START_MAN {
 			if (q)
 				res = xact_goto_eci_attitude(q);
 		}

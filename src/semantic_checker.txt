@@ -1,3 +1,4 @@
+Conditions that could be checked by an eventual semantic checker:
 - input shall be initialized
 - input can never be modified a part for initialization
 - ouptut shall be initialized

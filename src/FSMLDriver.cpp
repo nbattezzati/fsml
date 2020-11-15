@@ -265,10 +265,10 @@ bool FSMLDriver::AddState(FSMState * s)
 	return ret_val;
 }
 
-FSMState * FSMLDriver::StartState()
+FSMState * FSMLDriver::ResetState()
 {
 	for(auto s : state_map_) { 
-		if(s.second->HasType(kStateTypeStart)) {
+		if(s.second->HasType(kStateTypeReset)) {
 			return s.second;
 		} 
 	}
@@ -316,9 +316,9 @@ bool FSMLDriver::BuildGraph()
 {
 	unsigned int error_codes_counter = 1;
 
-	// check there is a start state
-	if (StartState() == nullptr) {
-		lastError_ = "Missing start state";
+	// check there is a reset state
+	if (ResetState() == nullptr) {
+		lastError_ = "Missing reset state";
 		return false;
 	}
 
