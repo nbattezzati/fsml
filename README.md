@@ -206,16 +206,64 @@ out cur_state { this.err() ? state_ERROR : state_COMPLETE; };
 ```
 
 
-### 4. The FSML interface (how to use the FSM in your own code)
-TODO
--->
-In particular, through the `this` keyword, it is possible to know the current state of the FSM and if there is an error.
-`this.state()` is a built-in function that returns an enumerator defining the current state, and `this.err()` returns an enumerator with the current error, if any.
-The following example, that refers to the one in the previous section, should clarify a bit how to use them:
+### 4. The FSML C interface (how to use the FSM from your own C program)
+In order to use the genarted C code that translates your FSM, first of all you need to include it's header file.
+The header file of the generated FSM is named `<prefix>_fsm.h`, where the prefix is the name of the FSM by default.
+
+A part from the user declarations, the header file contains a first `enum` `<prefix>_state_t` that enumerates the FSM states.
+A second enumerator `<prefix>_err_t` is present only if there is an error state and errors are emitted, and enumerates the error codes.
+The following header file is an example for an FSM named `myFSM`:
 ```
-fsm inputCounter {
-   input int inp = 0;
-   output inputCounter__State curState = 
-state [end, err]
-out 
+...
+typedef enum {
+   myFSMState__STATE_1,
+   myFSMState__STATE_2,
+   myFSMState__STATE_3
+} myFSM_state_t;
+
+typedef enum {
+   myFSMErr__NoError,
+   myFSMErr__INPUT_INVALID,
+   myFSMErr__TIMEOUT_EXPIRED
+}
+...
+```
+
+Finally, a structure named `<prefix>_fsm_t` contains all the functions necessary to use the FSM.
+The two basic functions are `reset()` and `exec()`. The first function resets the FSM to the initial state and all it's variables to their initial value. The `exec` function executes a step of the FSM, so the evaluation of the transition conditions in the current state and what shall be the next state.
+
+There are two more functions, `state()` and `err()` (this one is available only if errors are emitted from any state). The `state` function returns the current state of the FSM, while the `err` function returns an error code if any error occurred, or `<prefix>Err__NoError` otherwise.
+
+The FSM `struct` contains also *setter* and *getter* functions for each input and output variable. 
+The setter functions for the input variables are named `set_<input-name>()` and take one argument of the same type of the corresponding input variable. 
+The getter functions for the output variables are named `get_<output-name>()`, take no arguments and return a value of the same type of the corresponding output variable.
+
+In order to access these functions, the header file exports a pointer to an internal variable named `<prefix>_fsm`.
+
+The following code is an example of how to use an FSM, taken from the *toy_decoder* example, that you can find in the examples directory.
+The `toy_decoder` FSM analyses a stream of characters in input and recognizes the string `"TOY"`: 
+```c
+#include <stdio.h>
+#include "toy_decoder_fsm.h"
+
+int main(int argc, char *argv[])
+{
+   int i = 0;
+   
+   /* reset fsm to the starting state */
+   toy_decoder_fsm->reset();
+
+   /* execute FSM to search for the TOY pattern in the input string */
+   while(argv[1] != NULL && argv[1][i] != '\0') {
+      toy_decoder_fsm->set_input_char(argv[1][i]);
+      if (toy_decoder_fsm->exec() == toy_decoderState__toy_found) {
+         printf("TOY found\n");
+         return 0;
+      }
+      i++;
+   }
+
+   printf("TOY not found\n");
+   return 1;
+}
 ```
