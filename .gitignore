@@ -1,12 +1,1 @@
-fsmlc
-fsml.cc
-fsml.hh
-fsml.output
-fsml.yy.cc
-fsmlc.exe
-lex.yy.c
-location.hh
-position.hh
-stack.hh
-fsm.c
-fsm.dot
+.vscode
