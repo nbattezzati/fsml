@@ -13,9 +13,31 @@ There are also some constructs that allow describing useful features like **retr
 FSML is **portable**, since it is compiled to C and is completely **standalone**, not relying on any other third-party library.
   
 
-## 2. Installation
-TODO
+## 2. Installation and usage
+To install the FSML Compiler (`fsmlc`) you just need C++ compiler `g++` and the `make` program.
+You clone this repo, you enter the main directory and you simply type:
+```bash
+$> make
+```
+The `make` command will compile the source files and create the `fsmlc` binary executable in the main directory.
 
+Now, imagine you have written your first FSM in a file named `first_test.fsm`:
+```
+fsm firstTest {
+   // FSM states go here
+   // ...
+}
+```
+you can simply copy the `fsmlc` executable where you have the FSM file and run:
+```bash
+$> fsmlc first_test.fsm
+```
+This command will create three files:
+* `firstTest_fsm.h` (the header you have to include in your C code, to use the FSM)
+* `firstTest_fsm.c` (the source file you have to compile together with your code)
+* `fsm.dot` (a graphical representation of the FSM using the DOT language, that you can visualize on https://dreampuf.github.io/GraphvizOnline/)
+
+Now compile your C code together with th generated `.c` file and it's done!
 
 ## 3. The language
 ### FSM structure
