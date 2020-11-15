@@ -30,7 +30,7 @@ You jus need to use the keyword `fsm` followed by a *name*, and then enclose the
 ### States
 Then you have to define states within the FSM:
 ```
-state [start] firstState
+state [reset] firstState
 on ( /* here it goes a condition */ ) go middleState;
 
 state middleState
@@ -38,7 +38,7 @@ on ( /* ...condition... */ ) go endState;
 
 state [end] endState;
 ```
-So, use keyword `state` to define a new state, followed by an optional *type* that can be either `start`, `end` or `err`, followed by the *name* of the state.
+So, use keyword `state` to define a new state, followed by an optional *type* that can be either `reset`, `end` or `err`, followed by the *name* of the state.
 
 Every transition that brings to another state is described by the construct `on-go`. The keyword `on` is followed by a condition between `()`, then `go` and the name of the end state. Before digging into conditions, let's make a digression about variables.
 
@@ -59,7 +59,7 @@ output state_t nextState = FIRST_STATE;
 Let's go back to trantions and have a deeper look into this construct. We've previously mentioned that a transition is specified by the keyword `on`, followed by a condition and the *actuator* `go`, that specifies the next state.
 In order to be activated, a transition needs its condition to be evaluated to true. This condition is expressed in a pair of brackets `()`, that contain a boolean expression using variables and inputs.
 ```
-state [start] firstState
+state [reset] firstState
 on (myVar > 0) go secondState
 on (myVar == 0) go thirdState;
 ```
@@ -69,7 +69,7 @@ The conditions are evaluated in the order they appear.
 ### Errors
 If an error state exists (i.e. a state with the `err` type), the transition actuator can be `err` instead of `go`, followed by a label that identifies the type of error, e.g.:
 ```
-state [start] firstState
+state [reset] firstState
 on (myVar > 0) go secondState
 on (myVar == 0) go thirdState
 on (myVar < 0) err negativeValue;
@@ -128,7 +128,7 @@ The `timeout` keyword can be used as a condition for a transition, followed by t
 ```
 timer t(100);   /* timer of 100 ms */
 
-state [start] firstState
+state [reset] firstState
 on (input1 == OK) go waitState start(t);
 
 state waitState
@@ -166,7 +166,7 @@ Output variables can be set using the `out` keyword, followed by the name of the
 ```
 output int fsmState = 0;
 
-state [start] s1
+state [reset] s1
 on (myVar > 0) go s2
 out fsmState { return 0; };
 
