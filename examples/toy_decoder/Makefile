@@ -1,5 +1,3 @@
-F2C = ../../fsmlc
-
 all: fsm
 	$(CC) main.c toy_decoder_fsm.c -o toy_decoder
 
