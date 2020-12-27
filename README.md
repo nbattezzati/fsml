@@ -151,7 +151,7 @@ The `timeout` keyword can be used as a condition for a transition, followed by t
 timer t(100);   /* timer of 100 ms */
 
 state [reset] firstState
-on (input1 == OK) go waitState start(t);
+on (input1 == OK) go waitState start t;
 
 state waitState
 on (input2 == OK) go endState
