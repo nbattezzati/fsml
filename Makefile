@@ -23,7 +23,7 @@
 fsmlc:
 	$(MAKE) -C src
 
-.PHONY: examples
+.PHONY: fsmlc examples
 examples:
 	$(MAKE) -C examples
 

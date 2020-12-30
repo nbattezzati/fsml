@@ -333,7 +333,7 @@ bool FSMLDriver::BuildGraph()
 			}
 			// check destination
 			if (t->CheckDestination() == false) {
-				lastError_ = "End state on transition <" + t->Condition() + "> in state <" + curS->Name() + "> is not reachable";
+				lastError_ = "Arrival state <" + t->EndState() + "> on transition " + t->Condition() + " in state <" + curS->Name() + "> is not reachable (may not exist)";
 				return false;
 			}
 			// if correct ...
