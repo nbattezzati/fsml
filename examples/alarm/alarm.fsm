@@ -1,0 +1,63 @@
+decl {
+    #include <time.h>
+
+    #define PROGR_TIMEOUT       (10000)     // stay in PROGRAM mode for at most 10 sec if no cmds arrive
+
+    typedef enum {
+        AlarmCmd_NoCommand,
+        AlarmCmd_ProgrSet,
+        AlarmCmd_ProgrPlus,
+        AlarmCmd_ProgrMinus
+    } alarm_cmd_t;
+
+    typedef struct {
+        unsigned int hour;
+        unsigned int minute;
+    } alarm_time_t;
+}
+
+time {
+    struct timespec t;
+    clock_gettime(CLOCK_MONOTONIC, &t);
+    return t;
+}
+
+fsm alarm 
+{
+    input alarm_cmd_t cmd = AlarmCmd_NoCommand;
+    var alarm_time_t cur_set_time = {0};
+    output alarm_time_t alarm_time = {0};
+    timer programming_timeout(PROGR_TIMEOUT);
+
+    state [reset] PROGRAMMED
+    on (cmd == AlarmCmd_ProgrSet) go SET_HOUR
+    out alarm_time = { return cur_set_time; } ;
+
+    state SET_HOUR {
+        if (cmd == AlarmCmd_ProgrPlus) {
+            cur_set_time.hour = cur_set_time.hour == 23 ? 0 : (cur_set_time.hour+1);
+            fsm_timer_start(&programming_timeout);
+        }
+        else if (cmd == AlarmCmd_ProgrMinus) {
+            cur_set_time.hour = cur_set_time.hour == 0 ? 23 : (cur_set_time.hour-1);
+            fsm_timer_start(&programming_timeout);
+        } 
+    }
+    on (cmd == AlarmCmd_ProgrSet) go SET_MINUTE start programming_timeout
+    on timeout(programming_timeout) go PROGRAMMED
+    out alarm_time = { return cur_set_time; } ;
+
+    state SET_MINUTE {
+        if (cmd == AlarmCmd_ProgrPlus) {
+            cur_set_time.minute = cur_set_time.minute == 59 ? 0 : (cur_set_time.minute+1);
+            fsm_timer_start(&programming_timeout);
+        }
+        else if (cmd == AlarmCmd_ProgrMinus) {
+            cur_set_time.minute = cur_set_time.minute == 0 ? 59 : (cur_set_time.minute-1);
+            fsm_timer_start(&programming_timeout);
+        } 
+    }
+    on (cmd == AlarmCmd_ProgrSet) go PROGRAMMED
+    on timeout(programming_timeout) go PROGRAMMED
+    out alarm_time = { return cur_set_time; } ;
+}

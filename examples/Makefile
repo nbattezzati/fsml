@@ -1,6 +1,6 @@
 export F2C = ../../fsmlc	# the path of the FSML compiler from the single example directory
 
-EXAMPLES = toy_decoder # add more here
+EXAMPLES = toy_decoder alarm # add more here
 
 
 .PHONY: subdirs $(EXAMPLES)
@@ -10,4 +10,4 @@ $(EXAMPLES):
 	$(MAKE) -C $@
 
 clean:
-	$(MAKE) clean -C $(EXAMPLES)
+	for d in $(EXAMPLES) ; do make --directory=$$d clean ; done
