@@ -142,7 +142,7 @@ typedef struct {
 @OUTPUT_FUNCTIONS@
 } @PREFIX_@fsm_t;
 
-extern @PREFIX_@fsm_t * @PREFIX_@fsm;
+extern const @PREFIX_@fsm_t * @PREFIX_@fsm;
 
 )";
 	
@@ -286,7 +286,7 @@ static @PREFIX_@fsm_t this = {
 	// close FSM object
 	ret_str += R"(
 };
-@PREFIX_@fsm_t * @PREFIX_@fsm = &this;
+const @PREFIX_@fsm_t * @PREFIX_@fsm = &this;
 )";
 
 	// timer declarations
