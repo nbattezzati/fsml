@@ -47,6 +47,13 @@ class FSMLDriver;
 
 
 typedef enum {
+	ParseResult_OK,
+	ParseResult_WARN,
+	ParseResult_ERR
+} parse_result_t;
+
+
+typedef enum {
 	VariableFamily_VAR,
 	VariableFamily_INPUT,
 	VariableFamily_OUTPUT,
@@ -160,7 +167,7 @@ public:
 
 	bool HasType(state_type_t type);
 	bool AddOutput(const std::string & output, const std::string & out_code);
-	void SetEndStateForRetryTrans(FSMState * s);
+	bool SetEndStateForRetryTrans(FSMState * s);
 
 	inline std::string ToString() { return std::string(
 		"S<" + name_ + ">" + 
@@ -248,7 +255,7 @@ public:
 	inline std::map<std::string, unsigned int> & ErrorMap() { return error_map_; }
 
 	inline void PushUntil(FSMUntil * u) { until_stack_.push(u); }
-	void PopUntil();
+	parse_result_t PopUntil();
 	inline FSMUntil * CurUntil() { return until_stack_.top(); }
 	inline std::vector<FSMState *> & UntilFirstStates() { return until_first_states_; }
 	inline bool IsUntilFirstState(const std::string & state) { for(auto & s : until_first_states_) { if(s->Name() == state) return true; } return false; }
@@ -276,17 +283,20 @@ public:
 
 	//parser's functions	
 	int Parse(const std::string& fileName);
-	std::string file;
+	inline std::string * FilenamePtr() { return &filename_; }
 
 	//error handling
-	static void error(FSML::location const & l, const std::string& m);
-	static void error(const std::string& errorMsg);
-	inline void SetlastError(const std::string & err) { lastError_ = err; }
+	static void error(FSML::location const & l, const std::string& msg);
+	static void error(const std::string& msg);
+	static void warning(FSML::location const & l, const std::string& msg);
+	inline void SetLastError(const std::string & err) { lastError_ = err; }
 	inline std::string GetLastError() const { return lastError_; }
 
 	//---------------------------------------------------/
 	
 private:
+	std::string filename_;
+
 	std::string fsmName_;
 
 	// code contained in the declaration section (if any)

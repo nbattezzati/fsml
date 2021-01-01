@@ -40,7 +40,11 @@ FSMTransition * tmpTrans = nullptr;
 FSMUntil * tmpUntil = nullptr;
 %}
 
-
+%initial-action
+{
+  // Initialize the initial location.
+  @$.begin.filename = @$.end.filename = driver.FilenamePtr();
+};
 
 %start fsml
 
@@ -279,7 +283,10 @@ until_retry : UNTIL_KEY until_condition
 				}
 			  transition_actuator SC
 			  	{ 
-					driver.PopUntil();
+					parse_result_t res = driver.PopUntil();
+					if (res == ParseResult_WARN) {
+						driver.warning(@1, driver.GetLastError());
+					}
 				} ;
 
 until_condition : LB INTEGER_CONSTANT RB		{ $$ = std::to_string($2); }

@@ -724,6 +724,16 @@ namespace FSML {
     YYCDEBUG << "Starting parse\n";
 
 
+    // User initialization code.
+#line 44 "fsml.yy"
+{
+  // Initialize the initial location.
+  yyla.location.begin.filename = yyla.location.end.filename = driver.FilenamePtr();
+}
+
+#line 735 "fsml.cc"
+
+
     /* Initialize the stack.  The initial state will be set in
        yynewstate, since the latter expects the semantical and the
        location values to have been already stored, initialize these
@@ -891,41 +901,41 @@ namespace FSML {
           switch (yyn)
             {
   case 8:
-#line 79 "fsml.yy"
+#line 83 "fsml.yy"
                                     { driver.Decl(YY_MOVE (yystack_[0].value.as < std::string > ())); }
-#line 897 "fsml.cc"
+#line 907 "fsml.cc"
     break;
 
   case 11:
-#line 85 "fsml.yy"
+#line 89 "fsml.yy"
                                        { 
 		if (driver.TimeSpec(YY_MOVE (yystack_[0].value.as < std::string > ())) == false) { 
 			driver.error(yylhs.location, driver.GetLastError()); 
 			YYERROR; 
 		}; 
 	}
-#line 908 "fsml.cc"
+#line 918 "fsml.cc"
     break;
 
   case 12:
-#line 92 "fsml.yy"
+#line 96 "fsml.yy"
                                            {
 		if (driver.PeriodSpec(YY_MOVE (yystack_[0].value.as < std::string > ())) == false) { 
 			driver.error(yylhs.location, driver.GetLastError()); 
 			YYERROR; 
 		}; 
 	}
-#line 919 "fsml.cc"
+#line 929 "fsml.cc"
     break;
 
   case 13:
-#line 99 "fsml.yy"
+#line 103 "fsml.yy"
                                                   { driver.FsmName(YY_MOVE (yystack_[3].value.as < std::string > ())); }
-#line 925 "fsml.cc"
+#line 935 "fsml.cc"
     break;
 
   case 19:
-#line 112 "fsml.yy"
+#line 116 "fsml.yy"
                                                 {
 							bool result = driver.AddVariable(
 													YY_MOVE (yystack_[3].value.as < var_family_t > ()), 
@@ -939,400 +949,403 @@ namespace FSML {
 								YYERROR; 
 							}
 						}
-#line 943 "fsml.cc"
+#line 953 "fsml.cc"
     break;
 
   case 21:
-#line 128 "fsml.yy"
+#line 132 "fsml.yy"
                                                                                 { tmp_type = YY_MOVE (yystack_[0].value.as < std::string > ()); }
-#line 949 "fsml.cc"
+#line 959 "fsml.cc"
     break;
 
   case 22:
-#line 129 "fsml.yy"
+#line 133 "fsml.yy"
                                                                                 { tmp_type.append(" " + YY_MOVE (yystack_[0].value.as < std::string > ())); }
-#line 955 "fsml.cc"
+#line 965 "fsml.cc"
     break;
 
   case 23:
-#line 132 "fsml.yy"
+#line 136 "fsml.yy"
                                         { yylhs.value.as < var_family_t > () = VariableFamily_VAR; }
-#line 961 "fsml.cc"
+#line 971 "fsml.cc"
     break;
 
   case 24:
-#line 133 "fsml.yy"
+#line 137 "fsml.yy"
                                                         { yylhs.value.as < var_family_t > () = VariableFamily_INPUT; }
-#line 967 "fsml.cc"
+#line 977 "fsml.cc"
     break;
 
   case 25:
-#line 134 "fsml.yy"
+#line 138 "fsml.yy"
                                                         { yylhs.value.as < var_family_t > () = VariableFamily_OUTPUT; }
-#line 973 "fsml.cc"
+#line 983 "fsml.cc"
     break;
 
   case 26:
-#line 137 "fsml.yy"
+#line 141 "fsml.yy"
                                                 { yylhs.value.as < std::string > () = std::string("void"); }
-#line 979 "fsml.cc"
+#line 989 "fsml.cc"
     break;
 
   case 27:
-#line 138 "fsml.yy"
+#line 142 "fsml.yy"
                                                                 { yylhs.value.as < std::string > () = std::string("char"); }
-#line 985 "fsml.cc"
+#line 995 "fsml.cc"
     break;
 
   case 28:
-#line 139 "fsml.yy"
+#line 143 "fsml.yy"
                                                                 { yylhs.value.as < std::string > () = std::string("short"); }
-#line 991 "fsml.cc"
+#line 1001 "fsml.cc"
     break;
 
   case 29:
-#line 140 "fsml.yy"
+#line 144 "fsml.yy"
                                                                 { yylhs.value.as < std::string > () = std::string("int"); }
-#line 997 "fsml.cc"
+#line 1007 "fsml.cc"
     break;
 
   case 30:
-#line 141 "fsml.yy"
+#line 145 "fsml.yy"
                                                                 { yylhs.value.as < std::string > () = std::string("long"); }
-#line 1003 "fsml.cc"
+#line 1013 "fsml.cc"
     break;
 
   case 31:
-#line 142 "fsml.yy"
+#line 146 "fsml.yy"
                                                                 { yylhs.value.as < std::string > () = std::string("float"); }
-#line 1009 "fsml.cc"
+#line 1019 "fsml.cc"
     break;
 
   case 32:
-#line 143 "fsml.yy"
+#line 147 "fsml.yy"
                                                                 { yylhs.value.as < std::string > () = std::string("double"); }
-#line 1015 "fsml.cc"
+#line 1025 "fsml.cc"
     break;
 
   case 33:
-#line 144 "fsml.yy"
+#line 148 "fsml.yy"
                                                                 { yylhs.value.as < std::string > () = std::string("signed"); }
-#line 1021 "fsml.cc"
+#line 1031 "fsml.cc"
     break;
 
   case 34:
-#line 145 "fsml.yy"
+#line 149 "fsml.yy"
                                                         { yylhs.value.as < std::string > () = std::string("unsigned"); }
-#line 1027 "fsml.cc"
+#line 1037 "fsml.cc"
     break;
 
   case 35:
-#line 146 "fsml.yy"
+#line 150 "fsml.yy"
                                                         { yylhs.value.as < std::string > () = YY_MOVE (yystack_[0].value.as < std::string > ()); }
-#line 1033 "fsml.cc"
+#line 1043 "fsml.cc"
     break;
 
   case 36:
-#line 147 "fsml.yy"
+#line 151 "fsml.yy"
                                                         { yylhs.value.as < std::string > () = YY_MOVE (yystack_[0].value.as < std::string > ()); }
-#line 1039 "fsml.cc"
+#line 1049 "fsml.cc"
     break;
 
   case 37:
-#line 148 "fsml.yy"
+#line 152 "fsml.yy"
                                                         { yylhs.value.as < std::string > () = YY_MOVE (yystack_[0].value.as < std::string > ()); }
-#line 1045 "fsml.cc"
+#line 1055 "fsml.cc"
     break;
 
   case 38:
-#line 151 "fsml.yy"
+#line 155 "fsml.yy"
                                                        { yylhs.value.as < std::string > () = YY_MOVE (yystack_[1].value.as < std::string > ()) + " " + YY_MOVE (yystack_[0].value.as < std::string > ()); }
-#line 1051 "fsml.cc"
+#line 1061 "fsml.cc"
     break;
 
   case 39:
-#line 153 "fsml.yy"
+#line 157 "fsml.yy"
                                                 { yylhs.value.as < std::string > () = std::string("struct"); }
-#line 1057 "fsml.cc"
+#line 1067 "fsml.cc"
     break;
 
   case 40:
-#line 154 "fsml.yy"
+#line 158 "fsml.yy"
                                                                 { yylhs.value.as < std::string > () = std::string("union"); }
-#line 1063 "fsml.cc"
+#line 1073 "fsml.cc"
     break;
 
   case 41:
-#line 157 "fsml.yy"
+#line 161 "fsml.yy"
                                         { yylhs.value.as < std::string > () = std::string("enum " + YY_MOVE (yystack_[0].value.as < std::string > ())); }
-#line 1069 "fsml.cc"
+#line 1079 "fsml.cc"
     break;
 
   case 42:
-#line 160 "fsml.yy"
+#line 164 "fsml.yy"
                                                 { yylhs.value.as < std::string > () = YY_MOVE (yystack_[0].value.as < std::string > ()); }
-#line 1075 "fsml.cc"
+#line 1085 "fsml.cc"
     break;
 
   case 44:
-#line 165 "fsml.yy"
+#line 169 "fsml.yy"
                                         { tmp_initializer = YY_MOVE (yystack_[0].value.as < std::string > ()); }
-#line 1081 "fsml.cc"
+#line 1091 "fsml.cc"
     break;
 
   case 45:
-#line 166 "fsml.yy"
+#line 170 "fsml.yy"
                                                 { tmp_initializer = std::string("{" + YY_MOVE (yystack_[1].value.as < std::string > ()) + "}"); }
-#line 1087 "fsml.cc"
+#line 1097 "fsml.cc"
     break;
 
   case 48:
-#line 173 "fsml.yy"
+#line 177 "fsml.yy"
                                                 { tmp_declarator = YY_MOVE (yystack_[0].value.as < std::string > ()); }
-#line 1093 "fsml.cc"
+#line 1103 "fsml.cc"
     break;
 
   case 49:
-#line 176 "fsml.yy"
+#line 180 "fsml.yy"
                                                                 { tmp_ptr_type.append("*"); }
-#line 1099 "fsml.cc"
+#line 1109 "fsml.cc"
     break;
 
   case 50:
-#line 177 "fsml.yy"
+#line 181 "fsml.yy"
                                                                 { tmp_ptr_type.append("*"); }
-#line 1105 "fsml.cc"
+#line 1115 "fsml.cc"
     break;
 
   case 51:
-#line 180 "fsml.yy"
+#line 184 "fsml.yy"
                                                         { yylhs.value.as < std::string > () = std::to_string(YY_MOVE (yystack_[0].value.as < int > ())); }
-#line 1111 "fsml.cc"
+#line 1121 "fsml.cc"
     break;
 
   case 52:
-#line 181 "fsml.yy"
+#line 185 "fsml.yy"
                                                         { yylhs.value.as < std::string > () = YY_MOVE (yystack_[0].value.as < std::string > ()); }
-#line 1117 "fsml.cc"
+#line 1127 "fsml.cc"
     break;
 
   case 53:
-#line 182 "fsml.yy"
+#line 186 "fsml.yy"
                                                         { yylhs.value.as < std::string > () = std::to_string(YY_MOVE (yystack_[0].value.as < float > ())); }
-#line 1123 "fsml.cc"
+#line 1133 "fsml.cc"
     break;
 
   case 54:
-#line 183 "fsml.yy"
+#line 187 "fsml.yy"
                                                         { yylhs.value.as < std::string > () = YY_MOVE (yystack_[0].value.as < std::string > ()); }
-#line 1129 "fsml.cc"
+#line 1139 "fsml.cc"
     break;
 
   case 55:
-#line 186 "fsml.yy"
+#line 190 "fsml.yy"
                                                 { yylhs.value.as < std::string > () = YY_MOVE (yystack_[0].value.as < std::string > ()); }
-#line 1135 "fsml.cc"
+#line 1145 "fsml.cc"
     break;
 
   case 56:
-#line 190 "fsml.yy"
+#line 194 "fsml.yy"
                                         {
 						if (driver.AddTimer(YY_MOVE (yystack_[3].value.as < std::string > ()), YY_MOVE (yystack_[1].value.as < std::string > ())) == false) {
 							driver.error(yylhs.location, driver.GetLastError()); 
 							YYERROR; 
 						};
 					}
-#line 1146 "fsml.cc"
+#line 1156 "fsml.cc"
     break;
 
   case 57:
-#line 198 "fsml.yy"
+#line 202 "fsml.yy"
                                         { yylhs.value.as < std::string > () = std::to_string(YY_MOVE (yystack_[0].value.as < int > ())); }
-#line 1152 "fsml.cc"
+#line 1162 "fsml.cc"
     break;
 
   case 58:
-#line 199 "fsml.yy"
+#line 203 "fsml.yy"
                                                                 { yylhs.value.as < std::string > () = YY_MOVE (yystack_[0].value.as < std::string > ()); }
-#line 1158 "fsml.cc"
+#line 1168 "fsml.cc"
     break;
 
   case 59:
-#line 203 "fsml.yy"
+#line 207 "fsml.yy"
                 { 
 			if (driver.AddState(tmpState) == false) {
 				driver.error(yylhs.location, driver.GetLastError()); 
 				YYERROR; 
 			} 
 		}
-#line 1169 "fsml.cc"
+#line 1179 "fsml.cc"
     break;
 
   case 60:
-#line 210 "fsml.yy"
+#line 214 "fsml.yy"
                             { tmpState = new FSMState(driver); }
-#line 1175 "fsml.cc"
+#line 1185 "fsml.cc"
     break;
 
   case 61:
-#line 212 "fsml.yy"
+#line 216 "fsml.yy"
                                              { tmpState->Name(YY_MOVE (yystack_[0].value.as < std::string > ())); }
-#line 1181 "fsml.cc"
+#line 1191 "fsml.cc"
     break;
 
   case 62:
-#line 213 "fsml.yy"
+#line 217 "fsml.yy"
                                                { tmpState->Code(YY_MOVE (yystack_[0].value.as < std::string > ())); }
-#line 1187 "fsml.cc"
+#line 1197 "fsml.cc"
     break;
 
   case 65:
-#line 220 "fsml.yy"
+#line 224 "fsml.yy"
                                         { yylhs.value.as < std::string > () = YY_MOVE (yystack_[0].value.as < std::string > ()); }
-#line 1193 "fsml.cc"
+#line 1203 "fsml.cc"
     break;
 
   case 66:
-#line 221 "fsml.yy"
+#line 225 "fsml.yy"
                                                 { yylhs.value.as < std::string > () = std::string(); }
-#line 1199 "fsml.cc"
+#line 1209 "fsml.cc"
     break;
 
   case 67:
-#line 224 "fsml.yy"
+#line 228 "fsml.yy"
                                                                                 { tmpState->AddType(YY_MOVE (yystack_[0].value.as < state_type_t > ())); }
-#line 1205 "fsml.cc"
+#line 1215 "fsml.cc"
     break;
 
   case 68:
-#line 225 "fsml.yy"
+#line 229 "fsml.yy"
                                                                                 { tmpState->AddType(YY_MOVE (yystack_[0].value.as < state_type_t > ())); }
-#line 1211 "fsml.cc"
+#line 1221 "fsml.cc"
     break;
 
   case 69:
-#line 228 "fsml.yy"
+#line 232 "fsml.yy"
                                 { yylhs.value.as < state_type_t > () = kStateTypeReset; }
-#line 1217 "fsml.cc"
+#line 1227 "fsml.cc"
     break;
 
   case 70:
-#line 229 "fsml.yy"
+#line 233 "fsml.yy"
                                         { yylhs.value.as < state_type_t > () = kStateTypeEnd; }
-#line 1223 "fsml.cc"
+#line 1233 "fsml.cc"
     break;
 
   case 71:
-#line 230 "fsml.yy"
+#line 234 "fsml.yy"
                                         { yylhs.value.as < state_type_t > () = kStateTypeErr; }
-#line 1229 "fsml.cc"
+#line 1239 "fsml.cc"
     break;
 
   case 75:
-#line 239 "fsml.yy"
+#line 243 "fsml.yy"
                                         { tmpState->AddTransition(tmpTrans); }
-#line 1235 "fsml.cc"
+#line 1245 "fsml.cc"
     break;
 
   case 78:
-#line 246 "fsml.yy"
+#line 250 "fsml.yy"
                                         { tmpTrans->Code(YY_MOVE (yystack_[0].value.as < std::string > ())); }
-#line 1241 "fsml.cc"
+#line 1251 "fsml.cc"
     break;
 
   case 80:
-#line 250 "fsml.yy"
+#line 254 "fsml.yy"
                                                                         { tmpTrans = new FSMTransition(driver, TransType_Normal, YY_MOVE (yystack_[0].value.as < std::string > ())); }
-#line 1247 "fsml.cc"
+#line 1257 "fsml.cc"
     break;
 
   case 81:
-#line 251 "fsml.yy"
+#line 255 "fsml.yy"
                                                                                 { tmpTrans = new FSMTransition(driver, TransType_Timeout, YY_MOVE (yystack_[1].value.as < std::string > ())); }
-#line 1253 "fsml.cc"
+#line 1263 "fsml.cc"
     break;
 
   case 82:
-#line 254 "fsml.yy"
+#line 258 "fsml.yy"
                                                 { tmpTrans->Actuator(TransActuator_GO); tmpTrans->EndState(YY_MOVE (yystack_[0].value.as < std::string > ())); }
-#line 1259 "fsml.cc"
+#line 1269 "fsml.cc"
     break;
 
   case 83:
-#line 255 "fsml.yy"
+#line 259 "fsml.yy"
                                                                 { tmpTrans->Actuator(TransActuator_ERR); tmpTrans->ErrorCode(YY_MOVE (yystack_[0].value.as < std::string > ())); }
-#line 1265 "fsml.cc"
+#line 1275 "fsml.cc"
     break;
 
   case 84:
-#line 256 "fsml.yy"
+#line 260 "fsml.yy"
                                                                         { tmpTrans->Actuator(TransActuator_RETRY); }
-#line 1271 "fsml.cc"
+#line 1281 "fsml.cc"
     break;
 
   case 85:
-#line 259 "fsml.yy"
+#line 263 "fsml.yy"
                                         { tmpTrans->Timer(YY_MOVE (yystack_[0].value.as < std::string > ())); }
-#line 1277 "fsml.cc"
+#line 1287 "fsml.cc"
     break;
 
   case 87:
-#line 263 "fsml.yy"
+#line 267 "fsml.yy"
                                                      { 
 						if (tmpState->AddOutput(YY_MOVE (yystack_[2].value.as < std::string > ()), YY_MOVE (yystack_[0].value.as < std::string > ())) == false) {
 							driver.error(yylhs.location, driver.GetLastError()); 
 							YYERROR;
 						} 
 				 }
-#line 1288 "fsml.cc"
+#line 1298 "fsml.cc"
     break;
 
   case 88:
-#line 271 "fsml.yy"
+#line 275 "fsml.yy"
                                 { 
 					tmpUntil = new FSMUntil(); 
 					driver.PushUntil(tmpUntil); 
 			  	}
-#line 1297 "fsml.cc"
+#line 1307 "fsml.cc"
     break;
 
   case 89:
-#line 276 "fsml.yy"
+#line 280 "fsml.yy"
                                 { 
 					tmpTrans = new FSMTransition(driver, TransType_ExitUntil, YY_MOVE (yystack_[4].value.as < std::string > ())); 
 					driver.CurUntil()->ExitTransition(tmpTrans);
 				}
-#line 1306 "fsml.cc"
+#line 1316 "fsml.cc"
     break;
 
   case 90:
-#line 281 "fsml.yy"
+#line 285 "fsml.yy"
                                 { 
-					driver.PopUntil();
+					parse_result_t res = driver.PopUntil();
+					if (res == ParseResult_WARN) {
+						driver.warning(yystack_[8].location, driver.GetLastError());
+					}
 				}
-#line 1314 "fsml.cc"
+#line 1327 "fsml.cc"
     break;
 
   case 91:
-#line 285 "fsml.yy"
+#line 292 "fsml.yy"
                                                         { yylhs.value.as < std::string > () = std::to_string(YY_MOVE (yystack_[1].value.as < int > ())); }
-#line 1320 "fsml.cc"
+#line 1333 "fsml.cc"
     break;
 
   case 92:
-#line 286 "fsml.yy"
+#line 293 "fsml.yy"
                                                                 { yylhs.value.as < std::string > () = YY_MOVE (yystack_[1].value.as < std::string > ()); }
-#line 1326 "fsml.cc"
+#line 1339 "fsml.cc"
     break;
 
   case 95:
-#line 293 "fsml.yy"
+#line 300 "fsml.yy"
                      { driver.CurUntil()->AddState(tmpState); }
-#line 1332 "fsml.cc"
+#line 1345 "fsml.cc"
     break;
 
 
-#line 1336 "fsml.cc"
+#line 1349 "fsml.cc"
 
             default:
               break;
@@ -1709,16 +1722,16 @@ namespace FSML {
   const short
   FSMLParser::yyrline_[] =
   {
-       0,    68,    68,    70,    71,    72,    75,    76,    79,    81,
-      82,    85,    92,    99,   102,   103,   106,   107,   108,   111,
-     125,   128,   129,   132,   133,   134,   137,   138,   139,   140,
-     141,   142,   143,   144,   145,   146,   147,   148,   151,   153,
-     154,   157,   160,   163,   165,   166,   169,   170,   173,   176,
-     177,   180,   181,   182,   183,   186,   189,   198,   199,   202,
-     210,   212,   210,   216,   217,   220,   221,   224,   225,   228,
-     229,   230,   233,   234,   235,   239,   240,   244,   246,   247,
-     250,   251,   254,   255,   256,   259,   260,   263,   271,   276,
-     270,   285,   286,   289,   290,   293,   294
+       0,    72,    72,    74,    75,    76,    79,    80,    83,    85,
+      86,    89,    96,   103,   106,   107,   110,   111,   112,   115,
+     129,   132,   133,   136,   137,   138,   141,   142,   143,   144,
+     145,   146,   147,   148,   149,   150,   151,   152,   155,   157,
+     158,   161,   164,   167,   169,   170,   173,   174,   177,   180,
+     181,   184,   185,   186,   187,   190,   193,   202,   203,   206,
+     214,   216,   214,   220,   221,   224,   225,   228,   229,   232,
+     233,   234,   237,   238,   239,   243,   244,   248,   250,   251,
+     254,   255,   258,   259,   260,   263,   264,   267,   275,   280,
+     274,   292,   293,   296,   297,   300,   301
   };
 
   void
@@ -1800,9 +1813,9 @@ namespace FSML {
   }
 
 } // FSML
-#line 1804 "fsml.cc"
+#line 1817 "fsml.cc"
 
-#line 299 "fsml.yy"
+#line 306 "fsml.yy"
 
 
 void FSML::FSMLParser::error(const FSML::FSMLParser::location_type& l, const std::string& m)

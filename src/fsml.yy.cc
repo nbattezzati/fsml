@@ -2826,8 +2826,8 @@ int yywrap()
 void FSMLDriver::scanBegin()
 {
 	std::string msg; 
-	if(!(yyin = fopen(file.c_str(), "r"))){
-		msg += std::string("error opening ") + file + std::string(": ") + strerror(errno);
+	if(!(yyin = fopen(filename_.c_str(), "r"))){
+		msg += std::string("error opening ") + filename_ + std::string(": ") + strerror(errno);
 		error(msg);
 	}
 }

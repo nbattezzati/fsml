@@ -53,23 +53,26 @@ bool FSMState::AddOutput(const std::string & output, const std::string & out_cod
 			return true;
 		}
 		else {
-			driver_.SetlastError("Output <" + output + "> redeclared in state <" + name_ + ">");
+			driver_.SetLastError("Output <" + output + "> redeclared in state <" + name_ + ">");
 		}
 	}
 	else {
-		driver_.SetlastError("State <" + name_ + "> tries to set inexistent output <" + output + ">");
+		driver_.SetLastError("State <" + name_ + "> tries to set inexistent output <" + output + ">");
 	}
 
 	return false;
 }
 
-void FSMState::SetEndStateForRetryTrans(FSMState * s)
+bool FSMState::SetEndStateForRetryTrans(FSMState * s)
 {
 	for(FSMTransition * t : transitions_) {
 		if (t->Actuator() == TransActuator_RETRY) {
 			t->EndState(s->Name());
+			return true;
 		}
 	}
+
+	return false;
 }
 
 
@@ -285,16 +288,25 @@ FSMState * FSMLDriver::ErrorState()
 	return nullptr;
 }
 
-void FSMLDriver::PopUntil()
-{ 
+parse_result_t FSMLDriver::PopUntil()
+{
+	parse_result_t res = ParseResult_OK;
+
 	/* TODO: create transitions due to this FSMUntil and destroy this FSMUntil after */ 
 	FSMUntil * u = until_stack_.top();
 
 	// add retry transition to all internal states
 	std::vector<FSMState *> & untilStates = u->States();
 	FSMState * firstS = untilStates[0];
+	bool retry_actuator_exists = false;
 	for (int i=0; i<untilStates.size(); ++i) {
-		untilStates[i]->SetEndStateForRetryTrans(firstS);
+		if (untilStates[i]->SetEndStateForRetryTrans(firstS) == true) {
+			retry_actuator_exists = true;
+		}
+	}
+	if (retry_actuator_exists == false) {
+		lastError_ = "Until block has no retry actuators";
+		res = ParseResult_WARN;
 	}
 
 	// add exit transition for the first state
@@ -305,6 +317,8 @@ void FSMLDriver::PopUntil()
 
 	// delete the current Until scope
 	until_stack_.pop();	
+
+	return res;
 }
 
 
@@ -404,7 +418,7 @@ int FSMLDriver::Parse(const std::string& fileName)
 {
 	int res;
 
-	file = fileName;
+	filename_ = fileName;
 	scanBegin();
 	FSML::FSMLParser parser (*this);
 #ifdef DEBUG
@@ -418,17 +432,36 @@ int FSMLDriver::Parse(const std::string& fileName)
 
 
 //error handling functions
-void FSMLDriver::error(const std::string& errorMsg)
+void FSMLDriver::error(const std::string& msg)
 {
-	std::cerr << THIS_PARSER << errorMsg << std::endl;
+	std::cerr << THIS_PARSER << msg << std::endl;
 }
 
 
-void FSMLDriver::error(FSML::location const & l, const std::string& errorMsg)
+void FSMLDriver::error(FSML::location const & l, const std::string& msg)
 {
-	fprintf(stderr, "%s %s at line %d\n", \
-			THIS_PARSER, \
-			errorMsg.c_str(), \
-			l.begin.line
+	fprintf(stderr, "%s:%d: %s: %s\n", // "%s:%d:%d: %s: %s\n", (use this to add column number)
+			l.begin.filename->c_str(),
+			l.begin.line,
+			// 		(to add column number look at the example in the lexer here 
+			//  	https://opensource.apple.com/source/bison/bison-14/examples/calc++
+			// 		but there is something more to add probably)
+			// l.begin.column,	
+			"error",
+			msg.c_str()
+	);
+}
+
+void FSMLDriver::warning(FSML::location const & l, const std::string& msg)
+{
+	fprintf(stderr, "%s:%d: %s: %s\n", // "%s:%d:%d: %s: %s\n", (use this to add column number)
+			l.begin.filename->c_str(),
+			l.begin.line,
+			// 		(to add column number look at the example in the lexer here 
+			//  	https://opensource.apple.com/source/bison/bison-14/examples/calc++
+			// 		but there is something more to add probably)
+			// l.begin.column,	
+			"warning",
+			msg.c_str()
 	);
 }
