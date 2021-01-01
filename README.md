@@ -158,6 +158,8 @@ on (input2 == OK) go endState
 on timeout(t) err input2IsLate;
 ```
 
+Sometimes, it could be necessary or simply convenient to use timers inside a transition condition or within the user-code: refer to the paragraph *Built-in functions*.
+
 ### Timer implementation
 In order to make the implementation of the FSM portable on any system, the user shall specify a way to count time on its specific system.
 This can be done by means of two possible sections: `time` or `period`.
@@ -227,9 +229,20 @@ state [end, err] lastState
 out cur_state { this.err() ? state_ERROR : state_COMPLETE; };
 ```
 
+### Built-in functions
+The FSML has some built-in functions that can be used within the user specific code or the transition conditions:
+* `fsm_timer_start()` (to start a specific timer. This is equivalent to the `start` statement)
+* `fsm_timer_expired()` (to check if a specific timer is expired. This is equivalent to the `timeout` statement)
+
+Built-in functions may vary according to the user-specific language.
+For C language, the prototypes are:
+```
+void fsm_timer_start(fsm_timer_t * t);
+unsigned char fsm_timer_expired(fsm_timer_t * t);
+```
 
 ### 4. The FSML C interface (how to use the FSM from your own C program)
-In order to use the genarted C code that translates your FSM, first of all you need to include it's header file.
+In order to use the generated C code that translates your FSM, first of all you need to include it's header file.
 The header file of the generated FSM is named `<prefix>_fsm.h`, where the prefix is the name of the FSM by default.
 
 A part from the user declarations, the header file contains a first `enum` `<prefix>_state_t` that enumerates the FSM states.
