@@ -11,7 +11,8 @@ int main(int argc, char *argv[])
     /* execute FSM to search for the TOY pattern in the input string */
     while(argv[1] != NULL && argv[1][i] != '\0') {
         toy_decoder_fsm->set_input_char(argv[1][i]);
-        if (toy_decoder_fsm->exec() == toy_decoderState__toy_found) {
+        toy_decoder_fsm->exec();
+        if (toy_decoder_fsm->is_in_final_state()) {
             printf("TOY found\n");
             return 0;
         }
