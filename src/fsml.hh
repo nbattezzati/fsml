@@ -1,4 +1,4 @@
-// A Bison parser, made by GNU Bison 3.6.4.
+// A Bison parser, made by GNU Bison 3.7.2.
 
 // Skeleton interface for Bison LALR(1) parsers in C++
 
@@ -647,38 +647,38 @@ namespace FSML {
       {
         switch (this->kind ())
     {
-      case 49: // FLOATING_CONSTANT
+      case symbol_kind::S_FLOATING_CONSTANT: // FLOATING_CONSTANT
         value.move< float > (std::move (that.value));
         break;
 
-      case 48: // INTEGER_CONSTANT
+      case symbol_kind::S_INTEGER_CONSTANT: // INTEGER_CONSTANT
         value.move< int > (std::move (that.value));
         break;
 
-      case 85: // state_type
+      case symbol_kind::S_state_type: // state_type
         value.move< state_type_t > (std::move (that.value));
         break;
 
-      case 44: // C_CODE_BLOCK
-      case 45: // C_CONDITION_BLOCK
-      case 46: // IDENTIFIER
-      case 47: // CHARACTER_CONSTANT
-      case 62: // type_specifier_list
-      case 64: // type_specifier
-      case 65: // struct_or_union_specifier
-      case 66: // struct_or_union
-      case 67: // enum_specifier
-      case 68: // typedef_name
-      case 74: // constant
-      case 75: // enumeration_constant
-      case 77: // timer_initializer
-      case 79: // state_specifier
-      case 83: // state_c_code
-      case 97: // until_condition
+      case symbol_kind::S_C_CODE_BLOCK: // C_CODE_BLOCK
+      case symbol_kind::S_C_CONDITION_BLOCK: // C_CONDITION_BLOCK
+      case symbol_kind::S_IDENTIFIER: // IDENTIFIER
+      case symbol_kind::S_CHARACTER_CONSTANT: // CHARACTER_CONSTANT
+      case symbol_kind::S_type_specifier_list: // type_specifier_list
+      case symbol_kind::S_type_specifier: // type_specifier
+      case symbol_kind::S_struct_or_union_specifier: // struct_or_union_specifier
+      case symbol_kind::S_struct_or_union: // struct_or_union
+      case symbol_kind::S_enum_specifier: // enum_specifier
+      case symbol_kind::S_typedef_name: // typedef_name
+      case symbol_kind::S_constant: // constant
+      case symbol_kind::S_enumeration_constant: // enumeration_constant
+      case symbol_kind::S_timer_initializer: // timer_initializer
+      case symbol_kind::S_state_specifier: // state_specifier
+      case symbol_kind::S_state_c_code: // state_c_code
+      case symbol_kind::S_until_condition: // until_condition
         value.move< std::string > (std::move (that.value));
         break;
 
-      case 63: // variable_specifier
+      case symbol_kind::S_variable_specifier: // variable_specifier
         value.move< var_family_t > (std::move (that.value));
         break;
 
@@ -792,38 +792,38 @@ namespace FSML {
         // Value type destructor.
 switch (yykind)
     {
-      case 49: // FLOATING_CONSTANT
+      case symbol_kind::S_FLOATING_CONSTANT: // FLOATING_CONSTANT
         value.template destroy< float > ();
         break;
 
-      case 48: // INTEGER_CONSTANT
+      case symbol_kind::S_INTEGER_CONSTANT: // INTEGER_CONSTANT
         value.template destroy< int > ();
         break;
 
-      case 85: // state_type
+      case symbol_kind::S_state_type: // state_type
         value.template destroy< state_type_t > ();
         break;
 
-      case 44: // C_CODE_BLOCK
-      case 45: // C_CONDITION_BLOCK
-      case 46: // IDENTIFIER
-      case 47: // CHARACTER_CONSTANT
-      case 62: // type_specifier_list
-      case 64: // type_specifier
-      case 65: // struct_or_union_specifier
-      case 66: // struct_or_union
-      case 67: // enum_specifier
-      case 68: // typedef_name
-      case 74: // constant
-      case 75: // enumeration_constant
-      case 77: // timer_initializer
-      case 79: // state_specifier
-      case 83: // state_c_code
-      case 97: // until_condition
+      case symbol_kind::S_C_CODE_BLOCK: // C_CODE_BLOCK
+      case symbol_kind::S_C_CONDITION_BLOCK: // C_CONDITION_BLOCK
+      case symbol_kind::S_IDENTIFIER: // IDENTIFIER
+      case symbol_kind::S_CHARACTER_CONSTANT: // CHARACTER_CONSTANT
+      case symbol_kind::S_type_specifier_list: // type_specifier_list
+      case symbol_kind::S_type_specifier: // type_specifier
+      case symbol_kind::S_struct_or_union_specifier: // struct_or_union_specifier
+      case symbol_kind::S_struct_or_union: // struct_or_union
+      case symbol_kind::S_enum_specifier: // enum_specifier
+      case symbol_kind::S_typedef_name: // typedef_name
+      case symbol_kind::S_constant: // constant
+      case symbol_kind::S_enumeration_constant: // enumeration_constant
+      case symbol_kind::S_timer_initializer: // timer_initializer
+      case symbol_kind::S_state_specifier: // state_specifier
+      case symbol_kind::S_state_c_code: // state_c_code
+      case symbol_kind::S_until_condition: // until_condition
         value.template destroy< std::string > ();
         break;
 
-      case 63: // variable_specifier
+      case symbol_kind::S_variable_specifier: // variable_specifier
         value.template destroy< var_family_t > ();
         break;
 
@@ -1894,7 +1894,7 @@ switch (yykind)
       void move (by_state& that);
 
       /// The symbol kind (corresponding to \a state).
-      /// \a S_YYEMPTY when empty.
+      /// \a symbol_kind::S_YYEMPTY when empty.
       symbol_kind_type kind () const YY_NOEXCEPT;
 
       /// The state number used to denote an empty symbol.
@@ -2087,7 +2087,6 @@ switch (yykind)
 
 } // FSML
 #line 2090 "fsml.hh"
-
 
 
 

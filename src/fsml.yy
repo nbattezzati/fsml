@@ -252,7 +252,16 @@ transition_c_code : C_CODE_BLOCK	{ tmpTrans->Code($1); }
 				  ;
 
 transition_condition : C_CONDITION_BLOCK				{ tmpTrans = new FSMTransition(driver, TransType_Normal, $1); }
-					 | TIMEOUT_KEY LB IDENTIFIER RB		{ tmpTrans = new FSMTransition(driver, TransType_Timeout, $3); }
+					 | TIMEOUT_KEY LB IDENTIFIER RB	{ 
+						 std::string timer = $3;
+						 if (driver.TimerExists(timer)) {
+						 	tmpTrans = new FSMTransition(driver, TransType_Timeout, timer);
+						 }
+						 else {
+							 driver.error(@$, std::string("timer <" + timer + "> is not defined"));
+							 YYERROR;
+						 }
+					 }
 					 ;
 
 transition_actuator : GO IDENTIFIER		{ tmpTrans->Actuator(TransActuator_GO); tmpTrans->EndState($2); }
@@ -260,7 +269,12 @@ transition_actuator : GO IDENTIFIER		{ tmpTrans->Actuator(TransActuator_GO); tmp
 					| RETRY				{ tmpTrans->Actuator(TransActuator_RETRY); }
 					;
 
-timer_actuator : START IDENTIFIER 	{ tmpTrans->Timer($2); }
+timer_actuator : START IDENTIFIER { 
+					if(tmpTrans->SetTimer($2) == false) {
+						driver.error(@$, driver.GetLastError());
+						YYERROR;
+					}
+				}
 			   | /* empty*/
 			   ;
 

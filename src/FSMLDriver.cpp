@@ -127,6 +127,19 @@ bool FSMTransition::CheckDestination()
 }
 
 
+bool FSMTransition::SetTimer(const std::string & timer)
+{
+	// check if the timer exists
+	if (driver_.TimerExists(timer)) {
+		timer_ = timer;
+		return true;
+	}
+	// return error otherwise
+	driver_.SetLastError("timer <" + timer + "> is not defined");
+	return false;
+}
+
+
 /**
  * @brief   The FSMLDriver constructor
  * @param   edM		The EdifManager whose netlist is constrained by the Actel PDC information

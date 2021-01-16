@@ -120,7 +120,6 @@ public:
 	inline std::string Condition() const { return condition_; }
 	inline void Actuator(const trans_actuator_t act) { actuator_ = act; }
 	inline trans_actuator_t Actuator() const { return actuator_; }
-	inline void Timer(const std::string & timer) { timer_ = timer; }
 	inline std::string Timer() const { return timer_; }
 	inline void EndState(const std::string & endState) { endState_ = endState; }
 	inline std::string EndState() const { return endState_; }
@@ -131,6 +130,7 @@ public:
 
 	virtual bool CheckCondition();
 	bool CheckDestination();
+	bool SetTimer(const std::string & timer);
 
 protected:
 	trans_type_t type_;

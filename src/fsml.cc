@@ -1,4 +1,4 @@
-// A Bison parser, made by GNU Bison 3.6.4.
+// A Bison parser, made by GNU Bison 3.7.2.
 
 // Skeleton implementation for Bison LALR(1) parsers in C++
 
@@ -197,38 +197,38 @@ namespace FSML {
   {
     switch (this->kind ())
     {
-      case 49: // FLOATING_CONSTANT
+      case symbol_kind::S_FLOATING_CONSTANT: // FLOATING_CONSTANT
         value.copy< float > (YY_MOVE (that.value));
         break;
 
-      case 48: // INTEGER_CONSTANT
+      case symbol_kind::S_INTEGER_CONSTANT: // INTEGER_CONSTANT
         value.copy< int > (YY_MOVE (that.value));
         break;
 
-      case 85: // state_type
+      case symbol_kind::S_state_type: // state_type
         value.copy< state_type_t > (YY_MOVE (that.value));
         break;
 
-      case 44: // C_CODE_BLOCK
-      case 45: // C_CONDITION_BLOCK
-      case 46: // IDENTIFIER
-      case 47: // CHARACTER_CONSTANT
-      case 62: // type_specifier_list
-      case 64: // type_specifier
-      case 65: // struct_or_union_specifier
-      case 66: // struct_or_union
-      case 67: // enum_specifier
-      case 68: // typedef_name
-      case 74: // constant
-      case 75: // enumeration_constant
-      case 77: // timer_initializer
-      case 79: // state_specifier
-      case 83: // state_c_code
-      case 97: // until_condition
+      case symbol_kind::S_C_CODE_BLOCK: // C_CODE_BLOCK
+      case symbol_kind::S_C_CONDITION_BLOCK: // C_CONDITION_BLOCK
+      case symbol_kind::S_IDENTIFIER: // IDENTIFIER
+      case symbol_kind::S_CHARACTER_CONSTANT: // CHARACTER_CONSTANT
+      case symbol_kind::S_type_specifier_list: // type_specifier_list
+      case symbol_kind::S_type_specifier: // type_specifier
+      case symbol_kind::S_struct_or_union_specifier: // struct_or_union_specifier
+      case symbol_kind::S_struct_or_union: // struct_or_union
+      case symbol_kind::S_enum_specifier: // enum_specifier
+      case symbol_kind::S_typedef_name: // typedef_name
+      case symbol_kind::S_constant: // constant
+      case symbol_kind::S_enumeration_constant: // enumeration_constant
+      case symbol_kind::S_timer_initializer: // timer_initializer
+      case symbol_kind::S_state_specifier: // state_specifier
+      case symbol_kind::S_state_c_code: // state_c_code
+      case symbol_kind::S_until_condition: // until_condition
         value.copy< std::string > (YY_MOVE (that.value));
         break;
 
-      case 63: // variable_specifier
+      case symbol_kind::S_variable_specifier: // variable_specifier
         value.copy< var_family_t > (YY_MOVE (that.value));
         break;
 
@@ -261,38 +261,38 @@ namespace FSML {
     super_type::move (s);
     switch (this->kind ())
     {
-      case 49: // FLOATING_CONSTANT
+      case symbol_kind::S_FLOATING_CONSTANT: // FLOATING_CONSTANT
         value.move< float > (YY_MOVE (s.value));
         break;
 
-      case 48: // INTEGER_CONSTANT
+      case symbol_kind::S_INTEGER_CONSTANT: // INTEGER_CONSTANT
         value.move< int > (YY_MOVE (s.value));
         break;
 
-      case 85: // state_type
+      case symbol_kind::S_state_type: // state_type
         value.move< state_type_t > (YY_MOVE (s.value));
         break;
 
-      case 44: // C_CODE_BLOCK
-      case 45: // C_CONDITION_BLOCK
-      case 46: // IDENTIFIER
-      case 47: // CHARACTER_CONSTANT
-      case 62: // type_specifier_list
-      case 64: // type_specifier
-      case 65: // struct_or_union_specifier
-      case 66: // struct_or_union
-      case 67: // enum_specifier
-      case 68: // typedef_name
-      case 74: // constant
-      case 75: // enumeration_constant
-      case 77: // timer_initializer
-      case 79: // state_specifier
-      case 83: // state_c_code
-      case 97: // until_condition
+      case symbol_kind::S_C_CODE_BLOCK: // C_CODE_BLOCK
+      case symbol_kind::S_C_CONDITION_BLOCK: // C_CONDITION_BLOCK
+      case symbol_kind::S_IDENTIFIER: // IDENTIFIER
+      case symbol_kind::S_CHARACTER_CONSTANT: // CHARACTER_CONSTANT
+      case symbol_kind::S_type_specifier_list: // type_specifier_list
+      case symbol_kind::S_type_specifier: // type_specifier
+      case symbol_kind::S_struct_or_union_specifier: // struct_or_union_specifier
+      case symbol_kind::S_struct_or_union: // struct_or_union
+      case symbol_kind::S_enum_specifier: // enum_specifier
+      case symbol_kind::S_typedef_name: // typedef_name
+      case symbol_kind::S_constant: // constant
+      case symbol_kind::S_enumeration_constant: // enumeration_constant
+      case symbol_kind::S_timer_initializer: // timer_initializer
+      case symbol_kind::S_state_specifier: // state_specifier
+      case symbol_kind::S_state_c_code: // state_c_code
+      case symbol_kind::S_until_condition: // until_condition
         value.move< std::string > (YY_MOVE (s.value));
         break;
 
-      case 63: // variable_specifier
+      case symbol_kind::S_variable_specifier: // variable_specifier
         value.move< var_family_t > (YY_MOVE (s.value));
         break;
 
@@ -393,38 +393,38 @@ namespace FSML {
   {
     switch (that.kind ())
     {
-      case 49: // FLOATING_CONSTANT
+      case symbol_kind::S_FLOATING_CONSTANT: // FLOATING_CONSTANT
         value.YY_MOVE_OR_COPY< float > (YY_MOVE (that.value));
         break;
 
-      case 48: // INTEGER_CONSTANT
+      case symbol_kind::S_INTEGER_CONSTANT: // INTEGER_CONSTANT
         value.YY_MOVE_OR_COPY< int > (YY_MOVE (that.value));
         break;
 
-      case 85: // state_type
+      case symbol_kind::S_state_type: // state_type
         value.YY_MOVE_OR_COPY< state_type_t > (YY_MOVE (that.value));
         break;
 
-      case 44: // C_CODE_BLOCK
-      case 45: // C_CONDITION_BLOCK
-      case 46: // IDENTIFIER
-      case 47: // CHARACTER_CONSTANT
-      case 62: // type_specifier_list
-      case 64: // type_specifier
-      case 65: // struct_or_union_specifier
-      case 66: // struct_or_union
-      case 67: // enum_specifier
-      case 68: // typedef_name
-      case 74: // constant
-      case 75: // enumeration_constant
-      case 77: // timer_initializer
-      case 79: // state_specifier
-      case 83: // state_c_code
-      case 97: // until_condition
+      case symbol_kind::S_C_CODE_BLOCK: // C_CODE_BLOCK
+      case symbol_kind::S_C_CONDITION_BLOCK: // C_CONDITION_BLOCK
+      case symbol_kind::S_IDENTIFIER: // IDENTIFIER
+      case symbol_kind::S_CHARACTER_CONSTANT: // CHARACTER_CONSTANT
+      case symbol_kind::S_type_specifier_list: // type_specifier_list
+      case symbol_kind::S_type_specifier: // type_specifier
+      case symbol_kind::S_struct_or_union_specifier: // struct_or_union_specifier
+      case symbol_kind::S_struct_or_union: // struct_or_union
+      case symbol_kind::S_enum_specifier: // enum_specifier
+      case symbol_kind::S_typedef_name: // typedef_name
+      case symbol_kind::S_constant: // constant
+      case symbol_kind::S_enumeration_constant: // enumeration_constant
+      case symbol_kind::S_timer_initializer: // timer_initializer
+      case symbol_kind::S_state_specifier: // state_specifier
+      case symbol_kind::S_state_c_code: // state_c_code
+      case symbol_kind::S_until_condition: // until_condition
         value.YY_MOVE_OR_COPY< std::string > (YY_MOVE (that.value));
         break;
 
-      case 63: // variable_specifier
+      case symbol_kind::S_variable_specifier: // variable_specifier
         value.YY_MOVE_OR_COPY< var_family_t > (YY_MOVE (that.value));
         break;
 
@@ -443,38 +443,38 @@ namespace FSML {
   {
     switch (that.kind ())
     {
-      case 49: // FLOATING_CONSTANT
+      case symbol_kind::S_FLOATING_CONSTANT: // FLOATING_CONSTANT
         value.move< float > (YY_MOVE (that.value));
         break;
 
-      case 48: // INTEGER_CONSTANT
+      case symbol_kind::S_INTEGER_CONSTANT: // INTEGER_CONSTANT
         value.move< int > (YY_MOVE (that.value));
         break;
 
-      case 85: // state_type
+      case symbol_kind::S_state_type: // state_type
         value.move< state_type_t > (YY_MOVE (that.value));
         break;
 
-      case 44: // C_CODE_BLOCK
-      case 45: // C_CONDITION_BLOCK
-      case 46: // IDENTIFIER
-      case 47: // CHARACTER_CONSTANT
-      case 62: // type_specifier_list
-      case 64: // type_specifier
-      case 65: // struct_or_union_specifier
-      case 66: // struct_or_union
-      case 67: // enum_specifier
-      case 68: // typedef_name
-      case 74: // constant
-      case 75: // enumeration_constant
-      case 77: // timer_initializer
-      case 79: // state_specifier
-      case 83: // state_c_code
-      case 97: // until_condition
+      case symbol_kind::S_C_CODE_BLOCK: // C_CODE_BLOCK
+      case symbol_kind::S_C_CONDITION_BLOCK: // C_CONDITION_BLOCK
+      case symbol_kind::S_IDENTIFIER: // IDENTIFIER
+      case symbol_kind::S_CHARACTER_CONSTANT: // CHARACTER_CONSTANT
+      case symbol_kind::S_type_specifier_list: // type_specifier_list
+      case symbol_kind::S_type_specifier: // type_specifier
+      case symbol_kind::S_struct_or_union_specifier: // struct_or_union_specifier
+      case symbol_kind::S_struct_or_union: // struct_or_union
+      case symbol_kind::S_enum_specifier: // enum_specifier
+      case symbol_kind::S_typedef_name: // typedef_name
+      case symbol_kind::S_constant: // constant
+      case symbol_kind::S_enumeration_constant: // enumeration_constant
+      case symbol_kind::S_timer_initializer: // timer_initializer
+      case symbol_kind::S_state_specifier: // state_specifier
+      case symbol_kind::S_state_c_code: // state_c_code
+      case symbol_kind::S_until_condition: // until_condition
         value.move< std::string > (YY_MOVE (that.value));
         break;
 
-      case 63: // variable_specifier
+      case symbol_kind::S_variable_specifier: // variable_specifier
         value.move< var_family_t > (YY_MOVE (that.value));
         break;
 
@@ -493,38 +493,38 @@ namespace FSML {
     state = that.state;
     switch (that.kind ())
     {
-      case 49: // FLOATING_CONSTANT
+      case symbol_kind::S_FLOATING_CONSTANT: // FLOATING_CONSTANT
         value.copy< float > (that.value);
         break;
 
-      case 48: // INTEGER_CONSTANT
+      case symbol_kind::S_INTEGER_CONSTANT: // INTEGER_CONSTANT
         value.copy< int > (that.value);
         break;
 
-      case 85: // state_type
+      case symbol_kind::S_state_type: // state_type
         value.copy< state_type_t > (that.value);
         break;
 
-      case 44: // C_CODE_BLOCK
-      case 45: // C_CONDITION_BLOCK
-      case 46: // IDENTIFIER
-      case 47: // CHARACTER_CONSTANT
-      case 62: // type_specifier_list
-      case 64: // type_specifier
-      case 65: // struct_or_union_specifier
-      case 66: // struct_or_union
-      case 67: // enum_specifier
-      case 68: // typedef_name
-      case 74: // constant
-      case 75: // enumeration_constant
-      case 77: // timer_initializer
-      case 79: // state_specifier
-      case 83: // state_c_code
-      case 97: // until_condition
+      case symbol_kind::S_C_CODE_BLOCK: // C_CODE_BLOCK
+      case symbol_kind::S_C_CONDITION_BLOCK: // C_CONDITION_BLOCK
+      case symbol_kind::S_IDENTIFIER: // IDENTIFIER
+      case symbol_kind::S_CHARACTER_CONSTANT: // CHARACTER_CONSTANT
+      case symbol_kind::S_type_specifier_list: // type_specifier_list
+      case symbol_kind::S_type_specifier: // type_specifier
+      case symbol_kind::S_struct_or_union_specifier: // struct_or_union_specifier
+      case symbol_kind::S_struct_or_union: // struct_or_union
+      case symbol_kind::S_enum_specifier: // enum_specifier
+      case symbol_kind::S_typedef_name: // typedef_name
+      case symbol_kind::S_constant: // constant
+      case symbol_kind::S_enumeration_constant: // enumeration_constant
+      case symbol_kind::S_timer_initializer: // timer_initializer
+      case symbol_kind::S_state_specifier: // state_specifier
+      case symbol_kind::S_state_c_code: // state_c_code
+      case symbol_kind::S_until_condition: // until_condition
         value.copy< std::string > (that.value);
         break;
 
-      case 63: // variable_specifier
+      case symbol_kind::S_variable_specifier: // variable_specifier
         value.copy< var_family_t > (that.value);
         break;
 
@@ -542,38 +542,38 @@ namespace FSML {
     state = that.state;
     switch (that.kind ())
     {
-      case 49: // FLOATING_CONSTANT
+      case symbol_kind::S_FLOATING_CONSTANT: // FLOATING_CONSTANT
         value.move< float > (that.value);
         break;
 
-      case 48: // INTEGER_CONSTANT
+      case symbol_kind::S_INTEGER_CONSTANT: // INTEGER_CONSTANT
         value.move< int > (that.value);
         break;
 
-      case 85: // state_type
+      case symbol_kind::S_state_type: // state_type
         value.move< state_type_t > (that.value);
         break;
 
-      case 44: // C_CODE_BLOCK
-      case 45: // C_CONDITION_BLOCK
-      case 46: // IDENTIFIER
-      case 47: // CHARACTER_CONSTANT
-      case 62: // type_specifier_list
-      case 64: // type_specifier
-      case 65: // struct_or_union_specifier
-      case 66: // struct_or_union
-      case 67: // enum_specifier
-      case 68: // typedef_name
-      case 74: // constant
-      case 75: // enumeration_constant
-      case 77: // timer_initializer
-      case 79: // state_specifier
-      case 83: // state_c_code
-      case 97: // until_condition
+      case symbol_kind::S_C_CODE_BLOCK: // C_CODE_BLOCK
+      case symbol_kind::S_C_CONDITION_BLOCK: // C_CONDITION_BLOCK
+      case symbol_kind::S_IDENTIFIER: // IDENTIFIER
+      case symbol_kind::S_CHARACTER_CONSTANT: // CHARACTER_CONSTANT
+      case symbol_kind::S_type_specifier_list: // type_specifier_list
+      case symbol_kind::S_type_specifier: // type_specifier
+      case symbol_kind::S_struct_or_union_specifier: // struct_or_union_specifier
+      case symbol_kind::S_struct_or_union: // struct_or_union
+      case symbol_kind::S_enum_specifier: // enum_specifier
+      case symbol_kind::S_typedef_name: // typedef_name
+      case symbol_kind::S_constant: // constant
+      case symbol_kind::S_enumeration_constant: // enumeration_constant
+      case symbol_kind::S_timer_initializer: // timer_initializer
+      case symbol_kind::S_state_specifier: // state_specifier
+      case symbol_kind::S_state_c_code: // state_c_code
+      case symbol_kind::S_until_condition: // until_condition
         value.move< std::string > (that.value);
         break;
 
-      case 63: // variable_specifier
+      case symbol_kind::S_variable_specifier: // variable_specifier
         value.move< var_family_t > (that.value);
         break;
 
@@ -845,38 +845,38 @@ namespace FSML {
          when using variants.  */
       switch (yyr1_[yyn])
     {
-      case 49: // FLOATING_CONSTANT
+      case symbol_kind::S_FLOATING_CONSTANT: // FLOATING_CONSTANT
         yylhs.value.emplace< float > ();
         break;
 
-      case 48: // INTEGER_CONSTANT
+      case symbol_kind::S_INTEGER_CONSTANT: // INTEGER_CONSTANT
         yylhs.value.emplace< int > ();
         break;
 
-      case 85: // state_type
+      case symbol_kind::S_state_type: // state_type
         yylhs.value.emplace< state_type_t > ();
         break;
 
-      case 44: // C_CODE_BLOCK
-      case 45: // C_CONDITION_BLOCK
-      case 46: // IDENTIFIER
-      case 47: // CHARACTER_CONSTANT
-      case 62: // type_specifier_list
-      case 64: // type_specifier
-      case 65: // struct_or_union_specifier
-      case 66: // struct_or_union
-      case 67: // enum_specifier
-      case 68: // typedef_name
-      case 74: // constant
-      case 75: // enumeration_constant
-      case 77: // timer_initializer
-      case 79: // state_specifier
-      case 83: // state_c_code
-      case 97: // until_condition
+      case symbol_kind::S_C_CODE_BLOCK: // C_CODE_BLOCK
+      case symbol_kind::S_C_CONDITION_BLOCK: // C_CONDITION_BLOCK
+      case symbol_kind::S_IDENTIFIER: // IDENTIFIER
+      case symbol_kind::S_CHARACTER_CONSTANT: // CHARACTER_CONSTANT
+      case symbol_kind::S_type_specifier_list: // type_specifier_list
+      case symbol_kind::S_type_specifier: // type_specifier
+      case symbol_kind::S_struct_or_union_specifier: // struct_or_union_specifier
+      case symbol_kind::S_struct_or_union: // struct_or_union
+      case symbol_kind::S_enum_specifier: // enum_specifier
+      case symbol_kind::S_typedef_name: // typedef_name
+      case symbol_kind::S_constant: // constant
+      case symbol_kind::S_enumeration_constant: // enumeration_constant
+      case symbol_kind::S_timer_initializer: // timer_initializer
+      case symbol_kind::S_state_specifier: // state_specifier
+      case symbol_kind::S_state_c_code: // state_c_code
+      case symbol_kind::S_until_condition: // until_condition
         yylhs.value.emplace< std::string > ();
         break;
 
-      case 63: // variable_specifier
+      case symbol_kind::S_variable_specifier: // variable_specifier
         yylhs.value.emplace< var_family_t > ();
         break;
 
@@ -900,13 +900,13 @@ namespace FSML {
         {
           switch (yyn)
             {
-  case 8:
+  case 8: // declaration: DECL_KEY C_CODE_BLOCK
 #line 83 "fsml.yy"
                                     { driver.Decl(YY_MOVE (yystack_[0].value.as < std::string > ())); }
 #line 907 "fsml.cc"
     break;
 
-  case 11:
+  case 11: // time_specifier: TIME_KEY C_CODE_BLOCK
 #line 89 "fsml.yy"
                                        { 
 		if (driver.TimeSpec(YY_MOVE (yystack_[0].value.as < std::string > ())) == false) { 
@@ -917,7 +917,7 @@ namespace FSML {
 #line 918 "fsml.cc"
     break;
 
-  case 12:
+  case 12: // period_specifier: PERIOD_KEY C_CODE_BLOCK
 #line 96 "fsml.yy"
                                            {
 		if (driver.PeriodSpec(YY_MOVE (yystack_[0].value.as < std::string > ())) == false) { 
@@ -928,13 +928,13 @@ namespace FSML {
 #line 929 "fsml.cc"
     break;
 
-  case 13:
+  case 13: // fsm: FSM_KEY IDENTIFIER LCB fsm_objects_list RCB
 #line 103 "fsml.yy"
                                                   { driver.FsmName(YY_MOVE (yystack_[3].value.as < std::string > ())); }
 #line 935 "fsml.cc"
     break;
 
-  case 19:
+  case 19: // variable_declaration: variable_specifier type_specifier_list init_declarator SC
 #line 116 "fsml.yy"
                                                 {
 							bool result = driver.AddVariable(
@@ -952,199 +952,199 @@ namespace FSML {
 #line 953 "fsml.cc"
     break;
 
-  case 21:
+  case 21: // type_specifier_list: type_specifier
 #line 132 "fsml.yy"
                                                                                 { tmp_type = YY_MOVE (yystack_[0].value.as < std::string > ()); }
 #line 959 "fsml.cc"
     break;
 
-  case 22:
+  case 22: // type_specifier_list: type_specifier_list type_specifier
 #line 133 "fsml.yy"
                                                                                 { tmp_type.append(" " + YY_MOVE (yystack_[0].value.as < std::string > ())); }
 #line 965 "fsml.cc"
     break;
 
-  case 23:
+  case 23: // variable_specifier: VAR_KEY
 #line 136 "fsml.yy"
                                         { yylhs.value.as < var_family_t > () = VariableFamily_VAR; }
 #line 971 "fsml.cc"
     break;
 
-  case 24:
+  case 24: // variable_specifier: INPUT_KEY
 #line 137 "fsml.yy"
                                                         { yylhs.value.as < var_family_t > () = VariableFamily_INPUT; }
 #line 977 "fsml.cc"
     break;
 
-  case 25:
+  case 25: // variable_specifier: OUTPUT_KEY
 #line 138 "fsml.yy"
                                                         { yylhs.value.as < var_family_t > () = VariableFamily_OUTPUT; }
 #line 983 "fsml.cc"
     break;
 
-  case 26:
+  case 26: // type_specifier: VOID
 #line 141 "fsml.yy"
                                                 { yylhs.value.as < std::string > () = std::string("void"); }
 #line 989 "fsml.cc"
     break;
 
-  case 27:
+  case 27: // type_specifier: CHAR
 #line 142 "fsml.yy"
                                                                 { yylhs.value.as < std::string > () = std::string("char"); }
 #line 995 "fsml.cc"
     break;
 
-  case 28:
+  case 28: // type_specifier: SHORT
 #line 143 "fsml.yy"
                                                                 { yylhs.value.as < std::string > () = std::string("short"); }
 #line 1001 "fsml.cc"
     break;
 
-  case 29:
+  case 29: // type_specifier: INT
 #line 144 "fsml.yy"
                                                                 { yylhs.value.as < std::string > () = std::string("int"); }
 #line 1007 "fsml.cc"
     break;
 
-  case 30:
+  case 30: // type_specifier: LONG
 #line 145 "fsml.yy"
                                                                 { yylhs.value.as < std::string > () = std::string("long"); }
 #line 1013 "fsml.cc"
     break;
 
-  case 31:
+  case 31: // type_specifier: FLOAT
 #line 146 "fsml.yy"
                                                                 { yylhs.value.as < std::string > () = std::string("float"); }
 #line 1019 "fsml.cc"
     break;
 
-  case 32:
+  case 32: // type_specifier: DOUBLE
 #line 147 "fsml.yy"
                                                                 { yylhs.value.as < std::string > () = std::string("double"); }
 #line 1025 "fsml.cc"
     break;
 
-  case 33:
+  case 33: // type_specifier: SIGNED
 #line 148 "fsml.yy"
                                                                 { yylhs.value.as < std::string > () = std::string("signed"); }
 #line 1031 "fsml.cc"
     break;
 
-  case 34:
+  case 34: // type_specifier: UNSIGNED
 #line 149 "fsml.yy"
                                                         { yylhs.value.as < std::string > () = std::string("unsigned"); }
 #line 1037 "fsml.cc"
     break;
 
-  case 35:
+  case 35: // type_specifier: struct_or_union_specifier
 #line 150 "fsml.yy"
                                                         { yylhs.value.as < std::string > () = YY_MOVE (yystack_[0].value.as < std::string > ()); }
 #line 1043 "fsml.cc"
     break;
 
-  case 36:
+  case 36: // type_specifier: enum_specifier
 #line 151 "fsml.yy"
                                                         { yylhs.value.as < std::string > () = YY_MOVE (yystack_[0].value.as < std::string > ()); }
 #line 1049 "fsml.cc"
     break;
 
-  case 37:
+  case 37: // type_specifier: typedef_name
 #line 152 "fsml.yy"
                                                         { yylhs.value.as < std::string > () = YY_MOVE (yystack_[0].value.as < std::string > ()); }
 #line 1055 "fsml.cc"
     break;
 
-  case 38:
+  case 38: // struct_or_union_specifier: struct_or_union IDENTIFIER
 #line 155 "fsml.yy"
                                                        { yylhs.value.as < std::string > () = YY_MOVE (yystack_[1].value.as < std::string > ()) + " " + YY_MOVE (yystack_[0].value.as < std::string > ()); }
 #line 1061 "fsml.cc"
     break;
 
-  case 39:
+  case 39: // struct_or_union: STRUCT
 #line 157 "fsml.yy"
                                                 { yylhs.value.as < std::string > () = std::string("struct"); }
 #line 1067 "fsml.cc"
     break;
 
-  case 40:
+  case 40: // struct_or_union: UNION
 #line 158 "fsml.yy"
                                                                 { yylhs.value.as < std::string > () = std::string("union"); }
 #line 1073 "fsml.cc"
     break;
 
-  case 41:
+  case 41: // enum_specifier: ENUM IDENTIFIER
 #line 161 "fsml.yy"
                                         { yylhs.value.as < std::string > () = std::string("enum " + YY_MOVE (yystack_[0].value.as < std::string > ())); }
 #line 1079 "fsml.cc"
     break;
 
-  case 42:
+  case 42: // typedef_name: IDENTIFIER
 #line 164 "fsml.yy"
                                                 { yylhs.value.as < std::string > () = YY_MOVE (yystack_[0].value.as < std::string > ()); }
 #line 1085 "fsml.cc"
     break;
 
-  case 44:
+  case 44: // initializer: constant
 #line 169 "fsml.yy"
                                         { tmp_initializer = YY_MOVE (yystack_[0].value.as < std::string > ()); }
 #line 1091 "fsml.cc"
     break;
 
-  case 45:
+  case 45: // initializer: LCB constant RCB
 #line 170 "fsml.yy"
                                                 { tmp_initializer = std::string("{" + YY_MOVE (yystack_[1].value.as < std::string > ()) + "}"); }
 #line 1097 "fsml.cc"
     break;
 
-  case 48:
+  case 48: // direct_declarator: IDENTIFIER
 #line 177 "fsml.yy"
                                                 { tmp_declarator = YY_MOVE (yystack_[0].value.as < std::string > ()); }
 #line 1103 "fsml.cc"
     break;
 
-  case 49:
+  case 49: // pointer: STAR
 #line 180 "fsml.yy"
                                                                 { tmp_ptr_type.append("*"); }
 #line 1109 "fsml.cc"
     break;
 
-  case 50:
+  case 50: // pointer: STAR pointer
 #line 181 "fsml.yy"
                                                                 { tmp_ptr_type.append("*"); }
 #line 1115 "fsml.cc"
     break;
 
-  case 51:
+  case 51: // constant: INTEGER_CONSTANT
 #line 184 "fsml.yy"
                                                         { yylhs.value.as < std::string > () = std::to_string(YY_MOVE (yystack_[0].value.as < int > ())); }
 #line 1121 "fsml.cc"
     break;
 
-  case 52:
+  case 52: // constant: CHARACTER_CONSTANT
 #line 185 "fsml.yy"
                                                         { yylhs.value.as < std::string > () = YY_MOVE (yystack_[0].value.as < std::string > ()); }
 #line 1127 "fsml.cc"
     break;
 
-  case 53:
+  case 53: // constant: FLOATING_CONSTANT
 #line 186 "fsml.yy"
                                                         { yylhs.value.as < std::string > () = std::to_string(YY_MOVE (yystack_[0].value.as < float > ())); }
 #line 1133 "fsml.cc"
     break;
 
-  case 54:
+  case 54: // constant: enumeration_constant
 #line 187 "fsml.yy"
                                                         { yylhs.value.as < std::string > () = YY_MOVE (yystack_[0].value.as < std::string > ()); }
 #line 1139 "fsml.cc"
     break;
 
-  case 55:
+  case 55: // enumeration_constant: IDENTIFIER
 #line 190 "fsml.yy"
                                                 { yylhs.value.as < std::string > () = YY_MOVE (yystack_[0].value.as < std::string > ()); }
 #line 1145 "fsml.cc"
     break;
 
-  case 56:
+  case 56: // timer_specifier: TIMER_KEY IDENTIFIER LB timer_initializer RB
 #line 194 "fsml.yy"
                                         {
 						if (driver.AddTimer(YY_MOVE (yystack_[3].value.as < std::string > ()), YY_MOVE (yystack_[1].value.as < std::string > ())) == false) {
@@ -1155,19 +1155,19 @@ namespace FSML {
 #line 1156 "fsml.cc"
     break;
 
-  case 57:
+  case 57: // timer_initializer: INTEGER_CONSTANT
 #line 202 "fsml.yy"
                                         { yylhs.value.as < std::string > () = std::to_string(YY_MOVE (yystack_[0].value.as < int > ())); }
 #line 1162 "fsml.cc"
     break;
 
-  case 58:
+  case 58: // timer_initializer: IDENTIFIER
 #line 203 "fsml.yy"
                                                                 { yylhs.value.as < std::string > () = YY_MOVE (yystack_[0].value.as < std::string > ()); }
 #line 1168 "fsml.cc"
     break;
 
-  case 59:
+  case 59: // state: state_specifier state_decorator_list SC
 #line 207 "fsml.yy"
                 { 
 			if (driver.AddState(tmpState) == false) {
@@ -1178,174 +1178,188 @@ namespace FSML {
 #line 1179 "fsml.cc"
     break;
 
-  case 60:
+  case 60: // $@1: %empty
 #line 214 "fsml.yy"
                             { tmpState = new FSMState(driver); }
 #line 1185 "fsml.cc"
     break;
 
-  case 61:
+  case 61: // $@2: %empty
 #line 216 "fsml.yy"
                                              { tmpState->Name(YY_MOVE (yystack_[0].value.as < std::string > ())); }
 #line 1191 "fsml.cc"
     break;
 
-  case 62:
+  case 62: // state_specifier: STATE_KEY $@1 state_type_specifier IDENTIFIER $@2 state_c_code
 #line 217 "fsml.yy"
                                                { tmpState->Code(YY_MOVE (yystack_[0].value.as < std::string > ())); }
 #line 1197 "fsml.cc"
     break;
 
-  case 65:
+  case 65: // state_c_code: C_CODE_BLOCK
 #line 224 "fsml.yy"
                                         { yylhs.value.as < std::string > () = YY_MOVE (yystack_[0].value.as < std::string > ()); }
 #line 1203 "fsml.cc"
     break;
 
-  case 66:
+  case 66: // state_c_code: %empty
 #line 225 "fsml.yy"
                                                 { yylhs.value.as < std::string > () = std::string(); }
 #line 1209 "fsml.cc"
     break;
 
-  case 67:
+  case 67: // state_type_list: state_type
 #line 228 "fsml.yy"
                                                                                 { tmpState->AddType(YY_MOVE (yystack_[0].value.as < state_type_t > ())); }
 #line 1215 "fsml.cc"
     break;
 
-  case 68:
+  case 68: // state_type_list: state_type_list COMMA state_type
 #line 229 "fsml.yy"
                                                                                 { tmpState->AddType(YY_MOVE (yystack_[0].value.as < state_type_t > ())); }
 #line 1221 "fsml.cc"
     break;
 
-  case 69:
+  case 69: // state_type: RESET
 #line 232 "fsml.yy"
                                 { yylhs.value.as < state_type_t > () = kStateTypeReset; }
 #line 1227 "fsml.cc"
     break;
 
-  case 70:
+  case 70: // state_type: END
 #line 233 "fsml.yy"
                                         { yylhs.value.as < state_type_t > () = kStateTypeEnd; }
 #line 1233 "fsml.cc"
     break;
 
-  case 71:
+  case 71: // state_type: ERR
 #line 234 "fsml.yy"
                                         { yylhs.value.as < state_type_t > () = kStateTypeErr; }
 #line 1239 "fsml.cc"
     break;
 
-  case 75:
+  case 75: // state_decorator: transition_specifier
 #line 243 "fsml.yy"
                                         { tmpState->AddTransition(tmpTrans); }
 #line 1245 "fsml.cc"
     break;
 
-  case 78:
+  case 78: // transition_c_code: C_CODE_BLOCK
 #line 250 "fsml.yy"
                                         { tmpTrans->Code(YY_MOVE (yystack_[0].value.as < std::string > ())); }
 #line 1251 "fsml.cc"
     break;
 
-  case 80:
+  case 80: // transition_condition: C_CONDITION_BLOCK
 #line 254 "fsml.yy"
                                                                         { tmpTrans = new FSMTransition(driver, TransType_Normal, YY_MOVE (yystack_[0].value.as < std::string > ())); }
 #line 1257 "fsml.cc"
     break;
 
-  case 81:
+  case 81: // transition_condition: TIMEOUT_KEY LB IDENTIFIER RB
 #line 255 "fsml.yy"
-                                                                                { tmpTrans = new FSMTransition(driver, TransType_Timeout, YY_MOVE (yystack_[1].value.as < std::string > ())); }
-#line 1263 "fsml.cc"
+                                                                        { 
+						 std::string timer = YY_MOVE (yystack_[1].value.as < std::string > ());
+						 if (driver.TimerExists(timer)) {
+						 	tmpTrans = new FSMTransition(driver, TransType_Timeout, timer);
+						 }
+						 else {
+							 driver.error(yylhs.location, std::string("timer < " + timer + "> is not defined"));
+							 YYERROR;
+						 }
+					 }
+#line 1272 "fsml.cc"
     break;
 
-  case 82:
-#line 258 "fsml.yy"
-                                                { tmpTrans->Actuator(TransActuator_GO); tmpTrans->EndState(YY_MOVE (yystack_[0].value.as < std::string > ())); }
-#line 1269 "fsml.cc"
-    break;
-
-  case 83:
-#line 259 "fsml.yy"
-                                                                { tmpTrans->Actuator(TransActuator_ERR); tmpTrans->ErrorCode(YY_MOVE (yystack_[0].value.as < std::string > ())); }
-#line 1275 "fsml.cc"
-    break;
-
-  case 84:
-#line 260 "fsml.yy"
-                                                                        { tmpTrans->Actuator(TransActuator_RETRY); }
-#line 1281 "fsml.cc"
-    break;
-
-  case 85:
-#line 263 "fsml.yy"
-                                        { tmpTrans->Timer(YY_MOVE (yystack_[0].value.as < std::string > ())); }
-#line 1287 "fsml.cc"
-    break;
-
-  case 87:
+  case 82: // transition_actuator: GO IDENTIFIER
 #line 267 "fsml.yy"
+                                                { tmpTrans->Actuator(TransActuator_GO); tmpTrans->EndState(YY_MOVE (yystack_[0].value.as < std::string > ())); }
+#line 1278 "fsml.cc"
+    break;
+
+  case 83: // transition_actuator: ERR IDENTIFIER
+#line 268 "fsml.yy"
+                                                                { tmpTrans->Actuator(TransActuator_ERR); tmpTrans->ErrorCode(YY_MOVE (yystack_[0].value.as < std::string > ())); }
+#line 1284 "fsml.cc"
+    break;
+
+  case 84: // transition_actuator: RETRY
+#line 269 "fsml.yy"
+                                                                        { tmpTrans->Actuator(TransActuator_RETRY); }
+#line 1290 "fsml.cc"
+    break;
+
+  case 85: // timer_actuator: START IDENTIFIER
+#line 272 "fsml.yy"
+                                  { 
+					if(tmpTrans->SetTimer(YY_MOVE (yystack_[0].value.as < std::string > ())) == false) {
+						driver.error(yylhs.location, driver.GetLastError());
+						YYERROR;
+					}
+				}
+#line 1301 "fsml.cc"
+    break;
+
+  case 87: // output_specifier: OUT IDENTIFIER EQUAL C_CODE_BLOCK
+#line 281 "fsml.yy"
                                                      { 
 						if (tmpState->AddOutput(YY_MOVE (yystack_[2].value.as < std::string > ()), YY_MOVE (yystack_[0].value.as < std::string > ())) == false) {
 							driver.error(yylhs.location, driver.GetLastError()); 
 							YYERROR;
 						} 
 				 }
-#line 1298 "fsml.cc"
+#line 1312 "fsml.cc"
     break;
 
-  case 88:
-#line 275 "fsml.yy"
+  case 88: // $@3: %empty
+#line 289 "fsml.yy"
                                 { 
 					tmpUntil = new FSMUntil(); 
 					driver.PushUntil(tmpUntil); 
 			  	}
-#line 1307 "fsml.cc"
+#line 1321 "fsml.cc"
     break;
 
-  case 89:
-#line 280 "fsml.yy"
+  case 89: // $@4: %empty
+#line 294 "fsml.yy"
                                 { 
 					tmpTrans = new FSMTransition(driver, TransType_ExitUntil, YY_MOVE (yystack_[4].value.as < std::string > ())); 
 					driver.CurUntil()->ExitTransition(tmpTrans);
 				}
-#line 1316 "fsml.cc"
+#line 1330 "fsml.cc"
     break;
 
-  case 90:
-#line 285 "fsml.yy"
+  case 90: // until_retry: UNTIL_KEY until_condition $@3 LCB until_object_list RCB $@4 transition_actuator SC
+#line 299 "fsml.yy"
                                 { 
 					parse_result_t res = driver.PopUntil();
 					if (res == ParseResult_WARN) {
 						driver.warning(yystack_[8].location, driver.GetLastError());
 					}
 				}
-#line 1327 "fsml.cc"
+#line 1341 "fsml.cc"
     break;
 
-  case 91:
-#line 292 "fsml.yy"
+  case 91: // until_condition: LB INTEGER_CONSTANT RB
+#line 306 "fsml.yy"
                                                         { yylhs.value.as < std::string > () = std::to_string(YY_MOVE (yystack_[1].value.as < int > ())); }
-#line 1333 "fsml.cc"
+#line 1347 "fsml.cc"
     break;
 
-  case 92:
-#line 293 "fsml.yy"
+  case 92: // until_condition: LB enumeration_constant RB
+#line 307 "fsml.yy"
                                                                 { yylhs.value.as < std::string > () = YY_MOVE (yystack_[1].value.as < std::string > ()); }
-#line 1339 "fsml.cc"
+#line 1353 "fsml.cc"
     break;
 
-  case 95:
-#line 300 "fsml.yy"
+  case 95: // until_object: state
+#line 314 "fsml.yy"
                      { driver.CurUntil()->AddState(tmpState); }
-#line 1345 "fsml.cc"
+#line 1359 "fsml.cc"
     break;
 
 
-#line 1349 "fsml.cc"
+#line 1363 "fsml.cc"
 
             default:
               break;
@@ -1730,8 +1744,8 @@ namespace FSML {
      181,   184,   185,   186,   187,   190,   193,   202,   203,   206,
      214,   216,   214,   220,   221,   224,   225,   228,   229,   232,
      233,   234,   237,   238,   239,   243,   244,   248,   250,   251,
-     254,   255,   258,   259,   260,   263,   264,   267,   275,   280,
-     274,   292,   293,   296,   297,   300,   301
+     254,   255,   267,   268,   269,   272,   278,   281,   289,   294,
+     288,   306,   307,   310,   311,   314,   315
   };
 
   void
@@ -1802,20 +1816,21 @@ namespace FSML {
       35,    36,    37,    38,    39,    40,    41,    42,    43,    44,
       45,    46,    47,    48,    49
     };
-    const int user_token_number_max_ = 304;
+    // Last valid token kind.
+    const int code_max = 304;
 
     if (t <= 0)
       return symbol_kind::S_YYEOF;
-    else if (t <= user_token_number_max_)
+    else if (t <= code_max)
       return YY_CAST (symbol_kind_type, translate_table[t]);
     else
       return symbol_kind::S_YYUNDEF;
   }
 
 } // FSML
-#line 1817 "fsml.cc"
+#line 1832 "fsml.cc"
 
-#line 306 "fsml.yy"
+#line 320 "fsml.yy"
 
 
 void FSML::FSMLParser::error(const FSML::FSMLParser::location_type& l, const std::string& m)
