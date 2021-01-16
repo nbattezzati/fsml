@@ -43,6 +43,7 @@ bool FSML2CCompiler::Translate()
 			fprintf(fp, "%s", Translate_GetterFunctions().c_str());
 			fprintf(fp, "%s", Translate_ResetFunction().c_str());
 			fprintf(fp, "%s", Translate_ExecFunction().c_str());
+			fprintf(fp, "%s", Translate_IsInFinalStateFunction().c_str());
 			
 			ret_val = true;
 		}
@@ -129,6 +130,7 @@ typedef struct {
    void (*reset)(void);
    @PREFIX_@state_t (*exec)(void);
    @PREFIX_@state_t (*state)(void);
+   unsigned int (*is_in_final_state)(void);
 )";
 
 	if (fsml_.ErrorState() != nullptr) {
@@ -222,6 +224,7 @@ static @PREFIX_@state_t __next_state;
 	ret_str += R"(
 void __reset(void);
 @PREFIX_@state_t __exec(void);
+unsigned int __is_in_final_state(void);
 )";
 
 	// input setter and output getter functions
@@ -258,6 +261,7 @@ static @PREFIX_@fsm_t this = {
 	ret_str += R"(
     .reset = __reset,
     .exec = __exec,
+	.is_in_final_state = __is_in_final_state,
 )";
 
 	// add input/output functions
@@ -668,6 +672,50 @@ std::string FSML2CCompiler::Translate_ExecFunction()
 	
 	return ret_str;
 }
+
+
+std::string FSML2CCompiler::Translate_IsInFinalStateFunction()
+{
+	std::string ret_str = R"(
+// is_in_final_state function
+unsigned int __is_in_final_state(void)
+{
+	unsigned int i = 0;
+)";
+
+	// generate the array of final state codes
+	std::string final_states_array = "";
+	unsigned int final_states_cnt = 0;
+	for (auto const & s :fsml_.StateMap()) {
+		if(s.second->HasType(kStateTypeEnd)) {
+			final_states_array += "@PREFIX@State__" + s.second->Name() + ", ";
+			final_states_cnt++;
+		}
+	}
+	// remove the comma, after the last state (if any)
+	if (final_states_cnt) {
+		final_states_array = final_states_array.substr(0, final_states_array.length()-2);
+	}
+
+	ret_str += "    unsigned int final_states_length = " + std::to_string(final_states_cnt) + ";\n";
+	ret_str += "    @PREFIX_@state_t final_states[] = {" + final_states_array + "};\n\n";
+
+	ret_str += R"(
+	for (i=0; i<final_states_length; ++i) { 
+		if (__cur_state == final_states[i]) {
+			return 1;
+		}
+	}
+	return 0;
+}
+)";
+
+	StrReplace(ret_str, "@PREFIX@", prefix_);
+	StrReplace(ret_str, "@PREFIX_@", prefix_ + (prefix_.size() ? "_" : ""));
+
+	return ret_str;
+}
+
 
 
 std::string FSML2CCompiler::TranslateTransition(FSMState & starting_state, FSMTransition & t)
