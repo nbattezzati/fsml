@@ -235,7 +235,9 @@ public:
 	inline std::string & FsmName() { return fsmName_; }
 	inline void FsmName(const std::string & name) { fsmName_ = name; }
 	inline std::string & Decl() { return decl_; }
-	void Decl(const std::string & c_code_block);
+	bool Decl(const std::string & c_code_block);
+	inline std::string & Export() { return export_; }
+	bool Export(const std::string & c_code_block);
 	inline std::string & TimeSpec() { return timeSpec_; }
 	bool TimeSpec(const std::string & c_code_block);
 	inline std::string & PeriodSpec() { return periodSpec_; }
@@ -301,6 +303,9 @@ private:
 
 	// code contained in the declaration section (if any)
 	std::string decl_;
+
+	// code contained in the export section (if any)
+	std::string export_;
 
 	// code contained in the time secction (if any)
 	std::string timeSpec_;

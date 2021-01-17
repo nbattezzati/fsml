@@ -33,6 +33,7 @@ bool FSML2CCompiler::Translate()
 		fp = fopen(std::string(outputName_ + ".c").c_str(), "w+");
 		if (fp != nullptr) {
 			// translate C
+			fprintf(fp, "%s", Translate_Decl().c_str());
 			fprintf(fp, "%s", Translate_FSMLDecl().c_str());
 			fprintf(fp, "%s", Translate_TimeOrPeriod().c_str());
 			fprintf(fp, "%s", Translate_Variables().c_str());
@@ -98,8 +99,8 @@ std::string FSML2CCompiler::Generate_Header()
 	ret_str += "#ifndef " + include_guard + "\n";
 	ret_str += "#define " + include_guard + "\n\n";
 
-	// user declarations
-	ret_str += Translate_Decl();
+	// user exports
+	ret_str += Translate_Export();
 
 	// states enum
 	ret_str += CComment("STATES");
@@ -324,6 +325,14 @@ std::string FSML2CCompiler::Translate_Decl()
 	std::string ret_val;
 	ret_val += CComment("User declarations");
 	ret_val += std::string(fsml_.Decl() + "\n\n");
+	return ret_val;
+}
+
+std::string FSML2CCompiler::Translate_Export()
+{
+	std::string ret_val;
+	ret_val += CComment("User exports");
+	ret_val += std::string(fsml_.Export() + "\n\n");
 	return ret_val;
 }
 

@@ -163,12 +163,45 @@ FSMLDriver::~FSMLDriver()
  * @brief   This method stores the C code contained in the declaration section
  * @param   c_code_block	string containing the C code block (whose curly braces will be stripped out)
  */
-void FSMLDriver::Decl(const std::string & c_code_block)
+bool FSMLDriver::Decl(const std::string & c_code_block)
 {
-	decl_ = c_code_block;
-	// strip starting and ending curly braces
-	decl_ = decl_.substr(1, decl_.size()-2);
+	bool ret_val = false;
+
+	if (decl_.length() == 0) {
+		decl_ = c_code_block;
+		// strip starting and ending curly braces
+		decl_ = decl_.substr(1, decl_.size()-2);
+		ret_val = true;
+	}
+	else {
+		lastError_ = "'decl' section already defined";
+	}
+
+	return ret_val;
 }
+
+
+/**
+ * @brief   This method stores the C code contained in the export section
+ * @param   c_code_block	string containing the C code block (whose curly braces will be stripped out)
+ */
+bool FSMLDriver::Export(const std::string & c_code_block)
+{
+	bool ret_val = false;
+
+	if (export_.length() == 0) {
+		export_ = c_code_block;
+		// strip starting and ending curly braces
+		export_ = export_.substr(1, export_.size()-2);
+		ret_val = true;
+	}
+	else {
+		lastError_ = "'export' section already defined";
+	}
+
+	return ret_val;
+}
+
 
 /**
  * @brief   This method stores the C code contained in the time section
@@ -178,14 +211,19 @@ bool FSMLDriver::TimeSpec(const std::string & c_code_block)
 {
 	bool ret_val = false;
 
-	if (periodSpec_.size() == 0) {
-		timeSpec_ = c_code_block;
-		// strip starting and ending curly braces
-		timeSpec_ = timeSpec_.substr(1, timeSpec_.size()-2);
-		ret_val = true;
+	if (timeSpec_.length() == 0) {
+		if (periodSpec_.length() == 0) {
+			timeSpec_ = c_code_block;
+			// strip starting and ending curly braces
+			timeSpec_ = timeSpec_.substr(1, timeSpec_.size()-2);
+			ret_val = true;
+		}
+		else {
+			lastError_ = "'period' section already defined, 'time' section cannot be defined any more";
+		}
 	}
 	else {
-		lastError_ = "'period' section already defined, 'time' section cannot be defined any more";
+		lastError_ = "'time' section already defined";
 	}
 
 	return ret_val;
@@ -199,14 +237,19 @@ bool FSMLDriver::PeriodSpec(const std::string & c_code_block)
 {
 	bool ret_val = false;
 
-	if (timeSpec_.size() == 0) {
-		periodSpec_ = c_code_block;
-		// strip starting and ending curly braces
-		periodSpec_ = periodSpec_.substr(1, periodSpec_.size()-2);
-		ret_val = true;
+	if (periodSpec_.length() == 0) {
+		if (timeSpec_.length() == 0) {
+			periodSpec_ = c_code_block;
+			// strip starting and ending curly braces
+			periodSpec_ = periodSpec_.substr(1, periodSpec_.size()-2);
+			ret_val = true;
+		}
+		else {
+			lastError_ = "'time' section already defined, 'period' section cannot be defined any more";
+		}
 	}
 	else {
-		lastError_ = "'time' section already defined, 'period' section cannot be defined any more";
+		lastError_ = "'period' section already defined";
 	}
 
 	return ret_val;

@@ -383,8 +383,8 @@ static void yy_fatal_error (yyconst char msg[]  );
 	*yy_cp = '\0'; \
 	(yy_c_buf_p) = yy_cp;
 
-#define YY_NUM_RULES 74
-#define YY_END_OF_BUFFER 75
+#define YY_NUM_RULES 75
+#define YY_END_OF_BUFFER 76
 /* This struct is not used in this scanner,
    but its presence is necessary. */
 struct yy_trans_info
@@ -392,30 +392,31 @@ struct yy_trans_info
 	flex_int32_t yy_verify;
 	flex_int32_t yy_nxt;
 	};
-static yyconst flex_int16_t yy_accept[201] =
+static yyconst flex_int16_t yy_accept[208] =
     {   0,
         0,    0,    0,    0,    0,    0,    0,    0,    0,    0,
         0,    0,    0,    0,    0,    0,    0,    0,    0,    0,
-        0,    0,    0,    0,    0,    0,   58,   58,   66,   66,
-       75,   73,   72,   71,   52,   53,   56,   54,   73,   55,
-       49,   49,   49,   49,   49,   49,   49,   49,   49,   49,
-       49,   49,   49,   49,   49,   50,   51,    4,    8,    9,
-       73,   27,   14,   27,   39,   48,   32,   37,   36,   43,
-       63,   64,   63,    5,    6,   40,   41,   58,   60,   59,
-       66,   68,   67,   72,   65,   70,   49,   49,   49,   49,
-       49,   49,   49,   49,   44,   49,   49,   38,   49,   49,
+        0,    0,    0,    0,    0,    0,    0,    0,   59,   59,
+       67,   67,   76,   74,   73,   72,   53,   54,   57,   55,
+       74,   56,   50,   50,   50,   50,   50,   50,   50,   50,
+       50,   50,   50,   50,   50,   50,   50,   51,   52,    5,
+        9,   10,   74,   28,   15,   28,   40,   49,   33,   38,
+       37,   44,   64,   65,   64,    6,    7,   41,   42,   59,
+       61,   60,   67,   69,   68,   73,   66,   71,   50,   50,
+       50,   50,   50,   50,   50,   50,   50,   45,   50,   50,
 
-       49,   49,   49,   49,   49,   49,   49,   49,    0,    0,
-       27,   27,   57,   62,   58,   59,   59,   61,   66,   67,
-       67,   69,   70,   49,   49,   49,   34,   49,   35,   49,
-        7,   49,   18,   49,   46,   49,   49,   49,   49,   49,
-       49,   49,   49,   49,   49,   49,   10,   49,   28,   29,
-       62,   16,    1,   49,   26,   49,   49,   19,   49,   49,
-       49,   49,   49,   49,   49,   49,   49,    2,   49,   49,
-       49,   15,   49,   20,   11,   49,   49,   33,   45,   17,
-       49,   47,   31,   49,   49,   13,   24,   49,   30,   21,
-       12,    3,   22,   25,   49,   49,   42,   49,   23,    0
+       39,   50,   50,   50,   50,   50,   50,   50,   50,   50,
+       50,    0,    0,   28,   28,   58,   63,   59,   60,   60,
+       62,   67,   68,   68,   70,   71,   50,   50,   50,   35,
+       50,   36,   50,   50,    8,   50,   19,   50,   47,   50,
+       50,   50,   50,   50,   50,   50,   50,   50,   50,   50,
+       11,   50,   29,   30,   63,   17,    1,   50,   27,   50,
+       50,   50,   20,   50,   50,   50,   50,   50,   50,   50,
+       50,   50,    3,   50,   50,   50,   16,   50,   50,   21,
+       12,   50,   50,   34,   46,   18,   50,   48,   32,   50,
+       50,   14,   25,   50,   31,   22,    2,   13,    4,   23,
 
+       26,   50,   50,   43,   50,   24,    0
     } ;
 
 static yyconst flex_int32_t yy_ec[256] =
@@ -432,8 +433,8 @@ static yyconst flex_int32_t yy_ec[256] =
        15,    1,   16,    1,   17,    1,   18,   19,   20,   21,
 
        22,   23,   24,   25,   26,   14,   14,   27,   28,   29,
-       30,   31,   14,   32,   33,   34,   35,   36,   14,   14,
-       37,   14,   38,    1,   39,    1,    1,    1,    1,    1,
+       30,   31,   14,   32,   33,   34,   35,   36,   14,   37,
+       38,   14,   39,    1,   40,    1,    1,    1,    1,    1,
         1,    1,    1,    1,    1,    1,    1,    1,    1,    1,
         1,    1,    1,    1,    1,    1,    1,    1,    1,    1,
         1,    1,    1,    1,    1,    1,    1,    1,    1,    1,
@@ -450,142 +451,144 @@ static yyconst flex_int32_t yy_ec[256] =
         1,    1,    1,    1,    1
     } ;
 
-static yyconst flex_int32_t yy_meta[40] =
+static yyconst flex_int32_t yy_meta[41] =
     {   0,
         1,    1,    2,    1,    1,    1,    3,    1,    1,    1,
         4,    1,    1,    4,    1,    1,    4,    4,    4,    4,
         4,    4,    4,    4,    4,    4,    4,    4,    4,    4,
-        4,    4,    4,    4,    4,    4,    4,    1,    1
+        4,    4,    4,    4,    4,    4,    4,    4,    1,    1
     } ;
 
-static yyconst flex_int16_t yy_base[212] =
+static yyconst flex_int16_t yy_base[219] =
     {   0,
-        0,    0,  216,  215,  214,  213,  212,  211,    2,    4,
-       40,   42,   36,   38,   50,   51,  232,  231,  240,  239,
-       46,   48,   58,   61,   64,   70,   74,   75,   76,   83,
-      244,  255,  241,  255,  255,  255,  255,  255,   77,  255,
-        0,  217,   63,   62,   65,  211,  211,  209,   66,  216,
-      215,   77,  210,  206,   86,  255,  255,  255,  255,  255,
-        0,   96,  255,  223,  255,  255,  255,  255,  255,  255,
-      255,  255,   99,  255,  255,  255,  255,    0,  255,  103,
-        0,  255,  105,  231,  255,    0,    0,  214,  211,  195,
-       87,  197,  198,  199,    0,   83,  197,    0,  191,  192,
+        0,    0,  223,  222,  221,  220,  219,  218,  217,  216,
+        2,    4,   41,   43,   37,   39,   51,   52,  238,  237,
+      246,  245,   47,   49,   59,   62,   65,   71,   75,   76,
+       77,   82,  250,  263,  247,  263,  263,  263,  263,  263,
+       85,  263,    0,  223,   64,   68,   60,  217,  217,  215,
+       74,  222,  221,   81,  216,  212,   78,  263,  263,  263,
+      263,  263,    0,  101,  263,  229,  263,  263,  263,  263,
+      263,  263,  263,  263,  104,  263,  263,  263,  263,    0,
+      263,  106,    0,  263,  110,  237,  263,    0,    0,  220,
+      217,  201,   83,  203,  203,  203,  204,    0,   88,  202,
 
-       85,  193,  198,  102,  193,   95,  188,  193,  214,  206,
-      114,  205,  255,    0,    0,  117,  123,  255,    0,  125,
-      129,  255,    0,  183,  187,  194,    0,  184,    0,  193,
-        0,  175,    0,  185,  177,  181,  184,  173,  172,  174,
-      106,  167,  179,  170,  173,  172,    0,  176,  255,  132,
-        0,    0,    0,  169,    0,  161,  160,    0,  158,  162,
-      157,  153,  155,  166,  153,  164,  165,  112,  153,  154,
-      147,    0,  149,    0,    0,  136,  145,    0,    0,    0,
-      142,    0,    0,  128,  123,    0,    0,  108,    0,    0,
-        0,    0,    0,    0,   97,  104,    0,   51,    0,  255,
+        0,  196,  197,   90,  198,  203,  103,  198,   99,  193,
+      198,  219,  211,  117,  210,  263,    0,    0,  120,  124,
+      263,    0,  129,  130,  263,    0,  188,  192,  199,    0,
+      189,    0,  186,  197,    0,  179,    0,  189,  181,  185,
+      188,  177,  176,  178,  109,  171,  183,  174,  177,  176,
+        0,  180,  263,  133,    0,    0,    0,  173,    0,  167,
+      164,  163,    0,  161,  165,  160,  155,  158,  169,  156,
+      167,  168,  115,  156,  157,  150,    0,  152,  139,    0,
+        0,  135,  145,    0,    0,    0,  144,    0,    0,  127,
+      111,    0,    0,  109,    0,    0,    0,    0,    0,    0,
 
-      144,  148,  152,   41,  156,  160,  164,  168,  172,  176,
-      180
+        0,   95,   66,    0,   52,    0,  263,  147,  151,  155,
+       42,  159,  163,  167,  171,  175,  179,  183
     } ;
 
-static yyconst flex_int16_t yy_def[212] =
+static yyconst flex_int16_t yy_def[219] =
     {   0,
-      200,    1,    1,    1,    1,    1,    1,    1,    1,    1,
+      207,    1,    1,    1,    1,    1,    1,    1,    1,    1,
         1,    1,    1,    1,    1,    1,    1,    1,    1,    1,
-        1,    1,  201,  201,  201,  201,  202,  202,  203,  203,
-      200,  200,  200,  200,  200,  200,  200,  200,  200,  200,
-      204,  204,  204,  204,  204,  204,  204,  204,  204,  204,
-      204,  204,  204,  204,  204,  200,  200,  200,  200,  200,
-      205,  200,  200,  200,  200,  200,  200,  200,  200,  200,
-      200,  200,  200,  200,  200,  200,  200,  206,  200,  207,
-      208,  200,  209,  200,  200,  210,  204,  204,  204,  204,
-      204,  204,  204,  204,  204,  204,  204,  204,  204,  204,
+        1,    1,    1,    1,  208,  208,  208,  208,  209,  209,
+      210,  210,  207,  207,  207,  207,  207,  207,  207,  207,
+      207,  207,  211,  211,  211,  211,  211,  211,  211,  211,
+      211,  211,  211,  211,  211,  211,  211,  207,  207,  207,
+      207,  207,  212,  207,  207,  207,  207,  207,  207,  207,
+      207,  207,  207,  207,  207,  207,  207,  207,  207,  213,
+      207,  214,  215,  207,  216,  207,  207,  217,  211,  211,
+      211,  211,  211,  211,  211,  211,  211,  211,  211,  211,
 
-      204,  204,  204,  204,  204,  204,  204,  204,  200,  200,
-      200,  200,  200,  211,  206,  207,  207,  200,  208,  209,
-      209,  200,  210,  204,  204,  204,  204,  204,  204,  204,
-      204,  204,  204,  204,  204,  204,  204,  204,  204,  204,
-      204,  204,  204,  204,  204,  204,  204,  204,  200,  200,
-      211,  204,  204,  204,  204,  204,  204,  204,  204,  204,
-      204,  204,  204,  204,  204,  204,  204,  204,  204,  204,
-      204,  204,  204,  204,  204,  204,  204,  204,  204,  204,
-      204,  204,  204,  204,  204,  204,  204,  204,  204,  204,
-      204,  204,  204,  204,  204,  204,  204,  204,  204,    0,
+      211,  211,  211,  211,  211,  211,  211,  211,  211,  211,
+      211,  207,  207,  207,  207,  207,  218,  213,  214,  214,
+      207,  215,  216,  216,  207,  217,  211,  211,  211,  211,
+      211,  211,  211,  211,  211,  211,  211,  211,  211,  211,
+      211,  211,  211,  211,  211,  211,  211,  211,  211,  211,
+      211,  211,  207,  207,  218,  211,  211,  211,  211,  211,
+      211,  211,  211,  211,  211,  211,  211,  211,  211,  211,
+      211,  211,  211,  211,  211,  211,  211,  211,  211,  211,
+      211,  211,  211,  211,  211,  211,  211,  211,  211,  211,
+      211,  211,  211,  211,  211,  211,  211,  211,  211,  211,
 
-      200,  200,  200,  200,  200,  200,  200,  200,  200,  200,
-      200
+      211,  211,  211,  211,  211,  211,    0,  207,  207,  207,
+      207,  207,  207,  207,  207,  207,  207,  207
     } ;
 
-static yyconst flex_int16_t yy_nxt[295] =
+static yyconst flex_int16_t yy_nxt[304] =
     {   0,
-       32,   33,   34,   32,   35,   36,   37,   38,   32,   39,
-       32,   32,   40,   41,   32,   32,   32,   41,   41,   42,
-       43,   44,   45,   46,   41,   47,   48,   41,   41,   49,
-       50,   51,   52,   53,   54,   55,   41,   56,   57,   59,
-       60,   59,   60,   61,   87,   61,   64,   63,   64,   63,
-       62,   63,   62,   63,   65,   65,   64,   66,   64,   66,
-       72,   66,   66,   72,   67,   67,   72,   73,   76,   77,
-       73,  199,   72,   73,   76,   77,   79,   79,   82,   73,
-       80,   80,   83,   85,   89,   82,   86,   68,   68,   83,
-       91,   93,   90,   92,   98,   74,   75,   94,   74,   75,
+       34,   35,   36,   34,   37,   38,   39,   40,   34,   41,
+       34,   34,   42,   43,   34,   34,   34,   43,   43,   44,
+       45,   46,   47,   48,   43,   49,   50,   43,   43,   51,
+       52,   53,   54,   55,   56,   57,   43,   43,   58,   59,
+       61,   62,   61,   62,   63,   89,   63,   66,   65,   66,
+       65,   64,   65,   64,   65,   67,   67,   66,   68,   66,
+       68,   74,   68,   68,   74,   69,   69,   74,   75,   78,
+       79,   75,  206,   74,   75,   78,   79,   81,   81,   84,
+       75,   82,   82,   85,   84,   91,   96,  205,   85,   70,
+       70,   87,   97,   92,   88,  110,   93,   76,   77,   94,
 
-       99,  102,  103,  107,  110,  113,  111,  127,  114,  117,
-      104,  121,  118,  132,  122,  108,  133,  137,  138,  141,
-      144,  128,  110,  200,  111,  198,  200,  145,  146,  117,
-      197,  200,  118,  142,  200,  121,  196,  165,  122,  166,
-      110,  185,  150,  186,   71,   71,   71,   71,   78,   78,
-       78,   78,   81,   81,   81,   81,  109,  195,  109,  109,
-      115,  194,  193,  115,  116,  192,  116,  116,  119,  191,
-      190,  119,  120,  189,  120,  120,  123,  188,  123,  123,
-      151,  187,  151,  151,  184,  183,  182,  181,  180,  179,
-      178,  177,  176,  175,  174,  173,  172,  171,  170,  169,
+       76,   77,  101,  130,   95,  105,  106,  111,  102,  113,
+      116,  114,  120,  117,  107,  121,  124,  131,  136,  125,
+      145,  137,  141,  142,  148,  113,  207,  114,  204,  207,
+      120,  149,  150,  121,  146,  207,  124,  203,  207,  125,
+      170,  113,  171,  154,  191,  202,  192,   73,   73,   73,
+       73,   80,   80,   80,   80,   83,   83,   83,   83,  112,
+      201,  112,  112,  118,  200,  199,  118,  119,  198,  119,
+      119,  122,  197,  196,  122,  123,  195,  123,  123,  126,
+      194,  126,  126,  155,  193,  155,  155,  190,  189,  188,
+      187,  186,  185,  184,  183,  182,  181,  180,  179,  178,
 
-      168,  167,  164,  163,  162,  161,  160,  159,  158,  157,
-      156,  155,  154,  153,  152,  112,  150,  149,  148,  147,
-      143,  140,  139,  136,  135,  134,  131,  130,  129,  126,
-      125,  124,   84,  112,  106,  105,  101,  100,   97,   96,
-       95,   88,   84,  200,   70,   70,   69,   69,   58,   58,
-       58,   58,   58,   58,   31,  200,  200,  200,  200,  200,
-      200,  200,  200,  200,  200,  200,  200,  200,  200,  200,
-      200,  200,  200,  200,  200,  200,  200,  200,  200,  200,
-      200,  200,  200,  200,  200,  200,  200,  200,  200,  200,
-      200,  200,  200,  200
+      177,  176,  175,  174,  173,  172,  169,  168,  167,  166,
+      165,  164,  163,  162,  161,  160,  159,  158,  157,  156,
+      115,  154,  153,  152,  151,  147,  144,  143,  140,  139,
+      138,  135,  134,  133,  132,  129,  128,  127,   86,  115,
+      109,  108,  104,  103,  100,   99,   98,   90,   86,  207,
+       72,   72,   71,   71,   60,   60,   60,   60,   60,   60,
+       60,   60,   33,  207,  207,  207,  207,  207,  207,  207,
+      207,  207,  207,  207,  207,  207,  207,  207,  207,  207,
+      207,  207,  207,  207,  207,  207,  207,  207,  207,  207,
+      207,  207,  207,  207,  207,  207,  207,  207,  207,  207,
 
+      207,  207,  207
     } ;
 
-static yyconst flex_int16_t yy_chk[295] =
+static yyconst flex_int16_t yy_chk[304] =
     {   0,
         1,    1,    1,    1,    1,    1,    1,    1,    1,    1,
         1,    1,    1,    1,    1,    1,    1,    1,    1,    1,
         1,    1,    1,    1,    1,    1,    1,    1,    1,    1,
-        1,    1,    1,    1,    1,    1,    1,    1,    1,    9,
-        9,   10,   10,   11,  204,   12,   13,   13,   14,   14,
-       11,   11,   12,   12,   15,   16,   21,   21,   22,   22,
-       23,   15,   16,   24,   15,   16,   25,   23,   25,   25,
-       24,  198,   26,   25,   26,   26,   27,   28,   29,   26,
-       27,   28,   29,   39,   43,   30,   39,   15,   16,   30,
-       44,   45,   43,   44,   49,   23,   23,   45,   24,   24,
+        1,    1,    1,    1,    1,    1,    1,    1,    1,    1,
+       11,   11,   12,   12,   13,  211,   14,   15,   15,   16,
+       16,   13,   13,   14,   14,   17,   18,   23,   23,   24,
+       24,   25,   17,   18,   26,   17,   18,   27,   25,   27,
+       27,   26,  205,   28,   27,   28,   28,   29,   30,   31,
+       28,   29,   30,   31,   32,   45,   47,  203,   32,   17,
+       18,   41,   47,   45,   41,   57,   46,   25,   25,   46,
 
-       49,   52,   52,   55,   62,   73,   62,   91,   73,   80,
-       52,   83,   80,   96,   83,   55,   96,  101,  101,  104,
-      106,   91,  111,  116,  111,  196,  116,  106,  106,  117,
-      195,  120,  117,  104,  120,  121,  188,  141,  121,  141,
-      150,  168,  150,  168,  201,  201,  201,  201,  202,  202,
-      202,  202,  203,  203,  203,  203,  205,  185,  205,  205,
-      206,  184,  181,  206,  207,  177,  207,  207,  208,  176,
-      173,  208,  209,  171,  209,  209,  210,  170,  210,  210,
-      211,  169,  211,  211,  167,  166,  165,  164,  163,  162,
-      161,  160,  159,  157,  156,  154,  148,  146,  145,  144,
+       26,   26,   51,   93,   46,   54,   54,   57,   51,   64,
+       75,   64,   82,   75,   54,   82,   85,   93,   99,   85,
+      107,   99,  104,  104,  109,  114,  119,  114,  202,  119,
+      120,  109,  109,  120,  107,  123,  124,  194,  123,  124,
+      145,  154,  145,  154,  173,  191,  173,  208,  208,  208,
+      208,  209,  209,  209,  209,  210,  210,  210,  210,  212,
+      190,  212,  212,  213,  187,  183,  213,  214,  182,  214,
+      214,  215,  179,  178,  215,  216,  176,  216,  216,  217,
+      175,  217,  217,  218,  174,  218,  218,  172,  171,  170,
+      169,  168,  167,  166,  165,  164,  162,  161,  160,  158,
 
-      143,  142,  140,  139,  138,  137,  136,  135,  134,  132,
-      130,  128,  126,  125,  124,  112,  110,  109,  108,  107,
-      105,  103,  102,  100,   99,   97,   94,   93,   92,   90,
-       89,   88,   84,   64,   54,   53,   51,   50,   48,   47,
-       46,   42,   33,   31,   20,   19,   18,   17,    8,    7,
-        6,    5,    4,    3,  200,  200,  200,  200,  200,  200,
-      200,  200,  200,  200,  200,  200,  200,  200,  200,  200,
-      200,  200,  200,  200,  200,  200,  200,  200,  200,  200,
-      200,  200,  200,  200,  200,  200,  200,  200,  200,  200,
-      200,  200,  200,  200
+      152,  150,  149,  148,  147,  146,  144,  143,  142,  141,
+      140,  139,  138,  136,  134,  133,  131,  129,  128,  127,
+      115,  113,  112,  111,  110,  108,  106,  105,  103,  102,
+      100,   97,   96,   95,   94,   92,   91,   90,   86,   66,
+       56,   55,   53,   52,   50,   49,   48,   44,   35,   33,
+       22,   21,   20,   19,   10,    9,    8,    7,    6,    5,
+        4,    3,  207,  207,  207,  207,  207,  207,  207,  207,
+      207,  207,  207,  207,  207,  207,  207,  207,  207,  207,
+      207,  207,  207,  207,  207,  207,  207,  207,  207,  207,
+      207,  207,  207,  207,  207,  207,  207,  207,  207,  207,
 
+      207,  207,  207
     } ;
 
 static yy_state_type yy_last_accepting_state;
@@ -661,23 +664,24 @@ std::string tmp_str;	/* used to collect characters scanned by different rules in
 
  
 
-#line 665 "fsml.yy.cc"
+#line 668 "fsml.yy.cc"
 
 #define INITIAL 0
 #define DECL 1
-#define TIME 2
-#define PERIOD 3
-#define FSM 4
-#define VAR 5
-#define TIMER 6
-#define STATE 7
-#define STATE_TYPE 8
-#define TIMEOUT 9
-#define UNTIL 10
-#define C_CODE 11
-#define C_CONDITION 12
-#define C_COMMENT 13
-#define FSML_COMMENT 14
+#define EXPORT 2
+#define TIME 3
+#define PERIOD 4
+#define FSM 5
+#define VAR 6
+#define TIMER 7
+#define STATE 8
+#define STATE_TYPE 9
+#define TIMEOUT 10
+#define UNTIL 11
+#define C_CODE 12
+#define C_CONDITION 13
+#define C_COMMENT 14
+#define FSML_COMMENT 15
 
 #ifndef YY_NO_UNISTD_H
 /* Special case for "unistd.h", since it is non-ANSI. We include it way
@@ -869,7 +873,7 @@ YY_DECL
 
 
 
-#line 873 "fsml.yy.cc"
+#line 877 "fsml.yy.cc"
 
 	if ( !(yy_init) )
 		{
@@ -922,13 +926,13 @@ yy_match:
 			while ( yy_chk[yy_base[yy_current_state] + yy_c] != yy_current_state )
 				{
 				yy_current_state = (int) yy_def[yy_current_state];
-				if ( yy_current_state >= 201 )
+				if ( yy_current_state >= 208 )
 					yy_c = yy_meta[(unsigned int) yy_c];
 				}
 			yy_current_state = yy_nxt[yy_base[yy_current_state] + (unsigned int) yy_c];
 			++yy_cp;
 			}
-		while ( yy_current_state != 200 );
+		while ( yy_current_state != 207 );
 		yy_cp = (yy_last_accepting_cpos);
 		yy_current_state = (yy_last_accepting_state);
 
@@ -961,40 +965,49 @@ case 2:
 YY_RULE_SETUP
 #line 83 "fsml.lex"
 {
-				log("found: TIME\n");
-				yy_push_state(TIME);
-				return token::TIME_KEY;
+				log("found: EXPORT\n");
+				yy_push_state(EXPORT);
+				return token::EXPORT_KEY;
 			}
 	YY_BREAK
 case 3:
 YY_RULE_SETUP
 #line 89 "fsml.lex"
 {
-				log("found: PERIOD\n");
-				yy_push_state(PERIOD);
-				return token::PERIOD_KEY;
+				log("found: TIME\n");
+				yy_push_state(TIME);
+				return token::TIME_KEY;
 			}
 	YY_BREAK
 case 4:
 YY_RULE_SETUP
 #line 95 "fsml.lex"
 {
-				log("Beginning C-CODE\n");
-				tmp_str += std::string(FSMLtext);
-				yy_push_state(C_CODE);
+				log("found: PERIOD\n");
+				yy_push_state(PERIOD);
+				return token::PERIOD_KEY;
 			}
 	YY_BREAK
 case 5:
 YY_RULE_SETUP
 #line 101 "fsml.lex"
 {
+				log("Beginning C-CODE\n");
 				tmp_str += std::string(FSMLtext);
-				cb_cnt++;
+				yy_push_state(C_CODE);
 			}
 	YY_BREAK
 case 6:
 YY_RULE_SETUP
-#line 106 "fsml.lex"
+#line 107 "fsml.lex"
+{
+				tmp_str += std::string(FSMLtext);
+				cb_cnt++;
+			}
+	YY_BREAK
+case 7:
+YY_RULE_SETUP
+#line 112 "fsml.lex"
 {
 				tmp_str += std::string(FSMLtext);
 				cb_cnt--;
@@ -1003,6 +1016,7 @@ YY_RULE_SETUP
 					cb_cnt = 0;
 					switch (yy_top_state()) {
 						case DECL:
+						case EXPORT:
 						case TIME:
 						case PERIOD:
 							yy_pop_state();
@@ -1017,297 +1031,297 @@ YY_RULE_SETUP
 				}
 			}
 	YY_BREAK
-case 7:
+case 8:
 YY_RULE_SETUP
-#line 128 "fsml.lex"
+#line 135 "fsml.lex"
 {
 				log("found: FSM\n");
 				yy_push_state(FSM);
 				return token::FSM_KEY;
 			}
 	YY_BREAK
-case 8:
+case 9:
 YY_RULE_SETUP
-#line 134 "fsml.lex"
+#line 141 "fsml.lex"
 {
 				log("found: LCB\n");
 				return token::LCB;
 			}
 	YY_BREAK
-case 9:
+case 10:
 YY_RULE_SETUP
-#line 140 "fsml.lex"
+#line 147 "fsml.lex"
 {
 				log("found: RCB\n");
 				yy_pop_state();
 				return token::RCB;
 			}
 	YY_BREAK
-case 10:
+case 11:
 YY_RULE_SETUP
-#line 146 "fsml.lex"
+#line 153 "fsml.lex"
 {
 				log("found: VAR\n");
 				yy_push_state(VAR);
 				return token::VAR_KEY;
 			}
 	YY_BREAK
-case 11:
+case 12:
 YY_RULE_SETUP
-#line 152 "fsml.lex"
+#line 159 "fsml.lex"
 {
 				log("found: INPUT\n");
 				yy_push_state(VAR);
 				return token::INPUT_KEY;
 			}
 	YY_BREAK
-case 12:
+case 13:
 YY_RULE_SETUP
-#line 158 "fsml.lex"
+#line 165 "fsml.lex"
 {
 				log("found: OUTPUT\n");
 				yy_push_state(VAR);
 				return token::OUTPUT_KEY;
 			}
 	YY_BREAK
-case 13:
+case 14:
 YY_RULE_SETUP
-#line 164 "fsml.lex"
+#line 171 "fsml.lex"
 {
 				log("found: TIMER\n");
 				yy_push_state(TIMER);
 				return token::TIMER_KEY;
 			}
 	YY_BREAK
-case 14:
+case 15:
 YY_RULE_SETUP
-#line 170 "fsml.lex"
+#line 177 "fsml.lex"
 {
 				log("found: SC\n");
 				yy_pop_state();
 				return token::SC;
 			}
 	YY_BREAK
-case 15:
+case 16:
 YY_RULE_SETUP
-#line 176 "fsml.lex"
+#line 183 "fsml.lex"
 {
 				log("found: VOID\n");
 				return token::VOID;
 			}
 	YY_BREAK
-case 16:
+case 17:
 YY_RULE_SETUP
-#line 181 "fsml.lex"
+#line 188 "fsml.lex"
 {
 				log("found: CHAR\n");
 				return token::CHAR;
 			}
 	YY_BREAK
-case 17:
+case 18:
 YY_RULE_SETUP
-#line 186 "fsml.lex"
+#line 193 "fsml.lex"
 {
 				log("found: SHORT\n");
 				return token::SHORT;
 			}
 	YY_BREAK
-case 18:
+case 19:
 YY_RULE_SETUP
-#line 191 "fsml.lex"
+#line 198 "fsml.lex"
 {
 				log("found: INT\n");
 				return token::INT;
 			}
 	YY_BREAK
-case 19:
+case 20:
 YY_RULE_SETUP
-#line 196 "fsml.lex"
+#line 203 "fsml.lex"
 {
 				log("found: LONG\n");
 				return token::LONG;
 			}
 	YY_BREAK
-case 20:
+case 21:
 YY_RULE_SETUP
-#line 201 "fsml.lex"
+#line 208 "fsml.lex"
 {
 				log("found: FLOAT\n");
 				return token::FLOAT;
 			}
 	YY_BREAK
-case 21:
+case 22:
 YY_RULE_SETUP
-#line 206 "fsml.lex"
+#line 213 "fsml.lex"
 {
 				log("found: DOUBLE\n");
 				return token::DOUBLE;
 			}
 	YY_BREAK
-case 22:
+case 23:
 YY_RULE_SETUP
-#line 211 "fsml.lex"
+#line 218 "fsml.lex"
 {
 				log("found: SIGNED\n");
 				return token::SIGNED;
 			}
 	YY_BREAK
-case 23:
+case 24:
 YY_RULE_SETUP
-#line 216 "fsml.lex"
+#line 223 "fsml.lex"
 {
 				log("found: UNSIGNED\n");
 				return token::UNSIGNED;
 			}
 	YY_BREAK
-case 24:
+case 25:
 YY_RULE_SETUP
-#line 221 "fsml.lex"
+#line 228 "fsml.lex"
 {
 				log("found: UNION\n");
 				return token::UNION;
 			}
 	YY_BREAK
-case 25:
+case 26:
 YY_RULE_SETUP
-#line 226 "fsml.lex"
+#line 233 "fsml.lex"
 {
 				log("found: STRUCT\n");
 				return token::STRUCT;
 			}
 	YY_BREAK
-case 26:
+case 27:
 YY_RULE_SETUP
-#line 231 "fsml.lex"
+#line 238 "fsml.lex"
 {
 				log("found: ENUM\n");
 				return token::ENUM;
 			}
 	YY_BREAK
-case 27:
+case 28:
 YY_RULE_SETUP
-#line 236 "fsml.lex"
+#line 243 "fsml.lex"
 {
 				log("found: INTEGER %s\n", FSMLtext);
 				FSMLlval->emplace<int>(atoi(FSMLtext));
 				return token::INTEGER_CONSTANT;
 			}
 	YY_BREAK
-case 28:
+case 29:
 YY_RULE_SETUP
-#line 242 "fsml.lex"
+#line 249 "fsml.lex"
 {
 				log("found: CHARACTER %s\n", FSMLtext);
 				FSMLlval->emplace<std::string>(FSMLtext);
 				return token::CHARACTER_CONSTANT;
 			}
 	YY_BREAK
-case 29:
+case 30:
 YY_RULE_SETUP
-#line 248 "fsml.lex"
+#line 255 "fsml.lex"
 {
 				log("found: FLOAT %s\n", FSMLtext);
 				FSMLlval->emplace<float>(atof(FSMLtext));
 				return token::FLOATING_CONSTANT;
 			}
 	YY_BREAK
-case 30:
+case 31:
 YY_RULE_SETUP
-#line 254 "fsml.lex"
+#line 261 "fsml.lex"
 {
 				log("found: UNTIL\n");
 				yy_push_state(UNTIL);
 				return token::UNTIL_KEY;
 			}
 	YY_BREAK
-case 31:
+case 32:
 YY_RULE_SETUP
-#line 262 "fsml.lex"
+#line 269 "fsml.lex"
 {
 				log("found: STATE\n");
 				yy_push_state(STATE);
 				return token::STATE_KEY;
 			}
 	YY_BREAK
-case 32:
+case 33:
 YY_RULE_SETUP
-#line 268 "fsml.lex"
+#line 275 "fsml.lex"
 {
 				log("found: LSB\n");
 				yy_push_state(STATE_TYPE);
 				return token::LSB;
 			}
 	YY_BREAK
-case 33:
+case 34:
 YY_RULE_SETUP
-#line 274 "fsml.lex"
+#line 281 "fsml.lex"
 {
 				log("found: RESET\n");
 				return token::RESET;
 			}
 	YY_BREAK
-case 34:
+case 35:
 YY_RULE_SETUP
-#line 279 "fsml.lex"
+#line 286 "fsml.lex"
 {
 				log("found: END\n");
 				return token::END;
 			}
 	YY_BREAK
-case 35:
+case 36:
 YY_RULE_SETUP
-#line 284 "fsml.lex"
+#line 291 "fsml.lex"
 {
 				log("found: ERR\n");
 				return token::ERR;
 			}
 	YY_BREAK
-case 36:
+case 37:
 YY_RULE_SETUP
-#line 289 "fsml.lex"
+#line 296 "fsml.lex"
 {
 				log("found: RSB\n");
 				yy_pop_state();
 				return token::RSB;
 			}
 	YY_BREAK
-case 37:
+case 38:
 YY_RULE_SETUP
-#line 295 "fsml.lex"
+#line 302 "fsml.lex"
 {
 				log("Beginning C_CODE\n");
 				tmp_str += std::string(FSMLtext);
 				yy_push_state(C_CODE);
 			}
 	YY_BREAK
-case 38:
+case 39:
 YY_RULE_SETUP
-#line 301 "fsml.lex"
+#line 308 "fsml.lex"
 {
 				log("found: ON\n");
 				return token::ON;
 			}
 	YY_BREAK
-case 39:
+case 40:
 YY_RULE_SETUP
-#line 306 "fsml.lex"
+#line 313 "fsml.lex"
 {
 				log("Beginning C_CONDITION\n");
 				tmp_str += std::string(FSMLtext);
 				yy_push_state(C_CONDITION);
 			}
 	YY_BREAK
-case 40:
+case 41:
 YY_RULE_SETUP
-#line 312 "fsml.lex"
+#line 319 "fsml.lex"
 {
 				tmp_str += std::string(FSMLtext);
 				b_cnt++;
 			}
 	YY_BREAK
-case 41:
+case 42:
 YY_RULE_SETUP
-#line 317 "fsml.lex"
+#line 324 "fsml.lex"
 {
 				tmp_str += std::string(FSMLtext);
 				b_cnt--;
@@ -1321,208 +1335,209 @@ YY_RULE_SETUP
 				}
 			}
 	YY_BREAK
-case 42:
+case 43:
 YY_RULE_SETUP
-#line 330 "fsml.lex"
+#line 337 "fsml.lex"
 {
 				log("found: TIMEOUT\n");
 				yy_push_state(TIMEOUT);
 				return token::TIMEOUT_KEY;
 			}
 	YY_BREAK
-case 43:
+case 44:
 YY_RULE_SETUP
-#line 336 "fsml.lex"
+#line 343 "fsml.lex"
 {
 				log("found RB\n");
 				yy_pop_state();
 				return token::RB;
 			}
 	YY_BREAK
-case 44:
+case 45:
 YY_RULE_SETUP
-#line 342 "fsml.lex"
+#line 349 "fsml.lex"
 {
 				log("found: GO\n");
 				return token::GO;
 			}
 	YY_BREAK
-case 45:
+case 46:
 YY_RULE_SETUP
-#line 347 "fsml.lex"
+#line 354 "fsml.lex"
 {
 				log("found: RETRY\n");
 				return token::RETRY;
 			}
 	YY_BREAK
-case 46:
+case 47:
 YY_RULE_SETUP
-#line 352 "fsml.lex"
+#line 359 "fsml.lex"
 {
 				log("found: OUT\n");
 				return token::OUT;
 			}
 	YY_BREAK
-case 47:
+case 48:
 YY_RULE_SETUP
-#line 357 "fsml.lex"
+#line 364 "fsml.lex"
 {
 				log("found: START\n");
 				return token::START;
 			}
 	YY_BREAK
-case 48:
+case 49:
 YY_RULE_SETUP
-#line 362 "fsml.lex"
+#line 369 "fsml.lex"
 {
 				log("found: SC\n");
 				yy_pop_state();
 				return token::SC;
 			}
 	YY_BREAK
-case 49:
+case 50:
 YY_RULE_SETUP
-#line 368 "fsml.lex"
+#line 375 "fsml.lex"
 { 
 				log("found: IDENTIFIER %s\n", FSMLtext);
 				FSMLlval->emplace<std::string>(FSMLtext);
 				return token::IDENTIFIER;
 			}
 	YY_BREAK
-case 50:
+case 51:
 YY_RULE_SETUP
-#line 374 "fsml.lex"
+#line 381 "fsml.lex"
 {
 				log("found LCB\n");
 				return token::LCB;
 			}
 	YY_BREAK
-case 51:
+case 52:
 YY_RULE_SETUP
-#line 379 "fsml.lex"
+#line 386 "fsml.lex"
 {
 				log("found RCB\n");
 				return token::RCB;
 			}
 	YY_BREAK
-case 52:
+case 53:
 YY_RULE_SETUP
-#line 384 "fsml.lex"
+#line 391 "fsml.lex"
 {
 				log("found LB\n");
 				return token::LB;
 			}
 	YY_BREAK
-case 53:
+case 54:
 YY_RULE_SETUP
-#line 389 "fsml.lex"
+#line 396 "fsml.lex"
 {
 				log("found RB\n");
 				return token::RB;
 			}
 	YY_BREAK
-case 54:
+case 55:
 YY_RULE_SETUP
-#line 394 "fsml.lex"
+#line 401 "fsml.lex"
 {
 				log("found: COMMA\n");
 				return token::COMMA;
 			}
 	YY_BREAK
-case 55:
+case 56:
 YY_RULE_SETUP
-#line 399 "fsml.lex"
+#line 406 "fsml.lex"
 {
 				log("found: EQUAL\n");
 				return token::EQUAL;
 			}
 	YY_BREAK
-case 56:
+case 57:
 YY_RULE_SETUP
-#line 404 "fsml.lex"
+#line 411 "fsml.lex"
 {
 				log("found: STAR\n");
 				return token::STAR;
 			}
 	YY_BREAK
-case 57:
-YY_RULE_SETUP
-#line 410 "fsml.lex"
-{ tmp_str += std::string(FSMLtext); yy_push_state(C_COMMENT); }
-	YY_BREAK
 case 58:
 YY_RULE_SETUP
-#line 412 "fsml.lex"
-{ tmp_str += std::string(FSMLtext);}
+#line 417 "fsml.lex"
+{ tmp_str += std::string(FSMLtext); yy_push_state(C_COMMENT); }
 	YY_BREAK
 case 59:
 YY_RULE_SETUP
-#line 413 "fsml.lex"
-{ tmp_str += std::string(FSMLtext); }
+#line 419 "fsml.lex"
+{ tmp_str += std::string(FSMLtext);}
 	YY_BREAK
 case 60:
-/* rule 60 can match eol */
-YY_RULE_SETUP
-#line 414 "fsml.lex"
-{ ++line; yylloc->begin.line++; tmp_str += std::string(FSMLtext); }
-	YY_BREAK
-case 61:
-YY_RULE_SETUP
-#line 415 "fsml.lex"
-{ tmp_str += std::string(FSMLtext); yy_pop_state(); }
-	YY_BREAK
-case 62:
-YY_RULE_SETUP
-#line 417 "fsml.lex"
-{ tmp_str += std::string(FSMLtext); }
-	YY_BREAK
-case 63:
 YY_RULE_SETUP
 #line 420 "fsml.lex"
 { tmp_str += std::string(FSMLtext); }
 	YY_BREAK
-case 64:
-/* rule 64 can match eol */
+case 61:
+/* rule 61 can match eol */
 YY_RULE_SETUP
 #line 421 "fsml.lex"
 { ++line; yylloc->begin.line++; tmp_str += std::string(FSMLtext); }
 	YY_BREAK
-case 65:
+case 62:
 YY_RULE_SETUP
-#line 425 "fsml.lex"
+#line 422 "fsml.lex"
+{ tmp_str += std::string(FSMLtext); yy_pop_state(); }
+	YY_BREAK
+case 63:
+YY_RULE_SETUP
+#line 424 "fsml.lex"
+{ tmp_str += std::string(FSMLtext); }
+	YY_BREAK
+case 64:
+YY_RULE_SETUP
+#line 427 "fsml.lex"
+{ tmp_str += std::string(FSMLtext); }
+	YY_BREAK
+case 65:
+/* rule 65 can match eol */
+YY_RULE_SETUP
+#line 428 "fsml.lex"
+{ ++line; yylloc->begin.line++; tmp_str += std::string(FSMLtext); }
+	YY_BREAK
+case 66:
+YY_RULE_SETUP
+#line 432 "fsml.lex"
 { 
 								yy_push_state(FSML_COMMENT); 
 								log("removing comment\n"); 
 							}
 	YY_BREAK
-case 66:
-YY_RULE_SETUP
-#line 429 "fsml.lex"
-
-	YY_BREAK
 case 67:
 YY_RULE_SETUP
-#line 430 "fsml.lex"
+#line 436 "fsml.lex"
 
 	YY_BREAK
 case 68:
-/* rule 68 can match eol */
 YY_RULE_SETUP
-#line 431 "fsml.lex"
-{ ++line; yylloc->begin.line++; }
+#line 437 "fsml.lex"
+
 	YY_BREAK
 case 69:
+/* rule 69 can match eol */
 YY_RULE_SETUP
-#line 432 "fsml.lex"
-{ yy_pop_state(); }
+#line 438 "fsml.lex"
+{ ++line; yylloc->begin.line++; }
 	YY_BREAK
 case 70:
 YY_RULE_SETUP
-#line 433 "fsml.lex"
+#line 439 "fsml.lex"
+{ yy_pop_state(); }
+	YY_BREAK
+case 71:
+YY_RULE_SETUP
+#line 440 "fsml.lex"
 { log("removing comment\n"); }
 	YY_BREAK
 case YY_STATE_EOF(INITIAL):
 case YY_STATE_EOF(DECL):
+case YY_STATE_EOF(EXPORT):
 case YY_STATE_EOF(TIME):
 case YY_STATE_EOF(PERIOD):
 case YY_STATE_EOF(FSM):
@@ -1536,31 +1551,31 @@ case YY_STATE_EOF(C_CODE):
 case YY_STATE_EOF(C_CONDITION):
 case YY_STATE_EOF(C_COMMENT):
 case YY_STATE_EOF(FSML_COMMENT):
-#line 436 "fsml.lex"
+#line 443 "fsml.lex"
 {yyterminate();}
 	YY_BREAK
-case 71:
-/* rule 71 can match eol */
-YY_RULE_SETUP
-#line 438 "fsml.lex"
-{ ++line; yylloc->begin.line++; }
-	YY_BREAK
 case 72:
+/* rule 72 can match eol */
 YY_RULE_SETUP
-#line 440 "fsml.lex"
-{ /* skip silently */ }
+#line 445 "fsml.lex"
+{ ++line; yylloc->begin.line++; }
 	YY_BREAK
 case 73:
 YY_RULE_SETUP
-#line 441 "fsml.lex"
-{ throw FSML::FSMLParser::syntax_error(*yylloc, "invalid character: " + std::string(FSMLtext)); }
+#line 447 "fsml.lex"
+{ /* skip silently */ }
 	YY_BREAK
 case 74:
 YY_RULE_SETUP
-#line 443 "fsml.lex"
+#line 448 "fsml.lex"
+{ throw FSML::FSMLParser::syntax_error(*yylloc, "invalid character: " + std::string(FSMLtext)); }
+	YY_BREAK
+case 75:
+YY_RULE_SETUP
+#line 450 "fsml.lex"
 ECHO;
 	YY_BREAK
-#line 1564 "fsml.yy.cc"
+#line 1579 "fsml.yy.cc"
 
 	case YY_END_OF_BUFFER:
 		{
@@ -1851,7 +1866,7 @@ static int yy_get_next_buffer (void)
 		while ( yy_chk[yy_base[yy_current_state] + yy_c] != yy_current_state )
 			{
 			yy_current_state = (int) yy_def[yy_current_state];
-			if ( yy_current_state >= 201 )
+			if ( yy_current_state >= 208 )
 				yy_c = yy_meta[(unsigned int) yy_c];
 			}
 		yy_current_state = yy_nxt[yy_base[yy_current_state] + (unsigned int) yy_c];
@@ -1879,11 +1894,11 @@ static int yy_get_next_buffer (void)
 	while ( yy_chk[yy_base[yy_current_state] + yy_c] != yy_current_state )
 		{
 		yy_current_state = (int) yy_def[yy_current_state];
-		if ( yy_current_state >= 201 )
+		if ( yy_current_state >= 208 )
 			yy_c = yy_meta[(unsigned int) yy_c];
 		}
 	yy_current_state = yy_nxt[yy_base[yy_current_state] + (unsigned int) yy_c];
-	yy_is_jam = (yy_current_state == 200);
+	yy_is_jam = (yy_current_state == 207);
 
 	return yy_is_jam ? 0 : yy_current_state;
 }
@@ -2564,7 +2579,7 @@ void FSMLfree (void * ptr )
 
 #define YYTABLES_NAME "yytables"
 
-#line 443 "fsml.lex"
+#line 450 "fsml.lex"
 
 
 

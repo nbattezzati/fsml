@@ -52,7 +52,7 @@ FSMUntil * tmpUntil = nullptr;
 
 
 
-%token DECL_KEY TIME_KEY PERIOD_KEY FSM_KEY LCB RCB VAR_KEY INPUT_KEY OUTPUT_KEY TIMER_KEY STATE_KEY ON TIMEOUT_KEY GO ERR RETRY START VOID CHAR SHORT INT LONG FLOAT DOUBLE SIGNED UNSIGNED UNION STRUCT ENUM STAR COMMA END RESET LSB RSB OUT UNTIL_KEY SC EQUAL LB RB
+%token DECL_KEY EXPORT_KEY TIME_KEY PERIOD_KEY FSM_KEY LCB RCB VAR_KEY INPUT_KEY OUTPUT_KEY TIMER_KEY STATE_KEY ON TIMEOUT_KEY GO ERR RETRY START VOID CHAR SHORT INT LONG FLOAT DOUBLE SIGNED UNSIGNED UNION STRUCT ENUM STAR COMMA END RESET LSB RSB OUT UNTIL_KEY SC EQUAL LB RB
 %token <std::string> C_CODE_BLOCK C_CONDITION_BLOCK IDENTIFIER CHARACTER_CONSTANT
 %token <int> INTEGER_CONSTANT
 %token <float> FLOATING_CONSTANT
@@ -77,10 +77,23 @@ init_section_list : init_section
 				  ;
 
 init_section : declaration
+			 | export
 			 | time
 			 ;
 
-declaration : DECL_KEY C_CODE_BLOCK { driver.Decl($2); } ;
+declaration : DECL_KEY C_CODE_BLOCK { 
+		if (driver.Decl($2) == false) {
+			driver.error(@$, driver.GetLastError()); 
+			YYERROR; 
+		}
+	};
+
+export : EXPORT_KEY C_CODE_BLOCK {
+		if (driver.Export($2) == false) {
+			driver.error(@$, driver.GetLastError()); 
+			YYERROR; 
+		}
+	};
 
 time : time_specifier 
 	 | period_specifier
