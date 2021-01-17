@@ -394,21 +394,39 @@ bool FSMLDriver::TranslateToDOT(const std::string & file_name)
 	FILE * fp = fopen(out_file.c_str(), "w+");
 	if (fp != nullptr) {
 
+		// start graph
 		fprintf(fp, "digraph %s {\n", fsmName_.c_str());
-		fprintf(fp, "node [shape = doublecircle]; ");
+		
+		// reset state
+		fprintf(fp, "{node [style = \"invis\"] __fsmlReset}\n");
+		fprintf(fp, "{node [style=\"bold\" shape=\"circle\"] %s}\n", ResetState()->Name().c_str());
+		
+		// error state
+		if (ErrorState() != nullptr) {
+			std::string shape = ErrorState()->HasType(kStateTypeEnd) ? "doublecircle" : "circle";
+			fprintf(fp, "{node [color=\"black\" fillcolor=\"red\" style=\"filled\" shape=\"%s\"] %s}\n", shape.c_str(), ErrorState()->Name().c_str());
+		}
+		
+		// final states
+		fprintf(fp, "{node [shape=\"doublecircle\"] ");
 		for(auto & s : state_map_) {
-			if(s.second->HasType(kStateTypeEnd) || s.second->HasType(kStateTypeErr)) {
+			if(s.second->HasType(kStateTypeEnd)) {
 				fprintf(fp, "%s ", s.second->Name().c_str());
 			}
 		}
-		fprintf(fp, ";\n");
-		fprintf(fp, "node [shape = circle];\n");
+		fprintf(fp, "}\n");
+		
+		// other states and transitions
+		fprintf(fp, "node [shape=\"circle\"]\n");
+		fprintf(fp, "__fsmlReset -> %s [label=\"reset\"]\n", ResetState()->Name().c_str());
 		for(auto & s : state_map_) {
 			FSMState * curS = s.second;
 			for(FSMTransition * t : curS->Transitions()) {
-				fprintf(fp, "%s -> %s [ label = \"%s\"];\n", curS->Name().c_str(), t->EndState().c_str(), t->ConditionStr().c_str());
+				fprintf(fp, "%s -> %s [label=\"%s\"]\n", curS->Name().c_str(), t->EndState().c_str(), t->ConditionStr().c_str());
 			}
 		}
+		
+		// end graph
 		fprintf(fp, "}\n");
 		
 		ret_val = true;
