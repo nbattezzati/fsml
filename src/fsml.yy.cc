@@ -1,6 +1,6 @@
-#line 1 "fsml.yy.cc"
+#line 2 "fsml.yy.cc"
 
-#line 3 "fsml.yy.cc"
+#line 4 "fsml.yy.cc"
 
 #define  YY_INT_ALIGNED short int
 
@@ -8,17 +8,11 @@
 
 #define yy_create_buffer FSML_create_buffer
 #define yy_delete_buffer FSML_delete_buffer
-#define yy_scan_buffer FSML_scan_buffer
-#define yy_scan_string FSML_scan_string
-#define yy_scan_bytes FSML_scan_bytes
+#define yy_flex_debug FSML_flex_debug
 #define yy_init_buffer FSML_init_buffer
 #define yy_flush_buffer FSML_flush_buffer
 #define yy_load_buffer_state FSML_load_buffer_state
 #define yy_switch_to_buffer FSML_switch_to_buffer
-#define yypush_buffer_state FSMLpush_buffer_state
-#define yypop_buffer_state FSMLpop_buffer_state
-#define yyensure_buffer_stack FSMLensure_buffer_stack
-#define yy_flex_debug FSML_flex_debug
 #define yyin FSMLin
 #define yyleng FSMLleng
 #define yylex FSMLlex
@@ -33,244 +27,10 @@
 
 #define FLEX_SCANNER
 #define YY_FLEX_MAJOR_VERSION 2
-#define YY_FLEX_MINOR_VERSION 6
-#define YY_FLEX_SUBMINOR_VERSION 4
+#define YY_FLEX_MINOR_VERSION 5
+#define YY_FLEX_SUBMINOR_VERSION 35
 #if YY_FLEX_SUBMINOR_VERSION > 0
 #define FLEX_BETA
-#endif
-
-#ifdef yy_create_buffer
-#define FSML_create_buffer_ALREADY_DEFINED
-#else
-#define yy_create_buffer FSML_create_buffer
-#endif
-
-#ifdef yy_delete_buffer
-#define FSML_delete_buffer_ALREADY_DEFINED
-#else
-#define yy_delete_buffer FSML_delete_buffer
-#endif
-
-#ifdef yy_scan_buffer
-#define FSML_scan_buffer_ALREADY_DEFINED
-#else
-#define yy_scan_buffer FSML_scan_buffer
-#endif
-
-#ifdef yy_scan_string
-#define FSML_scan_string_ALREADY_DEFINED
-#else
-#define yy_scan_string FSML_scan_string
-#endif
-
-#ifdef yy_scan_bytes
-#define FSML_scan_bytes_ALREADY_DEFINED
-#else
-#define yy_scan_bytes FSML_scan_bytes
-#endif
-
-#ifdef yy_init_buffer
-#define FSML_init_buffer_ALREADY_DEFINED
-#else
-#define yy_init_buffer FSML_init_buffer
-#endif
-
-#ifdef yy_flush_buffer
-#define FSML_flush_buffer_ALREADY_DEFINED
-#else
-#define yy_flush_buffer FSML_flush_buffer
-#endif
-
-#ifdef yy_load_buffer_state
-#define FSML_load_buffer_state_ALREADY_DEFINED
-#else
-#define yy_load_buffer_state FSML_load_buffer_state
-#endif
-
-#ifdef yy_switch_to_buffer
-#define FSML_switch_to_buffer_ALREADY_DEFINED
-#else
-#define yy_switch_to_buffer FSML_switch_to_buffer
-#endif
-
-#ifdef yypush_buffer_state
-#define FSMLpush_buffer_state_ALREADY_DEFINED
-#else
-#define yypush_buffer_state FSMLpush_buffer_state
-#endif
-
-#ifdef yypop_buffer_state
-#define FSMLpop_buffer_state_ALREADY_DEFINED
-#else
-#define yypop_buffer_state FSMLpop_buffer_state
-#endif
-
-#ifdef yyensure_buffer_stack
-#define FSMLensure_buffer_stack_ALREADY_DEFINED
-#else
-#define yyensure_buffer_stack FSMLensure_buffer_stack
-#endif
-
-#ifdef yylex
-#define FSMLlex_ALREADY_DEFINED
-#else
-#define yylex FSMLlex
-#endif
-
-#ifdef yyrestart
-#define FSMLrestart_ALREADY_DEFINED
-#else
-#define yyrestart FSMLrestart
-#endif
-
-#ifdef yylex_init
-#define FSMLlex_init_ALREADY_DEFINED
-#else
-#define yylex_init FSMLlex_init
-#endif
-
-#ifdef yylex_init_extra
-#define FSMLlex_init_extra_ALREADY_DEFINED
-#else
-#define yylex_init_extra FSMLlex_init_extra
-#endif
-
-#ifdef yylex_destroy
-#define FSMLlex_destroy_ALREADY_DEFINED
-#else
-#define yylex_destroy FSMLlex_destroy
-#endif
-
-#ifdef yyget_debug
-#define FSMLget_debug_ALREADY_DEFINED
-#else
-#define yyget_debug FSMLget_debug
-#endif
-
-#ifdef yyset_debug
-#define FSMLset_debug_ALREADY_DEFINED
-#else
-#define yyset_debug FSMLset_debug
-#endif
-
-#ifdef yyget_extra
-#define FSMLget_extra_ALREADY_DEFINED
-#else
-#define yyget_extra FSMLget_extra
-#endif
-
-#ifdef yyset_extra
-#define FSMLset_extra_ALREADY_DEFINED
-#else
-#define yyset_extra FSMLset_extra
-#endif
-
-#ifdef yyget_in
-#define FSMLget_in_ALREADY_DEFINED
-#else
-#define yyget_in FSMLget_in
-#endif
-
-#ifdef yyset_in
-#define FSMLset_in_ALREADY_DEFINED
-#else
-#define yyset_in FSMLset_in
-#endif
-
-#ifdef yyget_out
-#define FSMLget_out_ALREADY_DEFINED
-#else
-#define yyget_out FSMLget_out
-#endif
-
-#ifdef yyset_out
-#define FSMLset_out_ALREADY_DEFINED
-#else
-#define yyset_out FSMLset_out
-#endif
-
-#ifdef yyget_leng
-#define FSMLget_leng_ALREADY_DEFINED
-#else
-#define yyget_leng FSMLget_leng
-#endif
-
-#ifdef yyget_text
-#define FSMLget_text_ALREADY_DEFINED
-#else
-#define yyget_text FSMLget_text
-#endif
-
-#ifdef yyget_lineno
-#define FSMLget_lineno_ALREADY_DEFINED
-#else
-#define yyget_lineno FSMLget_lineno
-#endif
-
-#ifdef yyset_lineno
-#define FSMLset_lineno_ALREADY_DEFINED
-#else
-#define yyset_lineno FSMLset_lineno
-#endif
-
-#ifdef yywrap
-#define FSMLwrap_ALREADY_DEFINED
-#else
-#define yywrap FSMLwrap
-#endif
-
-#ifdef yyalloc
-#define FSMLalloc_ALREADY_DEFINED
-#else
-#define yyalloc FSMLalloc
-#endif
-
-#ifdef yyrealloc
-#define FSMLrealloc_ALREADY_DEFINED
-#else
-#define yyrealloc FSMLrealloc
-#endif
-
-#ifdef yyfree
-#define FSMLfree_ALREADY_DEFINED
-#else
-#define yyfree FSMLfree
-#endif
-
-#ifdef yytext
-#define FSMLtext_ALREADY_DEFINED
-#else
-#define yytext FSMLtext
-#endif
-
-#ifdef yyleng
-#define FSMLleng_ALREADY_DEFINED
-#else
-#define yyleng FSMLleng
-#endif
-
-#ifdef yyin
-#define FSMLin_ALREADY_DEFINED
-#else
-#define yyin FSMLin
-#endif
-
-#ifdef yyout
-#define FSMLout_ALREADY_DEFINED
-#else
-#define yyout FSMLout
-#endif
-
-#ifdef yy_flex_debug
-#define FSML_flex_debug_ALREADY_DEFINED
-#else
-#define yy_flex_debug FSML_flex_debug
-#endif
-
-#ifdef yylineno
-#define FSMLlineno_ALREADY_DEFINED
-#else
-#define yylineno FSMLlineno
 #endif
 
 /* First, we deal with  platform-specific or compiler-specific issues. */
@@ -306,6 +66,7 @@ typedef int16_t flex_int16_t;
 typedef uint16_t flex_uint16_t;
 typedef int32_t flex_int32_t;
 typedef uint32_t flex_uint32_t;
+typedef uint64_t flex_uint64_t;
 #else
 typedef signed char flex_int8_t;
 typedef short int flex_int16_t;
@@ -313,6 +74,7 @@ typedef int flex_int32_t;
 typedef unsigned char flex_uint8_t; 
 typedef unsigned short int flex_uint16_t;
 typedef unsigned int flex_uint32_t;
+#endif /* ! C99 */
 
 /* Limits of integral types. */
 #ifndef INT8_MIN
@@ -343,61 +105,63 @@ typedef unsigned int flex_uint32_t;
 #define UINT32_MAX             (4294967295U)
 #endif
 
-#ifndef SIZE_MAX
-#define SIZE_MAX               (~(size_t)0)
-#endif
-
-#endif /* ! C99 */
-
 #endif /* ! FLEXINT_H */
 
-/* begin standard C++ headers. */
+#ifdef __cplusplus
 
-/* TODO: this is always defined, so inline it */
+/* The "const" storage-class-modifier is valid. */
+#define YY_USE_CONST
+
+#else	/* ! __cplusplus */
+
+/* C99 requires __STDC__ to be defined as 1. */
+#if defined (__STDC__)
+
+#define YY_USE_CONST
+
+#endif	/* defined (__STDC__) */
+#endif	/* ! __cplusplus */
+
+#ifdef YY_USE_CONST
 #define yyconst const
-
-#if defined(__GNUC__) && __GNUC__ >= 3
-#define yynoreturn __attribute__((__noreturn__))
 #else
-#define yynoreturn
+#define yyconst
 #endif
 
 /* Returned upon end-of-file. */
 #define YY_NULL 0
 
-/* Promotes a possibly negative, possibly signed char to an
- *   integer in range [0..255] for use as an array index.
+/* Promotes a possibly negative, possibly signed char to an unsigned
+ * integer for use as an array index.  If the signed char is negative,
+ * we want to instead treat it as an 8-bit unsigned char, hence the
+ * double cast.
  */
-#define YY_SC_TO_UI(c) ((YY_CHAR) (c))
+#define YY_SC_TO_UI(c) ((unsigned int) (unsigned char) c)
 
 /* Enter a start condition.  This macro really ought to take a parameter,
  * but we do it the disgusting crufty way forced on us by the ()-less
  * definition of BEGIN.
  */
 #define BEGIN (yy_start) = 1 + 2 *
+
 /* Translate the current start state into a value that can be later handed
  * to BEGIN to return to the state.  The YYSTATE alias is for lex
  * compatibility.
  */
 #define YY_START (((yy_start) - 1) / 2)
 #define YYSTATE YY_START
+
 /* Action number for EOF rule of a given start state. */
 #define YY_STATE_EOF(state) (YY_END_OF_BUFFER + state + 1)
+
 /* Special action meaning "start processing a new file". */
-#define YY_NEW_FILE yyrestart( yyin  )
+#define YY_NEW_FILE FSMLrestart(FSMLin  )
+
 #define YY_END_OF_BUFFER_CHAR 0
 
 /* Size of default input buffer. */
 #ifndef YY_BUF_SIZE
-#ifdef __ia64__
-/* On IA-64, the buffer size is 16k, not 8k.
- * Moreover, YY_BUF_SIZE is 2*YY_READ_BUF_SIZE in the general case.
- * Ditto for the __ia64__ case accordingly.
- */
-#define YY_BUF_SIZE 32768
-#else
 #define YY_BUF_SIZE 16384
-#endif /* __ia64__ */
 #endif
 
 /* The state buf must be large enough to hold one state per character in the main buffer.
@@ -414,30 +178,30 @@ typedef struct yy_buffer_state *YY_BUFFER_STATE;
 typedef size_t yy_size_t;
 #endif
 
-extern int yyleng;
+extern yy_size_t FSMLleng;
 
-extern FILE *yyin, *yyout;
+extern FILE *FSMLin, *FSMLout;
 
 #define EOB_ACT_CONTINUE_SCAN 0
 #define EOB_ACT_END_OF_FILE 1
 #define EOB_ACT_LAST_MATCH 2
-    
+
     #define YY_LESS_LINENO(n)
-    #define YY_LINENO_REWIND_TO(ptr)
     
 /* Return all but the first "n" matched characters back to the input stream. */
 #define yyless(n) \
 	do \
 		{ \
-		/* Undo effects of setting up yytext. */ \
+		/* Undo effects of setting up FSMLtext. */ \
         int yyless_macro_arg = (n); \
         YY_LESS_LINENO(yyless_macro_arg);\
 		*yy_cp = (yy_hold_char); \
 		YY_RESTORE_YY_MORE_OFFSET \
 		(yy_c_buf_p) = yy_cp = yy_bp + yyless_macro_arg - YY_MORE_ADJ; \
-		YY_DO_BEFORE_ACTION; /* set up yytext again */ \
+		YY_DO_BEFORE_ACTION; /* set up FSMLtext again */ \
 		} \
 	while ( 0 )
+
 #define unput(c) yyunput( c, (yytext_ptr)  )
 
 #ifndef YY_STRUCT_YY_BUFFER_STATE
@@ -452,12 +216,12 @@ struct yy_buffer_state
 	/* Size of input buffer in bytes, not including room for EOB
 	 * characters.
 	 */
-	int yy_buf_size;
+	yy_size_t yy_buf_size;
 
 	/* Number of characters read into yy_ch_buf, not including EOB
 	 * characters.
 	 */
-	int yy_n_chars;
+	yy_size_t yy_n_chars;
 
 	/* Whether we "own" the buffer - i.e., we know we created it,
 	 * and can realloc() it to grow it, and should free() it to
@@ -480,7 +244,7 @@ struct yy_buffer_state
 
     int yy_bs_lineno; /**< The line count. */
     int yy_bs_column; /**< The column count. */
-
+    
 	/* Whether to try to fill the input buffer when we reach the
 	 * end of it.
 	 */
@@ -497,8 +261,8 @@ struct yy_buffer_state
 	 * possible backing-up.
 	 *
 	 * When we actually see the EOF, we change the status to "new"
-	 * (via yyrestart()), so that the user can continue scanning by
-	 * just pointing yyin at a new input file.
+	 * (via FSMLrestart()), so that the user can continue scanning by
+	 * just pointing FSMLin at a new input file.
 	 */
 #define YY_BUFFER_EOF_PENDING 2
 
@@ -508,7 +272,7 @@ struct yy_buffer_state
 /* Stack of input buffers. */
 static size_t yy_buffer_stack_top = 0; /**< index of top of stack. */
 static size_t yy_buffer_stack_max = 0; /**< capacity of stack. */
-static YY_BUFFER_STATE * yy_buffer_stack = NULL; /**< Stack as an array. */
+static YY_BUFFER_STATE * yy_buffer_stack = 0; /**< Stack as an array. */
 
 /* We provide macros for accessing buffer states in case in the
  * future we want to put the buffer states in a more general
@@ -519,103 +283,108 @@ static YY_BUFFER_STATE * yy_buffer_stack = NULL; /**< Stack as an array. */
 #define YY_CURRENT_BUFFER ( (yy_buffer_stack) \
                           ? (yy_buffer_stack)[(yy_buffer_stack_top)] \
                           : NULL)
+
 /* Same as previous macro, but useful when we know that the buffer stack is not
  * NULL or when we need an lvalue. For internal use only.
  */
 #define YY_CURRENT_BUFFER_LVALUE (yy_buffer_stack)[(yy_buffer_stack_top)]
 
-/* yy_hold_char holds the character lost when yytext is formed. */
+/* yy_hold_char holds the character lost when FSMLtext is formed. */
 static char yy_hold_char;
-static int yy_n_chars;		/* number of characters read into yy_ch_buf */
-int yyleng;
+static yy_size_t yy_n_chars;		/* number of characters read into yy_ch_buf */
+yy_size_t FSMLleng;
 
 /* Points to current character in buffer. */
-static char *yy_c_buf_p = NULL;
+static char *yy_c_buf_p = (char *) 0;
 static int yy_init = 0;		/* whether we need to initialize */
 static int yy_start = 0;	/* start state number */
 
-/* Flag which is used to allow yywrap()'s to do buffer switches
- * instead of setting up a fresh yyin.  A bit of a hack ...
+/* Flag which is used to allow FSMLwrap()'s to do buffer switches
+ * instead of setting up a fresh FSMLin.  A bit of a hack ...
  */
 static int yy_did_buffer_switch_on_eof;
 
-void yyrestart ( FILE *input_file  );
-void yy_switch_to_buffer ( YY_BUFFER_STATE new_buffer  );
-YY_BUFFER_STATE yy_create_buffer ( FILE *file, int size  );
-void yy_delete_buffer ( YY_BUFFER_STATE b  );
-void yy_flush_buffer ( YY_BUFFER_STATE b  );
-void yypush_buffer_state ( YY_BUFFER_STATE new_buffer  );
-void yypop_buffer_state ( void );
+void FSMLrestart (FILE *input_file  );
+void FSML_switch_to_buffer (YY_BUFFER_STATE new_buffer  );
+YY_BUFFER_STATE FSML_create_buffer (FILE *file,int size  );
+void FSML_delete_buffer (YY_BUFFER_STATE b  );
+void FSML_flush_buffer (YY_BUFFER_STATE b  );
+void FSMLpush_buffer_state (YY_BUFFER_STATE new_buffer  );
+void FSMLpop_buffer_state (void );
 
-static void yyensure_buffer_stack ( void );
-static void yy_load_buffer_state ( void );
-static void yy_init_buffer ( YY_BUFFER_STATE b, FILE *file  );
-#define YY_FLUSH_BUFFER yy_flush_buffer( YY_CURRENT_BUFFER )
+static void FSMLensure_buffer_stack (void );
+static void FSML_load_buffer_state (void );
+static void FSML_init_buffer (YY_BUFFER_STATE b,FILE *file  );
 
-YY_BUFFER_STATE yy_scan_buffer ( char *base, yy_size_t size  );
-YY_BUFFER_STATE yy_scan_string ( const char *yy_str  );
-YY_BUFFER_STATE yy_scan_bytes ( const char *bytes, int len  );
+#define YY_FLUSH_BUFFER FSML_flush_buffer(YY_CURRENT_BUFFER )
 
-void *yyalloc ( yy_size_t  );
-void *yyrealloc ( void *, yy_size_t  );
-void yyfree ( void *  );
+YY_BUFFER_STATE FSML_scan_buffer (char *base,yy_size_t size  );
+YY_BUFFER_STATE FSML_scan_string (yyconst char *yy_str  );
+YY_BUFFER_STATE FSML_scan_bytes (yyconst char *bytes,yy_size_t len  );
 
-#define yy_new_buffer yy_create_buffer
+void *FSMLalloc (yy_size_t  );
+void *FSMLrealloc (void *,yy_size_t  );
+void FSMLfree (void *  );
+
+#define yy_new_buffer FSML_create_buffer
+
 #define yy_set_interactive(is_interactive) \
 	{ \
 	if ( ! YY_CURRENT_BUFFER ){ \
-        yyensure_buffer_stack (); \
+        FSMLensure_buffer_stack (); \
 		YY_CURRENT_BUFFER_LVALUE =    \
-            yy_create_buffer( yyin, YY_BUF_SIZE ); \
+            FSML_create_buffer(FSMLin,YY_BUF_SIZE ); \
 	} \
 	YY_CURRENT_BUFFER_LVALUE->yy_is_interactive = is_interactive; \
 	}
+
 #define yy_set_bol(at_bol) \
 	{ \
 	if ( ! YY_CURRENT_BUFFER ){\
-        yyensure_buffer_stack (); \
+        FSMLensure_buffer_stack (); \
 		YY_CURRENT_BUFFER_LVALUE =    \
-            yy_create_buffer( yyin, YY_BUF_SIZE ); \
+            FSML_create_buffer(FSMLin,YY_BUF_SIZE ); \
 	} \
 	YY_CURRENT_BUFFER_LVALUE->yy_at_bol = at_bol; \
 	}
+
 #define YY_AT_BOL() (YY_CURRENT_BUFFER_LVALUE->yy_at_bol)
 
 /* Begin user sect3 */
 
-#define FSMLwrap() (/*CONSTCOND*/1)
+#define FSMLwrap(n) 1
 #define YY_SKIP_YYWRAP
-typedef flex_uint8_t YY_CHAR;
 
-FILE *yyin = NULL, *yyout = NULL;
+typedef unsigned char YY_CHAR;
+
+FILE *FSMLin = (FILE *) 0, *FSMLout = (FILE *) 0;
 
 typedef int yy_state_type;
 
-extern int yylineno;
-int yylineno = 1;
+extern int FSMLlineno;
 
-extern char *yytext;
-#ifdef yytext_ptr
-#undef yytext_ptr
-#endif
-#define yytext_ptr yytext
+int FSMLlineno = 1;
 
-static yy_state_type yy_get_previous_state ( void );
-static yy_state_type yy_try_NUL_trans ( yy_state_type current_state  );
-static int yy_get_next_buffer ( void );
-static void yynoreturn yy_fatal_error ( const char* msg  );
+extern char *FSMLtext;
+#define yytext_ptr FSMLtext
+
+static yy_state_type yy_get_previous_state (void );
+static yy_state_type yy_try_NUL_trans (yy_state_type current_state  );
+static int yy_get_next_buffer (void );
+static void yy_fatal_error (yyconst char msg[]  );
 
 /* Done after the current pattern has been matched and before the
- * corresponding action - sets up yytext.
+ * corresponding action - sets up FSMLtext.
  */
 #define YY_DO_BEFORE_ACTION \
 	(yytext_ptr) = yy_bp; \
-	yyleng = (int) (yy_cp - yy_bp); \
+	FSMLleng = (yy_size_t) (yy_cp - yy_bp); \
 	(yy_hold_char) = *yy_cp; \
 	*yy_cp = '\0'; \
 	(yy_c_buf_p) = yy_cp;
-#define YY_NUM_RULES 74
-#define YY_END_OF_BUFFER 75
+
+#define YY_NUM_RULES 75
+#define YY_END_OF_BUFFER 76
 /* This struct is not used in this scanner,
    but its presence is necessary. */
 struct yy_trans_info
@@ -623,33 +392,34 @@ struct yy_trans_info
 	flex_int32_t yy_verify;
 	flex_int32_t yy_nxt;
 	};
-static const flex_int16_t yy_accept[201] =
+static yyconst flex_int16_t yy_accept[208] =
     {   0,
         0,    0,    0,    0,    0,    0,    0,    0,    0,    0,
         0,    0,    0,    0,    0,    0,    0,    0,    0,    0,
-        0,    0,    0,    0,    0,    0,   58,   58,   66,   66,
-       75,   73,   72,   71,   52,   53,   56,   54,   73,   55,
-       49,   49,   49,   49,   49,   49,   49,   49,   49,   49,
-       49,   49,   49,   49,   49,   50,   51,    4,    8,    9,
-       73,   27,   14,   27,   39,   48,   32,   37,   36,   43,
-       63,   64,   63,    5,    6,   40,   41,   58,   60,   59,
-       66,   68,   67,   72,   65,   70,   49,   49,   49,   49,
-       49,   49,   49,   49,   44,   49,   49,   38,   49,   49,
+        0,    0,    0,    0,    0,    0,    0,    0,   59,   59,
+       67,   67,   76,   74,   73,   72,   53,   54,   57,   55,
+       74,   56,   50,   50,   50,   50,   50,   50,   50,   50,
+       50,   50,   50,   50,   50,   50,   50,   51,   52,    5,
+        9,   10,   74,   28,   15,   28,   40,   49,   33,   38,
+       37,   44,   64,   65,   64,    6,    7,   41,   42,   59,
+       61,   60,   67,   69,   68,   73,   66,   71,   50,   50,
+       50,   50,   50,   50,   50,   50,   50,   45,   50,   50,
 
-       49,   49,   49,   49,   49,   49,   49,   49,    0,    0,
-       27,   27,   57,   62,   58,   59,   59,   61,   66,   67,
-       67,   69,   70,   49,   49,   49,   34,   49,   35,   49,
-        7,   49,   18,   49,   46,   49,   49,   49,   49,   49,
-       49,   49,   49,   49,   49,   49,   10,   49,   28,   29,
-       62,   16,    1,   49,   26,   49,   49,   19,   49,   49,
-       49,   49,   49,   49,   49,   49,   49,    2,   49,   49,
-       49,   15,   49,   20,   11,   49,   49,   33,   45,   17,
-       49,   47,   31,   49,   49,   13,   24,   49,   30,   21,
-       12,    3,   22,   25,   49,   49,   42,   49,   23,    0
+       39,   50,   50,   50,   50,   50,   50,   50,   50,   50,
+       50,    0,    0,   28,   28,   58,   63,   59,   60,   60,
+       62,   67,   68,   68,   70,   71,   50,   50,   50,   35,
+       50,   36,   50,   50,    8,   50,   19,   50,   47,   50,
+       50,   50,   50,   50,   50,   50,   50,   50,   50,   50,
+       11,   50,   29,   30,   63,   17,    1,   50,   27,   50,
+       50,   50,   20,   50,   50,   50,   50,   50,   50,   50,
+       50,   50,    3,   50,   50,   50,   16,   50,   50,   21,
+       12,   50,   50,   34,   46,   18,   50,   48,   32,   50,
+       50,   14,   25,   50,   31,   22,    2,   13,    4,   23,
 
+       26,   50,   50,   43,   50,   24,    0
     } ;
 
-static const YY_CHAR yy_ec[256] =
+static yyconst flex_int32_t yy_ec[256] =
     {   0,
         1,    1,    1,    1,    1,    1,    1,    1,    2,    3,
         1,    1,    1,    1,    1,    1,    1,    1,    1,    1,
@@ -663,8 +433,8 @@ static const YY_CHAR yy_ec[256] =
        15,    1,   16,    1,   17,    1,   18,   19,   20,   21,
 
        22,   23,   24,   25,   26,   14,   14,   27,   28,   29,
-       30,   31,   14,   32,   33,   34,   35,   36,   14,   14,
-       37,   14,   38,    1,   39,    1,    1,    1,    1,    1,
+       30,   31,   14,   32,   33,   34,   35,   36,   14,   37,
+       38,   14,   39,    1,   40,    1,    1,    1,    1,    1,
         1,    1,    1,    1,    1,    1,    1,    1,    1,    1,
         1,    1,    1,    1,    1,    1,    1,    1,    1,    1,
         1,    1,    1,    1,    1,    1,    1,    1,    1,    1,
@@ -681,149 +451,151 @@ static const YY_CHAR yy_ec[256] =
         1,    1,    1,    1,    1
     } ;
 
-static const YY_CHAR yy_meta[40] =
+static yyconst flex_int32_t yy_meta[41] =
     {   0,
         1,    1,    2,    1,    1,    1,    3,    1,    1,    1,
         4,    1,    1,    4,    1,    1,    4,    4,    4,    4,
         4,    4,    4,    4,    4,    4,    4,    4,    4,    4,
-        4,    4,    4,    4,    4,    4,    4,    1,    1
+        4,    4,    4,    4,    4,    4,    4,    4,    1,    1
     } ;
 
-static const flex_int16_t yy_base[212] =
+static yyconst flex_int16_t yy_base[219] =
     {   0,
-        0,    0,  216,  215,  214,  213,  212,  211,    2,    4,
-       40,   42,   36,   38,   50,   51,  232,  231,  240,  239,
-       46,   48,   58,   61,   64,   70,   74,   75,   76,   83,
-      244,  255,  241,  255,  255,  255,  255,  255,   77,  255,
-        0,  217,   63,   62,   65,  211,  211,  209,   66,  216,
-      215,   77,  210,  206,   86,  255,  255,  255,  255,  255,
-        0,   96,  255,  223,  255,  255,  255,  255,  255,  255,
-      255,  255,   99,  255,  255,  255,  255,    0,  255,  103,
-        0,  255,  105,  231,  255,    0,    0,  214,  211,  195,
-       87,  197,  198,  199,    0,   83,  197,    0,  191,  192,
+        0,    0,  223,  222,  221,  220,  219,  218,  217,  216,
+        2,    4,   41,   43,   37,   39,   51,   52,  238,  237,
+      246,  245,   47,   49,   59,   62,   65,   71,   75,   76,
+       77,   82,  250,  263,  247,  263,  263,  263,  263,  263,
+       85,  263,    0,  223,   64,   68,   60,  217,  217,  215,
+       74,  222,  221,   81,  216,  212,   78,  263,  263,  263,
+      263,  263,    0,  101,  263,  229,  263,  263,  263,  263,
+      263,  263,  263,  263,  104,  263,  263,  263,  263,    0,
+      263,  106,    0,  263,  110,  237,  263,    0,    0,  220,
+      217,  201,   83,  203,  203,  203,  204,    0,   88,  202,
 
-       85,  193,  198,  102,  193,   95,  188,  193,  214,  206,
-      114,  205,  255,    0,    0,  117,  123,  255,    0,  125,
-      129,  255,    0,  183,  187,  194,    0,  184,    0,  193,
-        0,  175,    0,  185,  177,  181,  184,  173,  172,  174,
-      106,  167,  179,  170,  173,  172,    0,  176,  255,  132,
-        0,    0,    0,  169,    0,  161,  160,    0,  158,  162,
-      157,  153,  155,  166,  153,  164,  165,  112,  153,  154,
-      147,    0,  149,    0,    0,  136,  145,    0,    0,    0,
-      142,    0,    0,  128,  123,    0,    0,  108,    0,    0,
-        0,    0,    0,    0,   97,  104,    0,   51,    0,  255,
+        0,  196,  197,   90,  198,  203,  103,  198,   99,  193,
+      198,  219,  211,  117,  210,  263,    0,    0,  120,  124,
+      263,    0,  129,  130,  263,    0,  188,  192,  199,    0,
+      189,    0,  186,  197,    0,  179,    0,  189,  181,  185,
+      188,  177,  176,  178,  109,  171,  183,  174,  177,  176,
+        0,  180,  263,  133,    0,    0,    0,  173,    0,  167,
+      164,  163,    0,  161,  165,  160,  155,  158,  169,  156,
+      167,  168,  115,  156,  157,  150,    0,  152,  139,    0,
+        0,  135,  145,    0,    0,    0,  144,    0,    0,  127,
+      111,    0,    0,  109,    0,    0,    0,    0,    0,    0,
 
-      144,  148,  152,   41,  156,  160,  164,  168,  172,  176,
-      180
+        0,   95,   66,    0,   52,    0,  263,  147,  151,  155,
+       42,  159,  163,  167,  171,  175,  179,  183
     } ;
 
-static const flex_int16_t yy_def[212] =
+static yyconst flex_int16_t yy_def[219] =
     {   0,
-      200,    1,    1,    1,    1,    1,    1,    1,    1,    1,
+      207,    1,    1,    1,    1,    1,    1,    1,    1,    1,
         1,    1,    1,    1,    1,    1,    1,    1,    1,    1,
-        1,    1,  201,  201,  201,  201,  202,  202,  203,  203,
-      200,  200,  200,  200,  200,  200,  200,  200,  200,  200,
-      204,  204,  204,  204,  204,  204,  204,  204,  204,  204,
-      204,  204,  204,  204,  204,  200,  200,  200,  200,  200,
-      205,  200,  200,  200,  200,  200,  200,  200,  200,  200,
-      200,  200,  200,  200,  200,  200,  200,  206,  200,  207,
-      208,  200,  209,  200,  200,  210,  204,  204,  204,  204,
-      204,  204,  204,  204,  204,  204,  204,  204,  204,  204,
+        1,    1,    1,    1,  208,  208,  208,  208,  209,  209,
+      210,  210,  207,  207,  207,  207,  207,  207,  207,  207,
+      207,  207,  211,  211,  211,  211,  211,  211,  211,  211,
+      211,  211,  211,  211,  211,  211,  211,  207,  207,  207,
+      207,  207,  212,  207,  207,  207,  207,  207,  207,  207,
+      207,  207,  207,  207,  207,  207,  207,  207,  207,  213,
+      207,  214,  215,  207,  216,  207,  207,  217,  211,  211,
+      211,  211,  211,  211,  211,  211,  211,  211,  211,  211,
 
-      204,  204,  204,  204,  204,  204,  204,  204,  200,  200,
-      200,  200,  200,  211,  206,  207,  207,  200,  208,  209,
-      209,  200,  210,  204,  204,  204,  204,  204,  204,  204,
-      204,  204,  204,  204,  204,  204,  204,  204,  204,  204,
-      204,  204,  204,  204,  204,  204,  204,  204,  200,  200,
-      211,  204,  204,  204,  204,  204,  204,  204,  204,  204,
-      204,  204,  204,  204,  204,  204,  204,  204,  204,  204,
-      204,  204,  204,  204,  204,  204,  204,  204,  204,  204,
-      204,  204,  204,  204,  204,  204,  204,  204,  204,  204,
-      204,  204,  204,  204,  204,  204,  204,  204,  204,    0,
+      211,  211,  211,  211,  211,  211,  211,  211,  211,  211,
+      211,  207,  207,  207,  207,  207,  218,  213,  214,  214,
+      207,  215,  216,  216,  207,  217,  211,  211,  211,  211,
+      211,  211,  211,  211,  211,  211,  211,  211,  211,  211,
+      211,  211,  211,  211,  211,  211,  211,  211,  211,  211,
+      211,  211,  207,  207,  218,  211,  211,  211,  211,  211,
+      211,  211,  211,  211,  211,  211,  211,  211,  211,  211,
+      211,  211,  211,  211,  211,  211,  211,  211,  211,  211,
+      211,  211,  211,  211,  211,  211,  211,  211,  211,  211,
+      211,  211,  211,  211,  211,  211,  211,  211,  211,  211,
 
-      200,  200,  200,  200,  200,  200,  200,  200,  200,  200,
-      200
+      211,  211,  211,  211,  211,  211,    0,  207,  207,  207,
+      207,  207,  207,  207,  207,  207,  207,  207
     } ;
 
-static const flex_int16_t yy_nxt[295] =
+static yyconst flex_int16_t yy_nxt[304] =
     {   0,
-       32,   33,   34,   32,   35,   36,   37,   38,   32,   39,
-       32,   32,   40,   41,   32,   32,   32,   41,   41,   42,
-       43,   44,   45,   46,   41,   47,   48,   41,   41,   49,
-       50,   51,   52,   53,   54,   55,   41,   56,   57,   59,
-       60,   59,   60,   61,   87,   61,   64,   63,   64,   63,
-       62,   63,   62,   63,   65,   65,   64,   66,   64,   66,
-       72,   66,   66,   72,   67,   67,   72,   73,   76,   77,
-       73,  199,   72,   73,   76,   77,   79,   79,   82,   73,
-       80,   80,   83,   85,   89,   82,   86,   68,   68,   83,
-       91,   93,   90,   92,   98,   74,   75,   94,   74,   75,
+       34,   35,   36,   34,   37,   38,   39,   40,   34,   41,
+       34,   34,   42,   43,   34,   34,   34,   43,   43,   44,
+       45,   46,   47,   48,   43,   49,   50,   43,   43,   51,
+       52,   53,   54,   55,   56,   57,   43,   43,   58,   59,
+       61,   62,   61,   62,   63,   89,   63,   66,   65,   66,
+       65,   64,   65,   64,   65,   67,   67,   66,   68,   66,
+       68,   74,   68,   68,   74,   69,   69,   74,   75,   78,
+       79,   75,  206,   74,   75,   78,   79,   81,   81,   84,
+       75,   82,   82,   85,   84,   91,   96,  205,   85,   70,
+       70,   87,   97,   92,   88,  110,   93,   76,   77,   94,
 
-       99,  102,  103,  107,  110,  113,  111,  127,  114,  117,
-      104,  121,  118,  132,  122,  108,  133,  137,  138,  141,
-      144,  128,  110,  200,  111,  198,  200,  145,  146,  117,
-      197,  200,  118,  142,  200,  121,  196,  165,  122,  166,
-      110,  185,  150,  186,   71,   71,   71,   71,   78,   78,
-       78,   78,   81,   81,   81,   81,  109,  195,  109,  109,
-      115,  194,  193,  115,  116,  192,  116,  116,  119,  191,
-      190,  119,  120,  189,  120,  120,  123,  188,  123,  123,
-      151,  187,  151,  151,  184,  183,  182,  181,  180,  179,
-      178,  177,  176,  175,  174,  173,  172,  171,  170,  169,
+       76,   77,  101,  130,   95,  105,  106,  111,  102,  113,
+      116,  114,  120,  117,  107,  121,  124,  131,  136,  125,
+      145,  137,  141,  142,  148,  113,  207,  114,  204,  207,
+      120,  149,  150,  121,  146,  207,  124,  203,  207,  125,
+      170,  113,  171,  154,  191,  202,  192,   73,   73,   73,
+       73,   80,   80,   80,   80,   83,   83,   83,   83,  112,
+      201,  112,  112,  118,  200,  199,  118,  119,  198,  119,
+      119,  122,  197,  196,  122,  123,  195,  123,  123,  126,
+      194,  126,  126,  155,  193,  155,  155,  190,  189,  188,
+      187,  186,  185,  184,  183,  182,  181,  180,  179,  178,
 
-      168,  167,  164,  163,  162,  161,  160,  159,  158,  157,
-      156,  155,  154,  153,  152,  112,  150,  149,  148,  147,
-      143,  140,  139,  136,  135,  134,  131,  130,  129,  126,
-      125,  124,   84,  112,  106,  105,  101,  100,   97,   96,
-       95,   88,   84,  200,   70,   70,   69,   69,   58,   58,
-       58,   58,   58,   58,   31,  200,  200,  200,  200,  200,
-      200,  200,  200,  200,  200,  200,  200,  200,  200,  200,
-      200,  200,  200,  200,  200,  200,  200,  200,  200,  200,
-      200,  200,  200,  200,  200,  200,  200,  200,  200,  200,
-      200,  200,  200,  200
+      177,  176,  175,  174,  173,  172,  169,  168,  167,  166,
+      165,  164,  163,  162,  161,  160,  159,  158,  157,  156,
+      115,  154,  153,  152,  151,  147,  144,  143,  140,  139,
+      138,  135,  134,  133,  132,  129,  128,  127,   86,  115,
+      109,  108,  104,  103,  100,   99,   98,   90,   86,  207,
+       72,   72,   71,   71,   60,   60,   60,   60,   60,   60,
+       60,   60,   33,  207,  207,  207,  207,  207,  207,  207,
+      207,  207,  207,  207,  207,  207,  207,  207,  207,  207,
+      207,  207,  207,  207,  207,  207,  207,  207,  207,  207,
+      207,  207,  207,  207,  207,  207,  207,  207,  207,  207,
 
+      207,  207,  207
     } ;
 
-static const flex_int16_t yy_chk[295] =
+static yyconst flex_int16_t yy_chk[304] =
     {   0,
         1,    1,    1,    1,    1,    1,    1,    1,    1,    1,
         1,    1,    1,    1,    1,    1,    1,    1,    1,    1,
         1,    1,    1,    1,    1,    1,    1,    1,    1,    1,
-        1,    1,    1,    1,    1,    1,    1,    1,    1,    9,
-        9,   10,   10,   11,  204,   12,   13,   13,   14,   14,
-       11,   11,   12,   12,   15,   16,   21,   21,   22,   22,
-       23,   15,   16,   24,   15,   16,   25,   23,   25,   25,
-       24,  198,   26,   25,   26,   26,   27,   28,   29,   26,
-       27,   28,   29,   39,   43,   30,   39,   15,   16,   30,
-       44,   45,   43,   44,   49,   23,   23,   45,   24,   24,
+        1,    1,    1,    1,    1,    1,    1,    1,    1,    1,
+       11,   11,   12,   12,   13,  211,   14,   15,   15,   16,
+       16,   13,   13,   14,   14,   17,   18,   23,   23,   24,
+       24,   25,   17,   18,   26,   17,   18,   27,   25,   27,
+       27,   26,  205,   28,   27,   28,   28,   29,   30,   31,
+       28,   29,   30,   31,   32,   45,   47,  203,   32,   17,
+       18,   41,   47,   45,   41,   57,   46,   25,   25,   46,
 
-       49,   52,   52,   55,   62,   73,   62,   91,   73,   80,
-       52,   83,   80,   96,   83,   55,   96,  101,  101,  104,
-      106,   91,  111,  116,  111,  196,  116,  106,  106,  117,
-      195,  120,  117,  104,  120,  121,  188,  141,  121,  141,
-      150,  168,  150,  168,  201,  201,  201,  201,  202,  202,
-      202,  202,  203,  203,  203,  203,  205,  185,  205,  205,
-      206,  184,  181,  206,  207,  177,  207,  207,  208,  176,
-      173,  208,  209,  171,  209,  209,  210,  170,  210,  210,
-      211,  169,  211,  211,  167,  166,  165,  164,  163,  162,
-      161,  160,  159,  157,  156,  154,  148,  146,  145,  144,
+       26,   26,   51,   93,   46,   54,   54,   57,   51,   64,
+       75,   64,   82,   75,   54,   82,   85,   93,   99,   85,
+      107,   99,  104,  104,  109,  114,  119,  114,  202,  119,
+      120,  109,  109,  120,  107,  123,  124,  194,  123,  124,
+      145,  154,  145,  154,  173,  191,  173,  208,  208,  208,
+      208,  209,  209,  209,  209,  210,  210,  210,  210,  212,
+      190,  212,  212,  213,  187,  183,  213,  214,  182,  214,
+      214,  215,  179,  178,  215,  216,  176,  216,  216,  217,
+      175,  217,  217,  218,  174,  218,  218,  172,  171,  170,
+      169,  168,  167,  166,  165,  164,  162,  161,  160,  158,
 
-      143,  142,  140,  139,  138,  137,  136,  135,  134,  132,
-      130,  128,  126,  125,  124,  112,  110,  109,  108,  107,
-      105,  103,  102,  100,   99,   97,   94,   93,   92,   90,
-       89,   88,   84,   64,   54,   53,   51,   50,   48,   47,
-       46,   42,   33,   31,   20,   19,   18,   17,    8,    7,
-        6,    5,    4,    3,  200,  200,  200,  200,  200,  200,
-      200,  200,  200,  200,  200,  200,  200,  200,  200,  200,
-      200,  200,  200,  200,  200,  200,  200,  200,  200,  200,
-      200,  200,  200,  200,  200,  200,  200,  200,  200,  200,
-      200,  200,  200,  200
+      152,  150,  149,  148,  147,  146,  144,  143,  142,  141,
+      140,  139,  138,  136,  134,  133,  131,  129,  128,  127,
+      115,  113,  112,  111,  110,  108,  106,  105,  103,  102,
+      100,   97,   96,   95,   94,   92,   91,   90,   86,   66,
+       56,   55,   53,   52,   50,   49,   48,   44,   35,   33,
+       22,   21,   20,   19,   10,    9,    8,    7,    6,    5,
+        4,    3,  207,  207,  207,  207,  207,  207,  207,  207,
+      207,  207,  207,  207,  207,  207,  207,  207,  207,  207,
+      207,  207,  207,  207,  207,  207,  207,  207,  207,  207,
+      207,  207,  207,  207,  207,  207,  207,  207,  207,  207,
 
+      207,  207,  207
     } ;
 
 static yy_state_type yy_last_accepting_state;
 static char *yy_last_accepting_cpos;
 
-extern int yy_flex_debug;
-int yy_flex_debug = 0;
+extern int FSML_flex_debug;
+int FSML_flex_debug = 0;
 
 /* The intent behind this definition is that it'll catch
  * any uses of REJECT which flex missed.
@@ -832,7 +604,7 @@ int yy_flex_debug = 0;
 #define yymore() yymore_used_but_not_detected
 #define YY_MORE_ADJ 0
 #define YY_RESTORE_YY_MORE_OFFSET
-char *yytext;
+char *FSMLtext;
 #line 1 "fsml.lex"
 /**
  *       @file  fsml.lexpp
@@ -890,25 +662,26 @@ int b_cnt = 0;			/* counter for round brackets */
 
 std::string tmp_str;	/* used to collect characters scanned by different rules in a unique token */
 
-#line 893 "fsml.yy.cc"
  
-#line 895 "fsml.yy.cc"
+
+#line 668 "fsml.yy.cc"
 
 #define INITIAL 0
 #define DECL 1
-#define TIME 2
-#define PERIOD 3
-#define FSM 4
-#define VAR 5
-#define TIMER 6
-#define STATE 7
-#define STATE_TYPE 8
-#define TIMEOUT 9
-#define UNTIL 10
-#define C_CODE 11
-#define C_CONDITION 12
-#define C_COMMENT 13
-#define FSML_COMMENT 14
+#define EXPORT 2
+#define TIME 3
+#define PERIOD 4
+#define FSM 5
+#define VAR 6
+#define TIMER 7
+#define STATE 8
+#define STATE_TYPE 9
+#define TIMEOUT 10
+#define UNTIL 11
+#define C_CODE 12
+#define C_CONDITION 13
+#define C_COMMENT 14
+#define FSML_COMMENT 15
 
 #ifndef YY_NO_UNISTD_H
 /* Special case for "unistd.h", since it is non-ANSI. We include it way
@@ -922,36 +695,36 @@ std::string tmp_str;	/* used to collect characters scanned by different rules in
 #define YY_EXTRA_TYPE void *
 #endif
 
-static int yy_init_globals ( void );
+static int yy_init_globals (void );
 
 /* Accessor methods to globals.
    These are made visible to non-reentrant scanners for convenience. */
 
-int yylex_destroy ( void );
+int FSMLlex_destroy (void );
 
-int yyget_debug ( void );
+int FSMLget_debug (void );
 
-void yyset_debug ( int debug_flag  );
+void FSMLset_debug (int debug_flag  );
 
-YY_EXTRA_TYPE yyget_extra ( void );
+YY_EXTRA_TYPE FSMLget_extra (void );
 
-void yyset_extra ( YY_EXTRA_TYPE user_defined  );
+void FSMLset_extra (YY_EXTRA_TYPE user_defined  );
 
-FILE *yyget_in ( void );
+FILE *FSMLget_in (void );
 
-void yyset_in  ( FILE * _in_str  );
+void FSMLset_in  (FILE * in_str  );
 
-FILE *yyget_out ( void );
+FILE *FSMLget_out (void );
 
-void yyset_out  ( FILE * _out_str  );
+void FSMLset_out  (FILE * out_str  );
 
-			int yyget_leng ( void );
+yy_size_t FSMLget_leng (void );
 
-char *yyget_text ( void );
+char *FSMLget_text (void );
 
-int yyget_lineno ( void );
+int FSMLget_lineno (void );
 
-void yyset_lineno ( int _line_number  );
+void FSMLset_lineno (int line_number  );
 
 /* Macros after this point can all be overridden by user definitions in
  * section 1.
@@ -959,29 +732,26 @@ void yyset_lineno ( int _line_number  );
 
 #ifndef YY_SKIP_YYWRAP
 #ifdef __cplusplus
-extern "C" int yywrap ( void );
+extern "C" int FSMLwrap (void );
 #else
-extern int yywrap ( void );
+extern int FSMLwrap (void );
 #endif
-#endif
-
-#ifndef YY_NO_UNPUT
-    
 #endif
 
 #ifndef yytext_ptr
-static void yy_flex_strncpy ( char *, const char *, int );
+static void yy_flex_strncpy (char *,yyconst char *,int );
 #endif
 
 #ifdef YY_NEED_STRLEN
-static int yy_flex_strlen ( const char * );
+static int yy_flex_strlen (yyconst char * );
 #endif
 
 #ifndef YY_NO_INPUT
+
 #ifdef __cplusplus
-static int yyinput ( void );
+static int yyinput (void );
 #else
-static int input ( void );
+static int input (void );
 #endif
 
 #endif
@@ -990,20 +760,15 @@ static int input ( void );
         static int yy_start_stack_depth = 0;
         static int *yy_start_stack = NULL;
     
-    static void yy_push_state ( int _new_state );
+    static void yy_push_state (int new_state );
     
-    static void yy_pop_state ( void );
+    static void yy_pop_state (void );
     
-    static int yy_top_state ( void );
+    static int yy_top_state (void );
     
 /* Amount of stuff to slurp up with each read. */
 #ifndef YY_READ_BUF_SIZE
-#ifdef __ia64__
-/* On IA-64, the buffer size is 16k, not 8k */
-#define YY_READ_BUF_SIZE 16384
-#else
 #define YY_READ_BUF_SIZE 8192
-#endif /* __ia64__ */
 #endif
 
 /* Copy whatever the last rule matched to the standard output. */
@@ -1011,7 +776,7 @@ static int input ( void );
 /* This used to be an fputs(), but since the string might contain NUL's,
  * we now use fwrite().
  */
-#define ECHO do { if (fwrite( yytext, (size_t) yyleng, 1, yyout )) {} } while (0)
+#define ECHO fwrite( FSMLtext, FSMLleng, 1, FSMLout )
 #endif
 
 /* Gets input and stuffs it into "buf".  number of characters read, or YY_NULL,
@@ -1022,20 +787,20 @@ static int input ( void );
 	if ( YY_CURRENT_BUFFER_LVALUE->yy_is_interactive ) \
 		{ \
 		int c = '*'; \
-		int n; \
+		yy_size_t n; \
 		for ( n = 0; n < max_size && \
-			     (c = getc( yyin )) != EOF && c != '\n'; ++n ) \
+			     (c = getc( FSMLin )) != EOF && c != '\n'; ++n ) \
 			buf[n] = (char) c; \
 		if ( c == '\n' ) \
 			buf[n++] = (char) c; \
-		if ( c == EOF && ferror( yyin ) ) \
+		if ( c == EOF && ferror( FSMLin ) ) \
 			YY_FATAL_ERROR( "input in flex scanner failed" ); \
 		result = n; \
 		} \
 	else \
 		{ \
 		errno=0; \
-		while ( (result = (int) fread(buf, 1, (yy_size_t) max_size, yyin)) == 0 && ferror(yyin)) \
+		while ( (result = fread(buf, 1, max_size, FSMLin))==0 && ferror(FSMLin)) \
 			{ \
 			if( errno != EINTR) \
 				{ \
@@ -1043,7 +808,7 @@ static int input ( void );
 				break; \
 				} \
 			errno=0; \
-			clearerr(yyin); \
+			clearerr(FSMLin); \
 			} \
 		}\
 \
@@ -1076,12 +841,12 @@ static int input ( void );
 #ifndef YY_DECL
 #define YY_DECL_IS_OURS 1
 
-extern int yylex (void);
+extern int FSMLlex (void);
 
-#define YY_DECL int yylex (void)
+#define YY_DECL int FSMLlex (void)
 #endif /* !YY_DECL */
 
-/* Code executed at the beginning of each rule, after yytext and yyleng
+/* Code executed at the beginning of each rule, after FSMLtext and FSMLleng
  * have been set up.
  */
 #ifndef YY_USER_ACTION
@@ -1090,7 +855,7 @@ extern int yylex (void);
 
 /* Code executed at the end of each rule. */
 #ifndef YY_BREAK
-#define YY_BREAK /*LINTED*/break;
+#define YY_BREAK break;
 #endif
 
 #define YY_RULE_SETUP \
@@ -1100,10 +865,16 @@ extern int yylex (void);
  */
 YY_DECL
 {
-	yy_state_type yy_current_state;
-	char *yy_cp, *yy_bp;
-	int yy_act;
+	register yy_state_type yy_current_state;
+	register char *yy_cp, *yy_bp;
+	register int yy_act;
     
+#line 74 "fsml.lex"
+
+
+
+#line 877 "fsml.yy.cc"
+
 	if ( !(yy_init) )
 		{
 		(yy_init) = 1;
@@ -1115,33 +886,26 @@ YY_DECL
 		if ( ! (yy_start) )
 			(yy_start) = 1;	/* first start state */
 
-		if ( ! yyin )
-			yyin = stdin;
+		if ( ! FSMLin )
+			FSMLin = stdin;
 
-		if ( ! yyout )
-			yyout = stdout;
+		if ( ! FSMLout )
+			FSMLout = stdout;
 
 		if ( ! YY_CURRENT_BUFFER ) {
-			yyensure_buffer_stack ();
+			FSMLensure_buffer_stack ();
 			YY_CURRENT_BUFFER_LVALUE =
-				yy_create_buffer( yyin, YY_BUF_SIZE );
+				FSML_create_buffer(FSMLin,YY_BUF_SIZE );
 		}
 
-		yy_load_buffer_state(  );
+		FSML_load_buffer_state( );
 		}
 
-	{
-#line 74 "fsml.lex"
-
-
-
-#line 1138 "fsml.yy.cc"
-
-	while ( /*CONSTCOND*/1 )		/* loops until end-of-file is reached */
+	while ( 1 )		/* loops until end-of-file is reached */
 		{
 		yy_cp = (yy_c_buf_p);
 
-		/* Support of yytext. */
+		/* Support of FSMLtext. */
 		*yy_cp = (yy_hold_char);
 
 		/* yy_bp points to the position in yy_ch_buf of the start of
@@ -1153,7 +917,7 @@ YY_DECL
 yy_match:
 		do
 			{
-			YY_CHAR yy_c = yy_ec[YY_SC_TO_UI(*yy_cp)] ;
+			register YY_CHAR yy_c = yy_ec[YY_SC_TO_UI(*yy_cp)];
 			if ( yy_accept[yy_current_state] )
 				{
 				(yy_last_accepting_state) = yy_current_state;
@@ -1162,13 +926,13 @@ yy_match:
 			while ( yy_chk[yy_base[yy_current_state] + yy_c] != yy_current_state )
 				{
 				yy_current_state = (int) yy_def[yy_current_state];
-				if ( yy_current_state >= 201 )
-					yy_c = yy_meta[yy_c];
+				if ( yy_current_state >= 208 )
+					yy_c = yy_meta[(unsigned int) yy_c];
 				}
-			yy_current_state = yy_nxt[yy_base[yy_current_state] + yy_c];
+			yy_current_state = yy_nxt[yy_base[yy_current_state] + (unsigned int) yy_c];
 			++yy_cp;
 			}
-		while ( yy_current_state != 200 );
+		while ( yy_current_state != 207 );
 		yy_cp = (yy_last_accepting_cpos);
 		yy_current_state = (yy_last_accepting_state);
 
@@ -1201,48 +965,58 @@ case 2:
 YY_RULE_SETUP
 #line 83 "fsml.lex"
 {
-				log("found: TIME\n");
-				yy_push_state(TIME);
-				return token::TIME_KEY;
+				log("found: EXPORT\n");
+				yy_push_state(EXPORT);
+				return token::EXPORT_KEY;
 			}
 	YY_BREAK
 case 3:
 YY_RULE_SETUP
 #line 89 "fsml.lex"
 {
-				log("found: PERIOD\n");
-				yy_push_state(PERIOD);
-				return token::PERIOD_KEY;
+				log("found: TIME\n");
+				yy_push_state(TIME);
+				return token::TIME_KEY;
 			}
 	YY_BREAK
 case 4:
 YY_RULE_SETUP
 #line 95 "fsml.lex"
 {
-				log("Beginning C-CODE\n");
-				tmp_str += std::string(yytext);
-				yy_push_state(C_CODE);
+				log("found: PERIOD\n");
+				yy_push_state(PERIOD);
+				return token::PERIOD_KEY;
 			}
 	YY_BREAK
 case 5:
 YY_RULE_SETUP
 #line 101 "fsml.lex"
 {
-				tmp_str += std::string(yytext);
-				cb_cnt++;
+				log("Beginning C-CODE\n");
+				tmp_str += std::string(FSMLtext);
+				yy_push_state(C_CODE);
 			}
 	YY_BREAK
 case 6:
 YY_RULE_SETUP
-#line 106 "fsml.lex"
+#line 107 "fsml.lex"
 {
-				tmp_str += std::string(yytext);
+				tmp_str += std::string(FSMLtext);
+				cb_cnt++;
+			}
+	YY_BREAK
+case 7:
+YY_RULE_SETUP
+#line 112 "fsml.lex"
+{
+				tmp_str += std::string(FSMLtext);
 				cb_cnt--;
 				if (cb_cnt < 0) {
 					log("found: C_CODE\n");
 					cb_cnt = 0;
 					switch (yy_top_state()) {
 						case DECL:
+						case EXPORT:
 						case TIME:
 						case PERIOD:
 							yy_pop_state();
@@ -1257,299 +1031,299 @@ YY_RULE_SETUP
 				}
 			}
 	YY_BREAK
-case 7:
+case 8:
 YY_RULE_SETUP
-#line 128 "fsml.lex"
+#line 135 "fsml.lex"
 {
 				log("found: FSM\n");
 				yy_push_state(FSM);
 				return token::FSM_KEY;
 			}
 	YY_BREAK
-case 8:
+case 9:
 YY_RULE_SETUP
-#line 134 "fsml.lex"
+#line 141 "fsml.lex"
 {
 				log("found: LCB\n");
 				return token::LCB;
 			}
 	YY_BREAK
-case 9:
+case 10:
 YY_RULE_SETUP
-#line 140 "fsml.lex"
+#line 147 "fsml.lex"
 {
 				log("found: RCB\n");
 				yy_pop_state();
 				return token::RCB;
 			}
 	YY_BREAK
-case 10:
+case 11:
 YY_RULE_SETUP
-#line 146 "fsml.lex"
+#line 153 "fsml.lex"
 {
 				log("found: VAR\n");
 				yy_push_state(VAR);
 				return token::VAR_KEY;
 			}
 	YY_BREAK
-case 11:
+case 12:
 YY_RULE_SETUP
-#line 152 "fsml.lex"
+#line 159 "fsml.lex"
 {
 				log("found: INPUT\n");
 				yy_push_state(VAR);
 				return token::INPUT_KEY;
 			}
 	YY_BREAK
-case 12:
+case 13:
 YY_RULE_SETUP
-#line 158 "fsml.lex"
+#line 165 "fsml.lex"
 {
 				log("found: OUTPUT\n");
 				yy_push_state(VAR);
 				return token::OUTPUT_KEY;
 			}
 	YY_BREAK
-case 13:
+case 14:
 YY_RULE_SETUP
-#line 164 "fsml.lex"
+#line 171 "fsml.lex"
 {
 				log("found: TIMER\n");
 				yy_push_state(TIMER);
 				return token::TIMER_KEY;
 			}
 	YY_BREAK
-case 14:
+case 15:
 YY_RULE_SETUP
-#line 170 "fsml.lex"
+#line 177 "fsml.lex"
 {
 				log("found: SC\n");
 				yy_pop_state();
 				return token::SC;
 			}
 	YY_BREAK
-case 15:
+case 16:
 YY_RULE_SETUP
-#line 176 "fsml.lex"
+#line 183 "fsml.lex"
 {
 				log("found: VOID\n");
 				return token::VOID;
 			}
 	YY_BREAK
-case 16:
+case 17:
 YY_RULE_SETUP
-#line 181 "fsml.lex"
+#line 188 "fsml.lex"
 {
 				log("found: CHAR\n");
 				return token::CHAR;
 			}
 	YY_BREAK
-case 17:
+case 18:
 YY_RULE_SETUP
-#line 186 "fsml.lex"
+#line 193 "fsml.lex"
 {
 				log("found: SHORT\n");
 				return token::SHORT;
 			}
 	YY_BREAK
-case 18:
+case 19:
 YY_RULE_SETUP
-#line 191 "fsml.lex"
+#line 198 "fsml.lex"
 {
 				log("found: INT\n");
 				return token::INT;
 			}
 	YY_BREAK
-case 19:
+case 20:
 YY_RULE_SETUP
-#line 196 "fsml.lex"
+#line 203 "fsml.lex"
 {
 				log("found: LONG\n");
 				return token::LONG;
 			}
 	YY_BREAK
-case 20:
+case 21:
 YY_RULE_SETUP
-#line 201 "fsml.lex"
+#line 208 "fsml.lex"
 {
 				log("found: FLOAT\n");
 				return token::FLOAT;
 			}
 	YY_BREAK
-case 21:
+case 22:
 YY_RULE_SETUP
-#line 206 "fsml.lex"
+#line 213 "fsml.lex"
 {
 				log("found: DOUBLE\n");
 				return token::DOUBLE;
 			}
 	YY_BREAK
-case 22:
+case 23:
 YY_RULE_SETUP
-#line 211 "fsml.lex"
+#line 218 "fsml.lex"
 {
 				log("found: SIGNED\n");
 				return token::SIGNED;
 			}
 	YY_BREAK
-case 23:
+case 24:
 YY_RULE_SETUP
-#line 216 "fsml.lex"
+#line 223 "fsml.lex"
 {
 				log("found: UNSIGNED\n");
 				return token::UNSIGNED;
 			}
 	YY_BREAK
-case 24:
+case 25:
 YY_RULE_SETUP
-#line 221 "fsml.lex"
+#line 228 "fsml.lex"
 {
 				log("found: UNION\n");
 				return token::UNION;
 			}
 	YY_BREAK
-case 25:
+case 26:
 YY_RULE_SETUP
-#line 226 "fsml.lex"
+#line 233 "fsml.lex"
 {
 				log("found: STRUCT\n");
 				return token::STRUCT;
 			}
 	YY_BREAK
-case 26:
+case 27:
 YY_RULE_SETUP
-#line 231 "fsml.lex"
+#line 238 "fsml.lex"
 {
 				log("found: ENUM\n");
 				return token::ENUM;
 			}
 	YY_BREAK
-case 27:
-YY_RULE_SETUP
-#line 236 "fsml.lex"
-{
-				log("found: INTEGER %s\n", yytext);
-				FSMLlval->emplace<int>(atoi(yytext));
-				return token::INTEGER_CONSTANT;
-			}
-	YY_BREAK
 case 28:
 YY_RULE_SETUP
-#line 242 "fsml.lex"
+#line 243 "fsml.lex"
 {
-				log("found: CHARACTER %s\n", yytext);
-				FSMLlval->emplace<std::string>(yytext);
-				return token::CHARACTER_CONSTANT;
+				log("found: INTEGER %s\n", FSMLtext);
+				FSMLlval->emplace<int>(atoi(FSMLtext));
+				return token::INTEGER_CONSTANT;
 			}
 	YY_BREAK
 case 29:
 YY_RULE_SETUP
-#line 248 "fsml.lex"
+#line 249 "fsml.lex"
 {
-				log("found: FLOAT %s\n", yytext);
-				FSMLlval->emplace<float>(atof(yytext));
-				return token::FLOATING_CONSTANT;
+				log("found: CHARACTER %s\n", FSMLtext);
+				FSMLlval->emplace<std::string>(FSMLtext);
+				return token::CHARACTER_CONSTANT;
 			}
 	YY_BREAK
 case 30:
 YY_RULE_SETUP
-#line 254 "fsml.lex"
+#line 255 "fsml.lex"
+{
+				log("found: FLOAT %s\n", FSMLtext);
+				FSMLlval->emplace<float>(atof(FSMLtext));
+				return token::FLOATING_CONSTANT;
+			}
+	YY_BREAK
+case 31:
+YY_RULE_SETUP
+#line 261 "fsml.lex"
 {
 				log("found: UNTIL\n");
 				yy_push_state(UNTIL);
 				return token::UNTIL_KEY;
 			}
 	YY_BREAK
-case 31:
+case 32:
 YY_RULE_SETUP
-#line 262 "fsml.lex"
+#line 269 "fsml.lex"
 {
 				log("found: STATE\n");
 				yy_push_state(STATE);
 				return token::STATE_KEY;
 			}
 	YY_BREAK
-case 32:
+case 33:
 YY_RULE_SETUP
-#line 268 "fsml.lex"
+#line 275 "fsml.lex"
 {
 				log("found: LSB\n");
 				yy_push_state(STATE_TYPE);
 				return token::LSB;
 			}
 	YY_BREAK
-case 33:
+case 34:
 YY_RULE_SETUP
-#line 274 "fsml.lex"
+#line 281 "fsml.lex"
 {
 				log("found: RESET\n");
 				return token::RESET;
 			}
 	YY_BREAK
-case 34:
+case 35:
 YY_RULE_SETUP
-#line 279 "fsml.lex"
+#line 286 "fsml.lex"
 {
 				log("found: END\n");
 				return token::END;
 			}
 	YY_BREAK
-case 35:
+case 36:
 YY_RULE_SETUP
-#line 284 "fsml.lex"
+#line 291 "fsml.lex"
 {
 				log("found: ERR\n");
 				return token::ERR;
 			}
 	YY_BREAK
-case 36:
+case 37:
 YY_RULE_SETUP
-#line 289 "fsml.lex"
+#line 296 "fsml.lex"
 {
 				log("found: RSB\n");
 				yy_pop_state();
 				return token::RSB;
 			}
 	YY_BREAK
-case 37:
+case 38:
 YY_RULE_SETUP
-#line 295 "fsml.lex"
+#line 302 "fsml.lex"
 {
 				log("Beginning C_CODE\n");
-				tmp_str += std::string(yytext);
+				tmp_str += std::string(FSMLtext);
 				yy_push_state(C_CODE);
 			}
 	YY_BREAK
-case 38:
+case 39:
 YY_RULE_SETUP
-#line 301 "fsml.lex"
+#line 308 "fsml.lex"
 {
 				log("found: ON\n");
 				return token::ON;
 			}
 	YY_BREAK
-case 39:
-YY_RULE_SETUP
-#line 306 "fsml.lex"
-{
-				log("Beginning C_CONDITION\n");
-				tmp_str += std::string(yytext);
-				yy_push_state(C_CONDITION);
-			}
-	YY_BREAK
 case 40:
 YY_RULE_SETUP
-#line 312 "fsml.lex"
+#line 313 "fsml.lex"
 {
-				tmp_str += std::string(yytext);
-				b_cnt++;
+				log("Beginning C_CONDITION\n");
+				tmp_str += std::string(FSMLtext);
+				yy_push_state(C_CONDITION);
 			}
 	YY_BREAK
 case 41:
 YY_RULE_SETUP
-#line 317 "fsml.lex"
+#line 319 "fsml.lex"
 {
-				tmp_str += std::string(yytext);
+				tmp_str += std::string(FSMLtext);
+				b_cnt++;
+			}
+	YY_BREAK
+case 42:
+YY_RULE_SETUP
+#line 324 "fsml.lex"
+{
+				tmp_str += std::string(FSMLtext);
 				b_cnt--;
 				if (b_cnt < 0) {
 					log("found: C_CONDITION\n");
@@ -1561,208 +1335,209 @@ YY_RULE_SETUP
 				}
 			}
 	YY_BREAK
-case 42:
+case 43:
 YY_RULE_SETUP
-#line 330 "fsml.lex"
+#line 337 "fsml.lex"
 {
 				log("found: TIMEOUT\n");
 				yy_push_state(TIMEOUT);
 				return token::TIMEOUT_KEY;
 			}
 	YY_BREAK
-case 43:
+case 44:
 YY_RULE_SETUP
-#line 336 "fsml.lex"
+#line 343 "fsml.lex"
 {
 				log("found RB\n");
 				yy_pop_state();
 				return token::RB;
 			}
 	YY_BREAK
-case 44:
+case 45:
 YY_RULE_SETUP
-#line 342 "fsml.lex"
+#line 349 "fsml.lex"
 {
 				log("found: GO\n");
 				return token::GO;
 			}
 	YY_BREAK
-case 45:
+case 46:
 YY_RULE_SETUP
-#line 347 "fsml.lex"
+#line 354 "fsml.lex"
 {
 				log("found: RETRY\n");
 				return token::RETRY;
 			}
 	YY_BREAK
-case 46:
+case 47:
 YY_RULE_SETUP
-#line 352 "fsml.lex"
+#line 359 "fsml.lex"
 {
 				log("found: OUT\n");
 				return token::OUT;
 			}
 	YY_BREAK
-case 47:
+case 48:
 YY_RULE_SETUP
-#line 357 "fsml.lex"
+#line 364 "fsml.lex"
 {
 				log("found: START\n");
 				return token::START;
 			}
 	YY_BREAK
-case 48:
+case 49:
 YY_RULE_SETUP
-#line 362 "fsml.lex"
+#line 369 "fsml.lex"
 {
 				log("found: SC\n");
 				yy_pop_state();
 				return token::SC;
 			}
 	YY_BREAK
-case 49:
+case 50:
 YY_RULE_SETUP
-#line 368 "fsml.lex"
+#line 375 "fsml.lex"
 { 
-				log("found: IDENTIFIER %s\n", yytext);
-				FSMLlval->emplace<std::string>(yytext);
+				log("found: IDENTIFIER %s\n", FSMLtext);
+				FSMLlval->emplace<std::string>(FSMLtext);
 				return token::IDENTIFIER;
 			}
 	YY_BREAK
-case 50:
+case 51:
 YY_RULE_SETUP
-#line 374 "fsml.lex"
+#line 381 "fsml.lex"
 {
 				log("found LCB\n");
 				return token::LCB;
 			}
 	YY_BREAK
-case 51:
+case 52:
 YY_RULE_SETUP
-#line 379 "fsml.lex"
+#line 386 "fsml.lex"
 {
 				log("found RCB\n");
 				return token::RCB;
 			}
 	YY_BREAK
-case 52:
+case 53:
 YY_RULE_SETUP
-#line 384 "fsml.lex"
+#line 391 "fsml.lex"
 {
 				log("found LB\n");
 				return token::LB;
 			}
 	YY_BREAK
-case 53:
+case 54:
 YY_RULE_SETUP
-#line 389 "fsml.lex"
+#line 396 "fsml.lex"
 {
 				log("found RB\n");
 				return token::RB;
 			}
 	YY_BREAK
-case 54:
+case 55:
 YY_RULE_SETUP
-#line 394 "fsml.lex"
+#line 401 "fsml.lex"
 {
 				log("found: COMMA\n");
 				return token::COMMA;
 			}
 	YY_BREAK
-case 55:
+case 56:
 YY_RULE_SETUP
-#line 399 "fsml.lex"
+#line 406 "fsml.lex"
 {
 				log("found: EQUAL\n");
 				return token::EQUAL;
 			}
 	YY_BREAK
-case 56:
+case 57:
 YY_RULE_SETUP
-#line 404 "fsml.lex"
+#line 411 "fsml.lex"
 {
 				log("found: STAR\n");
 				return token::STAR;
 			}
 	YY_BREAK
-case 57:
-YY_RULE_SETUP
-#line 410 "fsml.lex"
-{ tmp_str += std::string(yytext); yy_push_state(C_COMMENT); }
-	YY_BREAK
 case 58:
 YY_RULE_SETUP
-#line 412 "fsml.lex"
-{ tmp_str += std::string(yytext);}
+#line 417 "fsml.lex"
+{ tmp_str += std::string(FSMLtext); yy_push_state(C_COMMENT); }
 	YY_BREAK
 case 59:
 YY_RULE_SETUP
-#line 413 "fsml.lex"
-{ tmp_str += std::string(yytext); }
+#line 419 "fsml.lex"
+{ tmp_str += std::string(FSMLtext);}
 	YY_BREAK
 case 60:
-/* rule 60 can match eol */
 YY_RULE_SETUP
-#line 414 "fsml.lex"
-{ ++line; yylloc->begin.line++; tmp_str += std::string(yytext); }
+#line 420 "fsml.lex"
+{ tmp_str += std::string(FSMLtext); }
 	YY_BREAK
 case 61:
+/* rule 61 can match eol */
 YY_RULE_SETUP
-#line 415 "fsml.lex"
-{ tmp_str += std::string(yytext); yy_pop_state(); }
+#line 421 "fsml.lex"
+{ ++line; yylloc->begin.line++; tmp_str += std::string(FSMLtext); }
 	YY_BREAK
 case 62:
 YY_RULE_SETUP
-#line 417 "fsml.lex"
-{ tmp_str += std::string(yytext); }
+#line 422 "fsml.lex"
+{ tmp_str += std::string(FSMLtext); yy_pop_state(); }
 	YY_BREAK
 case 63:
 YY_RULE_SETUP
-#line 420 "fsml.lex"
-{ tmp_str += std::string(yytext); }
+#line 424 "fsml.lex"
+{ tmp_str += std::string(FSMLtext); }
 	YY_BREAK
 case 64:
-/* rule 64 can match eol */
 YY_RULE_SETUP
-#line 421 "fsml.lex"
-{ ++line; yylloc->begin.line++; tmp_str += std::string(yytext); }
+#line 427 "fsml.lex"
+{ tmp_str += std::string(FSMLtext); }
 	YY_BREAK
 case 65:
+/* rule 65 can match eol */
 YY_RULE_SETUP
-#line 425 "fsml.lex"
+#line 428 "fsml.lex"
+{ ++line; yylloc->begin.line++; tmp_str += std::string(FSMLtext); }
+	YY_BREAK
+case 66:
+YY_RULE_SETUP
+#line 432 "fsml.lex"
 { 
 								yy_push_state(FSML_COMMENT); 
 								log("removing comment\n"); 
 							}
 	YY_BREAK
-case 66:
-YY_RULE_SETUP
-#line 429 "fsml.lex"
-
-	YY_BREAK
 case 67:
 YY_RULE_SETUP
-#line 430 "fsml.lex"
+#line 436 "fsml.lex"
 
 	YY_BREAK
 case 68:
-/* rule 68 can match eol */
 YY_RULE_SETUP
-#line 431 "fsml.lex"
-{ ++line; yylloc->begin.line++; }
+#line 437 "fsml.lex"
+
 	YY_BREAK
 case 69:
+/* rule 69 can match eol */
 YY_RULE_SETUP
-#line 432 "fsml.lex"
-{ yy_pop_state(); }
+#line 438 "fsml.lex"
+{ ++line; yylloc->begin.line++; }
 	YY_BREAK
 case 70:
 YY_RULE_SETUP
-#line 433 "fsml.lex"
+#line 439 "fsml.lex"
+{ yy_pop_state(); }
+	YY_BREAK
+case 71:
+YY_RULE_SETUP
+#line 440 "fsml.lex"
 { log("removing comment\n"); }
 	YY_BREAK
 case YY_STATE_EOF(INITIAL):
 case YY_STATE_EOF(DECL):
+case YY_STATE_EOF(EXPORT):
 case YY_STATE_EOF(TIME):
 case YY_STATE_EOF(PERIOD):
 case YY_STATE_EOF(FSM):
@@ -1776,31 +1551,31 @@ case YY_STATE_EOF(C_CODE):
 case YY_STATE_EOF(C_CONDITION):
 case YY_STATE_EOF(C_COMMENT):
 case YY_STATE_EOF(FSML_COMMENT):
-#line 436 "fsml.lex"
+#line 443 "fsml.lex"
 {yyterminate();}
 	YY_BREAK
-case 71:
-/* rule 71 can match eol */
-YY_RULE_SETUP
-#line 438 "fsml.lex"
-{ ++line; yylloc->begin.line++; }
-	YY_BREAK
 case 72:
+/* rule 72 can match eol */
 YY_RULE_SETUP
-#line 440 "fsml.lex"
-{ /* skip silently */ }
+#line 445 "fsml.lex"
+{ ++line; yylloc->begin.line++; }
 	YY_BREAK
 case 73:
 YY_RULE_SETUP
-#line 441 "fsml.lex"
-{ throw FSML::FSMLParser::syntax_error(*yylloc, "invalid character: " + std::string(yytext)); }
+#line 447 "fsml.lex"
+{ /* skip silently */ }
 	YY_BREAK
 case 74:
 YY_RULE_SETUP
-#line 443 "fsml.lex"
+#line 448 "fsml.lex"
+{ throw FSML::FSMLParser::syntax_error(*yylloc, "invalid character: " + std::string(FSMLtext)); }
+	YY_BREAK
+case 75:
+YY_RULE_SETUP
+#line 450 "fsml.lex"
 ECHO;
 	YY_BREAK
-#line 1803 "fsml.yy.cc"
+#line 1579 "fsml.yy.cc"
 
 	case YY_END_OF_BUFFER:
 		{
@@ -1815,15 +1590,15 @@ ECHO;
 			{
 			/* We're scanning a new file or input source.  It's
 			 * possible that this happened because the user
-			 * just pointed yyin at a new source and called
-			 * yylex().  If so, then we have to assure
+			 * just pointed FSMLin at a new source and called
+			 * FSMLlex().  If so, then we have to assure
 			 * consistency between YY_CURRENT_BUFFER and our
 			 * globals.  Here is the right place to do so, because
 			 * this is the first action (other than possibly a
 			 * back-up) that will match for the new input source.
 			 */
 			(yy_n_chars) = YY_CURRENT_BUFFER_LVALUE->yy_n_chars;
-			YY_CURRENT_BUFFER_LVALUE->yy_input_file = yyin;
+			YY_CURRENT_BUFFER_LVALUE->yy_input_file = FSMLin;
 			YY_CURRENT_BUFFER_LVALUE->yy_buffer_status = YY_BUFFER_NORMAL;
 			}
 
@@ -1877,11 +1652,11 @@ ECHO;
 				{
 				(yy_did_buffer_switch_on_eof) = 0;
 
-				if ( yywrap(  ) )
+				if ( FSMLwrap( ) )
 					{
 					/* Note: because we've taken care in
 					 * yy_get_next_buffer() to have set up
-					 * yytext, we can now set up
+					 * FSMLtext, we can now set up
 					 * yy_c_buf_p so that if some total
 					 * hoser (like flex itself) wants to
 					 * call the scanner after we return the
@@ -1930,8 +1705,7 @@ ECHO;
 			"fatal flex scanner internal error--no action found" );
 	} /* end of action switch */
 		} /* end of scanning one token */
-	} /* end of user's declarations */
-} /* end of yylex */
+} /* end of FSMLlex */
 
 /* yy_get_next_buffer - try to read in a new buffer
  *
@@ -1942,9 +1716,9 @@ ECHO;
  */
 static int yy_get_next_buffer (void)
 {
-    	char *dest = YY_CURRENT_BUFFER_LVALUE->yy_ch_buf;
-	char *source = (yytext_ptr);
-	int number_to_move, i;
+    	register char *dest = YY_CURRENT_BUFFER_LVALUE->yy_ch_buf;
+	register char *source = (yytext_ptr);
+	register int number_to_move, i;
 	int ret_val;
 
 	if ( (yy_c_buf_p) > &YY_CURRENT_BUFFER_LVALUE->yy_ch_buf[(yy_n_chars) + 1] )
@@ -1973,7 +1747,7 @@ static int yy_get_next_buffer (void)
 	/* Try to read more data. */
 
 	/* First move last chars to start of buffer. */
-	number_to_move = (int) ((yy_c_buf_p) - (yytext_ptr) - 1);
+	number_to_move = (int) ((yy_c_buf_p) - (yytext_ptr)) - 1;
 
 	for ( i = 0; i < number_to_move; ++i )
 		*(dest++) = *(source++);
@@ -1986,21 +1760,21 @@ static int yy_get_next_buffer (void)
 
 	else
 		{
-			int num_to_read =
+			yy_size_t num_to_read =
 			YY_CURRENT_BUFFER_LVALUE->yy_buf_size - number_to_move - 1;
 
 		while ( num_to_read <= 0 )
 			{ /* Not enough room in the buffer - grow it. */
 
 			/* just a shorter name for the current buffer */
-			YY_BUFFER_STATE b = YY_CURRENT_BUFFER_LVALUE;
+			YY_BUFFER_STATE b = YY_CURRENT_BUFFER;
 
 			int yy_c_buf_p_offset =
 				(int) ((yy_c_buf_p) - b->yy_ch_buf);
 
 			if ( b->yy_is_our_buffer )
 				{
-				int new_size = b->yy_buf_size * 2;
+				yy_size_t new_size = b->yy_buf_size * 2;
 
 				if ( new_size <= 0 )
 					b->yy_buf_size += b->yy_buf_size / 8;
@@ -2009,12 +1783,11 @@ static int yy_get_next_buffer (void)
 
 				b->yy_ch_buf = (char *)
 					/* Include room in for 2 EOB chars. */
-					yyrealloc( (void *) b->yy_ch_buf,
-							 (yy_size_t) (b->yy_buf_size + 2)  );
+					FSMLrealloc((void *) b->yy_ch_buf,b->yy_buf_size + 2  );
 				}
 			else
 				/* Can't grow it, we don't own it. */
-				b->yy_ch_buf = NULL;
+				b->yy_ch_buf = 0;
 
 			if ( ! b->yy_ch_buf )
 				YY_FATAL_ERROR(
@@ -2042,7 +1815,7 @@ static int yy_get_next_buffer (void)
 		if ( number_to_move == YY_MORE_ADJ )
 			{
 			ret_val = EOB_ACT_END_OF_FILE;
-			yyrestart( yyin  );
+			FSMLrestart(FSMLin  );
 			}
 
 		else
@@ -2056,15 +1829,12 @@ static int yy_get_next_buffer (void)
 	else
 		ret_val = EOB_ACT_CONTINUE_SCAN;
 
-	if (((yy_n_chars) + number_to_move) > YY_CURRENT_BUFFER_LVALUE->yy_buf_size) {
+	if ((yy_size_t) ((yy_n_chars) + number_to_move) > YY_CURRENT_BUFFER_LVALUE->yy_buf_size) {
 		/* Extend the array by 50%, plus the number we really need. */
-		int new_size = (yy_n_chars) + number_to_move + ((yy_n_chars) >> 1);
-		YY_CURRENT_BUFFER_LVALUE->yy_ch_buf = (char *) yyrealloc(
-			(void *) YY_CURRENT_BUFFER_LVALUE->yy_ch_buf, (yy_size_t) new_size  );
+		yy_size_t new_size = (yy_n_chars) + number_to_move + ((yy_n_chars) >> 1);
+		YY_CURRENT_BUFFER_LVALUE->yy_ch_buf = (char *) FSMLrealloc((void *) YY_CURRENT_BUFFER_LVALUE->yy_ch_buf,new_size  );
 		if ( ! YY_CURRENT_BUFFER_LVALUE->yy_ch_buf )
 			YY_FATAL_ERROR( "out of dynamic memory in yy_get_next_buffer()" );
-		/* "- 2" to take care of EOB's */
-		YY_CURRENT_BUFFER_LVALUE->yy_buf_size = (int) (new_size - 2);
 	}
 
 	(yy_n_chars) += number_to_move;
@@ -2080,14 +1850,14 @@ static int yy_get_next_buffer (void)
 
     static yy_state_type yy_get_previous_state (void)
 {
-	yy_state_type yy_current_state;
-	char *yy_cp;
+	register yy_state_type yy_current_state;
+	register char *yy_cp;
     
 	yy_current_state = (yy_start);
 
 	for ( yy_cp = (yytext_ptr) + YY_MORE_ADJ; yy_cp < (yy_c_buf_p); ++yy_cp )
 		{
-		YY_CHAR yy_c = (*yy_cp ? yy_ec[YY_SC_TO_UI(*yy_cp)] : 1);
+		register YY_CHAR yy_c = (*yy_cp ? yy_ec[YY_SC_TO_UI(*yy_cp)] : 1);
 		if ( yy_accept[yy_current_state] )
 			{
 			(yy_last_accepting_state) = yy_current_state;
@@ -2096,10 +1866,10 @@ static int yy_get_next_buffer (void)
 		while ( yy_chk[yy_base[yy_current_state] + yy_c] != yy_current_state )
 			{
 			yy_current_state = (int) yy_def[yy_current_state];
-			if ( yy_current_state >= 201 )
-				yy_c = yy_meta[yy_c];
+			if ( yy_current_state >= 208 )
+				yy_c = yy_meta[(unsigned int) yy_c];
 			}
-		yy_current_state = yy_nxt[yy_base[yy_current_state] + yy_c];
+		yy_current_state = yy_nxt[yy_base[yy_current_state] + (unsigned int) yy_c];
 		}
 
 	return yy_current_state;
@@ -2112,10 +1882,10 @@ static int yy_get_next_buffer (void)
  */
     static yy_state_type yy_try_NUL_trans  (yy_state_type yy_current_state )
 {
-	int yy_is_jam;
-    	char *yy_cp = (yy_c_buf_p);
+	register int yy_is_jam;
+    	register char *yy_cp = (yy_c_buf_p);
 
-	YY_CHAR yy_c = 1;
+	register YY_CHAR yy_c = 1;
 	if ( yy_accept[yy_current_state] )
 		{
 		(yy_last_accepting_state) = yy_current_state;
@@ -2124,18 +1894,14 @@ static int yy_get_next_buffer (void)
 	while ( yy_chk[yy_base[yy_current_state] + yy_c] != yy_current_state )
 		{
 		yy_current_state = (int) yy_def[yy_current_state];
-		if ( yy_current_state >= 201 )
-			yy_c = yy_meta[yy_c];
+		if ( yy_current_state >= 208 )
+			yy_c = yy_meta[(unsigned int) yy_c];
 		}
-	yy_current_state = yy_nxt[yy_base[yy_current_state] + yy_c];
-	yy_is_jam = (yy_current_state == 200);
+	yy_current_state = yy_nxt[yy_base[yy_current_state] + (unsigned int) yy_c];
+	yy_is_jam = (yy_current_state == 207);
 
-		return yy_is_jam ? 0 : yy_current_state;
+	return yy_is_jam ? 0 : yy_current_state;
 }
-
-#ifndef YY_NO_UNPUT
-
-#endif
 
 #ifndef YY_NO_INPUT
 #ifdef __cplusplus
@@ -2161,7 +1927,7 @@ static int yy_get_next_buffer (void)
 
 		else
 			{ /* need more input */
-			int offset = (int) ((yy_c_buf_p) - (yytext_ptr));
+			yy_size_t offset = (yy_c_buf_p) - (yytext_ptr);
 			++(yy_c_buf_p);
 
 			switch ( yy_get_next_buffer(  ) )
@@ -2178,13 +1944,13 @@ static int yy_get_next_buffer (void)
 					 */
 
 					/* Reset buffer status. */
-					yyrestart( yyin );
+					FSMLrestart(FSMLin );
 
 					/*FALLTHROUGH*/
 
 				case EOB_ACT_END_OF_FILE:
 					{
-					if ( yywrap(  ) )
+					if ( FSMLwrap( ) )
 						return 0;
 
 					if ( ! (yy_did_buffer_switch_on_eof) )
@@ -2204,7 +1970,7 @@ static int yy_get_next_buffer (void)
 		}
 
 	c = *(unsigned char *) (yy_c_buf_p);	/* cast for 8-bit char's */
-	*(yy_c_buf_p) = '\0';	/* preserve yytext */
+	*(yy_c_buf_p) = '\0';	/* preserve FSMLtext */
 	(yy_hold_char) = *++(yy_c_buf_p);
 
 	return c;
@@ -2216,32 +1982,32 @@ static int yy_get_next_buffer (void)
  * 
  * @note This function does not reset the start condition to @c INITIAL .
  */
-    void yyrestart  (FILE * input_file )
+    void FSMLrestart  (FILE * input_file )
 {
     
 	if ( ! YY_CURRENT_BUFFER ){
-        yyensure_buffer_stack ();
+        FSMLensure_buffer_stack ();
 		YY_CURRENT_BUFFER_LVALUE =
-            yy_create_buffer( yyin, YY_BUF_SIZE );
+            FSML_create_buffer(FSMLin,YY_BUF_SIZE );
 	}
 
-	yy_init_buffer( YY_CURRENT_BUFFER, input_file );
-	yy_load_buffer_state(  );
+	FSML_init_buffer(YY_CURRENT_BUFFER,input_file );
+	FSML_load_buffer_state( );
 }
 
 /** Switch to a different input buffer.
  * @param new_buffer The new input buffer.
  * 
  */
-    void yy_switch_to_buffer  (YY_BUFFER_STATE  new_buffer )
+    void FSML_switch_to_buffer  (YY_BUFFER_STATE  new_buffer )
 {
     
 	/* TODO. We should be able to replace this entire function body
 	 * with
-	 *		yypop_buffer_state();
-	 *		yypush_buffer_state(new_buffer);
+	 *		FSMLpop_buffer_state();
+	 *		FSMLpush_buffer_state(new_buffer);
      */
-	yyensure_buffer_stack ();
+	FSMLensure_buffer_stack ();
 	if ( YY_CURRENT_BUFFER == new_buffer )
 		return;
 
@@ -2254,21 +2020,21 @@ static int yy_get_next_buffer (void)
 		}
 
 	YY_CURRENT_BUFFER_LVALUE = new_buffer;
-	yy_load_buffer_state(  );
+	FSML_load_buffer_state( );
 
 	/* We don't actually know whether we did this switch during
-	 * EOF (yywrap()) processing, but the only time this flag
-	 * is looked at is after yywrap() is called, so it's safe
+	 * EOF (FSMLwrap()) processing, but the only time this flag
+	 * is looked at is after FSMLwrap() is called, so it's safe
 	 * to go ahead and always set it.
 	 */
 	(yy_did_buffer_switch_on_eof) = 1;
 }
 
-static void yy_load_buffer_state  (void)
+static void FSML_load_buffer_state  (void)
 {
     	(yy_n_chars) = YY_CURRENT_BUFFER_LVALUE->yy_n_chars;
 	(yytext_ptr) = (yy_c_buf_p) = YY_CURRENT_BUFFER_LVALUE->yy_buf_pos;
-	yyin = YY_CURRENT_BUFFER_LVALUE->yy_input_file;
+	FSMLin = YY_CURRENT_BUFFER_LVALUE->yy_input_file;
 	(yy_hold_char) = *(yy_c_buf_p);
 }
 
@@ -2278,35 +2044,35 @@ static void yy_load_buffer_state  (void)
  * 
  * @return the allocated buffer state.
  */
-    YY_BUFFER_STATE yy_create_buffer  (FILE * file, int  size )
+    YY_BUFFER_STATE FSML_create_buffer  (FILE * file, int  size )
 {
 	YY_BUFFER_STATE b;
     
-	b = (YY_BUFFER_STATE) yyalloc( sizeof( struct yy_buffer_state )  );
+	b = (YY_BUFFER_STATE) FSMLalloc(sizeof( struct yy_buffer_state )  );
 	if ( ! b )
-		YY_FATAL_ERROR( "out of dynamic memory in yy_create_buffer()" );
+		YY_FATAL_ERROR( "out of dynamic memory in FSML_create_buffer()" );
 
 	b->yy_buf_size = size;
 
 	/* yy_ch_buf has to be 2 characters longer than the size given because
 	 * we need to put in 2 end-of-buffer characters.
 	 */
-	b->yy_ch_buf = (char *) yyalloc( (yy_size_t) (b->yy_buf_size + 2)  );
+	b->yy_ch_buf = (char *) FSMLalloc(b->yy_buf_size + 2  );
 	if ( ! b->yy_ch_buf )
-		YY_FATAL_ERROR( "out of dynamic memory in yy_create_buffer()" );
+		YY_FATAL_ERROR( "out of dynamic memory in FSML_create_buffer()" );
 
 	b->yy_is_our_buffer = 1;
 
-	yy_init_buffer( b, file );
+	FSML_init_buffer(b,file );
 
 	return b;
 }
 
 /** Destroy the buffer.
- * @param b a buffer created with yy_create_buffer()
+ * @param b a buffer created with FSML_create_buffer()
  * 
  */
-    void yy_delete_buffer (YY_BUFFER_STATE  b )
+    void FSML_delete_buffer (YY_BUFFER_STATE  b )
 {
     
 	if ( ! b )
@@ -2316,27 +2082,31 @@ static void yy_load_buffer_state  (void)
 		YY_CURRENT_BUFFER_LVALUE = (YY_BUFFER_STATE) 0;
 
 	if ( b->yy_is_our_buffer )
-		yyfree( (void *) b->yy_ch_buf  );
+		FSMLfree((void *) b->yy_ch_buf  );
 
-	yyfree( (void *) b  );
+	FSMLfree((void *) b  );
 }
 
+#ifndef __cplusplus
+extern int isatty (int );
+#endif /* __cplusplus */
+    
 /* Initializes or reinitializes a buffer.
  * This function is sometimes called more than once on the same buffer,
- * such as during a yyrestart() or at EOF.
+ * such as during a FSMLrestart() or at EOF.
  */
-    static void yy_init_buffer  (YY_BUFFER_STATE  b, FILE * file )
+    static void FSML_init_buffer  (YY_BUFFER_STATE  b, FILE * file )
 
 {
 	int oerrno = errno;
     
-	yy_flush_buffer( b );
+	FSML_flush_buffer(b );
 
 	b->yy_input_file = file;
 	b->yy_fill_buffer = 1;
 
-    /* If b is the current buffer, then yy_init_buffer was _probably_
-     * called from yyrestart() or through yy_get_next_buffer.
+    /* If b is the current buffer, then FSML_init_buffer was _probably_
+     * called from FSMLrestart() or through yy_get_next_buffer.
      * In that case, we don't want to reset the lineno or column.
      */
     if (b != YY_CURRENT_BUFFER){
@@ -2353,7 +2123,7 @@ static void yy_load_buffer_state  (void)
  * @param b the buffer state to be flushed, usually @c YY_CURRENT_BUFFER.
  * 
  */
-    void yy_flush_buffer (YY_BUFFER_STATE  b )
+    void FSML_flush_buffer (YY_BUFFER_STATE  b )
 {
     	if ( ! b )
 		return;
@@ -2373,7 +2143,7 @@ static void yy_load_buffer_state  (void)
 	b->yy_buffer_status = YY_BUFFER_NEW;
 
 	if ( b == YY_CURRENT_BUFFER )
-		yy_load_buffer_state(  );
+		FSML_load_buffer_state( );
 }
 
 /** Pushes the new state onto the stack. The new state becomes
@@ -2382,14 +2152,14 @@ static void yy_load_buffer_state  (void)
  *  @param new_buffer The new state.
  *  
  */
-void yypush_buffer_state (YY_BUFFER_STATE new_buffer )
+void FSMLpush_buffer_state (YY_BUFFER_STATE new_buffer )
 {
     	if (new_buffer == NULL)
 		return;
 
-	yyensure_buffer_stack();
+	FSMLensure_buffer_stack();
 
-	/* This block is copied from yy_switch_to_buffer. */
+	/* This block is copied from FSML_switch_to_buffer. */
 	if ( YY_CURRENT_BUFFER )
 		{
 		/* Flush out information for old buffer. */
@@ -2403,8 +2173,8 @@ void yypush_buffer_state (YY_BUFFER_STATE new_buffer )
 		(yy_buffer_stack_top)++;
 	YY_CURRENT_BUFFER_LVALUE = new_buffer;
 
-	/* copied from yy_switch_to_buffer. */
-	yy_load_buffer_state(  );
+	/* copied from FSML_switch_to_buffer. */
+	FSML_load_buffer_state( );
 	(yy_did_buffer_switch_on_eof) = 1;
 }
 
@@ -2412,18 +2182,18 @@ void yypush_buffer_state (YY_BUFFER_STATE new_buffer )
  *  The next element becomes the new top.
  *  
  */
-void yypop_buffer_state (void)
+void FSMLpop_buffer_state (void)
 {
     	if (!YY_CURRENT_BUFFER)
 		return;
 
-	yy_delete_buffer(YY_CURRENT_BUFFER );
+	FSML_delete_buffer(YY_CURRENT_BUFFER );
 	YY_CURRENT_BUFFER_LVALUE = NULL;
 	if ((yy_buffer_stack_top) > 0)
 		--(yy_buffer_stack_top);
 
 	if (YY_CURRENT_BUFFER) {
-		yy_load_buffer_state(  );
+		FSML_load_buffer_state( );
 		(yy_did_buffer_switch_on_eof) = 1;
 	}
 }
@@ -2431,7 +2201,7 @@ void yypop_buffer_state (void)
 /* Allocates the stack if it does not exist.
  *  Guarantees space for at least one push.
  */
-static void yyensure_buffer_stack (void)
+static void FSMLensure_buffer_stack (void)
 {
 	yy_size_t num_to_alloc;
     
@@ -2441,15 +2211,15 @@ static void yyensure_buffer_stack (void)
 		 * scanner will even need a stack. We use 2 instead of 1 to avoid an
 		 * immediate realloc on the next call.
          */
-      num_to_alloc = 1; /* After all that talk, this was set to 1 anyways... */
-		(yy_buffer_stack) = (struct yy_buffer_state**)yyalloc
+		num_to_alloc = 1;
+		(yy_buffer_stack) = (struct yy_buffer_state**)FSMLalloc
 								(num_to_alloc * sizeof(struct yy_buffer_state*)
 								);
 		if ( ! (yy_buffer_stack) )
-			YY_FATAL_ERROR( "out of dynamic memory in yyensure_buffer_stack()" );
-
+			YY_FATAL_ERROR( "out of dynamic memory in FSMLensure_buffer_stack()" );
+								  
 		memset((yy_buffer_stack), 0, num_to_alloc * sizeof(struct yy_buffer_state*));
-
+				
 		(yy_buffer_stack_max) = num_to_alloc;
 		(yy_buffer_stack_top) = 0;
 		return;
@@ -2458,15 +2228,15 @@ static void yyensure_buffer_stack (void)
 	if ((yy_buffer_stack_top) >= ((yy_buffer_stack_max)) - 1){
 
 		/* Increase the buffer to prepare for a possible push. */
-		yy_size_t grow_size = 8 /* arbitrary grow size */;
+		int grow_size = 8 /* arbitrary grow size */;
 
 		num_to_alloc = (yy_buffer_stack_max) + grow_size;
-		(yy_buffer_stack) = (struct yy_buffer_state**)yyrealloc
+		(yy_buffer_stack) = (struct yy_buffer_state**)FSMLrealloc
 								((yy_buffer_stack),
 								num_to_alloc * sizeof(struct yy_buffer_state*)
 								);
 		if ( ! (yy_buffer_stack) )
-			YY_FATAL_ERROR( "out of dynamic memory in yyensure_buffer_stack()" );
+			YY_FATAL_ERROR( "out of dynamic memory in FSMLensure_buffer_stack()" );
 
 		/* zero only the new slots.*/
 		memset((yy_buffer_stack) + (yy_buffer_stack_max), 0, grow_size * sizeof(struct yy_buffer_state*));
@@ -2478,9 +2248,9 @@ static void yyensure_buffer_stack (void)
  * @param base the character buffer
  * @param size the size in bytes of the character buffer
  * 
- * @return the newly allocated buffer state object.
+ * @return the newly allocated buffer state object. 
  */
-YY_BUFFER_STATE yy_scan_buffer  (char * base, yy_size_t  size )
+YY_BUFFER_STATE FSML_scan_buffer  (char * base, yy_size_t  size )
 {
 	YY_BUFFER_STATE b;
     
@@ -2488,69 +2258,68 @@ YY_BUFFER_STATE yy_scan_buffer  (char * base, yy_size_t  size )
 	     base[size-2] != YY_END_OF_BUFFER_CHAR ||
 	     base[size-1] != YY_END_OF_BUFFER_CHAR )
 		/* They forgot to leave room for the EOB's. */
-		return NULL;
+		return 0;
 
-	b = (YY_BUFFER_STATE) yyalloc( sizeof( struct yy_buffer_state )  );
+	b = (YY_BUFFER_STATE) FSMLalloc(sizeof( struct yy_buffer_state )  );
 	if ( ! b )
-		YY_FATAL_ERROR( "out of dynamic memory in yy_scan_buffer()" );
+		YY_FATAL_ERROR( "out of dynamic memory in FSML_scan_buffer()" );
 
-	b->yy_buf_size = (int) (size - 2);	/* "- 2" to take care of EOB's */
+	b->yy_buf_size = size - 2;	/* "- 2" to take care of EOB's */
 	b->yy_buf_pos = b->yy_ch_buf = base;
 	b->yy_is_our_buffer = 0;
-	b->yy_input_file = NULL;
+	b->yy_input_file = 0;
 	b->yy_n_chars = b->yy_buf_size;
 	b->yy_is_interactive = 0;
 	b->yy_at_bol = 1;
 	b->yy_fill_buffer = 0;
 	b->yy_buffer_status = YY_BUFFER_NEW;
 
-	yy_switch_to_buffer( b  );
+	FSML_switch_to_buffer(b  );
 
 	return b;
 }
 
-/** Setup the input buffer state to scan a string. The next call to yylex() will
+/** Setup the input buffer state to scan a string. The next call to FSMLlex() will
  * scan from a @e copy of @a str.
  * @param yystr a NUL-terminated string to scan
  * 
  * @return the newly allocated buffer state object.
  * @note If you want to scan bytes that may contain NUL values, then use
- *       yy_scan_bytes() instead.
+ *       FSML_scan_bytes() instead.
  */
-YY_BUFFER_STATE yy_scan_string (const char * yystr )
+YY_BUFFER_STATE FSML_scan_string (yyconst char * yystr )
 {
     
-	return yy_scan_bytes( yystr, (int) strlen(yystr) );
+	return FSML_scan_bytes(yystr,strlen(yystr) );
 }
 
-/** Setup the input buffer state to scan the given bytes. The next call to yylex() will
+/** Setup the input buffer state to scan the given bytes. The next call to FSMLlex() will
  * scan from a @e copy of @a bytes.
- * @param yybytes the byte buffer to scan
- * @param _yybytes_len the number of bytes in the buffer pointed to by @a bytes.
+ * @param bytes the byte buffer to scan
+ * @param len the number of bytes in the buffer pointed to by @a bytes.
  * 
  * @return the newly allocated buffer state object.
  */
-YY_BUFFER_STATE yy_scan_bytes  (const char * yybytes, int  _yybytes_len )
+YY_BUFFER_STATE FSML_scan_bytes  (yyconst char * yybytes, yy_size_t  _yybytes_len )
 {
 	YY_BUFFER_STATE b;
 	char *buf;
-	yy_size_t n;
-	int i;
+	yy_size_t n, i;
     
 	/* Get memory for full buffer, including space for trailing EOB's. */
-	n = (yy_size_t) (_yybytes_len + 2);
-	buf = (char *) yyalloc( n  );
+	n = _yybytes_len + 2;
+	buf = (char *) FSMLalloc(n  );
 	if ( ! buf )
-		YY_FATAL_ERROR( "out of dynamic memory in yy_scan_bytes()" );
+		YY_FATAL_ERROR( "out of dynamic memory in FSML_scan_bytes()" );
 
 	for ( i = 0; i < _yybytes_len; ++i )
 		buf[i] = yybytes[i];
 
 	buf[_yybytes_len] = buf[_yybytes_len+1] = YY_END_OF_BUFFER_CHAR;
 
-	b = yy_scan_buffer( buf, n );
+	b = FSML_scan_buffer(buf,n );
 	if ( ! b )
-		YY_FATAL_ERROR( "bad buffer in yy_scan_bytes()" );
+		YY_FATAL_ERROR( "bad buffer in FSML_scan_bytes()" );
 
 	/* It's okay to grow etc. this buffer, and we should throw it
 	 * away when we're done.
@@ -2560,21 +2329,20 @@ YY_BUFFER_STATE yy_scan_bytes  (const char * yybytes, int  _yybytes_len )
 	return b;
 }
 
-    static void yy_push_state (int  _new_state )
+    static void yy_push_state (int  new_state )
 {
     	if ( (yy_start_stack_ptr) >= (yy_start_stack_depth) )
 		{
 		yy_size_t new_size;
 
 		(yy_start_stack_depth) += YY_START_STACK_INCR;
-		new_size = (yy_size_t) (yy_start_stack_depth) * sizeof( int );
+		new_size = (yy_start_stack_depth) * sizeof( int );
 
 		if ( ! (yy_start_stack) )
-			(yy_start_stack) = (int *) yyalloc( new_size  );
+			(yy_start_stack) = (int *) FSMLalloc(new_size  );
 
 		else
-			(yy_start_stack) = (int *) yyrealloc(
-					(void *) (yy_start_stack), new_size  );
+			(yy_start_stack) = (int *) FSMLrealloc((void *) (yy_start_stack),new_size  );
 
 		if ( ! (yy_start_stack) )
 			YY_FATAL_ERROR( "out of memory expanding start-condition stack" );
@@ -2582,7 +2350,7 @@ YY_BUFFER_STATE yy_scan_bytes  (const char * yybytes, int  _yybytes_len )
 
 	(yy_start_stack)[(yy_start_stack_ptr)++] = YY_START;
 
-	BEGIN(_new_state);
+	BEGIN(new_state);
 }
 
     static void yy_pop_state  (void)
@@ -2602,9 +2370,9 @@ YY_BUFFER_STATE yy_scan_bytes  (const char * yybytes, int  _yybytes_len )
 #define YY_EXIT_FAILURE 2
 #endif
 
-static void yynoreturn yy_fatal_error (const char* msg )
+static void yy_fatal_error (yyconst char* msg )
 {
-			fprintf( stderr, "%s\n", msg );
+    	(void) fprintf( stderr, "%s\n", msg );
 	exit( YY_EXIT_FAILURE );
 }
 
@@ -2614,14 +2382,14 @@ static void yynoreturn yy_fatal_error (const char* msg )
 #define yyless(n) \
 	do \
 		{ \
-		/* Undo effects of setting up yytext. */ \
+		/* Undo effects of setting up FSMLtext. */ \
         int yyless_macro_arg = (n); \
         YY_LESS_LINENO(yyless_macro_arg);\
-		yytext[yyleng] = (yy_hold_char); \
-		(yy_c_buf_p) = yytext + yyless_macro_arg; \
+		FSMLtext[FSMLleng] = (yy_hold_char); \
+		(yy_c_buf_p) = FSMLtext + yyless_macro_arg; \
 		(yy_hold_char) = *(yy_c_buf_p); \
 		*(yy_c_buf_p) = '\0'; \
-		yyleng = yyless_macro_arg; \
+		FSMLleng = yyless_macro_arg; \
 		} \
 	while ( 0 )
 
@@ -2630,91 +2398,91 @@ static void yynoreturn yy_fatal_error (const char* msg )
 /** Get the current line number.
  * 
  */
-int yyget_lineno  (void)
+int FSMLget_lineno  (void)
 {
-    
-    return yylineno;
+        
+    return FSMLlineno;
 }
 
 /** Get the input stream.
  * 
  */
-FILE *yyget_in  (void)
+FILE *FSMLget_in  (void)
 {
-        return yyin;
+        return FSMLin;
 }
 
 /** Get the output stream.
  * 
  */
-FILE *yyget_out  (void)
+FILE *FSMLget_out  (void)
 {
-        return yyout;
+        return FSMLout;
 }
 
 /** Get the length of the current token.
  * 
  */
-int yyget_leng  (void)
+yy_size_t FSMLget_leng  (void)
 {
-        return yyleng;
+        return FSMLleng;
 }
 
 /** Get the current token.
  * 
  */
 
-char *yyget_text  (void)
+char *FSMLget_text  (void)
 {
-        return yytext;
+        return FSMLtext;
 }
 
 /** Set the current line number.
- * @param _line_number line number
+ * @param line_number
  * 
  */
-void yyset_lineno (int  _line_number )
+void FSMLset_lineno (int  line_number )
 {
     
-    yylineno = _line_number;
+    FSMLlineno = line_number;
 }
 
 /** Set the input stream. This does not discard the current
  * input buffer.
- * @param _in_str A readable stream.
+ * @param in_str A readable stream.
  * 
- * @see yy_switch_to_buffer
+ * @see FSML_switch_to_buffer
  */
-void yyset_in (FILE *  _in_str )
+void FSMLset_in (FILE *  in_str )
 {
-        yyin = _in_str ;
+        FSMLin = in_str ;
 }
 
-void yyset_out (FILE *  _out_str )
+void FSMLset_out (FILE *  out_str )
 {
-        yyout = _out_str ;
+        FSMLout = out_str ;
 }
 
-int yyget_debug  (void)
+int FSMLget_debug  (void)
 {
-        return yy_flex_debug;
+        return FSML_flex_debug;
 }
 
-void yyset_debug (int  _bdebug )
+void FSMLset_debug (int  bdebug )
 {
-        yy_flex_debug = _bdebug ;
+        FSML_flex_debug = bdebug ;
 }
 
 static int yy_init_globals (void)
 {
         /* Initialization is the same as for the non-reentrant scanner.
-     * This function is called from yylex_destroy(), so don't allocate here.
+     * This function is called from FSMLlex_destroy(), so don't allocate here.
      */
 
-    (yy_buffer_stack) = NULL;
+    (yy_buffer_stack) = 0;
     (yy_buffer_stack_top) = 0;
     (yy_buffer_stack_max) = 0;
-    (yy_c_buf_p) = NULL;
+    (yy_c_buf_p) = (char *) 0;
     (yy_init) = 0;
     (yy_start) = 0;
 
@@ -2724,40 +2492,40 @@ static int yy_init_globals (void)
 
 /* Defined in main.c */
 #ifdef YY_STDINIT
-    yyin = stdin;
-    yyout = stdout;
+    FSMLin = stdin;
+    FSMLout = stdout;
 #else
-    yyin = NULL;
-    yyout = NULL;
+    FSMLin = (FILE *) 0;
+    FSMLout = (FILE *) 0;
 #endif
 
     /* For future reference: Set errno on error, since we are called by
-     * yylex_init()
+     * FSMLlex_init()
      */
     return 0;
 }
 
-/* yylex_destroy is for both reentrant and non-reentrant scanners. */
-int yylex_destroy  (void)
+/* FSMLlex_destroy is for both reentrant and non-reentrant scanners. */
+int FSMLlex_destroy  (void)
 {
     
     /* Pop the buffer stack, destroying each element. */
 	while(YY_CURRENT_BUFFER){
-		yy_delete_buffer( YY_CURRENT_BUFFER  );
+		FSML_delete_buffer(YY_CURRENT_BUFFER  );
 		YY_CURRENT_BUFFER_LVALUE = NULL;
-		yypop_buffer_state();
+		FSMLpop_buffer_state();
 	}
 
 	/* Destroy the stack itself. */
-	yyfree((yy_buffer_stack) );
+	FSMLfree((yy_buffer_stack) );
 	(yy_buffer_stack) = NULL;
 
     /* Destroy the start condition stack. */
-        yyfree( (yy_start_stack)  );
+        FSMLfree((yy_start_stack)  );
         (yy_start_stack) = NULL;
 
     /* Reset the globals. This is important in a non-reentrant scanner so the next time
-     * yylex() is called, initialization will occur. */
+     * FSMLlex() is called, initialization will occur. */
     yy_init_globals( );
 
     return 0;
@@ -2768,19 +2536,18 @@ int yylex_destroy  (void)
  */
 
 #ifndef yytext_ptr
-static void yy_flex_strncpy (char* s1, const char * s2, int n )
+static void yy_flex_strncpy (char* s1, yyconst char * s2, int n )
 {
-		
-	int i;
+	register int i;
 	for ( i = 0; i < n; ++i )
 		s1[i] = s2[i];
 }
 #endif
 
 #ifdef YY_NEED_STRLEN
-static int yy_flex_strlen (const char * s )
+static int yy_flex_strlen (yyconst char * s )
 {
-	int n;
+	register int n;
 	for ( n = 0; s[n]; ++n )
 		;
 
@@ -2788,14 +2555,13 @@ static int yy_flex_strlen (const char * s )
 }
 #endif
 
-void *yyalloc (yy_size_t  size )
+void *FSMLalloc (yy_size_t  size )
 {
-			return malloc(size);
+	return (void *) malloc( size );
 }
 
-void *yyrealloc  (void * ptr, yy_size_t  size )
+void *FSMLrealloc  (void * ptr, yy_size_t  size )
 {
-		
 	/* The cast to (char *) in the following accommodates both
 	 * implementations that use char* generic pointers, and those
 	 * that use void* generic pointers.  It works with the latter
@@ -2803,21 +2569,22 @@ void *yyrealloc  (void * ptr, yy_size_t  size )
 	 * any pointer type to void*, and deal with argument conversions
 	 * as though doing an assignment.
 	 */
-	return realloc(ptr, size);
+	return (void *) realloc( (char *) ptr, size );
 }
 
-void yyfree (void * ptr )
+void FSMLfree (void * ptr )
 {
-			free( (char *) ptr );	/* see yyrealloc() for (char *) cast */
+	free( (char *) ptr );	/* see FSMLrealloc() for (char *) cast */
 }
 
 #define YYTABLES_NAME "yytables"
 
-#line 443 "fsml.lex"
+#line 450 "fsml.lex"
 
 
-#ifndef yywrap
-int yywrap() 
+
+#ifndef FSMLwrap
+int FSMLwrap() 
 {
 	return 1;
 }
@@ -2826,7 +2593,7 @@ int yywrap()
 void FSMLDriver::scanBegin()
 {
 	std::string msg; 
-	if(!(yyin = fopen(filename_.c_str(), "r"))){
+	if(!(FSMLin = fopen(filename_.c_str(), "r"))){
 		msg += std::string("error opening ") + filename_ + std::string(": ") + strerror(errno);
 		error(msg);
 	}
@@ -2834,7 +2601,7 @@ void FSMLDriver::scanBegin()
 
 void FSMLDriver::scanEnd()
 {
-	fclose(yyin);
+	fclose(FSMLin);
 	YY_FLUSH_BUFFER;
 }
 

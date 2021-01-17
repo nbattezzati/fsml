@@ -2,7 +2,9 @@ decl {
     #include <time.h>
 
     #define PROGR_TIMEOUT       (10000)     // stay in PROGRAM mode for at most 10 sec if no cmds arrive
+}
 
+export {
     typedef enum {
         AlarmCmd_NoCommand,
         AlarmCmd_ProgrSet,

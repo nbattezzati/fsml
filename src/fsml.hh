@@ -1,4 +1,4 @@
-// A Bison parser, made by GNU Bison 3.6.4.
+// A Bison parser, made by GNU Bison 3.7.2.
 
 // Skeleton interface for Bison LALR(1) parsers in C++
 
@@ -447,52 +447,53 @@ namespace FSML {
     YYerror = 256,                 // error
     YYUNDEF = 257,                 // "invalid token"
     DECL_KEY = 258,                // DECL_KEY
-    TIME_KEY = 259,                // TIME_KEY
-    PERIOD_KEY = 260,              // PERIOD_KEY
-    FSM_KEY = 261,                 // FSM_KEY
-    LCB = 262,                     // LCB
-    RCB = 263,                     // RCB
-    VAR_KEY = 264,                 // VAR_KEY
-    INPUT_KEY = 265,               // INPUT_KEY
-    OUTPUT_KEY = 266,              // OUTPUT_KEY
-    TIMER_KEY = 267,               // TIMER_KEY
-    STATE_KEY = 268,               // STATE_KEY
-    ON = 269,                      // ON
-    TIMEOUT_KEY = 270,             // TIMEOUT_KEY
-    GO = 271,                      // GO
-    ERR = 272,                     // ERR
-    RETRY = 273,                   // RETRY
-    START = 274,                   // START
-    VOID = 275,                    // VOID
-    CHAR = 276,                    // CHAR
-    SHORT = 277,                   // SHORT
-    INT = 278,                     // INT
-    LONG = 279,                    // LONG
-    FLOAT = 280,                   // FLOAT
-    DOUBLE = 281,                  // DOUBLE
-    SIGNED = 282,                  // SIGNED
-    UNSIGNED = 283,                // UNSIGNED
-    UNION = 284,                   // UNION
-    STRUCT = 285,                  // STRUCT
-    ENUM = 286,                    // ENUM
-    STAR = 287,                    // STAR
-    COMMA = 288,                   // COMMA
-    END = 289,                     // END
-    RESET = 290,                   // RESET
-    LSB = 291,                     // LSB
-    RSB = 292,                     // RSB
-    OUT = 293,                     // OUT
-    UNTIL_KEY = 294,               // UNTIL_KEY
-    SC = 295,                      // SC
-    EQUAL = 296,                   // EQUAL
-    LB = 297,                      // LB
-    RB = 298,                      // RB
-    C_CODE_BLOCK = 299,            // C_CODE_BLOCK
-    C_CONDITION_BLOCK = 300,       // C_CONDITION_BLOCK
-    IDENTIFIER = 301,              // IDENTIFIER
-    CHARACTER_CONSTANT = 302,      // CHARACTER_CONSTANT
-    INTEGER_CONSTANT = 303,        // INTEGER_CONSTANT
-    FLOATING_CONSTANT = 304        // FLOATING_CONSTANT
+    EXPORT_KEY = 259,              // EXPORT_KEY
+    TIME_KEY = 260,                // TIME_KEY
+    PERIOD_KEY = 261,              // PERIOD_KEY
+    FSM_KEY = 262,                 // FSM_KEY
+    LCB = 263,                     // LCB
+    RCB = 264,                     // RCB
+    VAR_KEY = 265,                 // VAR_KEY
+    INPUT_KEY = 266,               // INPUT_KEY
+    OUTPUT_KEY = 267,              // OUTPUT_KEY
+    TIMER_KEY = 268,               // TIMER_KEY
+    STATE_KEY = 269,               // STATE_KEY
+    ON = 270,                      // ON
+    TIMEOUT_KEY = 271,             // TIMEOUT_KEY
+    GO = 272,                      // GO
+    ERR = 273,                     // ERR
+    RETRY = 274,                   // RETRY
+    START = 275,                   // START
+    VOID = 276,                    // VOID
+    CHAR = 277,                    // CHAR
+    SHORT = 278,                   // SHORT
+    INT = 279,                     // INT
+    LONG = 280,                    // LONG
+    FLOAT = 281,                   // FLOAT
+    DOUBLE = 282,                  // DOUBLE
+    SIGNED = 283,                  // SIGNED
+    UNSIGNED = 284,                // UNSIGNED
+    UNION = 285,                   // UNION
+    STRUCT = 286,                  // STRUCT
+    ENUM = 287,                    // ENUM
+    STAR = 288,                    // STAR
+    COMMA = 289,                   // COMMA
+    END = 290,                     // END
+    RESET = 291,                   // RESET
+    LSB = 292,                     // LSB
+    RSB = 293,                     // RSB
+    OUT = 294,                     // OUT
+    UNTIL_KEY = 295,               // UNTIL_KEY
+    SC = 296,                      // SC
+    EQUAL = 297,                   // EQUAL
+    LB = 298,                      // LB
+    RB = 299,                      // RB
+    C_CODE_BLOCK = 300,            // C_CODE_BLOCK
+    C_CONDITION_BLOCK = 301,       // C_CONDITION_BLOCK
+    IDENTIFIER = 302,              // IDENTIFIER
+    CHARACTER_CONSTANT = 303,      // CHARACTER_CONSTANT
+    INTEGER_CONSTANT = 304,        // INTEGER_CONSTANT
+    FLOATING_CONSTANT = 305        // FLOATING_CONSTANT
       };
       /// Backward compatibility alias (Bison 3.6).
       typedef token_kind_type yytokentype;
@@ -509,108 +510,110 @@ namespace FSML {
     {
       enum symbol_kind_type
       {
-        YYNTOKENS = 50, ///< Number of tokens.
+        YYNTOKENS = 51, ///< Number of tokens.
         S_YYEMPTY = -2,
         S_YYEOF = 0,                             // END_OF_FILE
         S_YYerror = 1,                           // error
         S_YYUNDEF = 2,                           // "invalid token"
         S_DECL_KEY = 3,                          // DECL_KEY
-        S_TIME_KEY = 4,                          // TIME_KEY
-        S_PERIOD_KEY = 5,                        // PERIOD_KEY
-        S_FSM_KEY = 6,                           // FSM_KEY
-        S_LCB = 7,                               // LCB
-        S_RCB = 8,                               // RCB
-        S_VAR_KEY = 9,                           // VAR_KEY
-        S_INPUT_KEY = 10,                        // INPUT_KEY
-        S_OUTPUT_KEY = 11,                       // OUTPUT_KEY
-        S_TIMER_KEY = 12,                        // TIMER_KEY
-        S_STATE_KEY = 13,                        // STATE_KEY
-        S_ON = 14,                               // ON
-        S_TIMEOUT_KEY = 15,                      // TIMEOUT_KEY
-        S_GO = 16,                               // GO
-        S_ERR = 17,                              // ERR
-        S_RETRY = 18,                            // RETRY
-        S_START = 19,                            // START
-        S_VOID = 20,                             // VOID
-        S_CHAR = 21,                             // CHAR
-        S_SHORT = 22,                            // SHORT
-        S_INT = 23,                              // INT
-        S_LONG = 24,                             // LONG
-        S_FLOAT = 25,                            // FLOAT
-        S_DOUBLE = 26,                           // DOUBLE
-        S_SIGNED = 27,                           // SIGNED
-        S_UNSIGNED = 28,                         // UNSIGNED
-        S_UNION = 29,                            // UNION
-        S_STRUCT = 30,                           // STRUCT
-        S_ENUM = 31,                             // ENUM
-        S_STAR = 32,                             // STAR
-        S_COMMA = 33,                            // COMMA
-        S_END = 34,                              // END
-        S_RESET = 35,                            // RESET
-        S_LSB = 36,                              // LSB
-        S_RSB = 37,                              // RSB
-        S_OUT = 38,                              // OUT
-        S_UNTIL_KEY = 39,                        // UNTIL_KEY
-        S_SC = 40,                               // SC
-        S_EQUAL = 41,                            // EQUAL
-        S_LB = 42,                               // LB
-        S_RB = 43,                               // RB
-        S_C_CODE_BLOCK = 44,                     // C_CODE_BLOCK
-        S_C_CONDITION_BLOCK = 45,                // C_CONDITION_BLOCK
-        S_IDENTIFIER = 46,                       // IDENTIFIER
-        S_CHARACTER_CONSTANT = 47,               // CHARACTER_CONSTANT
-        S_INTEGER_CONSTANT = 48,                 // INTEGER_CONSTANT
-        S_FLOATING_CONSTANT = 49,                // FLOATING_CONSTANT
-        S_YYACCEPT = 50,                         // $accept
-        S_fsml = 51,                             // fsml
-        S_init_section_list = 52,                // init_section_list
-        S_init_section = 53,                     // init_section
-        S_declaration = 54,                      // declaration
-        S_time = 55,                             // time
-        S_time_specifier = 56,                   // time_specifier
-        S_period_specifier = 57,                 // period_specifier
-        S_fsm = 58,                              // fsm
-        S_fsm_objects_list = 59,                 // fsm_objects_list
-        S_fsm_object = 60,                       // fsm_object
-        S_variable_declaration = 61,             // variable_declaration
-        S_type_specifier_list = 62,              // type_specifier_list
-        S_variable_specifier = 63,               // variable_specifier
-        S_type_specifier = 64,                   // type_specifier
-        S_struct_or_union_specifier = 65,        // struct_or_union_specifier
-        S_struct_or_union = 66,                  // struct_or_union
-        S_enum_specifier = 67,                   // enum_specifier
-        S_typedef_name = 68,                     // typedef_name
-        S_init_declarator = 69,                  // init_declarator
-        S_initializer = 70,                      // initializer
-        S_declarator = 71,                       // declarator
-        S_direct_declarator = 72,                // direct_declarator
-        S_pointer = 73,                          // pointer
-        S_constant = 74,                         // constant
-        S_enumeration_constant = 75,             // enumeration_constant
-        S_timer_specifier = 76,                  // timer_specifier
-        S_timer_initializer = 77,                // timer_initializer
-        S_state = 78,                            // state
-        S_state_specifier = 79,                  // state_specifier
-        S_80_1 = 80,                             // $@1
-        S_81_2 = 81,                             // $@2
-        S_state_type_specifier = 82,             // state_type_specifier
-        S_state_c_code = 83,                     // state_c_code
-        S_state_type_list = 84,                  // state_type_list
-        S_state_type = 85,                       // state_type
-        S_state_decorator_list = 86,             // state_decorator_list
-        S_state_decorator = 87,                  // state_decorator
-        S_transition_specifier = 88,             // transition_specifier
-        S_transition_c_code = 89,                // transition_c_code
-        S_transition_condition = 90,             // transition_condition
-        S_transition_actuator = 91,              // transition_actuator
-        S_timer_actuator = 92,                   // timer_actuator
-        S_output_specifier = 93,                 // output_specifier
-        S_until_retry = 94,                      // until_retry
-        S_95_3 = 95,                             // $@3
-        S_96_4 = 96,                             // $@4
-        S_until_condition = 97,                  // until_condition
-        S_until_object_list = 98,                // until_object_list
-        S_until_object = 99                      // until_object
+        S_EXPORT_KEY = 4,                        // EXPORT_KEY
+        S_TIME_KEY = 5,                          // TIME_KEY
+        S_PERIOD_KEY = 6,                        // PERIOD_KEY
+        S_FSM_KEY = 7,                           // FSM_KEY
+        S_LCB = 8,                               // LCB
+        S_RCB = 9,                               // RCB
+        S_VAR_KEY = 10,                          // VAR_KEY
+        S_INPUT_KEY = 11,                        // INPUT_KEY
+        S_OUTPUT_KEY = 12,                       // OUTPUT_KEY
+        S_TIMER_KEY = 13,                        // TIMER_KEY
+        S_STATE_KEY = 14,                        // STATE_KEY
+        S_ON = 15,                               // ON
+        S_TIMEOUT_KEY = 16,                      // TIMEOUT_KEY
+        S_GO = 17,                               // GO
+        S_ERR = 18,                              // ERR
+        S_RETRY = 19,                            // RETRY
+        S_START = 20,                            // START
+        S_VOID = 21,                             // VOID
+        S_CHAR = 22,                             // CHAR
+        S_SHORT = 23,                            // SHORT
+        S_INT = 24,                              // INT
+        S_LONG = 25,                             // LONG
+        S_FLOAT = 26,                            // FLOAT
+        S_DOUBLE = 27,                           // DOUBLE
+        S_SIGNED = 28,                           // SIGNED
+        S_UNSIGNED = 29,                         // UNSIGNED
+        S_UNION = 30,                            // UNION
+        S_STRUCT = 31,                           // STRUCT
+        S_ENUM = 32,                             // ENUM
+        S_STAR = 33,                             // STAR
+        S_COMMA = 34,                            // COMMA
+        S_END = 35,                              // END
+        S_RESET = 36,                            // RESET
+        S_LSB = 37,                              // LSB
+        S_RSB = 38,                              // RSB
+        S_OUT = 39,                              // OUT
+        S_UNTIL_KEY = 40,                        // UNTIL_KEY
+        S_SC = 41,                               // SC
+        S_EQUAL = 42,                            // EQUAL
+        S_LB = 43,                               // LB
+        S_RB = 44,                               // RB
+        S_C_CODE_BLOCK = 45,                     // C_CODE_BLOCK
+        S_C_CONDITION_BLOCK = 46,                // C_CONDITION_BLOCK
+        S_IDENTIFIER = 47,                       // IDENTIFIER
+        S_CHARACTER_CONSTANT = 48,               // CHARACTER_CONSTANT
+        S_INTEGER_CONSTANT = 49,                 // INTEGER_CONSTANT
+        S_FLOATING_CONSTANT = 50,                // FLOATING_CONSTANT
+        S_YYACCEPT = 51,                         // $accept
+        S_fsml = 52,                             // fsml
+        S_init_section_list = 53,                // init_section_list
+        S_init_section = 54,                     // init_section
+        S_declaration = 55,                      // declaration
+        S_export = 56,                           // export
+        S_time = 57,                             // time
+        S_time_specifier = 58,                   // time_specifier
+        S_period_specifier = 59,                 // period_specifier
+        S_fsm = 60,                              // fsm
+        S_fsm_objects_list = 61,                 // fsm_objects_list
+        S_fsm_object = 62,                       // fsm_object
+        S_variable_declaration = 63,             // variable_declaration
+        S_type_specifier_list = 64,              // type_specifier_list
+        S_variable_specifier = 65,               // variable_specifier
+        S_type_specifier = 66,                   // type_specifier
+        S_struct_or_union_specifier = 67,        // struct_or_union_specifier
+        S_struct_or_union = 68,                  // struct_or_union
+        S_enum_specifier = 69,                   // enum_specifier
+        S_typedef_name = 70,                     // typedef_name
+        S_init_declarator = 71,                  // init_declarator
+        S_initializer = 72,                      // initializer
+        S_declarator = 73,                       // declarator
+        S_direct_declarator = 74,                // direct_declarator
+        S_pointer = 75,                          // pointer
+        S_constant = 76,                         // constant
+        S_enumeration_constant = 77,             // enumeration_constant
+        S_timer_specifier = 78,                  // timer_specifier
+        S_timer_initializer = 79,                // timer_initializer
+        S_state = 80,                            // state
+        S_state_specifier = 81,                  // state_specifier
+        S_82_1 = 82,                             // $@1
+        S_83_2 = 83,                             // $@2
+        S_state_type_specifier = 84,             // state_type_specifier
+        S_state_c_code = 85,                     // state_c_code
+        S_state_type_list = 86,                  // state_type_list
+        S_state_type = 87,                       // state_type
+        S_state_decorator_list = 88,             // state_decorator_list
+        S_state_decorator = 89,                  // state_decorator
+        S_transition_specifier = 90,             // transition_specifier
+        S_transition_c_code = 91,                // transition_c_code
+        S_transition_condition = 92,             // transition_condition
+        S_transition_actuator = 93,              // transition_actuator
+        S_timer_actuator = 94,                   // timer_actuator
+        S_output_specifier = 95,                 // output_specifier
+        S_until_retry = 96,                      // until_retry
+        S_97_3 = 97,                             // $@3
+        S_98_4 = 98,                             // $@4
+        S_until_condition = 99,                  // until_condition
+        S_until_object_list = 100,               // until_object_list
+        S_until_object = 101                     // until_object
       };
     };
 
@@ -647,38 +650,38 @@ namespace FSML {
       {
         switch (this->kind ())
     {
-      case 49: // FLOATING_CONSTANT
+      case symbol_kind::S_FLOATING_CONSTANT: // FLOATING_CONSTANT
         value.move< float > (std::move (that.value));
         break;
 
-      case 48: // INTEGER_CONSTANT
+      case symbol_kind::S_INTEGER_CONSTANT: // INTEGER_CONSTANT
         value.move< int > (std::move (that.value));
         break;
 
-      case 85: // state_type
+      case symbol_kind::S_state_type: // state_type
         value.move< state_type_t > (std::move (that.value));
         break;
 
-      case 44: // C_CODE_BLOCK
-      case 45: // C_CONDITION_BLOCK
-      case 46: // IDENTIFIER
-      case 47: // CHARACTER_CONSTANT
-      case 62: // type_specifier_list
-      case 64: // type_specifier
-      case 65: // struct_or_union_specifier
-      case 66: // struct_or_union
-      case 67: // enum_specifier
-      case 68: // typedef_name
-      case 74: // constant
-      case 75: // enumeration_constant
-      case 77: // timer_initializer
-      case 79: // state_specifier
-      case 83: // state_c_code
-      case 97: // until_condition
+      case symbol_kind::S_C_CODE_BLOCK: // C_CODE_BLOCK
+      case symbol_kind::S_C_CONDITION_BLOCK: // C_CONDITION_BLOCK
+      case symbol_kind::S_IDENTIFIER: // IDENTIFIER
+      case symbol_kind::S_CHARACTER_CONSTANT: // CHARACTER_CONSTANT
+      case symbol_kind::S_type_specifier_list: // type_specifier_list
+      case symbol_kind::S_type_specifier: // type_specifier
+      case symbol_kind::S_struct_or_union_specifier: // struct_or_union_specifier
+      case symbol_kind::S_struct_or_union: // struct_or_union
+      case symbol_kind::S_enum_specifier: // enum_specifier
+      case symbol_kind::S_typedef_name: // typedef_name
+      case symbol_kind::S_constant: // constant
+      case symbol_kind::S_enumeration_constant: // enumeration_constant
+      case symbol_kind::S_timer_initializer: // timer_initializer
+      case symbol_kind::S_state_specifier: // state_specifier
+      case symbol_kind::S_state_c_code: // state_c_code
+      case symbol_kind::S_until_condition: // until_condition
         value.move< std::string > (std::move (that.value));
         break;
 
-      case 63: // variable_specifier
+      case symbol_kind::S_variable_specifier: // variable_specifier
         value.move< var_family_t > (std::move (that.value));
         break;
 
@@ -792,38 +795,38 @@ namespace FSML {
         // Value type destructor.
 switch (yykind)
     {
-      case 49: // FLOATING_CONSTANT
+      case symbol_kind::S_FLOATING_CONSTANT: // FLOATING_CONSTANT
         value.template destroy< float > ();
         break;
 
-      case 48: // INTEGER_CONSTANT
+      case symbol_kind::S_INTEGER_CONSTANT: // INTEGER_CONSTANT
         value.template destroy< int > ();
         break;
 
-      case 85: // state_type
+      case symbol_kind::S_state_type: // state_type
         value.template destroy< state_type_t > ();
         break;
 
-      case 44: // C_CODE_BLOCK
-      case 45: // C_CONDITION_BLOCK
-      case 46: // IDENTIFIER
-      case 47: // CHARACTER_CONSTANT
-      case 62: // type_specifier_list
-      case 64: // type_specifier
-      case 65: // struct_or_union_specifier
-      case 66: // struct_or_union
-      case 67: // enum_specifier
-      case 68: // typedef_name
-      case 74: // constant
-      case 75: // enumeration_constant
-      case 77: // timer_initializer
-      case 79: // state_specifier
-      case 83: // state_c_code
-      case 97: // until_condition
+      case symbol_kind::S_C_CODE_BLOCK: // C_CODE_BLOCK
+      case symbol_kind::S_C_CONDITION_BLOCK: // C_CONDITION_BLOCK
+      case symbol_kind::S_IDENTIFIER: // IDENTIFIER
+      case symbol_kind::S_CHARACTER_CONSTANT: // CHARACTER_CONSTANT
+      case symbol_kind::S_type_specifier_list: // type_specifier_list
+      case symbol_kind::S_type_specifier: // type_specifier
+      case symbol_kind::S_struct_or_union_specifier: // struct_or_union_specifier
+      case symbol_kind::S_struct_or_union: // struct_or_union
+      case symbol_kind::S_enum_specifier: // enum_specifier
+      case symbol_kind::S_typedef_name: // typedef_name
+      case symbol_kind::S_constant: // constant
+      case symbol_kind::S_enumeration_constant: // enumeration_constant
+      case symbol_kind::S_timer_initializer: // timer_initializer
+      case symbol_kind::S_state_specifier: // state_specifier
+      case symbol_kind::S_state_c_code: // state_c_code
+      case symbol_kind::S_until_condition: // until_condition
         value.template destroy< std::string > ();
         break;
 
-      case 63: // variable_specifier
+      case symbol_kind::S_variable_specifier: // variable_specifier
         value.template destroy< var_family_t > ();
         break;
 
@@ -920,13 +923,13 @@ switch (yykind)
       symbol_type (int tok, location_type l)
         : super_type(token_type (tok), std::move (l))
       {
-        YY_ASSERT (tok == token::END_OF_FILE || tok == token::YYerror || tok == token::YYUNDEF || tok == token::DECL_KEY || tok == token::TIME_KEY || tok == token::PERIOD_KEY || tok == token::FSM_KEY || tok == token::LCB || tok == token::RCB || tok == token::VAR_KEY || tok == token::INPUT_KEY || tok == token::OUTPUT_KEY || tok == token::TIMER_KEY || tok == token::STATE_KEY || tok == token::ON || tok == token::TIMEOUT_KEY || tok == token::GO || tok == token::ERR || tok == token::RETRY || tok == token::START || tok == token::VOID || tok == token::CHAR || tok == token::SHORT || tok == token::INT || tok == token::LONG || tok == token::FLOAT || tok == token::DOUBLE || tok == token::SIGNED || tok == token::UNSIGNED || tok == token::UNION || tok == token::STRUCT || tok == token::ENUM || tok == token::STAR || tok == token::COMMA || tok == token::END || tok == token::RESET || tok == token::LSB || tok == token::RSB || tok == token::OUT || tok == token::UNTIL_KEY || tok == token::SC || tok == token::EQUAL || tok == token::LB || tok == token::RB);
+        YY_ASSERT (tok == token::END_OF_FILE || tok == token::YYerror || tok == token::YYUNDEF || tok == token::DECL_KEY || tok == token::EXPORT_KEY || tok == token::TIME_KEY || tok == token::PERIOD_KEY || tok == token::FSM_KEY || tok == token::LCB || tok == token::RCB || tok == token::VAR_KEY || tok == token::INPUT_KEY || tok == token::OUTPUT_KEY || tok == token::TIMER_KEY || tok == token::STATE_KEY || tok == token::ON || tok == token::TIMEOUT_KEY || tok == token::GO || tok == token::ERR || tok == token::RETRY || tok == token::START || tok == token::VOID || tok == token::CHAR || tok == token::SHORT || tok == token::INT || tok == token::LONG || tok == token::FLOAT || tok == token::DOUBLE || tok == token::SIGNED || tok == token::UNSIGNED || tok == token::UNION || tok == token::STRUCT || tok == token::ENUM || tok == token::STAR || tok == token::COMMA || tok == token::END || tok == token::RESET || tok == token::LSB || tok == token::RSB || tok == token::OUT || tok == token::UNTIL_KEY || tok == token::SC || tok == token::EQUAL || tok == token::LB || tok == token::RB);
       }
 #else
       symbol_type (int tok, const location_type& l)
         : super_type(token_type (tok), l)
       {
-        YY_ASSERT (tok == token::END_OF_FILE || tok == token::YYerror || tok == token::YYUNDEF || tok == token::DECL_KEY || tok == token::TIME_KEY || tok == token::PERIOD_KEY || tok == token::FSM_KEY || tok == token::LCB || tok == token::RCB || tok == token::VAR_KEY || tok == token::INPUT_KEY || tok == token::OUTPUT_KEY || tok == token::TIMER_KEY || tok == token::STATE_KEY || tok == token::ON || tok == token::TIMEOUT_KEY || tok == token::GO || tok == token::ERR || tok == token::RETRY || tok == token::START || tok == token::VOID || tok == token::CHAR || tok == token::SHORT || tok == token::INT || tok == token::LONG || tok == token::FLOAT || tok == token::DOUBLE || tok == token::SIGNED || tok == token::UNSIGNED || tok == token::UNION || tok == token::STRUCT || tok == token::ENUM || tok == token::STAR || tok == token::COMMA || tok == token::END || tok == token::RESET || tok == token::LSB || tok == token::RSB || tok == token::OUT || tok == token::UNTIL_KEY || tok == token::SC || tok == token::EQUAL || tok == token::LB || tok == token::RB);
+        YY_ASSERT (tok == token::END_OF_FILE || tok == token::YYerror || tok == token::YYUNDEF || tok == token::DECL_KEY || tok == token::EXPORT_KEY || tok == token::TIME_KEY || tok == token::PERIOD_KEY || tok == token::FSM_KEY || tok == token::LCB || tok == token::RCB || tok == token::VAR_KEY || tok == token::INPUT_KEY || tok == token::OUTPUT_KEY || tok == token::TIMER_KEY || tok == token::STATE_KEY || tok == token::ON || tok == token::TIMEOUT_KEY || tok == token::GO || tok == token::ERR || tok == token::RETRY || tok == token::START || tok == token::VOID || tok == token::CHAR || tok == token::SHORT || tok == token::INT || tok == token::LONG || tok == token::FLOAT || tok == token::DOUBLE || tok == token::SIGNED || tok == token::UNSIGNED || tok == token::UNION || tok == token::STRUCT || tok == token::ENUM || tok == token::STAR || tok == token::COMMA || tok == token::END || tok == token::RESET || tok == token::LSB || tok == token::RSB || tok == token::OUT || tok == token::UNTIL_KEY || tok == token::SC || tok == token::EQUAL || tok == token::LB || tok == token::RB);
       }
 #endif
 #if 201103L <= YY_CPLUSPLUS
@@ -1077,6 +1080,21 @@ switch (yykind)
       make_DECL_KEY (const location_type& l)
       {
         return symbol_type (token::DECL_KEY, l);
+      }
+#endif
+#if 201103L <= YY_CPLUSPLUS
+      static
+      symbol_type
+      make_EXPORT_KEY (location_type l)
+      {
+        return symbol_type (token::EXPORT_KEY, std::move (l));
+      }
+#else
+      static
+      symbol_type
+      make_EXPORT_KEY (const location_type& l)
+      {
+        return symbol_type (token::EXPORT_KEY, l);
       }
 #endif
 #if 201103L <= YY_CPLUSPLUS
@@ -1894,7 +1912,7 @@ switch (yykind)
       void move (by_state& that);
 
       /// The symbol kind (corresponding to \a state).
-      /// \a S_YYEMPTY when empty.
+      /// \a symbol_kind::S_YYEMPTY when empty.
       symbol_kind_type kind () const YY_NOEXCEPT;
 
       /// The state number used to denote an empty symbol.
@@ -2073,9 +2091,9 @@ switch (yykind)
     /// Constants.
     enum
     {
-      yylast_ = 135,     ///< Last index in yytable_.
-      yynnts_ = 50,  ///< Number of nonterminal symbols.
-      yyfinal_ = 14 ///< Termination state number.
+      yylast_ = 148,     ///< Last index in yytable_.
+      yynnts_ = 51,  ///< Number of nonterminal symbols.
+      yyfinal_ = 17 ///< Termination state number.
     };
 
 
@@ -2086,8 +2104,7 @@ switch (yykind)
 
 
 } // FSML
-#line 2090 "fsml.hh"
-
+#line 2108 "fsml.hh"
 
 
 

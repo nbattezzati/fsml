@@ -1,4 +1,4 @@
-// A Bison parser, made by GNU Bison 3.6.4.
+// A Bison parser, made by GNU Bison 3.7.2.
 
 // Skeleton implementation for Bison LALR(1) parsers in C++
 
@@ -197,38 +197,38 @@ namespace FSML {
   {
     switch (this->kind ())
     {
-      case 49: // FLOATING_CONSTANT
+      case symbol_kind::S_FLOATING_CONSTANT: // FLOATING_CONSTANT
         value.copy< float > (YY_MOVE (that.value));
         break;
 
-      case 48: // INTEGER_CONSTANT
+      case symbol_kind::S_INTEGER_CONSTANT: // INTEGER_CONSTANT
         value.copy< int > (YY_MOVE (that.value));
         break;
 
-      case 85: // state_type
+      case symbol_kind::S_state_type: // state_type
         value.copy< state_type_t > (YY_MOVE (that.value));
         break;
 
-      case 44: // C_CODE_BLOCK
-      case 45: // C_CONDITION_BLOCK
-      case 46: // IDENTIFIER
-      case 47: // CHARACTER_CONSTANT
-      case 62: // type_specifier_list
-      case 64: // type_specifier
-      case 65: // struct_or_union_specifier
-      case 66: // struct_or_union
-      case 67: // enum_specifier
-      case 68: // typedef_name
-      case 74: // constant
-      case 75: // enumeration_constant
-      case 77: // timer_initializer
-      case 79: // state_specifier
-      case 83: // state_c_code
-      case 97: // until_condition
+      case symbol_kind::S_C_CODE_BLOCK: // C_CODE_BLOCK
+      case symbol_kind::S_C_CONDITION_BLOCK: // C_CONDITION_BLOCK
+      case symbol_kind::S_IDENTIFIER: // IDENTIFIER
+      case symbol_kind::S_CHARACTER_CONSTANT: // CHARACTER_CONSTANT
+      case symbol_kind::S_type_specifier_list: // type_specifier_list
+      case symbol_kind::S_type_specifier: // type_specifier
+      case symbol_kind::S_struct_or_union_specifier: // struct_or_union_specifier
+      case symbol_kind::S_struct_or_union: // struct_or_union
+      case symbol_kind::S_enum_specifier: // enum_specifier
+      case symbol_kind::S_typedef_name: // typedef_name
+      case symbol_kind::S_constant: // constant
+      case symbol_kind::S_enumeration_constant: // enumeration_constant
+      case symbol_kind::S_timer_initializer: // timer_initializer
+      case symbol_kind::S_state_specifier: // state_specifier
+      case symbol_kind::S_state_c_code: // state_c_code
+      case symbol_kind::S_until_condition: // until_condition
         value.copy< std::string > (YY_MOVE (that.value));
         break;
 
-      case 63: // variable_specifier
+      case symbol_kind::S_variable_specifier: // variable_specifier
         value.copy< var_family_t > (YY_MOVE (that.value));
         break;
 
@@ -261,38 +261,38 @@ namespace FSML {
     super_type::move (s);
     switch (this->kind ())
     {
-      case 49: // FLOATING_CONSTANT
+      case symbol_kind::S_FLOATING_CONSTANT: // FLOATING_CONSTANT
         value.move< float > (YY_MOVE (s.value));
         break;
 
-      case 48: // INTEGER_CONSTANT
+      case symbol_kind::S_INTEGER_CONSTANT: // INTEGER_CONSTANT
         value.move< int > (YY_MOVE (s.value));
         break;
 
-      case 85: // state_type
+      case symbol_kind::S_state_type: // state_type
         value.move< state_type_t > (YY_MOVE (s.value));
         break;
 
-      case 44: // C_CODE_BLOCK
-      case 45: // C_CONDITION_BLOCK
-      case 46: // IDENTIFIER
-      case 47: // CHARACTER_CONSTANT
-      case 62: // type_specifier_list
-      case 64: // type_specifier
-      case 65: // struct_or_union_specifier
-      case 66: // struct_or_union
-      case 67: // enum_specifier
-      case 68: // typedef_name
-      case 74: // constant
-      case 75: // enumeration_constant
-      case 77: // timer_initializer
-      case 79: // state_specifier
-      case 83: // state_c_code
-      case 97: // until_condition
+      case symbol_kind::S_C_CODE_BLOCK: // C_CODE_BLOCK
+      case symbol_kind::S_C_CONDITION_BLOCK: // C_CONDITION_BLOCK
+      case symbol_kind::S_IDENTIFIER: // IDENTIFIER
+      case symbol_kind::S_CHARACTER_CONSTANT: // CHARACTER_CONSTANT
+      case symbol_kind::S_type_specifier_list: // type_specifier_list
+      case symbol_kind::S_type_specifier: // type_specifier
+      case symbol_kind::S_struct_or_union_specifier: // struct_or_union_specifier
+      case symbol_kind::S_struct_or_union: // struct_or_union
+      case symbol_kind::S_enum_specifier: // enum_specifier
+      case symbol_kind::S_typedef_name: // typedef_name
+      case symbol_kind::S_constant: // constant
+      case symbol_kind::S_enumeration_constant: // enumeration_constant
+      case symbol_kind::S_timer_initializer: // timer_initializer
+      case symbol_kind::S_state_specifier: // state_specifier
+      case symbol_kind::S_state_c_code: // state_c_code
+      case symbol_kind::S_until_condition: // until_condition
         value.move< std::string > (YY_MOVE (s.value));
         break;
 
-      case 63: // variable_specifier
+      case symbol_kind::S_variable_specifier: // variable_specifier
         value.move< var_family_t > (YY_MOVE (s.value));
         break;
 
@@ -393,38 +393,38 @@ namespace FSML {
   {
     switch (that.kind ())
     {
-      case 49: // FLOATING_CONSTANT
+      case symbol_kind::S_FLOATING_CONSTANT: // FLOATING_CONSTANT
         value.YY_MOVE_OR_COPY< float > (YY_MOVE (that.value));
         break;
 
-      case 48: // INTEGER_CONSTANT
+      case symbol_kind::S_INTEGER_CONSTANT: // INTEGER_CONSTANT
         value.YY_MOVE_OR_COPY< int > (YY_MOVE (that.value));
         break;
 
-      case 85: // state_type
+      case symbol_kind::S_state_type: // state_type
         value.YY_MOVE_OR_COPY< state_type_t > (YY_MOVE (that.value));
         break;
 
-      case 44: // C_CODE_BLOCK
-      case 45: // C_CONDITION_BLOCK
-      case 46: // IDENTIFIER
-      case 47: // CHARACTER_CONSTANT
-      case 62: // type_specifier_list
-      case 64: // type_specifier
-      case 65: // struct_or_union_specifier
-      case 66: // struct_or_union
-      case 67: // enum_specifier
-      case 68: // typedef_name
-      case 74: // constant
-      case 75: // enumeration_constant
-      case 77: // timer_initializer
-      case 79: // state_specifier
-      case 83: // state_c_code
-      case 97: // until_condition
+      case symbol_kind::S_C_CODE_BLOCK: // C_CODE_BLOCK
+      case symbol_kind::S_C_CONDITION_BLOCK: // C_CONDITION_BLOCK
+      case symbol_kind::S_IDENTIFIER: // IDENTIFIER
+      case symbol_kind::S_CHARACTER_CONSTANT: // CHARACTER_CONSTANT
+      case symbol_kind::S_type_specifier_list: // type_specifier_list
+      case symbol_kind::S_type_specifier: // type_specifier
+      case symbol_kind::S_struct_or_union_specifier: // struct_or_union_specifier
+      case symbol_kind::S_struct_or_union: // struct_or_union
+      case symbol_kind::S_enum_specifier: // enum_specifier
+      case symbol_kind::S_typedef_name: // typedef_name
+      case symbol_kind::S_constant: // constant
+      case symbol_kind::S_enumeration_constant: // enumeration_constant
+      case symbol_kind::S_timer_initializer: // timer_initializer
+      case symbol_kind::S_state_specifier: // state_specifier
+      case symbol_kind::S_state_c_code: // state_c_code
+      case symbol_kind::S_until_condition: // until_condition
         value.YY_MOVE_OR_COPY< std::string > (YY_MOVE (that.value));
         break;
 
-      case 63: // variable_specifier
+      case symbol_kind::S_variable_specifier: // variable_specifier
         value.YY_MOVE_OR_COPY< var_family_t > (YY_MOVE (that.value));
         break;
 
@@ -443,38 +443,38 @@ namespace FSML {
   {
     switch (that.kind ())
     {
-      case 49: // FLOATING_CONSTANT
+      case symbol_kind::S_FLOATING_CONSTANT: // FLOATING_CONSTANT
         value.move< float > (YY_MOVE (that.value));
         break;
 
-      case 48: // INTEGER_CONSTANT
+      case symbol_kind::S_INTEGER_CONSTANT: // INTEGER_CONSTANT
         value.move< int > (YY_MOVE (that.value));
         break;
 
-      case 85: // state_type
+      case symbol_kind::S_state_type: // state_type
         value.move< state_type_t > (YY_MOVE (that.value));
         break;
 
-      case 44: // C_CODE_BLOCK
-      case 45: // C_CONDITION_BLOCK
-      case 46: // IDENTIFIER
-      case 47: // CHARACTER_CONSTANT
-      case 62: // type_specifier_list
-      case 64: // type_specifier
-      case 65: // struct_or_union_specifier
-      case 66: // struct_or_union
-      case 67: // enum_specifier
-      case 68: // typedef_name
-      case 74: // constant
-      case 75: // enumeration_constant
-      case 77: // timer_initializer
-      case 79: // state_specifier
-      case 83: // state_c_code
-      case 97: // until_condition
+      case symbol_kind::S_C_CODE_BLOCK: // C_CODE_BLOCK
+      case symbol_kind::S_C_CONDITION_BLOCK: // C_CONDITION_BLOCK
+      case symbol_kind::S_IDENTIFIER: // IDENTIFIER
+      case symbol_kind::S_CHARACTER_CONSTANT: // CHARACTER_CONSTANT
+      case symbol_kind::S_type_specifier_list: // type_specifier_list
+      case symbol_kind::S_type_specifier: // type_specifier
+      case symbol_kind::S_struct_or_union_specifier: // struct_or_union_specifier
+      case symbol_kind::S_struct_or_union: // struct_or_union
+      case symbol_kind::S_enum_specifier: // enum_specifier
+      case symbol_kind::S_typedef_name: // typedef_name
+      case symbol_kind::S_constant: // constant
+      case symbol_kind::S_enumeration_constant: // enumeration_constant
+      case symbol_kind::S_timer_initializer: // timer_initializer
+      case symbol_kind::S_state_specifier: // state_specifier
+      case symbol_kind::S_state_c_code: // state_c_code
+      case symbol_kind::S_until_condition: // until_condition
         value.move< std::string > (YY_MOVE (that.value));
         break;
 
-      case 63: // variable_specifier
+      case symbol_kind::S_variable_specifier: // variable_specifier
         value.move< var_family_t > (YY_MOVE (that.value));
         break;
 
@@ -493,38 +493,38 @@ namespace FSML {
     state = that.state;
     switch (that.kind ())
     {
-      case 49: // FLOATING_CONSTANT
+      case symbol_kind::S_FLOATING_CONSTANT: // FLOATING_CONSTANT
         value.copy< float > (that.value);
         break;
 
-      case 48: // INTEGER_CONSTANT
+      case symbol_kind::S_INTEGER_CONSTANT: // INTEGER_CONSTANT
         value.copy< int > (that.value);
         break;
 
-      case 85: // state_type
+      case symbol_kind::S_state_type: // state_type
         value.copy< state_type_t > (that.value);
         break;
 
-      case 44: // C_CODE_BLOCK
-      case 45: // C_CONDITION_BLOCK
-      case 46: // IDENTIFIER
-      case 47: // CHARACTER_CONSTANT
-      case 62: // type_specifier_list
-      case 64: // type_specifier
-      case 65: // struct_or_union_specifier
-      case 66: // struct_or_union
-      case 67: // enum_specifier
-      case 68: // typedef_name
-      case 74: // constant
-      case 75: // enumeration_constant
-      case 77: // timer_initializer
-      case 79: // state_specifier
-      case 83: // state_c_code
-      case 97: // until_condition
+      case symbol_kind::S_C_CODE_BLOCK: // C_CODE_BLOCK
+      case symbol_kind::S_C_CONDITION_BLOCK: // C_CONDITION_BLOCK
+      case symbol_kind::S_IDENTIFIER: // IDENTIFIER
+      case symbol_kind::S_CHARACTER_CONSTANT: // CHARACTER_CONSTANT
+      case symbol_kind::S_type_specifier_list: // type_specifier_list
+      case symbol_kind::S_type_specifier: // type_specifier
+      case symbol_kind::S_struct_or_union_specifier: // struct_or_union_specifier
+      case symbol_kind::S_struct_or_union: // struct_or_union
+      case symbol_kind::S_enum_specifier: // enum_specifier
+      case symbol_kind::S_typedef_name: // typedef_name
+      case symbol_kind::S_constant: // constant
+      case symbol_kind::S_enumeration_constant: // enumeration_constant
+      case symbol_kind::S_timer_initializer: // timer_initializer
+      case symbol_kind::S_state_specifier: // state_specifier
+      case symbol_kind::S_state_c_code: // state_c_code
+      case symbol_kind::S_until_condition: // until_condition
         value.copy< std::string > (that.value);
         break;
 
-      case 63: // variable_specifier
+      case symbol_kind::S_variable_specifier: // variable_specifier
         value.copy< var_family_t > (that.value);
         break;
 
@@ -542,38 +542,38 @@ namespace FSML {
     state = that.state;
     switch (that.kind ())
     {
-      case 49: // FLOATING_CONSTANT
+      case symbol_kind::S_FLOATING_CONSTANT: // FLOATING_CONSTANT
         value.move< float > (that.value);
         break;
 
-      case 48: // INTEGER_CONSTANT
+      case symbol_kind::S_INTEGER_CONSTANT: // INTEGER_CONSTANT
         value.move< int > (that.value);
         break;
 
-      case 85: // state_type
+      case symbol_kind::S_state_type: // state_type
         value.move< state_type_t > (that.value);
         break;
 
-      case 44: // C_CODE_BLOCK
-      case 45: // C_CONDITION_BLOCK
-      case 46: // IDENTIFIER
-      case 47: // CHARACTER_CONSTANT
-      case 62: // type_specifier_list
-      case 64: // type_specifier
-      case 65: // struct_or_union_specifier
-      case 66: // struct_or_union
-      case 67: // enum_specifier
-      case 68: // typedef_name
-      case 74: // constant
-      case 75: // enumeration_constant
-      case 77: // timer_initializer
-      case 79: // state_specifier
-      case 83: // state_c_code
-      case 97: // until_condition
+      case symbol_kind::S_C_CODE_BLOCK: // C_CODE_BLOCK
+      case symbol_kind::S_C_CONDITION_BLOCK: // C_CONDITION_BLOCK
+      case symbol_kind::S_IDENTIFIER: // IDENTIFIER
+      case symbol_kind::S_CHARACTER_CONSTANT: // CHARACTER_CONSTANT
+      case symbol_kind::S_type_specifier_list: // type_specifier_list
+      case symbol_kind::S_type_specifier: // type_specifier
+      case symbol_kind::S_struct_or_union_specifier: // struct_or_union_specifier
+      case symbol_kind::S_struct_or_union: // struct_or_union
+      case symbol_kind::S_enum_specifier: // enum_specifier
+      case symbol_kind::S_typedef_name: // typedef_name
+      case symbol_kind::S_constant: // constant
+      case symbol_kind::S_enumeration_constant: // enumeration_constant
+      case symbol_kind::S_timer_initializer: // timer_initializer
+      case symbol_kind::S_state_specifier: // state_specifier
+      case symbol_kind::S_state_c_code: // state_c_code
+      case symbol_kind::S_until_condition: // until_condition
         value.move< std::string > (that.value);
         break;
 
-      case 63: // variable_specifier
+      case symbol_kind::S_variable_specifier: // variable_specifier
         value.move< var_family_t > (that.value);
         break;
 
@@ -845,38 +845,38 @@ namespace FSML {
          when using variants.  */
       switch (yyr1_[yyn])
     {
-      case 49: // FLOATING_CONSTANT
+      case symbol_kind::S_FLOATING_CONSTANT: // FLOATING_CONSTANT
         yylhs.value.emplace< float > ();
         break;
 
-      case 48: // INTEGER_CONSTANT
+      case symbol_kind::S_INTEGER_CONSTANT: // INTEGER_CONSTANT
         yylhs.value.emplace< int > ();
         break;
 
-      case 85: // state_type
+      case symbol_kind::S_state_type: // state_type
         yylhs.value.emplace< state_type_t > ();
         break;
 
-      case 44: // C_CODE_BLOCK
-      case 45: // C_CONDITION_BLOCK
-      case 46: // IDENTIFIER
-      case 47: // CHARACTER_CONSTANT
-      case 62: // type_specifier_list
-      case 64: // type_specifier
-      case 65: // struct_or_union_specifier
-      case 66: // struct_or_union
-      case 67: // enum_specifier
-      case 68: // typedef_name
-      case 74: // constant
-      case 75: // enumeration_constant
-      case 77: // timer_initializer
-      case 79: // state_specifier
-      case 83: // state_c_code
-      case 97: // until_condition
+      case symbol_kind::S_C_CODE_BLOCK: // C_CODE_BLOCK
+      case symbol_kind::S_C_CONDITION_BLOCK: // C_CONDITION_BLOCK
+      case symbol_kind::S_IDENTIFIER: // IDENTIFIER
+      case symbol_kind::S_CHARACTER_CONSTANT: // CHARACTER_CONSTANT
+      case symbol_kind::S_type_specifier_list: // type_specifier_list
+      case symbol_kind::S_type_specifier: // type_specifier
+      case symbol_kind::S_struct_or_union_specifier: // struct_or_union_specifier
+      case symbol_kind::S_struct_or_union: // struct_or_union
+      case symbol_kind::S_enum_specifier: // enum_specifier
+      case symbol_kind::S_typedef_name: // typedef_name
+      case symbol_kind::S_constant: // constant
+      case symbol_kind::S_enumeration_constant: // enumeration_constant
+      case symbol_kind::S_timer_initializer: // timer_initializer
+      case symbol_kind::S_state_specifier: // state_specifier
+      case symbol_kind::S_state_c_code: // state_c_code
+      case symbol_kind::S_until_condition: // until_condition
         yylhs.value.emplace< std::string > ();
         break;
 
-      case 63: // variable_specifier
+      case symbol_kind::S_variable_specifier: // variable_specifier
         yylhs.value.emplace< var_family_t > ();
         break;
 
@@ -900,42 +900,58 @@ namespace FSML {
         {
           switch (yyn)
             {
-  case 8:
-#line 83 "fsml.yy"
-                                    { driver.Decl(YY_MOVE (yystack_[0].value.as < std::string > ())); }
-#line 907 "fsml.cc"
+  case 9: // declaration: DECL_KEY C_CODE_BLOCK
+#line 84 "fsml.yy"
+                                    { 
+		if (driver.Decl(YY_MOVE (yystack_[0].value.as < std::string > ())) == false) {
+			driver.error(yylhs.location, driver.GetLastError()); 
+			YYERROR; 
+		}
+	}
+#line 912 "fsml.cc"
     break;
 
-  case 11:
-#line 89 "fsml.yy"
+  case 10: // export: EXPORT_KEY C_CODE_BLOCK
+#line 91 "fsml.yy"
+                                 {
+		if (driver.Export(YY_MOVE (yystack_[0].value.as < std::string > ())) == false) {
+			driver.error(yylhs.location, driver.GetLastError()); 
+			YYERROR; 
+		}
+	}
+#line 923 "fsml.cc"
+    break;
+
+  case 13: // time_specifier: TIME_KEY C_CODE_BLOCK
+#line 102 "fsml.yy"
                                        { 
 		if (driver.TimeSpec(YY_MOVE (yystack_[0].value.as < std::string > ())) == false) { 
 			driver.error(yylhs.location, driver.GetLastError()); 
 			YYERROR; 
 		}; 
 	}
-#line 918 "fsml.cc"
+#line 934 "fsml.cc"
     break;
 
-  case 12:
-#line 96 "fsml.yy"
+  case 14: // period_specifier: PERIOD_KEY C_CODE_BLOCK
+#line 109 "fsml.yy"
                                            {
 		if (driver.PeriodSpec(YY_MOVE (yystack_[0].value.as < std::string > ())) == false) { 
 			driver.error(yylhs.location, driver.GetLastError()); 
 			YYERROR; 
 		}; 
 	}
-#line 929 "fsml.cc"
+#line 945 "fsml.cc"
     break;
 
-  case 13:
-#line 103 "fsml.yy"
-                                                  { driver.FsmName(YY_MOVE (yystack_[3].value.as < std::string > ())); }
-#line 935 "fsml.cc"
-    break;
-
-  case 19:
+  case 15: // fsm: FSM_KEY IDENTIFIER LCB fsm_objects_list RCB
 #line 116 "fsml.yy"
+                                                  { driver.FsmName(YY_MOVE (yystack_[3].value.as < std::string > ())); }
+#line 951 "fsml.cc"
+    break;
+
+  case 21: // variable_declaration: variable_specifier type_specifier_list init_declarator SC
+#line 129 "fsml.yy"
                                                 {
 							bool result = driver.AddVariable(
 													YY_MOVE (yystack_[3].value.as < var_family_t > ()), 
@@ -949,403 +965,427 @@ namespace FSML {
 								YYERROR; 
 							}
 						}
-#line 953 "fsml.cc"
+#line 969 "fsml.cc"
     break;
 
-  case 21:
-#line 132 "fsml.yy"
-                                                                                { tmp_type = YY_MOVE (yystack_[0].value.as < std::string > ()); }
-#line 959 "fsml.cc"
-    break;
-
-  case 22:
-#line 133 "fsml.yy"
-                                                                                { tmp_type.append(" " + YY_MOVE (yystack_[0].value.as < std::string > ())); }
-#line 965 "fsml.cc"
-    break;
-
-  case 23:
-#line 136 "fsml.yy"
-                                        { yylhs.value.as < var_family_t > () = VariableFamily_VAR; }
-#line 971 "fsml.cc"
-    break;
-
-  case 24:
-#line 137 "fsml.yy"
-                                                        { yylhs.value.as < var_family_t > () = VariableFamily_INPUT; }
-#line 977 "fsml.cc"
-    break;
-
-  case 25:
-#line 138 "fsml.yy"
-                                                        { yylhs.value.as < var_family_t > () = VariableFamily_OUTPUT; }
-#line 983 "fsml.cc"
-    break;
-
-  case 26:
-#line 141 "fsml.yy"
-                                                { yylhs.value.as < std::string > () = std::string("void"); }
-#line 989 "fsml.cc"
-    break;
-
-  case 27:
-#line 142 "fsml.yy"
-                                                                { yylhs.value.as < std::string > () = std::string("char"); }
-#line 995 "fsml.cc"
-    break;
-
-  case 28:
-#line 143 "fsml.yy"
-                                                                { yylhs.value.as < std::string > () = std::string("short"); }
-#line 1001 "fsml.cc"
-    break;
-
-  case 29:
-#line 144 "fsml.yy"
-                                                                { yylhs.value.as < std::string > () = std::string("int"); }
-#line 1007 "fsml.cc"
-    break;
-
-  case 30:
+  case 23: // type_specifier_list: type_specifier
 #line 145 "fsml.yy"
-                                                                { yylhs.value.as < std::string > () = std::string("long"); }
-#line 1013 "fsml.cc"
+                                                                                { tmp_type = YY_MOVE (yystack_[0].value.as < std::string > ()); }
+#line 975 "fsml.cc"
     break;
 
-  case 31:
+  case 24: // type_specifier_list: type_specifier_list type_specifier
 #line 146 "fsml.yy"
-                                                                { yylhs.value.as < std::string > () = std::string("float"); }
-#line 1019 "fsml.cc"
+                                                                                { tmp_type.append(" " + YY_MOVE (yystack_[0].value.as < std::string > ())); }
+#line 981 "fsml.cc"
     break;
 
-  case 32:
-#line 147 "fsml.yy"
-                                                                { yylhs.value.as < std::string > () = std::string("double"); }
-#line 1025 "fsml.cc"
-    break;
-
-  case 33:
-#line 148 "fsml.yy"
-                                                                { yylhs.value.as < std::string > () = std::string("signed"); }
-#line 1031 "fsml.cc"
-    break;
-
-  case 34:
+  case 25: // variable_specifier: VAR_KEY
 #line 149 "fsml.yy"
-                                                        { yylhs.value.as < std::string > () = std::string("unsigned"); }
-#line 1037 "fsml.cc"
+                                        { yylhs.value.as < var_family_t > () = VariableFamily_VAR; }
+#line 987 "fsml.cc"
     break;
 
-  case 35:
+  case 26: // variable_specifier: INPUT_KEY
 #line 150 "fsml.yy"
-                                                        { yylhs.value.as < std::string > () = YY_MOVE (yystack_[0].value.as < std::string > ()); }
-#line 1043 "fsml.cc"
+                                                        { yylhs.value.as < var_family_t > () = VariableFamily_INPUT; }
+#line 993 "fsml.cc"
     break;
 
-  case 36:
+  case 27: // variable_specifier: OUTPUT_KEY
 #line 151 "fsml.yy"
-                                                        { yylhs.value.as < std::string > () = YY_MOVE (yystack_[0].value.as < std::string > ()); }
-#line 1049 "fsml.cc"
+                                                        { yylhs.value.as < var_family_t > () = VariableFamily_OUTPUT; }
+#line 999 "fsml.cc"
     break;
 
-  case 37:
-#line 152 "fsml.yy"
-                                                        { yylhs.value.as < std::string > () = YY_MOVE (yystack_[0].value.as < std::string > ()); }
-#line 1055 "fsml.cc"
+  case 28: // type_specifier: VOID
+#line 154 "fsml.yy"
+                                                { yylhs.value.as < std::string > () = std::string("void"); }
+#line 1005 "fsml.cc"
     break;
 
-  case 38:
+  case 29: // type_specifier: CHAR
 #line 155 "fsml.yy"
-                                                       { yylhs.value.as < std::string > () = YY_MOVE (yystack_[1].value.as < std::string > ()) + " " + YY_MOVE (yystack_[0].value.as < std::string > ()); }
-#line 1061 "fsml.cc"
+                                                                { yylhs.value.as < std::string > () = std::string("char"); }
+#line 1011 "fsml.cc"
     break;
 
-  case 39:
+  case 30: // type_specifier: SHORT
+#line 156 "fsml.yy"
+                                                                { yylhs.value.as < std::string > () = std::string("short"); }
+#line 1017 "fsml.cc"
+    break;
+
+  case 31: // type_specifier: INT
 #line 157 "fsml.yy"
-                                                { yylhs.value.as < std::string > () = std::string("struct"); }
-#line 1067 "fsml.cc"
+                                                                { yylhs.value.as < std::string > () = std::string("int"); }
+#line 1023 "fsml.cc"
     break;
 
-  case 40:
+  case 32: // type_specifier: LONG
 #line 158 "fsml.yy"
-                                                                { yylhs.value.as < std::string > () = std::string("union"); }
-#line 1073 "fsml.cc"
+                                                                { yylhs.value.as < std::string > () = std::string("long"); }
+#line 1029 "fsml.cc"
     break;
 
-  case 41:
+  case 33: // type_specifier: FLOAT
+#line 159 "fsml.yy"
+                                                                { yylhs.value.as < std::string > () = std::string("float"); }
+#line 1035 "fsml.cc"
+    break;
+
+  case 34: // type_specifier: DOUBLE
+#line 160 "fsml.yy"
+                                                                { yylhs.value.as < std::string > () = std::string("double"); }
+#line 1041 "fsml.cc"
+    break;
+
+  case 35: // type_specifier: SIGNED
 #line 161 "fsml.yy"
-                                        { yylhs.value.as < std::string > () = std::string("enum " + YY_MOVE (yystack_[0].value.as < std::string > ())); }
-#line 1079 "fsml.cc"
+                                                                { yylhs.value.as < std::string > () = std::string("signed"); }
+#line 1047 "fsml.cc"
     break;
 
-  case 42:
+  case 36: // type_specifier: UNSIGNED
+#line 162 "fsml.yy"
+                                                        { yylhs.value.as < std::string > () = std::string("unsigned"); }
+#line 1053 "fsml.cc"
+    break;
+
+  case 37: // type_specifier: struct_or_union_specifier
+#line 163 "fsml.yy"
+                                                        { yylhs.value.as < std::string > () = YY_MOVE (yystack_[0].value.as < std::string > ()); }
+#line 1059 "fsml.cc"
+    break;
+
+  case 38: // type_specifier: enum_specifier
 #line 164 "fsml.yy"
-                                                { yylhs.value.as < std::string > () = YY_MOVE (yystack_[0].value.as < std::string > ()); }
-#line 1085 "fsml.cc"
+                                                        { yylhs.value.as < std::string > () = YY_MOVE (yystack_[0].value.as < std::string > ()); }
+#line 1065 "fsml.cc"
     break;
 
-  case 44:
-#line 169 "fsml.yy"
-                                        { tmp_initializer = YY_MOVE (yystack_[0].value.as < std::string > ()); }
-#line 1091 "fsml.cc"
+  case 39: // type_specifier: typedef_name
+#line 165 "fsml.yy"
+                                                        { yylhs.value.as < std::string > () = YY_MOVE (yystack_[0].value.as < std::string > ()); }
+#line 1071 "fsml.cc"
     break;
 
-  case 45:
+  case 40: // struct_or_union_specifier: struct_or_union IDENTIFIER
+#line 168 "fsml.yy"
+                                                       { yylhs.value.as < std::string > () = YY_MOVE (yystack_[1].value.as < std::string > ()) + " " + YY_MOVE (yystack_[0].value.as < std::string > ()); }
+#line 1077 "fsml.cc"
+    break;
+
+  case 41: // struct_or_union: STRUCT
 #line 170 "fsml.yy"
-                                                { tmp_initializer = std::string("{" + YY_MOVE (yystack_[1].value.as < std::string > ()) + "}"); }
-#line 1097 "fsml.cc"
+                                                { yylhs.value.as < std::string > () = std::string("struct"); }
+#line 1083 "fsml.cc"
     break;
 
-  case 48:
+  case 42: // struct_or_union: UNION
+#line 171 "fsml.yy"
+                                                                { yylhs.value.as < std::string > () = std::string("union"); }
+#line 1089 "fsml.cc"
+    break;
+
+  case 43: // enum_specifier: ENUM IDENTIFIER
+#line 174 "fsml.yy"
+                                        { yylhs.value.as < std::string > () = std::string("enum " + YY_MOVE (yystack_[0].value.as < std::string > ())); }
+#line 1095 "fsml.cc"
+    break;
+
+  case 44: // typedef_name: IDENTIFIER
 #line 177 "fsml.yy"
-                                                { tmp_declarator = YY_MOVE (yystack_[0].value.as < std::string > ()); }
-#line 1103 "fsml.cc"
-    break;
-
-  case 49:
-#line 180 "fsml.yy"
-                                                                { tmp_ptr_type.append("*"); }
-#line 1109 "fsml.cc"
-    break;
-
-  case 50:
-#line 181 "fsml.yy"
-                                                                { tmp_ptr_type.append("*"); }
-#line 1115 "fsml.cc"
-    break;
-
-  case 51:
-#line 184 "fsml.yy"
-                                                        { yylhs.value.as < std::string > () = std::to_string(YY_MOVE (yystack_[0].value.as < int > ())); }
-#line 1121 "fsml.cc"
-    break;
-
-  case 52:
-#line 185 "fsml.yy"
-                                                        { yylhs.value.as < std::string > () = YY_MOVE (yystack_[0].value.as < std::string > ()); }
-#line 1127 "fsml.cc"
-    break;
-
-  case 53:
-#line 186 "fsml.yy"
-                                                        { yylhs.value.as < std::string > () = std::to_string(YY_MOVE (yystack_[0].value.as < float > ())); }
-#line 1133 "fsml.cc"
-    break;
-
-  case 54:
-#line 187 "fsml.yy"
-                                                        { yylhs.value.as < std::string > () = YY_MOVE (yystack_[0].value.as < std::string > ()); }
-#line 1139 "fsml.cc"
-    break;
-
-  case 55:
-#line 190 "fsml.yy"
                                                 { yylhs.value.as < std::string > () = YY_MOVE (yystack_[0].value.as < std::string > ()); }
-#line 1145 "fsml.cc"
+#line 1101 "fsml.cc"
     break;
 
-  case 56:
+  case 46: // initializer: constant
+#line 182 "fsml.yy"
+                                        { tmp_initializer = YY_MOVE (yystack_[0].value.as < std::string > ()); }
+#line 1107 "fsml.cc"
+    break;
+
+  case 47: // initializer: LCB constant RCB
+#line 183 "fsml.yy"
+                                                { tmp_initializer = std::string("{" + YY_MOVE (yystack_[1].value.as < std::string > ()) + "}"); }
+#line 1113 "fsml.cc"
+    break;
+
+  case 50: // direct_declarator: IDENTIFIER
+#line 190 "fsml.yy"
+                                                { tmp_declarator = YY_MOVE (yystack_[0].value.as < std::string > ()); }
+#line 1119 "fsml.cc"
+    break;
+
+  case 51: // pointer: STAR
+#line 193 "fsml.yy"
+                                                                { tmp_ptr_type.append("*"); }
+#line 1125 "fsml.cc"
+    break;
+
+  case 52: // pointer: STAR pointer
 #line 194 "fsml.yy"
+                                                                { tmp_ptr_type.append("*"); }
+#line 1131 "fsml.cc"
+    break;
+
+  case 53: // constant: INTEGER_CONSTANT
+#line 197 "fsml.yy"
+                                                        { yylhs.value.as < std::string > () = std::to_string(YY_MOVE (yystack_[0].value.as < int > ())); }
+#line 1137 "fsml.cc"
+    break;
+
+  case 54: // constant: CHARACTER_CONSTANT
+#line 198 "fsml.yy"
+                                                        { yylhs.value.as < std::string > () = YY_MOVE (yystack_[0].value.as < std::string > ()); }
+#line 1143 "fsml.cc"
+    break;
+
+  case 55: // constant: FLOATING_CONSTANT
+#line 199 "fsml.yy"
+                                                        { yylhs.value.as < std::string > () = std::to_string(YY_MOVE (yystack_[0].value.as < float > ())); }
+#line 1149 "fsml.cc"
+    break;
+
+  case 56: // constant: enumeration_constant
+#line 200 "fsml.yy"
+                                                        { yylhs.value.as < std::string > () = YY_MOVE (yystack_[0].value.as < std::string > ()); }
+#line 1155 "fsml.cc"
+    break;
+
+  case 57: // enumeration_constant: IDENTIFIER
+#line 203 "fsml.yy"
+                                                { yylhs.value.as < std::string > () = YY_MOVE (yystack_[0].value.as < std::string > ()); }
+#line 1161 "fsml.cc"
+    break;
+
+  case 58: // timer_specifier: TIMER_KEY IDENTIFIER LB timer_initializer RB
+#line 207 "fsml.yy"
                                         {
 						if (driver.AddTimer(YY_MOVE (yystack_[3].value.as < std::string > ()), YY_MOVE (yystack_[1].value.as < std::string > ())) == false) {
 							driver.error(yylhs.location, driver.GetLastError()); 
 							YYERROR; 
 						};
 					}
-#line 1156 "fsml.cc"
+#line 1172 "fsml.cc"
     break;
 
-  case 57:
-#line 202 "fsml.yy"
+  case 59: // timer_initializer: INTEGER_CONSTANT
+#line 215 "fsml.yy"
                                         { yylhs.value.as < std::string > () = std::to_string(YY_MOVE (yystack_[0].value.as < int > ())); }
-#line 1162 "fsml.cc"
+#line 1178 "fsml.cc"
     break;
 
-  case 58:
-#line 203 "fsml.yy"
+  case 60: // timer_initializer: IDENTIFIER
+#line 216 "fsml.yy"
                                                                 { yylhs.value.as < std::string > () = YY_MOVE (yystack_[0].value.as < std::string > ()); }
-#line 1168 "fsml.cc"
+#line 1184 "fsml.cc"
     break;
 
-  case 59:
-#line 207 "fsml.yy"
+  case 61: // state: state_specifier state_decorator_list SC
+#line 220 "fsml.yy"
                 { 
 			if (driver.AddState(tmpState) == false) {
 				driver.error(yylhs.location, driver.GetLastError()); 
 				YYERROR; 
 			} 
 		}
-#line 1179 "fsml.cc"
+#line 1195 "fsml.cc"
     break;
 
-  case 60:
-#line 214 "fsml.yy"
+  case 62: // $@1: %empty
+#line 227 "fsml.yy"
                             { tmpState = new FSMState(driver); }
-#line 1185 "fsml.cc"
+#line 1201 "fsml.cc"
     break;
 
-  case 61:
-#line 216 "fsml.yy"
-                                             { tmpState->Name(YY_MOVE (yystack_[0].value.as < std::string > ())); }
-#line 1191 "fsml.cc"
-    break;
-
-  case 62:
-#line 217 "fsml.yy"
-                                               { tmpState->Code(YY_MOVE (yystack_[0].value.as < std::string > ())); }
-#line 1197 "fsml.cc"
-    break;
-
-  case 65:
-#line 224 "fsml.yy"
-                                        { yylhs.value.as < std::string > () = YY_MOVE (yystack_[0].value.as < std::string > ()); }
-#line 1203 "fsml.cc"
-    break;
-
-  case 66:
-#line 225 "fsml.yy"
-                                                { yylhs.value.as < std::string > () = std::string(); }
-#line 1209 "fsml.cc"
-    break;
-
-  case 67:
-#line 228 "fsml.yy"
-                                                                                { tmpState->AddType(YY_MOVE (yystack_[0].value.as < state_type_t > ())); }
-#line 1215 "fsml.cc"
-    break;
-
-  case 68:
+  case 63: // $@2: %empty
 #line 229 "fsml.yy"
-                                                                                { tmpState->AddType(YY_MOVE (yystack_[0].value.as < state_type_t > ())); }
-#line 1221 "fsml.cc"
+                                             { tmpState->Name(YY_MOVE (yystack_[0].value.as < std::string > ())); }
+#line 1207 "fsml.cc"
     break;
 
-  case 69:
-#line 232 "fsml.yy"
-                                { yylhs.value.as < state_type_t > () = kStateTypeReset; }
-#line 1227 "fsml.cc"
+  case 64: // state_specifier: STATE_KEY $@1 state_type_specifier IDENTIFIER $@2 state_c_code
+#line 230 "fsml.yy"
+                                               { tmpState->Code(YY_MOVE (yystack_[0].value.as < std::string > ())); }
+#line 1213 "fsml.cc"
     break;
 
-  case 70:
-#line 233 "fsml.yy"
-                                        { yylhs.value.as < state_type_t > () = kStateTypeEnd; }
-#line 1233 "fsml.cc"
+  case 67: // state_c_code: C_CODE_BLOCK
+#line 237 "fsml.yy"
+                                        { yylhs.value.as < std::string > () = YY_MOVE (yystack_[0].value.as < std::string > ()); }
+#line 1219 "fsml.cc"
     break;
 
-  case 71:
-#line 234 "fsml.yy"
-                                        { yylhs.value.as < state_type_t > () = kStateTypeErr; }
-#line 1239 "fsml.cc"
+  case 68: // state_c_code: %empty
+#line 238 "fsml.yy"
+                                                { yylhs.value.as < std::string > () = std::string(); }
+#line 1225 "fsml.cc"
     break;
 
-  case 75:
-#line 243 "fsml.yy"
-                                        { tmpState->AddTransition(tmpTrans); }
-#line 1245 "fsml.cc"
+  case 69: // state_type_list: state_type
+#line 241 "fsml.yy"
+                             { 
+					if (tmpState->AddType(YY_MOVE (yystack_[0].value.as < state_type_t > ())) == false) {
+						driver.error(yylhs.location, driver.GetLastError()); 
+						YYERROR; 
+					} 
+				}
+#line 1236 "fsml.cc"
     break;
 
-  case 78:
-#line 250 "fsml.yy"
-                                        { tmpTrans->Code(YY_MOVE (yystack_[0].value.as < std::string > ())); }
-#line 1251 "fsml.cc"
+  case 70: // state_type_list: state_type_list COMMA state_type
+#line 247 "fsml.yy"
+                                                                   {
+					if (tmpState->AddType(YY_MOVE (yystack_[0].value.as < state_type_t > ())) == false) {
+						driver.error(yylhs.location, driver.GetLastError()); 
+						YYERROR; 
+					} 
+				}
+#line 1247 "fsml.cc"
     break;
 
-  case 80:
-#line 254 "fsml.yy"
-                                                                        { tmpTrans = new FSMTransition(driver, TransType_Normal, YY_MOVE (yystack_[0].value.as < std::string > ())); }
-#line 1257 "fsml.cc"
-    break;
-
-  case 81:
+  case 71: // state_type: RESET
 #line 255 "fsml.yy"
-                                                                                { tmpTrans = new FSMTransition(driver, TransType_Timeout, YY_MOVE (yystack_[1].value.as < std::string > ())); }
-#line 1263 "fsml.cc"
+                                { yylhs.value.as < state_type_t > () = kStateTypeReset; }
+#line 1253 "fsml.cc"
     break;
 
-  case 82:
-#line 258 "fsml.yy"
+  case 72: // state_type: END
+#line 256 "fsml.yy"
+                                        { yylhs.value.as < state_type_t > () = kStateTypeEnd; }
+#line 1259 "fsml.cc"
+    break;
+
+  case 73: // state_type: ERR
+#line 257 "fsml.yy"
+                                        { yylhs.value.as < state_type_t > () = kStateTypeErr; }
+#line 1265 "fsml.cc"
+    break;
+
+  case 77: // state_decorator: transition_specifier
+#line 266 "fsml.yy"
+                                        { tmpState->AddTransition(tmpTrans); }
+#line 1271 "fsml.cc"
+    break;
+
+  case 80: // transition_c_code: C_CODE_BLOCK
+#line 273 "fsml.yy"
+                                        { tmpTrans->Code(YY_MOVE (yystack_[0].value.as < std::string > ())); }
+#line 1277 "fsml.cc"
+    break;
+
+  case 82: // transition_condition: C_CONDITION_BLOCK
+#line 277 "fsml.yy"
+                                                                        { tmpTrans = new FSMTransition(driver, TransType_Normal, YY_MOVE (yystack_[0].value.as < std::string > ())); }
+#line 1283 "fsml.cc"
+    break;
+
+  case 83: // transition_condition: TIMEOUT_KEY LB IDENTIFIER RB
+#line 278 "fsml.yy"
+                                                                        { 
+						 std::string timer = YY_MOVE (yystack_[1].value.as < std::string > ());
+						 if (driver.TimerExists(timer)) {
+						 	tmpTrans = new FSMTransition(driver, TransType_Timeout, timer);
+						 }
+						 else {
+							 driver.error(yylhs.location, std::string("timer <" + timer + "> is not defined"));
+							 YYERROR;
+						 }
+					 }
+#line 1298 "fsml.cc"
+    break;
+
+  case 84: // transition_actuator: GO IDENTIFIER
+#line 290 "fsml.yy"
                                                 { tmpTrans->Actuator(TransActuator_GO); tmpTrans->EndState(YY_MOVE (yystack_[0].value.as < std::string > ())); }
-#line 1269 "fsml.cc"
+#line 1304 "fsml.cc"
     break;
 
-  case 83:
-#line 259 "fsml.yy"
+  case 85: // transition_actuator: ERR IDENTIFIER
+#line 291 "fsml.yy"
                                                                 { tmpTrans->Actuator(TransActuator_ERR); tmpTrans->ErrorCode(YY_MOVE (yystack_[0].value.as < std::string > ())); }
-#line 1275 "fsml.cc"
+#line 1310 "fsml.cc"
     break;
 
-  case 84:
-#line 260 "fsml.yy"
+  case 86: // transition_actuator: RETRY
+#line 292 "fsml.yy"
                                                                         { tmpTrans->Actuator(TransActuator_RETRY); }
-#line 1281 "fsml.cc"
+#line 1316 "fsml.cc"
     break;
 
-  case 85:
-#line 263 "fsml.yy"
-                                        { tmpTrans->Timer(YY_MOVE (yystack_[0].value.as < std::string > ())); }
-#line 1287 "fsml.cc"
+  case 87: // timer_actuator: START IDENTIFIER
+#line 295 "fsml.yy"
+                                  { 
+					if(tmpTrans->SetTimer(YY_MOVE (yystack_[0].value.as < std::string > ())) == false) {
+						driver.error(yylhs.location, driver.GetLastError());
+						YYERROR;
+					}
+				}
+#line 1327 "fsml.cc"
     break;
 
-  case 87:
-#line 267 "fsml.yy"
+  case 89: // output_specifier: OUT IDENTIFIER EQUAL C_CODE_BLOCK
+#line 304 "fsml.yy"
                                                      { 
 						if (tmpState->AddOutput(YY_MOVE (yystack_[2].value.as < std::string > ()), YY_MOVE (yystack_[0].value.as < std::string > ())) == false) {
 							driver.error(yylhs.location, driver.GetLastError()); 
 							YYERROR;
 						} 
 				 }
-#line 1298 "fsml.cc"
+#line 1338 "fsml.cc"
     break;
 
-  case 88:
-#line 275 "fsml.yy"
+  case 90: // $@3: %empty
+#line 312 "fsml.yy"
                                 { 
 					tmpUntil = new FSMUntil(); 
 					driver.PushUntil(tmpUntil); 
 			  	}
-#line 1307 "fsml.cc"
+#line 1347 "fsml.cc"
     break;
 
-  case 89:
-#line 280 "fsml.yy"
+  case 91: // $@4: %empty
+#line 317 "fsml.yy"
                                 { 
 					tmpTrans = new FSMTransition(driver, TransType_ExitUntil, YY_MOVE (yystack_[4].value.as < std::string > ())); 
 					driver.CurUntil()->ExitTransition(tmpTrans);
 				}
-#line 1316 "fsml.cc"
+#line 1356 "fsml.cc"
     break;
 
-  case 90:
-#line 285 "fsml.yy"
+  case 92: // until_retry: UNTIL_KEY until_condition $@3 LCB until_object_list RCB $@4 transition_actuator SC
+#line 322 "fsml.yy"
                                 { 
 					parse_result_t res = driver.PopUntil();
 					if (res == ParseResult_WARN) {
 						driver.warning(yystack_[8].location, driver.GetLastError());
 					}
 				}
-#line 1327 "fsml.cc"
+#line 1367 "fsml.cc"
     break;
 
-  case 91:
-#line 292 "fsml.yy"
+  case 93: // until_condition: LB INTEGER_CONSTANT RB
+#line 329 "fsml.yy"
                                                         { yylhs.value.as < std::string > () = std::to_string(YY_MOVE (yystack_[1].value.as < int > ())); }
-#line 1333 "fsml.cc"
+#line 1373 "fsml.cc"
     break;
 
-  case 92:
-#line 293 "fsml.yy"
+  case 94: // until_condition: LB enumeration_constant RB
+#line 330 "fsml.yy"
                                                                 { yylhs.value.as < std::string > () = YY_MOVE (yystack_[1].value.as < std::string > ()); }
-#line 1339 "fsml.cc"
+#line 1379 "fsml.cc"
     break;
 
-  case 95:
-#line 300 "fsml.yy"
+  case 97: // until_object: state
+#line 337 "fsml.yy"
                      { driver.CurUntil()->AddState(tmpState); }
-#line 1345 "fsml.cc"
+#line 1385 "fsml.cc"
     break;
 
 
-#line 1349 "fsml.cc"
+#line 1389 "fsml.cc"
 
             default:
               break;
@@ -1534,156 +1574,160 @@ namespace FSML {
 
 
 
-  const signed char FSMLParser::yypact_ninf_ = -87;
+  const signed char FSMLParser::yypact_ninf_ = -90;
 
-  const signed char FSMLParser::yytable_ninf_ = -49;
+  const signed char FSMLParser::yytable_ninf_ = -51;
 
   const signed char
   FSMLParser::yypact_[] =
   {
-      77,   -35,   -29,   -20,    35,    41,   -87,   -87,   -87,   -87,
-     -87,   -87,   -87,   -87,   -87,    28,   -87,   -87,    79,     9,
-     -87,   -87,   -87,    44,   -87,    45,    -6,   -87,   -87,    42,
-      52,   -87,     0,   -87,    51,    58,   -18,   -87,   -87,   -87,
-     -87,   -87,   -87,   -87,   -87,   -87,   -87,   -87,   -87,   -87,
-     -87,    49,   -87,    29,   -87,   -87,    50,   -87,   -87,   -87,
-     -14,    53,    -4,   -87,   -87,   -87,    43,    -9,    54,   -87,
-      55,    59,    90,   -87,    69,    62,   -87,    64,    65,   -87,
-      61,   -87,    63,   -87,    66,    68,   -87,   -87,   -87,   -87,
-      70,   -87,   -87,   -87,   -10,   -87,   -87,   -87,   -87,    -2,
-     -87,   -87,    -7,   -87,   -87,    71,   -87,    67,    72,   -87,
-      -9,   -87,    74,   -87,   -87,     4,   -87,    30,   -87,   -87,
-     -87,   -87,   -87,   -87,    76,    75,    78,   -87,    89,   -87,
-     -87,   -87,   -87,   -87,   -87,   103,   -87,   -87,   -87,    80,
-     -87,    67,   -87,   -87,    82,   -87
+      78,   -36,   -30,   -21,     2,    35,    73,   -90,   -90,   -90,
+     -90,   -90,   -90,   -90,   -90,   -90,   -90,   -90,    39,   -90,
+     -90,    66,     8,   -90,   -90,   -90,    46,   -90,    51,    -7,
+     -90,   -90,    41,    54,   -90,    -1,   -90,    53,    60,   -19,
+     -90,   -90,   -90,   -90,   -90,   -90,   -90,   -90,   -90,   -90,
+     -90,   -90,   -90,   -90,    52,   -90,    28,   -90,   -90,    55,
+     -90,   -90,   -90,   -15,    56,    -5,   -90,   -90,   -90,    38,
+     -10,    57,   -90,    61,    62,    90,   -90,    67,    59,   -90,
+      68,    65,   -90,    63,   -90,    69,   -90,    70,    71,   -90,
+     -90,   -90,   -90,    64,   -90,   -90,   -90,   -11,   -90,   -90,
+     -90,   -90,    -3,   -90,   -90,    -8,   -90,   -90,    72,   -90,
+      27,    75,   -90,   -10,   -90,    76,   -90,   -90,     3,   -90,
+      42,   -90,   -90,   -90,   -90,   -90,   -90,    74,    77,    79,
+     -90,    91,   -90,   -90,   -90,   -90,   -90,   -90,   105,   -90,
+     -90,   -90,    80,   -90,    27,   -90,   -90,    81,   -90
   };
 
   const signed char
   FSMLParser::yydefact_[] =
   {
-       5,     0,     0,     0,     0,     0,     3,     6,     7,     9,
-      10,     8,    11,    12,     1,     0,     4,     2,     0,     0,
-      23,    24,    25,     0,    60,     0,     0,    14,    16,     0,
-       0,    17,    74,    18,     0,    64,     0,    88,    13,    15,
-      26,    27,    28,    29,    30,    31,    32,    33,    34,    40,
-      39,     0,    42,     0,    21,    35,     0,    36,    37,    20,
-       0,     0,     0,    72,    75,    76,     0,     0,     0,    55,
-       0,     0,     0,    41,    49,    42,    22,     0,     0,    47,
-       0,    38,     0,    80,    79,     0,    59,    73,    58,    57,
-       0,    71,    70,    69,     0,    67,    61,    91,    92,     0,
-      50,    19,     0,    48,    46,     0,    78,     0,     0,    56,
-       0,    63,    66,    95,    96,     0,    93,     0,    52,    51,
-      53,    43,    44,    54,     0,     0,     0,    84,    86,    87,
-      68,    65,    62,    89,    94,     0,    81,    82,    83,     0,
-      77,     0,    45,    85,     0,    90
+       5,     0,     0,     0,     0,     0,     0,     3,     6,     7,
+       8,    11,    12,     9,    10,    13,    14,     1,     0,     4,
+       2,     0,     0,    25,    26,    27,     0,    62,     0,     0,
+      16,    18,     0,     0,    19,    76,    20,     0,    66,     0,
+      90,    15,    17,    28,    29,    30,    31,    32,    33,    34,
+      35,    36,    42,    41,     0,    44,     0,    23,    37,     0,
+      38,    39,    22,     0,     0,     0,    74,    77,    78,     0,
+       0,     0,    57,     0,     0,     0,    43,    51,    44,    24,
+       0,     0,    49,     0,    40,     0,    82,    81,     0,    61,
+      75,    60,    59,     0,    73,    72,    71,     0,    69,    63,
+      93,    94,     0,    52,    21,     0,    50,    48,     0,    80,
+       0,     0,    58,     0,    65,    68,    97,    98,     0,    95,
+       0,    54,    53,    55,    45,    46,    56,     0,     0,     0,
+      86,    88,    89,    70,    67,    64,    91,    96,     0,    83,
+      84,    85,     0,    79,     0,    47,    87,     0,    92
   };
 
   const signed char
   FSMLParser::yypgoto_[] =
   {
-     -87,   -87,   -87,   107,   -87,   -87,   -87,   -87,   -87,   -87,
-      88,   -87,   -87,   -87,    81,   -87,   -87,   -87,   -87,   -87,
-     -87,   -87,    40,    56,     6,    91,   -87,   -87,   -86,   -87,
-     -87,   -87,   -87,   -87,   -87,     5,   -87,    73,   -87,   -87,
-     -87,   -16,   -87,   -87,   -83,   -87,   -87,   -87,   -87,    13
+     -90,   -90,   -90,   110,   -90,   -90,   -90,   -90,   -90,   -90,
+     -90,    88,   -90,   -90,   -90,    82,   -90,   -90,   -90,   -90,
+     -90,   -90,   -90,    40,    48,     9,    89,   -90,   -90,   -89,
+     -90,   -90,   -90,   -90,   -90,   -90,    17,   -90,    83,   -90,
+     -90,   -90,   -13,   -90,   -90,   -86,   -90,   -90,   -90,   -90,
+      14
   };
 
   const short
   FSMLParser::yydefgoto_[] =
   {
-      -1,     4,     5,     6,     7,     8,     9,    10,    17,    26,
-      27,    28,    53,    29,    54,    55,    56,    57,    58,    77,
-     121,    78,    79,    80,   122,   123,    30,    90,    31,    32,
-      35,   112,    68,   132,    94,    95,    62,    63,    64,   107,
-      84,   128,   140,    65,    33,    72,   141,    37,   115,   116
+      -1,     5,     6,     7,     8,     9,    10,    11,    12,    20,
+      29,    30,    31,    56,    32,    57,    58,    59,    60,    61,
+      80,   124,    81,    82,    83,   125,   126,    33,    93,    34,
+      35,    38,   115,    71,   135,    97,    98,    65,    66,    67,
+     110,    87,   131,   143,    68,    36,    75,   144,    40,   118,
+     119
   };
 
   const short
   FSMLParser::yytable_[] =
   {
-     117,    82,    38,    20,    21,    22,    23,    24,    91,    11,
-      60,    24,   133,   113,    60,    12,   114,    24,    20,    21,
-      22,    23,    24,   110,    13,    92,    93,   111,    69,   113,
-      70,    83,   114,    25,    61,    14,    86,    25,    61,    69,
-     118,   119,   120,    25,     1,     2,     3,    15,    25,    40,
-      41,    42,    43,    44,    45,    46,    47,    48,    49,    50,
-      51,    74,    40,    41,    42,    43,    44,    45,    46,    47,
-      48,    49,    50,    51,    18,    75,    69,   118,   119,   120,
-       1,     2,     3,   125,   126,   127,    19,    36,    52,    88,
-      34,    89,    59,    66,    67,    73,    81,    99,    97,    85,
-      96,    74,    98,   -48,   101,   105,   102,   103,   139,   108,
-     106,   142,    16,   109,    39,   130,   129,   124,   131,   136,
-     104,   137,   145,   135,   138,   144,   143,    71,   134,     0,
-     100,     0,     0,     0,    76,    87
+     120,    85,    41,    23,    24,    25,    26,    27,    94,    13,
+      63,    27,   136,   116,    63,    14,   117,    27,    23,    24,
+      25,    26,    27,   113,    15,    95,    96,   114,    72,   116,
+      73,    86,   117,    28,    64,    17,    89,    28,    64,    72,
+     121,   122,   123,    28,   128,   129,   130,    16,    28,    43,
+      44,    45,    46,    47,    48,    49,    50,    51,    52,    53,
+      54,    77,    43,    44,    45,    46,    47,    48,    49,    50,
+      51,    52,    53,    54,    22,    78,     1,     2,     3,     4,
+      18,     1,     2,     3,     4,    91,    21,    92,    55,    72,
+     121,   122,   123,    37,    39,    62,    69,    70,   102,    76,
+      77,   -50,    84,    88,    99,   100,   101,   105,   112,   104,
+     106,   142,   108,   111,   145,   109,    19,    42,   139,   127,
+     132,   134,   148,   107,   140,   103,   141,   146,    74,   138,
+     133,   147,   137,     0,     0,     0,     0,     0,    79,     0,
+       0,     0,     0,     0,     0,     0,     0,     0,    90
   };
 
   const short
   FSMLParser::yycheck_[] =
   {
-       7,    15,     8,     9,    10,    11,    12,    13,    17,    44,
-      14,    13,     8,    99,    14,    44,    99,    13,     9,    10,
-      11,    12,    13,    33,    44,    34,    35,    37,    46,   115,
-      48,    45,   115,    39,    38,     0,    40,    39,    38,    46,
-      47,    48,    49,    39,     3,     4,     5,     6,    39,    20,
-      21,    22,    23,    24,    25,    26,    27,    28,    29,    30,
-      31,    32,    20,    21,    22,    23,    24,    25,    26,    27,
-      28,    29,    30,    31,    46,    46,    46,    47,    48,    49,
-       3,     4,     5,    16,    17,    18,     7,    42,    46,    46,
-      46,    48,    40,    42,    36,    46,    46,     7,    43,    46,
-      46,    32,    43,    41,    40,    42,    41,    46,    19,    41,
-      44,     8,     5,    43,    26,   110,    44,    46,    44,    43,
-      80,    46,    40,   117,    46,   141,    46,    36,   115,    -1,
-      74,    -1,    -1,    -1,    53,    62
+       8,    16,     9,    10,    11,    12,    13,    14,    18,    45,
+      15,    14,     9,   102,    15,    45,   102,    14,    10,    11,
+      12,    13,    14,    34,    45,    35,    36,    38,    47,   118,
+      49,    46,   118,    40,    39,     0,    41,    40,    39,    47,
+      48,    49,    50,    40,    17,    18,    19,    45,    40,    21,
+      22,    23,    24,    25,    26,    27,    28,    29,    30,    31,
+      32,    33,    21,    22,    23,    24,    25,    26,    27,    28,
+      29,    30,    31,    32,     8,    47,     3,     4,     5,     6,
+       7,     3,     4,     5,     6,    47,    47,    49,    47,    47,
+      48,    49,    50,    47,    43,    41,    43,    37,     8,    47,
+      33,    42,    47,    47,    47,    44,    44,    42,    44,    41,
+      47,    20,    43,    42,     9,    45,     6,    29,    44,    47,
+      45,    45,    41,    83,    47,    77,    47,    47,    39,   120,
+     113,   144,   118,    -1,    -1,    -1,    -1,    -1,    56,    -1,
+      -1,    -1,    -1,    -1,    -1,    -1,    -1,    -1,    65
   };
 
   const signed char
   FSMLParser::yystos_[] =
   {
-       0,     3,     4,     5,    51,    52,    53,    54,    55,    56,
-      57,    44,    44,    44,     0,     6,    53,    58,    46,     7,
-       9,    10,    11,    12,    13,    39,    59,    60,    61,    63,
-      76,    78,    79,    94,    46,    80,    42,    97,     8,    60,
-      20,    21,    22,    23,    24,    25,    26,    27,    28,    29,
-      30,    31,    46,    62,    64,    65,    66,    67,    68,    40,
-      14,    38,    86,    87,    88,    93,    42,    36,    82,    46,
-      48,    75,    95,    46,    32,    46,    64,    69,    71,    72,
-      73,    46,    15,    45,    90,    46,    40,    87,    46,    48,
-      77,    17,    34,    35,    84,    85,    46,    43,    43,     7,
-      73,    40,    41,    46,    72,    42,    44,    89,    41,    43,
-      33,    37,    81,    78,    94,    98,    99,     7,    47,    48,
-      49,    70,    74,    75,    46,    16,    17,    18,    91,    44,
-      85,    44,    83,     8,    99,    74,    43,    46,    46,    19,
-      92,    96,     8,    46,    91,    40
+       0,     3,     4,     5,     6,    52,    53,    54,    55,    56,
+      57,    58,    59,    45,    45,    45,    45,     0,     7,    54,
+      60,    47,     8,    10,    11,    12,    13,    14,    40,    61,
+      62,    63,    65,    78,    80,    81,    96,    47,    82,    43,
+      99,     9,    62,    21,    22,    23,    24,    25,    26,    27,
+      28,    29,    30,    31,    32,    47,    64,    66,    67,    68,
+      69,    70,    41,    15,    39,    88,    89,    90,    95,    43,
+      37,    84,    47,    49,    77,    97,    47,    33,    47,    66,
+      71,    73,    74,    75,    47,    16,    46,    92,    47,    41,
+      89,    47,    49,    79,    18,    35,    36,    86,    87,    47,
+      44,    44,     8,    75,    41,    42,    47,    74,    43,    45,
+      91,    42,    44,    34,    38,    83,    80,    96,   100,   101,
+       8,    48,    49,    50,    72,    76,    77,    47,    17,    18,
+      19,    93,    45,    87,    45,    85,     9,   101,    76,    44,
+      47,    47,    20,    94,    98,     9,    47,    93,    41
   };
 
   const signed char
   FSMLParser::yyr1_[] =
   {
-       0,    50,    51,    52,    52,    52,    53,    53,    54,    55,
-      55,    56,    57,    58,    59,    59,    60,    60,    60,    61,
-      61,    62,    62,    63,    63,    63,    64,    64,    64,    64,
-      64,    64,    64,    64,    64,    64,    64,    64,    65,    66,
-      66,    67,    68,    69,    70,    70,    71,    71,    72,    73,
-      73,    74,    74,    74,    74,    75,    76,    77,    77,    78,
-      80,    81,    79,    82,    82,    83,    83,    84,    84,    85,
-      85,    85,    86,    86,    86,    87,    87,    88,    89,    89,
-      90,    90,    91,    91,    91,    92,    92,    93,    95,    96,
-      94,    97,    97,    98,    98,    99,    99
+       0,    51,    52,    53,    53,    53,    54,    54,    54,    55,
+      56,    57,    57,    58,    59,    60,    61,    61,    62,    62,
+      62,    63,    63,    64,    64,    65,    65,    65,    66,    66,
+      66,    66,    66,    66,    66,    66,    66,    66,    66,    66,
+      67,    68,    68,    69,    70,    71,    72,    72,    73,    73,
+      74,    75,    75,    76,    76,    76,    76,    77,    78,    79,
+      79,    80,    82,    83,    81,    84,    84,    85,    85,    86,
+      86,    87,    87,    87,    88,    88,    88,    89,    89,    90,
+      91,    91,    92,    92,    93,    93,    93,    94,    94,    95,
+      97,    98,    96,    99,    99,   100,   100,   101,   101
   };
 
   const signed char
   FSMLParser::yyr2_[] =
   {
-       0,     2,     2,     1,     2,     0,     1,     1,     2,     1,
-       1,     2,     2,     5,     1,     2,     1,     1,     1,     4,
-       2,     1,     2,     1,     1,     1,     1,     1,     1,     1,
-       1,     1,     1,     1,     1,     1,     1,     1,     2,     1,
-       1,     2,     1,     3,     1,     3,     2,     1,     1,     1,
-       2,     1,     1,     1,     1,     1,     5,     1,     1,     3,
-       0,     0,     6,     3,     0,     1,     0,     1,     3,     1,
-       1,     1,     1,     2,     0,     1,     1,     5,     1,     0,
-       1,     4,     2,     2,     1,     2,     0,     4,     0,     0,
-       9,     3,     3,     1,     2,     1,     1
+       0,     2,     2,     1,     2,     0,     1,     1,     1,     2,
+       2,     1,     1,     2,     2,     5,     1,     2,     1,     1,
+       1,     4,     2,     1,     2,     1,     1,     1,     1,     1,
+       1,     1,     1,     1,     1,     1,     1,     1,     1,     1,
+       2,     1,     1,     2,     1,     3,     1,     3,     2,     1,
+       1,     1,     2,     1,     1,     1,     1,     1,     5,     1,
+       1,     3,     0,     0,     6,     3,     0,     1,     0,     1,
+       3,     1,     1,     1,     1,     2,     0,     1,     1,     5,
+       1,     0,     1,     4,     2,     2,     1,     2,     0,     4,
+       0,     0,     9,     3,     3,     1,     2,     1,     1
   };
 
 
@@ -1693,16 +1737,16 @@ namespace FSML {
   const char*
   const FSMLParser::yytname_[] =
   {
-  "END_OF_FILE", "error", "\"invalid token\"", "DECL_KEY", "TIME_KEY",
-  "PERIOD_KEY", "FSM_KEY", "LCB", "RCB", "VAR_KEY", "INPUT_KEY",
-  "OUTPUT_KEY", "TIMER_KEY", "STATE_KEY", "ON", "TIMEOUT_KEY", "GO", "ERR",
-  "RETRY", "START", "VOID", "CHAR", "SHORT", "INT", "LONG", "FLOAT",
-  "DOUBLE", "SIGNED", "UNSIGNED", "UNION", "STRUCT", "ENUM", "STAR",
-  "COMMA", "END", "RESET", "LSB", "RSB", "OUT", "UNTIL_KEY", "SC", "EQUAL",
-  "LB", "RB", "C_CODE_BLOCK", "C_CONDITION_BLOCK", "IDENTIFIER",
+  "END_OF_FILE", "error", "\"invalid token\"", "DECL_KEY", "EXPORT_KEY",
+  "TIME_KEY", "PERIOD_KEY", "FSM_KEY", "LCB", "RCB", "VAR_KEY",
+  "INPUT_KEY", "OUTPUT_KEY", "TIMER_KEY", "STATE_KEY", "ON", "TIMEOUT_KEY",
+  "GO", "ERR", "RETRY", "START", "VOID", "CHAR", "SHORT", "INT", "LONG",
+  "FLOAT", "DOUBLE", "SIGNED", "UNSIGNED", "UNION", "STRUCT", "ENUM",
+  "STAR", "COMMA", "END", "RESET", "LSB", "RSB", "OUT", "UNTIL_KEY", "SC",
+  "EQUAL", "LB", "RB", "C_CODE_BLOCK", "C_CONDITION_BLOCK", "IDENTIFIER",
   "CHARACTER_CONSTANT", "INTEGER_CONSTANT", "FLOATING_CONSTANT", "$accept",
-  "fsml", "init_section_list", "init_section", "declaration", "time",
-  "time_specifier", "period_specifier", "fsm", "fsm_objects_list",
+  "fsml", "init_section_list", "init_section", "declaration", "export",
+  "time", "time_specifier", "period_specifier", "fsm", "fsm_objects_list",
   "fsm_object", "variable_declaration", "type_specifier_list",
   "variable_specifier", "type_specifier", "struct_or_union_specifier",
   "struct_or_union", "enum_specifier", "typedef_name", "init_declarator",
@@ -1722,16 +1766,16 @@ namespace FSML {
   const short
   FSMLParser::yyrline_[] =
   {
-       0,    72,    72,    74,    75,    76,    79,    80,    83,    85,
-      86,    89,    96,   103,   106,   107,   110,   111,   112,   115,
-     129,   132,   133,   136,   137,   138,   141,   142,   143,   144,
-     145,   146,   147,   148,   149,   150,   151,   152,   155,   157,
-     158,   161,   164,   167,   169,   170,   173,   174,   177,   180,
-     181,   184,   185,   186,   187,   190,   193,   202,   203,   206,
-     214,   216,   214,   220,   221,   224,   225,   228,   229,   232,
-     233,   234,   237,   238,   239,   243,   244,   248,   250,   251,
-     254,   255,   258,   259,   260,   263,   264,   267,   275,   280,
-     274,   292,   293,   296,   297,   300,   301
+       0,    72,    72,    74,    75,    76,    79,    80,    81,    84,
+      91,    98,    99,   102,   109,   116,   119,   120,   123,   124,
+     125,   128,   142,   145,   146,   149,   150,   151,   154,   155,
+     156,   157,   158,   159,   160,   161,   162,   163,   164,   165,
+     168,   170,   171,   174,   177,   180,   182,   183,   186,   187,
+     190,   193,   194,   197,   198,   199,   200,   203,   206,   215,
+     216,   219,   227,   229,   227,   233,   234,   237,   238,   241,
+     247,   255,   256,   257,   260,   261,   262,   266,   267,   271,
+     273,   274,   277,   278,   290,   291,   292,   295,   301,   304,
+     312,   317,   311,   329,   330,   333,   334,   337,   338
   };
 
   void
@@ -1800,22 +1844,23 @@ namespace FSML {
       15,    16,    17,    18,    19,    20,    21,    22,    23,    24,
       25,    26,    27,    28,    29,    30,    31,    32,    33,    34,
       35,    36,    37,    38,    39,    40,    41,    42,    43,    44,
-      45,    46,    47,    48,    49
+      45,    46,    47,    48,    49,    50
     };
-    const int user_token_number_max_ = 304;
+    // Last valid token kind.
+    const int code_max = 305;
 
     if (t <= 0)
       return symbol_kind::S_YYEOF;
-    else if (t <= user_token_number_max_)
+    else if (t <= code_max)
       return YY_CAST (symbol_kind_type, translate_table[t]);
     else
       return symbol_kind::S_YYUNDEF;
   }
 
 } // FSML
-#line 1817 "fsml.cc"
+#line 1862 "fsml.cc"
 
-#line 306 "fsml.yy"
+#line 343 "fsml.yy"
 
 
 void FSML::FSMLParser::error(const FSML::FSMLParser::location_type& l, const std::string& m)

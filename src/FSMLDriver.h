@@ -120,7 +120,6 @@ public:
 	inline std::string Condition() const { return condition_; }
 	inline void Actuator(const trans_actuator_t act) { actuator_ = act; }
 	inline trans_actuator_t Actuator() const { return actuator_; }
-	inline void Timer(const std::string & timer) { timer_ = timer; }
 	inline std::string Timer() const { return timer_; }
 	inline void EndState(const std::string & endState) { endState_ = endState; }
 	inline std::string EndState() const { return endState_; }
@@ -131,6 +130,7 @@ public:
 
 	virtual bool CheckCondition();
 	bool CheckDestination();
+	bool SetTimer(const std::string & timer);
 
 protected:
 	trans_type_t type_;
@@ -157,7 +157,6 @@ public:
 
 	inline void Name(const std::string & name) { name_ = name; }
 	inline std::string Name() const { return name_; }
-	inline void AddType(state_type_t type) { types_.push_back(type); }
 	inline void Code(const std::string & code) { code_ = code; }
 	inline std::string Code() const { return code_; } 
 	inline void AddTransition(FSMTransition * t) { transitions_.push_back(t); }
@@ -165,6 +164,7 @@ public:
 	inline bool DrivesOutput(const std::string & output) const { return (output_map_.find(output) != output_map_.end()); }
 	inline std::string OutputCode(const std::string & output) { return (DrivesOutput(output) ? output_map_[output] : std::string("")); }
 
+	bool AddType(state_type_t type);
 	bool HasType(state_type_t type);
 	bool AddOutput(const std::string & output, const std::string & out_code);
 	bool SetEndStateForRetryTrans(FSMState * s);
@@ -235,7 +235,9 @@ public:
 	inline std::string & FsmName() { return fsmName_; }
 	inline void FsmName(const std::string & name) { fsmName_ = name; }
 	inline std::string & Decl() { return decl_; }
-	void Decl(const std::string & c_code_block);
+	bool Decl(const std::string & c_code_block);
+	inline std::string & Export() { return export_; }
+	bool Export(const std::string & c_code_block);
 	inline std::string & TimeSpec() { return timeSpec_; }
 	bool TimeSpec(const std::string & c_code_block);
 	inline std::string & PeriodSpec() { return periodSpec_; }
@@ -301,6 +303,9 @@ private:
 
 	// code contained in the declaration section (if any)
 	std::string decl_;
+
+	// code contained in the export section (if any)
+	std::string export_;
 
 	// code contained in the time secction (if any)
 	std::string timeSpec_;

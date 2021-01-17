@@ -57,6 +57,7 @@ private:
 	std::string Generate_Header();
 	std::string Translate_FSMLDecl();
 	std::string Translate_Decl();
+	std::string Translate_Export();
 	std::string Translate_TimeOrPeriod();
 	std::string Translate_Variables();
 	std::string Translate_Timers();
@@ -66,6 +67,7 @@ private:
 	std::string Translate_GetterFunctions();
 	std::string Translate_ResetFunction();
 	std::string Translate_ExecFunction();
+	std::string Translate_IsInFinalStateFunction();
 	std::string TranslateTransition(FSMState & starting_state, FSMTransition & t);
 
 	const std::string kStaticCKeyword_ = "static";

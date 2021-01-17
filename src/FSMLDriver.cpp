@@ -35,6 +35,26 @@
 #include "fsml_inner.h"
 #include "fsml.h"
 
+bool FSMState::AddType(state_type_t type) 
+{
+	bool ret_val = false;
+
+	// if this is a reset/error type and there is already one in the driver, set an error
+	if ((type == kStateTypeReset) && (driver_.ResetState() != nullptr)) {
+		driver_.SetLastError("'reset' state already defined");
+	}
+	else if ((type == kStateTypeErr) && (driver_.ErrorState() != nullptr)) {
+		driver_.SetLastError("'err' state already defined");
+	}
+	
+	// otherwise add the type 
+	else {
+		types_.push_back(type);
+		ret_val = true;
+	}
+
+	return ret_val;
+}
 
 bool FSMState::HasType(state_type_t type)
 {
@@ -128,6 +148,19 @@ bool FSMTransition::CheckDestination()
 }
 
 
+bool FSMTransition::SetTimer(const std::string & timer)
+{
+	// check if the timer exists
+	if (driver_.TimerExists(timer)) {
+		timer_ = timer;
+		return true;
+	}
+	// return error otherwise
+	driver_.SetLastError("timer <" + timer + "> is not defined");
+	return false;
+}
+
+
 /**
  * @brief   The FSMLDriver constructor
  * @param   edM		The EdifManager whose netlist is constrained by the Actel PDC information
@@ -151,12 +184,45 @@ FSMLDriver::~FSMLDriver()
  * @brief   This method stores the C code contained in the declaration section
  * @param   c_code_block	string containing the C code block (whose curly braces will be stripped out)
  */
-void FSMLDriver::Decl(const std::string & c_code_block)
+bool FSMLDriver::Decl(const std::string & c_code_block)
 {
-	decl_ = c_code_block;
-	// strip starting and ending curly braces
-	decl_ = decl_.substr(1, decl_.size()-2);
+	bool ret_val = false;
+
+	if (decl_.length() == 0) {
+		decl_ = c_code_block;
+		// strip starting and ending curly braces
+		decl_ = decl_.substr(1, decl_.size()-2);
+		ret_val = true;
+	}
+	else {
+		lastError_ = "'decl' section already defined";
+	}
+
+	return ret_val;
 }
+
+
+/**
+ * @brief   This method stores the C code contained in the export section
+ * @param   c_code_block	string containing the C code block (whose curly braces will be stripped out)
+ */
+bool FSMLDriver::Export(const std::string & c_code_block)
+{
+	bool ret_val = false;
+
+	if (export_.length() == 0) {
+		export_ = c_code_block;
+		// strip starting and ending curly braces
+		export_ = export_.substr(1, export_.size()-2);
+		ret_val = true;
+	}
+	else {
+		lastError_ = "'export' section already defined";
+	}
+
+	return ret_val;
+}
+
 
 /**
  * @brief   This method stores the C code contained in the time section
@@ -166,14 +232,19 @@ bool FSMLDriver::TimeSpec(const std::string & c_code_block)
 {
 	bool ret_val = false;
 
-	if (periodSpec_.size() == 0) {
-		timeSpec_ = c_code_block;
-		// strip starting and ending curly braces
-		timeSpec_ = timeSpec_.substr(1, timeSpec_.size()-2);
-		ret_val = true;
+	if (timeSpec_.length() == 0) {
+		if (periodSpec_.length() == 0) {
+			timeSpec_ = c_code_block;
+			// strip starting and ending curly braces
+			timeSpec_ = timeSpec_.substr(1, timeSpec_.size()-2);
+			ret_val = true;
+		}
+		else {
+			lastError_ = "'period' section already defined, 'time' section cannot be defined any more";
+		}
 	}
 	else {
-		lastError_ = "'period' section already defined, 'time' section cannot be defined any more";
+		lastError_ = "'time' section already defined";
 	}
 
 	return ret_val;
@@ -187,14 +258,19 @@ bool FSMLDriver::PeriodSpec(const std::string & c_code_block)
 {
 	bool ret_val = false;
 
-	if (timeSpec_.size() == 0) {
-		periodSpec_ = c_code_block;
-		// strip starting and ending curly braces
-		periodSpec_ = periodSpec_.substr(1, periodSpec_.size()-2);
-		ret_val = true;
+	if (periodSpec_.length() == 0) {
+		if (timeSpec_.length() == 0) {
+			periodSpec_ = c_code_block;
+			// strip starting and ending curly braces
+			periodSpec_ = periodSpec_.substr(1, periodSpec_.size()-2);
+			ret_val = true;
+		}
+		else {
+			lastError_ = "'time' section already defined, 'period' section cannot be defined any more";
+		}
 	}
 	else {
-		lastError_ = "'time' section already defined, 'period' section cannot be defined any more";
+		lastError_ = "'period' section already defined";
 	}
 
 	return ret_val;
@@ -382,21 +458,39 @@ bool FSMLDriver::TranslateToDOT(const std::string & file_name)
 	FILE * fp = fopen(out_file.c_str(), "w+");
 	if (fp != nullptr) {
 
+		// start graph
 		fprintf(fp, "digraph %s {\n", fsmName_.c_str());
-		fprintf(fp, "node [shape = doublecircle]; ");
+		
+		// reset state
+		fprintf(fp, "{node [style = \"invis\"] __fsmlReset}\n");
+		fprintf(fp, "{node [style=\"bold\" shape=\"circle\"] %s}\n", ResetState()->Name().c_str());
+		
+		// error state
+		if (ErrorState() != nullptr) {
+			std::string shape = ErrorState()->HasType(kStateTypeEnd) ? "doublecircle" : "circle";
+			fprintf(fp, "{node [color=\"black\" fillcolor=\"red\" style=\"filled\" shape=\"%s\"] %s}\n", shape.c_str(), ErrorState()->Name().c_str());
+		}
+		
+		// final states
+		fprintf(fp, "{node [shape=\"doublecircle\"] ");
 		for(auto & s : state_map_) {
-			if(s.second->HasType(kStateTypeEnd) || s.second->HasType(kStateTypeErr)) {
+			if(s.second->HasType(kStateTypeEnd)) {
 				fprintf(fp, "%s ", s.second->Name().c_str());
 			}
 		}
-		fprintf(fp, ";\n");
-		fprintf(fp, "node [shape = circle];\n");
+		fprintf(fp, "}\n");
+		
+		// other states and transitions
+		fprintf(fp, "node [shape=\"circle\"]\n");
+		fprintf(fp, "__fsmlReset -> %s [label=\"reset\"]\n", ResetState()->Name().c_str());
 		for(auto & s : state_map_) {
 			FSMState * curS = s.second;
 			for(FSMTransition * t : curS->Transitions()) {
-				fprintf(fp, "%s -> %s [ label = \"%s\"];\n", curS->Name().c_str(), t->EndState().c_str(), t->ConditionStr().c_str());
+				fprintf(fp, "%s -> %s [label=\"%s\"]\n", curS->Name().c_str(), t->EndState().c_str(), t->ConditionStr().c_str());
 			}
 		}
+		
+		// end graph
 		fprintf(fp, "}\n");
 		
 		ret_val = true;

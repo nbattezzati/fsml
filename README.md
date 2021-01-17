@@ -135,6 +135,23 @@ fsm myFsm {
 }
 ```
 
+Declarations are *private* to the FSM code. Nothing in the `decl` section is visibile to the external user code. 
+In order to export declarations (e.g. data types for input/output variables) through the FSM interface, the `export` section shall be used: 
+```
+export {
+typedef enum {
+   cmd_TYPE1,
+   cmd_TYPE2,
+   cmd_TYPE3,
+} cmd_type_t;
+}
+
+fsm cmd_parser {
+   input cmd_type_t cur_cmd = cmd_TYPE1;
+   ...
+}
+```
+
 ### Timeout
 Another useful construct in case of FSMs that are implemented in real-time systems are timeouts. The FSML has a special notation for using timeouts in an easy fashion.
 There is a 4th family of variables: timers. The `timer` family specifies a timer variable like in the following examples:
@@ -267,7 +284,10 @@ typedef enum {
 Finally, a structure named `<prefix>_fsm_t` contains all the functions necessary to use the FSM.
 The two basic functions are `reset()` and `exec()`. The first function resets the FSM to the initial state and all it's variables to their initial value. The `exec` function executes a step of the FSM, so the evaluation of the transition conditions in the current state and what shall be the next state.
 
-There are two more functions, `state()` and `err()` (this one is available only if errors are emitted from any state). The `state` function returns the current state of the FSM, while the `err` function returns an error code if any error occurred, or `<prefix>Err__NoError` otherwise.
+The other functions of the interface are:
+* `state()`, returns the current state of the FSM
+* `err()`, returns an error code if any error occurred, or `<prefix>Err__NoError` otherwise (this function is available only if errors are emitted from any state)
+* `is_in_final_state()`, returns a integer greater than 0 if the FSM is in one of its final states, or 0 if not.
 
 The FSM `struct` contains also *setter* and *getter* functions for each input and output variable. 
 The setter functions for the input variables are named `set_<input-name>()` and take one argument of the same type of the corresponding input variable. 
@@ -291,7 +311,8 @@ int main(int argc, char *argv[])
    /* execute FSM to search for the TOY pattern in the input string */
    while(argv[1] != NULL && argv[1][i] != '\0') {
       toy_decoder_fsm->set_input_char(argv[1][i]);
-      if (toy_decoder_fsm->exec() == toy_decoderState__toy_found) {
+      toy_decoder_fsm->exec();
+      if (toy_decoder_fsm->is_in_final_state()) {
          printf("TOY found\n");
          return 0;
       }

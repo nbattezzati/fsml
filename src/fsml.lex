@@ -61,7 +61,7 @@ std::string tmp_str;	/* used to collect characters scanned by different rules in
 
 %option noyywrap nounput batch stack
 
-%s DECL TIME PERIOD FSM VAR TIMER STATE STATE_TYPE TIMEOUT UNTIL 
+%s DECL EXPORT TIME PERIOD FSM VAR TIMER STATE STATE_TYPE TIMEOUT UNTIL 
 %x C_CODE C_CONDITION C_COMMENT FSML_COMMENT
 
 
@@ -80,6 +80,12 @@ FLOAT			[0-9]+(\.[0-9]+)*
 				return token::DECL_KEY;
 			}
 
+"export"	{
+				log("found: EXPORT\n");
+				yy_push_state(EXPORT);
+				return token::EXPORT_KEY;
+			}
+
 "time"	{
 				log("found: TIME\n");
 				yy_push_state(TIME);
@@ -92,7 +98,7 @@ FLOAT			[0-9]+(\.[0-9]+)*
 				return token::PERIOD_KEY;
 			}
 
-<DECL,TIME,PERIOD>"{"	{
+<DECL,EXPORT,TIME,PERIOD>"{"	{
 				log("Beginning C-CODE\n");
 				tmp_str += std::string(yytext);
 				yy_push_state(C_CODE);
@@ -111,6 +117,7 @@ FLOAT			[0-9]+(\.[0-9]+)*
 					cb_cnt = 0;
 					switch (yy_top_state()) {
 						case DECL:
+						case EXPORT:
 						case TIME:
 						case PERIOD:
 							yy_pop_state();
