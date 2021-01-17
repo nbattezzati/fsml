@@ -1226,54 +1226,64 @@ namespace FSML {
 
   case 69: // state_type_list: state_type
 #line 241 "fsml.yy"
-                                                                                { tmpState->AddType(YY_MOVE (yystack_[0].value.as < state_type_t > ())); }
-#line 1231 "fsml.cc"
+                             { 
+					if (tmpState->AddType(YY_MOVE (yystack_[0].value.as < state_type_t > ())) == false) {
+						driver.error(yylhs.location, driver.GetLastError()); 
+						YYERROR; 
+					} 
+				}
+#line 1236 "fsml.cc"
     break;
 
   case 70: // state_type_list: state_type_list COMMA state_type
-#line 242 "fsml.yy"
-                                                                                { tmpState->AddType(YY_MOVE (yystack_[0].value.as < state_type_t > ())); }
-#line 1237 "fsml.cc"
+#line 247 "fsml.yy"
+                                                                   {
+					if (tmpState->AddType(YY_MOVE (yystack_[0].value.as < state_type_t > ())) == false) {
+						driver.error(yylhs.location, driver.GetLastError()); 
+						YYERROR; 
+					} 
+				}
+#line 1247 "fsml.cc"
     break;
 
   case 71: // state_type: RESET
-#line 245 "fsml.yy"
+#line 255 "fsml.yy"
                                 { yylhs.value.as < state_type_t > () = kStateTypeReset; }
-#line 1243 "fsml.cc"
+#line 1253 "fsml.cc"
     break;
 
   case 72: // state_type: END
-#line 246 "fsml.yy"
+#line 256 "fsml.yy"
                                         { yylhs.value.as < state_type_t > () = kStateTypeEnd; }
-#line 1249 "fsml.cc"
+#line 1259 "fsml.cc"
     break;
 
   case 73: // state_type: ERR
-#line 247 "fsml.yy"
+#line 257 "fsml.yy"
                                         { yylhs.value.as < state_type_t > () = kStateTypeErr; }
-#line 1255 "fsml.cc"
+#line 1265 "fsml.cc"
     break;
 
   case 77: // state_decorator: transition_specifier
-#line 256 "fsml.yy"
+#line 266 "fsml.yy"
                                         { tmpState->AddTransition(tmpTrans); }
-#line 1261 "fsml.cc"
+#line 1271 "fsml.cc"
     break;
 
   case 80: // transition_c_code: C_CODE_BLOCK
-#line 263 "fsml.yy"
+#line 273 "fsml.yy"
                                         { tmpTrans->Code(YY_MOVE (yystack_[0].value.as < std::string > ())); }
-#line 1267 "fsml.cc"
+#line 1277 "fsml.cc"
     break;
 
   case 82: // transition_condition: C_CONDITION_BLOCK
-#line 267 "fsml.yy"
+#line 277 "fsml.yy"
                                                                         { tmpTrans = new FSMTransition(driver, TransType_Normal, YY_MOVE (yystack_[0].value.as < std::string > ())); }
-#line 1273 "fsml.cc"
+#line 1283 "fsml.cc"
     break;
 
   case 83: // transition_condition: TIMEOUT_KEY LB IDENTIFIER RB
-#line 268 "fsml.yy"
+#line 278 "fsml.yy"
                                                                         { 
 						 std::string timer = YY_MOVE (yystack_[1].value.as < std::string > ());
 						 if (driver.TimerExists(timer)) {
@@ -1284,98 +1294,98 @@ namespace FSML {
 							 YYERROR;
 						 }
 					 }
-#line 1288 "fsml.cc"
+#line 1298 "fsml.cc"
     break;
 
   case 84: // transition_actuator: GO IDENTIFIER
-#line 280 "fsml.yy"
+#line 290 "fsml.yy"
                                                 { tmpTrans->Actuator(TransActuator_GO); tmpTrans->EndState(YY_MOVE (yystack_[0].value.as < std::string > ())); }
-#line 1294 "fsml.cc"
+#line 1304 "fsml.cc"
     break;
 
   case 85: // transition_actuator: ERR IDENTIFIER
-#line 281 "fsml.yy"
+#line 291 "fsml.yy"
                                                                 { tmpTrans->Actuator(TransActuator_ERR); tmpTrans->ErrorCode(YY_MOVE (yystack_[0].value.as < std::string > ())); }
-#line 1300 "fsml.cc"
+#line 1310 "fsml.cc"
     break;
 
   case 86: // transition_actuator: RETRY
-#line 282 "fsml.yy"
+#line 292 "fsml.yy"
                                                                         { tmpTrans->Actuator(TransActuator_RETRY); }
-#line 1306 "fsml.cc"
+#line 1316 "fsml.cc"
     break;
 
   case 87: // timer_actuator: START IDENTIFIER
-#line 285 "fsml.yy"
+#line 295 "fsml.yy"
                                   { 
 					if(tmpTrans->SetTimer(YY_MOVE (yystack_[0].value.as < std::string > ())) == false) {
 						driver.error(yylhs.location, driver.GetLastError());
 						YYERROR;
 					}
 				}
-#line 1317 "fsml.cc"
+#line 1327 "fsml.cc"
     break;
 
   case 89: // output_specifier: OUT IDENTIFIER EQUAL C_CODE_BLOCK
-#line 294 "fsml.yy"
+#line 304 "fsml.yy"
                                                      { 
 						if (tmpState->AddOutput(YY_MOVE (yystack_[2].value.as < std::string > ()), YY_MOVE (yystack_[0].value.as < std::string > ())) == false) {
 							driver.error(yylhs.location, driver.GetLastError()); 
 							YYERROR;
 						} 
 				 }
-#line 1328 "fsml.cc"
+#line 1338 "fsml.cc"
     break;
 
   case 90: // $@3: %empty
-#line 302 "fsml.yy"
+#line 312 "fsml.yy"
                                 { 
 					tmpUntil = new FSMUntil(); 
 					driver.PushUntil(tmpUntil); 
 			  	}
-#line 1337 "fsml.cc"
+#line 1347 "fsml.cc"
     break;
 
   case 91: // $@4: %empty
-#line 307 "fsml.yy"
+#line 317 "fsml.yy"
                                 { 
 					tmpTrans = new FSMTransition(driver, TransType_ExitUntil, YY_MOVE (yystack_[4].value.as < std::string > ())); 
 					driver.CurUntil()->ExitTransition(tmpTrans);
 				}
-#line 1346 "fsml.cc"
+#line 1356 "fsml.cc"
     break;
 
   case 92: // until_retry: UNTIL_KEY until_condition $@3 LCB until_object_list RCB $@4 transition_actuator SC
-#line 312 "fsml.yy"
+#line 322 "fsml.yy"
                                 { 
 					parse_result_t res = driver.PopUntil();
 					if (res == ParseResult_WARN) {
 						driver.warning(yystack_[8].location, driver.GetLastError());
 					}
 				}
-#line 1357 "fsml.cc"
+#line 1367 "fsml.cc"
     break;
 
   case 93: // until_condition: LB INTEGER_CONSTANT RB
-#line 319 "fsml.yy"
+#line 329 "fsml.yy"
                                                         { yylhs.value.as < std::string > () = std::to_string(YY_MOVE (yystack_[1].value.as < int > ())); }
-#line 1363 "fsml.cc"
+#line 1373 "fsml.cc"
     break;
 
   case 94: // until_condition: LB enumeration_constant RB
-#line 320 "fsml.yy"
+#line 330 "fsml.yy"
                                                                 { yylhs.value.as < std::string > () = YY_MOVE (yystack_[1].value.as < std::string > ()); }
-#line 1369 "fsml.cc"
+#line 1379 "fsml.cc"
     break;
 
   case 97: // until_object: state
-#line 327 "fsml.yy"
+#line 337 "fsml.yy"
                      { driver.CurUntil()->AddState(tmpState); }
-#line 1375 "fsml.cc"
+#line 1385 "fsml.cc"
     break;
 
 
-#line 1379 "fsml.cc"
+#line 1389 "fsml.cc"
 
             default:
               break;
@@ -1763,9 +1773,9 @@ namespace FSML {
      168,   170,   171,   174,   177,   180,   182,   183,   186,   187,
      190,   193,   194,   197,   198,   199,   200,   203,   206,   215,
      216,   219,   227,   229,   227,   233,   234,   237,   238,   241,
-     242,   245,   246,   247,   250,   251,   252,   256,   257,   261,
-     263,   264,   267,   268,   280,   281,   282,   285,   291,   294,
-     302,   307,   301,   319,   320,   323,   324,   327,   328
+     247,   255,   256,   257,   260,   261,   262,   266,   267,   271,
+     273,   274,   277,   278,   290,   291,   292,   295,   301,   304,
+     312,   317,   311,   329,   330,   333,   334,   337,   338
   };
 
   void
@@ -1848,9 +1858,9 @@ namespace FSML {
   }
 
 } // FSML
-#line 1852 "fsml.cc"
+#line 1862 "fsml.cc"
 
-#line 333 "fsml.yy"
+#line 343 "fsml.yy"
 
 
 void FSML::FSMLParser::error(const FSML::FSMLParser::location_type& l, const std::string& m)

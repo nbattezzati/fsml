@@ -35,6 +35,26 @@
 #include "fsml_inner.h"
 #include "fsml.h"
 
+bool FSMState::AddType(state_type_t type) 
+{
+	bool ret_val = false;
+
+	// if this is a reset/error type and there is already one in the driver, set an error
+	if ((type == kStateTypeReset) && (driver_.ResetState() != nullptr)) {
+		driver_.SetLastError("'reset' state already defined");
+	}
+	else if ((type == kStateTypeErr) && (driver_.ErrorState() != nullptr)) {
+		driver_.SetLastError("'err' state already defined");
+	}
+	
+	// otherwise add the type 
+	else {
+		types_.push_back(type);
+		ret_val = true;
+	}
+
+	return ret_val;
+}
 
 bool FSMState::HasType(state_type_t type)
 {

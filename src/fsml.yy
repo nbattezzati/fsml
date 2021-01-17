@@ -238,8 +238,18 @@ state_c_code : C_CODE_BLOCK		{ $$ = $1; }
 			 | /* empty */		{ $$ = std::string(); }
 			 ;
 
-state_type_list : state_type 							{ tmpState->AddType($1); }
-				| state_type_list COMMA state_type		{ tmpState->AddType($3); }
+state_type_list : state_type { 
+					if (tmpState->AddType($1) == false) {
+						driver.error(@$, driver.GetLastError()); 
+						YYERROR; 
+					} 
+				}
+				| state_type_list COMMA state_type {
+					if (tmpState->AddType($3) == false) {
+						driver.error(@$, driver.GetLastError()); 
+						YYERROR; 
+					} 
+				}
 				;
 
 state_type : RESET		{ $$ = kStateTypeReset; }
