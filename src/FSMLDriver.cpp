@@ -65,14 +65,15 @@ bool FSMState::AddOutput(const std::string & output, const std::string & out_cod
 
 bool FSMState::SetEndStateForRetryTrans(FSMState * s)
 {
+	bool retry_exists = false;
 	for(FSMTransition * t : transitions_) {
 		if (t->Actuator() == TransActuator_RETRY) {
 			t->EndState(s->Name());
-			return true;
+			retry_exists = true;
 		}
 	}
 
-	return false;
+	return retry_exists;
 }
 
 
