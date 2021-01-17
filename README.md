@@ -135,6 +135,23 @@ fsm myFsm {
 }
 ```
 
+Declarations are *private* to the FSM code. Nothing in the `decl` section is visibile to the external user code. 
+In order to export declarations (e.g. data types for input/output variables) through the FSM interface, the `export` section shall be used: 
+```
+export {
+typedef enum {
+   cmd_TYPE1,
+   cmd_TYPE2,
+   cmd_TYPE3,
+} cmd_type_t;
+}
+
+fsm cmd_parser {
+   input cmd_type_t cur_cmd = cmd_TYPE1;
+   ...
+}
+```
+
 ### Timeout
 Another useful construct in case of FSMs that are implemented in real-time systems are timeouts. The FSML has a special notation for using timeouts in an easy fashion.
 There is a 4th family of variables: timers. The `timer` family specifies a timer variable like in the following examples:
