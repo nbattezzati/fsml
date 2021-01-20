@@ -7,7 +7,7 @@ FSML has been thought **for programmers** by programmers.
  
 It was born from the need to have a simple but effective way, not using graphical tools, to write an FSM and to have it **translated to C language** (*and maybe others in the future*).
 
-Whit FSML it is possible to describe **states and transitions**, as well as arbitrary code that shall be executed within them.
+With FSML it is possible to describe **states and transitions**, as well as arbitrary code that shall be executed within them.
 There are also some constructs that allow describing useful features like **retries** and **timeouts**, in a very simple way.
 
 FSML is **portable**, since it is compiled to C and is completely **standalone**, not relying on any other third-party library.
@@ -21,14 +21,14 @@ $> make
 ```
 The `make` command will compile the source files and create the `fsmlc` binary executable in the main directory.
 
-Now, imagine you have written your first FSM in a file named `first_test.fsm`:
+Now, suppose you have written your first FSM in a file named `first_test.fsm`:
 ```
 fsm firstTest {
    // FSM states go here
    // ...
 }
 ```
-you can simply copy the `fsmlc` executable where you have the FSM file and run:
+you can copy the `fsmlc` executable where you have the FSM file and run:
 ```bash
 $> fsmlc first_test.fsm
 ```
@@ -37,7 +37,7 @@ This command will create three files:
 * `firstTest_fsm.c` (the source file you have to compile together with your code)
 * `fsm.dot` (a graphical representation of the FSM using the DOT language, that you can visualize on https://dreampuf.github.io/GraphvizOnline/)
 
-Now compile your C code together with th generated `.c` file and it's done!
+Now compile your C code together with the generated `.c` file and it's done!
 
 ## 3. The language
 ### FSM structure
@@ -47,7 +47,7 @@ fsm myFirstFSM {
   // ... and this is a comment
 }
 ```
-You jus need to use the keyword `fsm` followed by a *name*, and then enclose the FSM code in a pare of `{}`.
+You just need to use the keyword `fsm` followed by a *name*, and then enclose the FSM code between `{}`.
 
 ### States
 Then you have to define states within the FSM:
@@ -65,7 +65,7 @@ So, use keyword `state` to define a new state, followed by an optional *type* th
 Every transition that brings to another state is described by the construct `on-go`. The keyword `on` is followed by a condition between `()`, then `go` and the name of the end state. Before digging into conditions, let's make a digression about variables.
 
 ### Input and Variables
-FSML has thre families of variables:
+FSML has three families of variables:
 - internal variables, visible only inside the FSM (defined by the keyword `var`)
 - input variables, whose value can be set from the extern of the FSM (`input`)
 - output variables (`output`), that can pass a value to the extern of the FSM 
@@ -78,7 +78,7 @@ output state_t nextState = FIRST_STATE;
 ```
 
 ### Transitions 
-Let's go back to trantions and have a deeper look into this construct. We've previously mentioned that a transition is specified by the keyword `on`, followed by a condition and the *actuator* `go`, that specifies the next state.
+Let's go back to transitions and have a deeper look into this construct. We've previously mentioned that a transition is specified by the keyword `on`, followed by a condition and the *actuator* `go`, that specifies the next state.
 In order to be activated, a transition needs its condition to be evaluated to true. This condition is expressed in a pair of brackets `()`, that contain a boolean expression using variables and inputs.
 ```
 state [reset] firstState
@@ -259,7 +259,7 @@ unsigned char fsm_timer_expired(fsm_timer_t * t);
 ```
 
 ### 4. The FSML C interface (how to use the FSM from your own C program)
-In order to use the generated C code that translates your FSM, first of all you need to include it's header file.
+In order to use the generated C code that translates your FSM, first of all you need to include its header file.
 The header file of the generated FSM is named `<prefix>_fsm.h`, where the prefix is the name of the FSM by default.
 
 A part from the user declarations, the header file contains a first `enum` `<prefix>_state_t` that enumerates the FSM states.
