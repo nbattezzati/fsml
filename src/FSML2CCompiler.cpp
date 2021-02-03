@@ -743,6 +743,7 @@ std::string FSML2CCompiler::TranslateTransition(FSMState & starting_state, FSMTr
 
 		case TransType_ExitUntil:
 			ret_str += "         if (__retries_" + starting_state.Name() + " >= " + t.Condition() + ") {\n";
+			ret_str += "            __retries_" + starting_state.Name() + " = 0;\n";
 		break;
 
 		default:
