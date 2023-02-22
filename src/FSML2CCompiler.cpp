@@ -692,7 +692,6 @@ std::string FSML2CCompiler::Translate_IsInFinalStateFunction()
 // is_in_final_state function
 unsigned int @PREFIX@__is_in_final_state(void)
 {
-	unsigned int i = 0;
 )";
 
 	// generate the array of final state codes
@@ -704,23 +703,24 @@ unsigned int @PREFIX@__is_in_final_state(void)
 			final_states_cnt++;
 		}
 	}
-	// remove the comma, after the last state (if any)
+	// remove the comma, after the last state (if any) and generate the state research code
 	if (final_states_cnt) {
 		final_states_array = final_states_array.substr(0, final_states_array.length()-2);
-	}
 
-	ret_str += "    unsigned int final_states_length = " + std::to_string(final_states_cnt) + ";\n";
-	ret_str += "    @PREFIX_@state_t final_states[] = {" + final_states_array + "};\n\n";
+		ret_str += "    unsigned int i = 0;\n";
+		ret_str += "    unsigned int final_states_length = " + std::to_string(final_states_cnt) + ";\n";
+		ret_str += "    @PREFIX_@state_t final_states[] = {" + final_states_array + "};\n\n";
 
-	ret_str += R"(
+		ret_str += R"(
 	for (i=0; i<final_states_length; ++i) { 
 		if (__cur_state == final_states[i]) {
 			return 1;
 		}
 	}
-	return 0;
-}
 )";
+	}
+
+	ret_str += "    return 0;\n}\n";
 
 	StrReplace(ret_str, "@PREFIX@", prefix_);
 	StrReplace(ret_str, "@PREFIX_@", prefix_ + (prefix_.size() ? "_" : ""));
