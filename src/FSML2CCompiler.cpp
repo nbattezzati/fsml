@@ -215,17 +215,17 @@ static @PREFIX_@state_t __next_state;
 	// public function declarations
 	ret_str += R"(
 // public function declarations
-@PREFIX_@state_t __get_state(void);
+@PREFIX_@state_t @PREFIX@__get_state(void);
 )";
 	// error getter (if any)
 	if (fsml_.ErrorState() != nullptr) {
-		ret_str += "@PREFIX_@err_t __get_err(void);\n";
+		ret_str += "@PREFIX_@err_t @PREFIX@__get_err(void);\n";
 	}
 
 	ret_str += R"(
-void __reset(void);
-@PREFIX_@state_t __exec(void);
-unsigned int __is_in_final_state(void);
+void @PREFIX@__reset(void);
+@PREFIX_@state_t @PREFIX@__exec(void);
+unsigned int @PREFIX@__is_in_final_state(void);
 )";
 
 	// input setter and output getter functions
@@ -254,15 +254,15 @@ unsigned int __is_in_final_state(void);
 	ret_str += R"(
 // FSM object to access internal variables
 static @PREFIX_@fsm_t this = {
-    .state = __get_state,
+    .state = @PREFIX@__get_state,
 )";
 	if (fsml_.ErrorState() != nullptr) {
-		ret_str += "    .err = __get_err,\n";
+		ret_str += "    .err = @PREFIX@__get_err,\n";
 	}
 	ret_str += R"(
-    .reset = __reset,
-    .exec = __exec,
-	.is_in_final_state = __is_in_final_state,
+    .reset = @PREFIX@__reset,
+    .exec = @PREFIX@__exec,
+	.is_in_final_state = @PREFIX@__is_in_final_state,
 )";
 
 	// add input/output functions
@@ -494,7 +494,7 @@ std::string FSML2CCompiler::Translate_GetterFunctions()
 	
 	ret_str += R"(
 // state getter function
-@PREFIX_@state_t __get_state(void)
+@PREFIX_@state_t @PREFIX@__get_state(void)
 {
     return __cur_state;
 }
@@ -504,7 +504,7 @@ std::string FSML2CCompiler::Translate_GetterFunctions()
 	if (fsml_.ErrorState() != nullptr) {
 		ret_str += R"(
 // error getter function
-@PREFIX_@err_t __get_err(void)
+@PREFIX_@err_t @PREFIX@__get_err(void)
 {
     return __err;
 }
@@ -542,7 +542,10 @@ std::string FSML2CCompiler::Translate_GetterFunctions()
 	StrReplace(ret_str, "@INPUT_FUNCTIONS@", in_functions);
 	StrReplace(ret_str, "@OUTPUT_FUNCTIONS@", out_functions);
 
-	return StrReplace(ret_str, "@PREFIX_@", prefix_ + (prefix_.size() ? "_" : ""));
+	StrReplace(ret_str, "@PREFIX_@", prefix_ + (prefix_.size() ? "_" : ""));
+	StrReplace(ret_str, "@PREFIX@", prefix_);
+	
+	return ret_str;
 }
 
 
@@ -550,7 +553,7 @@ std::string FSML2CCompiler::Translate_ResetFunction()
 {
 	std::string ret_str = R"(
 // reset function
-void __reset(void)
+void @PREFIX@__reset(void)
 {
    // init private variables
    __cur_state = __RESET_STATE;
@@ -594,7 +597,7 @@ std::string FSML2CCompiler::Translate_ExecFunction()
 	// start switch-case
 	std::string ret_str = R"(
 // execute function
-@PREFIX_@state_t __exec(void)
+@PREFIX_@state_t @PREFIX@__exec(void)
 {
    // execute current state and transition evaluation
    switch(__cur_state) {
@@ -687,7 +690,7 @@ std::string FSML2CCompiler::Translate_IsInFinalStateFunction()
 {
 	std::string ret_str = R"(
 // is_in_final_state function
-unsigned int __is_in_final_state(void)
+unsigned int @PREFIX@__is_in_final_state(void)
 {
 	unsigned int i = 0;
 )";
