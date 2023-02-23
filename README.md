@@ -209,13 +209,13 @@ output int fsmState = 0;
 
 state [reset] s1
 on (myVar > 0) go s2
-out fsmState { return 0; };
+out fsmState = { return 0; };
 
 state s2
 on (myVar < 0) go s3;
 
 state [end] s3
-out fsmState { return 1; };
+out fsmState = { return 1; };
 ```
 In the example, states `s1` and `s3` set the value of the output variable `fsmState` while state `s2` does not. This means that when going to state `s2`, the value of the output keeps its last value, unchanged.
 
