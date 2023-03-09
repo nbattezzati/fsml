@@ -303,7 +303,7 @@ typedef struct {
     unsigned int __timeout_ms;
 } fsm_timer_t;
 void fsm_timer_start(fsm_timer_t * t);
-unsigned char fsm_timer_expired(fsm_timer_t * t);
+unsigned char fsm_timer_expired(const fsm_timer_t * t);
 
 )";
 	}
@@ -472,12 +472,12 @@ void fsm_timer_start(fsm_timer_t * t)
 }
 
 // return 0 if timeout is not elapsed, 1 if elapsed
-unsigned char fsm_timer_expired(fsm_timer_t * t)
+unsigned char fsm_timer_expired(const fsm_timer_t * t)
 {
    struct timespec now_t = get_cur_time();
    long ms_diff = now_t.tv_nsec/1000000 - t->__started_time.tv_nsec/1000000;
    long s_diff = now_t.tv_sec - t->__started_time.tv_sec;
-   double t_diff = ms_diff + s_diff*1000;
+   double t_diff = (double)(ms_diff + s_diff*1000);
 
    return t_diff >= t->__timeout_ms;
 }
