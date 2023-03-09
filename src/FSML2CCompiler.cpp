@@ -628,7 +628,7 @@ std::string FSML2CCompiler::Translate_ExecFunction()
 		for (const auto & t : s->Transitions()) {
 			if (t->Type() != TransType_ExitUntil) {
 				if (first_trans_done == true) {
-					ret_str += "         else\n";
+					ret_str += "         else ";
 				}
 				ret_str += TranslateTransition(*s, *t);
 				first_trans_done = true;
