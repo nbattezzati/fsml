@@ -302,8 +302,8 @@ typedef struct {
     struct timespec __started_time;
     unsigned int __timeout_ms;
 } fsm_timer_t;
-void fsm_timer_start(fsm_timer_t * t);
-unsigned char fsm_timer_expired(const fsm_timer_t * t);
+static void fsm_timer_start(fsm_timer_t * t);
+static unsigned char fsm_timer_expired(const fsm_timer_t * t);
 
 )";
 	}
@@ -343,10 +343,10 @@ std::string FSML2CCompiler::Translate_TimeOrPeriod()
 	if (!fsml_.TimerMap().empty()) {
 		ret_val += CComment("Timeout handling");
 		if (fsml_.TimeSpec().size() > 0) {
-			ret_val += std::string("struct timespec get_cur_time(void) {\n" + fsml_.TimeSpec() + "\n}\n\n\n");
+			ret_val += std::string("static struct timespec get_cur_time(void) {\n" + fsml_.TimeSpec() + "\n}\n\n\n");
 		}
 		else {
-			ret_val += std::string("struct timespec get_time_period(void) {\n" + fsml_.PeriodSpec() + "\n}\n\n\n");
+			ret_val += std::string("static struct timespec get_time_period(void) {\n" + fsml_.PeriodSpec() + "\n}\n\n\n");
 		}
 	}
 
