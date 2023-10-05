@@ -235,11 +235,11 @@ unsigned int @PREFIX@__is_in_final_state(void);
 	for(const auto & elem : fsml_.VarMap()) {
 		FSMVariable * v = elem.second;
 		if (v->Family() == VariableFamily_INPUT) {
-			in_functions += "void __set_" + v->Name() + "(" + v->Type() + ");\n";
+			in_functions += "static void @PREFIX@__set_" + v->Name() + "(" + v->Type() + ");\n";
 			cnt_inout_functions++;
 		}
 		else if (v->Family() == VariableFamily_OUTPUT) {
-			out_functions += v->Type() + " __get_" + v->Name() +"(void);\n";
+			out_functions += "static " + v->Type() + " @PREFIX@__get_" + v->Name() +"(void);\n";
 			cnt_inout_functions++;
 		}
 		else { /* not an IN/OUT variable */ }
@@ -270,11 +270,11 @@ static @PREFIX_@fsm_t this = {
 	for(const auto & elem : fsml_.VarMap()) {
 		FSMVariable * v = elem.second;
 		if (v->Family() == VariableFamily_INPUT) {
-			ret_str += "   .set_" + v->Name() + " = __set_" + v->Name();
+			 ret_str += "   .set_" + v->Name() + " = @PREFIX@__set_" + v->Name();
 			cnt_functions++;
 		}
 		else if (v->Family() == VariableFamily_OUTPUT) {
-			ret_str += "   .get_" + v->Name() + " = __get_" + v->Name();
+			ret_str += "   .get_" + v->Name() + " = @PREFIX@__get_" + v->Name();
 			cnt_functions++;
 		}
 		else { /* not an IN/OUT variable */ }
@@ -394,21 +394,21 @@ std::string FSML2CCompiler::Translate_OutputDeclarations()
 
 			// output setter function
 			ret_str += "// OUT Variable: " + out->Name() + ";\n";
-			ret_str += "typedef " + out->Type() + " (*__out_foo__" + out->Name() + ")(void);\n";
+			ret_str += "typedef " + out->Type() + " (*@PREFIX@__out_foo__" + out->Name() + ")(void);\n";
 			
 			// output setter function prototypes
 			for (const auto & s : fsml_.StateMap()) {
 				if (s.second->DrivesOutput(out->Name())) {
-					ret_str += out->Type() + " __out_foo__" + out->Name() + "__" + s.second->Name() + "(void);\n";
+					ret_str += "static " + out->Type() + " @PREFIX@__out_foo__" + out->Name() + "__" + s.second->Name() + "(void);\n";
 				}
 			}
 
 			// output setter functions table
-			ret_str += "static __out_foo__" + out->Name() + " __out_table__" + out->Name() + "[] = {\n";
+			ret_str += "static @PREFIX@__out_foo__" + out->Name() + " @PREFIX@__out_table__" + out->Name() + "[] = {\n";
 			unsigned int cnt_states = fsml_.StateMap().size() - 1;
 			for (const auto & s : fsml_.StateMap()) {
 				if (s.second->DrivesOutput(out->Name())) {
-					ret_str += "   __out_foo__" + out->Name() + "__" + s.second->Name();
+					ret_str += "   @PREFIX@__out_foo__" + out->Name() + "__" + s.second->Name();
 				}
 				else {
 					ret_str += "   NULL";
@@ -423,7 +423,7 @@ std::string FSML2CCompiler::Translate_OutputDeclarations()
 			ret_str += "};\n\n";
 		}
  	}
-
+	StrReplace(ret_str, "@PREFIX@", prefix_);
 	return ret_str;
 }
 
@@ -443,14 +443,14 @@ std::string FSML2CCompiler::Translate_OutputFunctions()
 			// output setter function prototypes
 			for (const auto & s : fsml_.StateMap()) {
 				if (s.second->DrivesOutput(out->Name())) {
-					ret_str += out->Type() + " __out_foo__" + out->Name() + "__" + s.second->Name() + "(void)\n";
+					ret_str += "static " + out->Type() + " @PREFIX@__out_foo__" + out->Name() + "__" + s.second->Name() + "(void)\n";
 					ret_str += s.second->OutputCode(out->Name()) + "\n\n";
 				}
 			}
 		}
  	}
 	ret_str += "\n";
-
+	StrReplace(ret_str, "@PREFIX@", prefix_);
 	return ret_str;
 }
 
@@ -525,13 +525,13 @@ std::string FSML2CCompiler::Translate_GetterFunctions()
 	for(const auto & elem : fsml_.VarMap()) {
 		FSMVariable * v = elem.second;
 		if (v->Family() == VariableFamily_INPUT) {
-			in_functions += "void __set_" + v->Name() + "(" + v->Type() + " input)\n";
+			in_functions += "static void @PREFIX@__set_" + v->Name() + "(" + v->Type() + " input)\n";
 			in_functions += "{\n";
 			in_functions += "   " + v->Name() + " = input;\n";
 			in_functions += "}\n\n";
 		}
 		else if (v->Family() == VariableFamily_OUTPUT) {
-			out_functions += v->Type() + " __get_" + v->Name() +"(void)\n";
+			out_functions += "static " + v->Type() + " @PREFIX@__get_" + v->Name() +"(void)\n";
 			out_functions += "{\n";
 			out_functions += "   return " + v->Name() + ";\n";
 			out_functions += "}\n\n";
@@ -665,8 +665,8 @@ std::string FSML2CCompiler::Translate_ExecFunction()
 	for(const auto & elem : fsml_.VarMap()) {
 		FSMVariable * v = elem.second;
 		if (v->Family() == VariableFamily_OUTPUT) {
-			ret_str += "   " + v->Name() + " = (__out_table__" + v->Name() + "[__next_state] != NULL ? "
-			             + "__out_table__" + v->Name() + "[__next_state]() : " + v->Name() + ");\n";
+			ret_str += "   " + v->Name() + " = (@PREFIX@__out_table__" + v->Name() + "[__next_state] != NULL ? "
+			             + "@PREFIX@__out_table__" + v->Name() + "[__next_state]() : " + v->Name() + ");\n";
 		}
 	}
 
