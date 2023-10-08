@@ -68,6 +68,7 @@ private:
 	std::string Translate_ResetFunction();
 	std::string Translate_ExecFunction();
 	std::string Translate_IsInFinalStateFunction();
+	std::string Translate_IsInResetStateFunction();
 	std::string TranslateTransition(FSMState & starting_state, FSMTransition & t);
 
 	const std::string kStaticCKeyword_ = "static";

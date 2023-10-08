@@ -45,6 +45,7 @@ bool FSML2CCompiler::Translate()
 			fprintf(fp, "%s", Translate_ResetFunction().c_str());
 			fprintf(fp, "%s", Translate_ExecFunction().c_str());
 			fprintf(fp, "%s", Translate_IsInFinalStateFunction().c_str());
+			fprintf(fp, "%s", Translate_IsInResetStateFunction().c_str());
 			
 			ret_val = true;
 		}
@@ -132,6 +133,7 @@ typedef struct {
    @PREFIX_@state_t (*exec)(void);
    @PREFIX_@state_t (*state)(void);
    unsigned int (*is_in_final_state)(void);
+   unsigned int (*is_in_reset_state)(void);
 )";
 
 	if (fsml_.ErrorState() != nullptr) {
@@ -226,6 +228,7 @@ static @PREFIX_@state_t __next_state;
 void @PREFIX@__reset(void);
 @PREFIX_@state_t @PREFIX@__exec(void);
 unsigned int @PREFIX@__is_in_final_state(void);
+unsigned int @PREFIX@__is_in_reset_state(void);
 )";
 
 	// input setter and output getter functions
@@ -263,6 +266,7 @@ static @PREFIX_@fsm_t this = {
     .reset = @PREFIX@__reset,
     .exec = @PREFIX@__exec,
 	.is_in_final_state = @PREFIX@__is_in_final_state,
+	.is_in_reset_state = @PREFIX@__is_in_reset_state,
 )";
 
 	// add input/output functions
@@ -714,6 +718,49 @@ unsigned int @PREFIX@__is_in_final_state(void)
 		ret_str += R"(
 	for (i=0; i<final_states_length; ++i) { 
 		if (__cur_state == final_states[i]) {
+			return 1;
+		}
+	}
+)";
+	}
+
+	ret_str += "    return 0;\n}\n";
+
+	StrReplace(ret_str, "@PREFIX@", prefix_);
+	StrReplace(ret_str, "@PREFIX_@", prefix_ + (prefix_.size() ? "_" : ""));
+
+	return ret_str;
+}
+
+
+std::string FSML2CCompiler::Translate_IsInResetStateFunction()
+{
+	std::string ret_str = R"(
+// is_in_reset_state function
+unsigned int @PREFIX@__is_in_reset_state(void)
+{
+)";
+
+	// generate the array of final state codes
+	std::string reset_states_array = "";
+	unsigned int reset_states_cnt = 0;
+	for (auto const & s :fsml_.StateMap()) {
+		if(s.second->HasType(kStateTypeReset)) {
+			reset_states_array += "@PREFIX@State__" + s.second->Name() + ", ";
+			reset_states_cnt++;
+		}
+	}
+	// remove the comma, after the last state (if any) and generate the state research code
+	if (reset_states_cnt) {
+		reset_states_array = reset_states_array.substr(0, reset_states_array.length()-2);
+
+		ret_str += "    unsigned int i = 0;\n";
+		ret_str += "    unsigned int reset_states_length = " + std::to_string(reset_states_cnt) + ";\n";
+		ret_str += "    @PREFIX_@state_t reset_states[] = {" + reset_states_array + "};\n\n";
+
+		ret_str += R"(
+	for (i=0; i<reset_states_length; ++i) { 
+		if (__cur_state == reset_states[i]) {
 			return 1;
 		}
 	}
