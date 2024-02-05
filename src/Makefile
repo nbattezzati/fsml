@@ -6,7 +6,8 @@ OUTPUT_DIR = ..
 
 
 CXXFLAGS = -std=c++11 -Wno-deprecated-register 
-# CXXFLAGS += -DDEBUG			# uncomment to enable debug logs
+CXXFLAGS += -Ilib/cxxopts
+# CXXFLAGS += -DDEBUG -DYYDEBUG	# uncomment to enable debug logs
 
 
 ######### scanning/parsing commands #######
