@@ -35,6 +35,10 @@
 #include "FSMLDriver.h"
 
 
+typedef struct {
+	bool static_factory = false;
+} FSML2COptions;
+
 
 /**
  * @class FSML2CCompiler
@@ -44,7 +48,7 @@ class FSML2CCompiler
 {
 
 public:
-	FSML2CCompiler(FSMLDriver & fsml, const std::string & outputName = "", const std::string & prefix = "");
+	FSML2CCompiler(FSMLDriver & fsml, FSML2COptions & options, const std::string & outputName = "", const std::string & prefix = "");
 	~FSML2CCompiler() {}
 
 	// compile and generate C code
@@ -76,6 +80,7 @@ private:
 	const unsigned int kCCommentWidth_ = 59;
 
 	FSMLDriver & fsml_;
+	FSML2COptions & options_;
 	std::string outputName_;
 	std::string prefix_;
 };

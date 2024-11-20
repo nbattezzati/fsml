@@ -11,7 +11,7 @@
 
 typedef struct {
 	std::string input;
-	bool static_factory = false;
+	FSML2COptions fsml2cOptions;
 } FSMLOptions;
 
 FSMLOptions * ParseCmdLine(int argc, char * argv[]);
@@ -37,7 +37,7 @@ int main(int argc, char * argv[])
 		}
 		
 		// translate to target language
-		FSML2CCompiler c_compiler(driver);
+		FSML2CCompiler c_compiler(driver, fsml_opts->fsml2cOptions);
 		c_compiler.Translate();
 
 		driver.TranslateToDOT(std::string());
@@ -96,7 +96,7 @@ void GetOptions(cxxopts::ParseResult & result, cxxopts::Options & options, FSMLO
 		exit(0);
 	}
 	if (result.count("static-factory")) {
-		fsml_opts.static_factory = true;
+		fsml_opts.fsml2cOptions.static_factory = true;
 	}
 }
 

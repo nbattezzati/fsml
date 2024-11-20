@@ -2,8 +2,8 @@
 #include "FSML2CCompiler.h"
 
 
-FSML2CCompiler::FSML2CCompiler(FSMLDriver & fsml, const std::string & outputName, const std::string & prefix)
-	: fsml_(fsml)
+FSML2CCompiler::FSML2CCompiler(FSMLDriver & fsml, FSML2COptions & options, const std::string & outputName, const std::string & prefix)
+	: fsml_(fsml), options_ (options)
 {
 	std::string fsmName = fsml.FsmName();
 
