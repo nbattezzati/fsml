@@ -251,7 +251,7 @@ static unsigned char fsm_timer_expired(const fsm_timer_t * t);
 	// FSM object to access internal variables
 	ret_str += R"(
 // FSM object to access internal variables
-struct @PREFIX_@fsm {
+static struct @PREFIX_@fsm {
 	// state variables
 	@PREFIX_@state_t __cur_state;
 	@PREFIX_@state_t __next_state;
@@ -481,17 +481,17 @@ std::string FSML2CCompiler::Translate_TimerFunctions()
 	ret_str += CComment("Timer functions");
 	
 	ret_str += R"(
-void fsm_timer_start(fsm_timer_t * t)
+static void fsm_timer_start(fsm_timer_t * t)
 {
    t->__started_time = get_cur_time();
 }
 
 // return 0 if timeout is not elapsed, 1 if elapsed
-unsigned char fsm_timer_expired(const fsm_timer_t * t)
+static unsigned char fsm_timer_expired(const fsm_timer_t * t)
 {
    struct timespec now_t = get_cur_time();
-   long ms_diff = now_t.tv_nsec/1000000 - t->__started_time.tv_nsec/1000000;
-   long s_diff = now_t.tv_sec - t->__started_time.tv_sec;
+   long ms_diff = (now_t.tv_nsec/1000000) - (t->__started_time.tv_nsec/1000000);
+   long s_diff = (now_t.tv_sec) - (t->__started_time.tv_sec);
    double t_diff = (double)(ms_diff + s_diff*1000);
 
    return t_diff >= t->__timeout_ms;
