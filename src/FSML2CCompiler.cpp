@@ -519,7 +519,7 @@ std::string FSML2CCompiler::Translate_GetterFunctions()
 	if (fsml_.ErrorState() != nullptr) {
 		ret_str += R"(
 // error getter function
-@PREFIX_@err_t @PREFIX@__err(const @PREFIX_@fsm_t this)
+@PREFIX_@err_t @PREFIX_@fsm__err(const @PREFIX_@fsm_t this)
 {
     return this->__err;
 }
@@ -577,7 +577,7 @@ void @PREFIX_@fsm__reset(const @PREFIX_@fsm_t this)
 
 	// reset error (if any)
 	if (fsml_.ErrorState() != nullptr) {
-		ret_str += "	// init error variable";
+		ret_str += "	// init error variable\n";
 		ret_str += "	this->__err = @PREFIX@Err__NoError;\n\n";
 	}
 
