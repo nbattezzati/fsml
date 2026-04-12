@@ -1,6 +1,6 @@
 export F2C = ../../fsmlc	# the path of the FSML compiler from the single example directory
 
-EXAMPLES = toy_decoder alarm multi_instances # add more here
+EXAMPLES = toy_decoder alarm multi_instances_advanced # add more here
 
 
 .PHONY: subdirs $(EXAMPLES)

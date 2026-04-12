@@ -1,4 +1,4 @@
-FSM_NAME := multi_instances
+FSM_NAME := multi_instances_advanced
 
 all: fsm
 	$(CC) main.c $(FSM_NAME)_fsm.c -o $(FSM_NAME)

@@ -1,9 +1,0 @@
-fsm multi_instances 
-{
-    input int cmd = 0;
-
-    state [reset] STATE_01
-    on (cmd == 1) go STATE_02;
-
-    state [end] STATE_02;
-}
