@@ -33,33 +33,33 @@ fsm alarm
 
     state [reset] PROGRAMMED
     on (cmd == AlarmCmd_ProgrSet) go SET_HOUR
-    out alarm_time = { return cur_set_time; } ;
+    out alarm_time = { return this->cur_set_time; } ;
 
     state SET_HOUR {
-        if (cmd == AlarmCmd_ProgrPlus) {
-            cur_set_time.hour = cur_set_time.hour == 23 ? 0 : (cur_set_time.hour+1);
-            fsm_timer_start(&programming_timeout);
+        if (this->cmd == AlarmCmd_ProgrPlus) {
+            this->cur_set_time.hour = this->cur_set_time.hour == 23 ? 0 : (this->cur_set_time.hour+1);
+            fsm_timer_start(&this->programming_timeout);
         }
-        else if (cmd == AlarmCmd_ProgrMinus) {
-            cur_set_time.hour = cur_set_time.hour == 0 ? 23 : (cur_set_time.hour-1);
-            fsm_timer_start(&programming_timeout);
+        else if (this->cmd == AlarmCmd_ProgrMinus) {
+            this->cur_set_time.hour = this->cur_set_time.hour == 0 ? 23 : (this->cur_set_time.hour-1);
+            fsm_timer_start(&this->programming_timeout);
         } 
     }
     on (cmd == AlarmCmd_ProgrSet) go SET_MINUTE start programming_timeout
     on timeout(programming_timeout) go PROGRAMMED
-    out alarm_time = { return cur_set_time; } ;
+    out alarm_time = { return this->cur_set_time; } ;
 
     state SET_MINUTE {
-        if (cmd == AlarmCmd_ProgrPlus) {
-            cur_set_time.minute = cur_set_time.minute == 59 ? 0 : (cur_set_time.minute+1);
-            fsm_timer_start(&programming_timeout);
+        if (this->cmd == AlarmCmd_ProgrPlus) {
+            this->cur_set_time.minute = this->cur_set_time.minute == 59 ? 0 : (this->cur_set_time.minute+1);
+            fsm_timer_start(&this->programming_timeout);
         }
-        else if (cmd == AlarmCmd_ProgrMinus) {
-            cur_set_time.minute = cur_set_time.minute == 0 ? 59 : (cur_set_time.minute-1);
-            fsm_timer_start(&programming_timeout);
+        else if (this->cmd == AlarmCmd_ProgrMinus) {
+            this->cur_set_time.minute = this->cur_set_time.minute == 0 ? 59 : (this->cur_set_time.minute-1);
+            fsm_timer_start(&this->programming_timeout);
         } 
     }
     on (cmd == AlarmCmd_ProgrSet) go PROGRAMMED
     on timeout(programming_timeout) go PROGRAMMED
-    out alarm_time = { return cur_set_time; } ;
+    out alarm_time = { return this->cur_set_time; } ;
 }

@@ -1,4 +1,5 @@
 #include <stdio.h>
+#include <assert.h>
 #include "alarm_fsm.h"
 
 
@@ -33,7 +34,7 @@ alarm_cmd_t wait_command(unsigned char * quit)
     *quit = 0;
 
     printf ("Insert command: ");
-    gets(cmd_str);
+    fgets(cmd_str, sizeof(cmd_str), stdin);
     if (sscanf(cmd_str, "%c", &cmd) > 0) {
         switch(cmd) {
             case 'S': return AlarmCmd_ProgrSet;
@@ -55,8 +56,11 @@ int main(int argc, char *argv[])
     alarm_time_t cur_time = {0};
     alarm_state_t cur_state = alarmState__PROGRAMMED;
 
+    alarm_fsm_t alarm_fsm = alarm_fsm__create();
+    assert(alarm_fsm != NULL);
+
     /* reset fsm to the starting state */
-    alarm_fsm->reset();
+    alarm_fsm__reset(alarm_fsm);
 
     /* print menu */
     print_menu();
@@ -65,24 +69,10 @@ int main(int argc, char *argv[])
         
         cmd = wait_command(&quit);
         
-        alarm_fsm->set_cmd(cmd);
-        cur_state = alarm_fsm->exec();
-        cur_time = alarm_fsm->get_alarm_time();
+        alarm_fsm__set_cmd(alarm_fsm, cmd);
+        cur_state = alarm_fsm__exec(alarm_fsm);
+        cur_time = alarm_fsm__get_alarm_time(alarm_fsm);
 
         print_cur_time(&cur_time, cur_state);
     } while (!quit);
-
-
-    /* execute FSM to search for the TOY pattern in the input string */
-    // while(argv[1] != NULL && argv[1][i] != '\0') {
-    //     toy_decoder_fsm->set_input_char(argv[1][i]);
-    //     if (toy_decoder_fsm->exec() == toy_decoderState__toy_found) {
-    //         printf("TOY found\n");
-    //         return 0;
-    //     }
-    //     i++;
-    // }
-
-    // printf("TOY not found\n");
-    // return 1;
 }

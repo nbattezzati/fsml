@@ -2,7 +2,7 @@ all: fsm
 	$(CC) main.c alarm_fsm.c -o alarm
 
 fsm:
-	$(F2C) alarm.fsm
+	$(F2C) -s alarm.fsm
 
 clean:
 	rm -f fsm.dot

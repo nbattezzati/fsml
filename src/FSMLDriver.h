@@ -1,16 +1,11 @@
 /**
  *       @file  FSMLDriver.h
- *      @brief  The declaration of the FSMLDriver class, i.e the parser for the Actel PDC format
+ *      @brief  The declaration of the FSMLDriver class, i.e the parser for the FSML language
  *
  * This file contains the declaration of the FSMLDriver class,
- * that offers the methods and attributes for parsing the Actel PDC format.
+ * that offers the methods and attributes for parsing the FSML language.
  *
  *     @author  Niccolo` Battezzati, niccolo.battezzati@gmail.com
- *
- *   @internal
- *     Created  01/25/11
- *     Company  Politecnico di Torino
- *   Copyright  Copyright (c) 2011, Politecnico di Torino
  *
  * This source code is free software: you can redistribute it and/or modify
  * it under the terms of the GNU Lesser Public License as published by

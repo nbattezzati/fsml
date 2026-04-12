@@ -1,0 +1,57 @@
+time {
+    struct timespec t;
+    #ifdef _WIN32
+        /* Windows implementation */
+        FILETIME ft;
+        GetSystemTimeAsFileTime(&ft);
+        unsigned long long ull = (((unsigned long long)ft.dwHighDateTime) << 32) | ft.dwLowDateTime;
+        ull = (ull - 116444736000000000ULL) / 10000;  /* Convert to milliseconds since epoch */
+        t.tv_sec = (long)(ull / 1000);
+        t.tv_nsec = (long)((ull % 1000) * 1000000);
+    #else
+        /* Linux/POSIX implementation */
+        clock_gettime(CLOCK_MONOTONIC, &t);
+    #endif
+    return t;
+}
+
+fsm multi_instances_advanced
+{
+    input int cmd = 0;
+    output int result = 0;
+    output int counter_out = 0;
+    output int accumulator_out = 0;
+    var int counter = 0;
+    var int accumulator = 0;
+    timer test_timer(100);
+
+    state [reset] IDLE
+    on (cmd == 1) go PROCESSING start test_timer
+    on (cmd == 2) go DONE
+    on (cmd == 3) err ERR_INVALID_CMD
+    out result = { return 1; }
+    out counter_out = { return this->counter; }
+    out accumulator_out = { return this->accumulator; };
+
+    state PROCESSING {
+        this->counter++;
+        this->accumulator += 10;
+    }
+    on (cmd == 2) go DONE
+    on (cmd == 3) err ERR_INVALID_CMD
+    on timeout(test_timer) go DONE
+    on (counter >= 5) go DONE
+    out result = { return 2; }
+    out counter_out = { return this->counter; }
+    out accumulator_out = { return this->accumulator; };
+
+    state [end] DONE
+    out result = { return 3; }
+    out counter_out = { return this->counter; }
+    out accumulator_out = { return this->accumulator; };
+
+    state [err] ERROR
+    out result = { return -1; }
+    out counter_out = { return this->counter; }
+    out accumulator_out = { return this->accumulator; };
+}

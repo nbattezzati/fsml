@@ -35,6 +35,10 @@
 #include "FSMLDriver.h"
 
 
+typedef struct {
+	bool static_factory = false;
+} FSML2COptions;
+
 
 /**
  * @class FSML2CCompiler
@@ -44,7 +48,7 @@ class FSML2CCompiler
 {
 
 public:
-	FSML2CCompiler(FSMLDriver & fsml, const std::string & outputName = "", const std::string & prefix = "");
+	FSML2CCompiler(FSMLDriver & fsml, FSML2COptions & options, const std::string & outputName = "", const std::string & prefix = "");
 	~FSML2CCompiler() {}
 
 	// compile and generate C code
@@ -52,6 +56,9 @@ public:
 	
 private:
 	std::string & StrReplace(std::string & str, std::string toReplace, std::string replaceWith);
+	std::string PrependFSMPointerToVarNames(std::string str, FSMLDriver & fsml_driver);
+	bool VarTypeIsPrimitive(std::string type);
+
 
 	std::string CComment(const std::string & msg);
 	std::string Generate_Header();
@@ -60,6 +67,7 @@ private:
 	std::string Translate_Export();
 	std::string Translate_TimeOrPeriod();
 	std::string Translate_Variables();
+	std::string Translate_VariableInitializers();
 	std::string Translate_Timers();
 	std::string Translate_OutputDeclarations();
 	std::string Translate_OutputFunctions();
@@ -76,6 +84,7 @@ private:
 	const unsigned int kCCommentWidth_ = 59;
 
 	FSMLDriver & fsml_;
+	FSML2COptions & options_;
 	std::string outputName_;
 	std::string prefix_;
 };
